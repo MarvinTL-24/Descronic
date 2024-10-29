@@ -12,84 +12,198 @@
 		<link rel="stylesheet" href="./src/css/estilos.css" />
 		<link rel="stylesheet" href="./src/css/responsivo.css" />
 
-		<title>One Piece - Semana do Zero ao Programador Contratado</title>
+		<title>Visualização de Classes</title>
+		<style>
+			body {
+				font-family: 'Rubik', sans-serif;
+				background-color: #f0f0f0;
+				color: #333;
+				padding: 20px;
+			}
+
+			.personagens {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 20px;
+				justify-content: center;
+			}
+
+			.personagem {
+				cursor: pointer;
+				background-color: #fff;
+				border-radius: 8px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				width: 200px;
+				padding: 15px;
+				text-align: center;
+				transition: transform 0.3s;
+			}
+
+			.personagem:hover {
+				transform: scale(1.05);
+			}
+
+			.personagem img {
+				width: 100%;
+				border-radius: 5px;
+			}
+
+			.detalhes-subclasse {
+				margin-top: 20px;
+				padding: 20px;
+				background-color: rgba(255, 255, 255, 0.95);
+				border-radius: 8px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+				text-align: center;
+			}
+
+			.subclasse-container {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 10px;
+				justify-content: center;
+				margin-top: 20px;
+			}
+
+			.subclasse {
+				width: 150px;
+				background-color: #e7e7e7;
+				border-radius: 8px;
+				padding: 15px;
+				box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+				text-align: center;
+			}
+
+			.subclasse h3 {
+				color: #007bff;
+			}
+
+			.karma-bar {
+				margin-top: 10px;
+				height: 10px;
+				width: 100%;
+				background: linear-gradient(to right, #00ff00, #ff0000);
+				border-radius: 5px;
+			}
+
+		</style>
 	</head>
 
 	<body>
 		<main class="personagens">
 			<div class="personagem">
-				<img class="imagem" src="./src/imagens/personagem-tony-chopper.png" alt="Personagem Tony Chopper" />
+				<img class="imagem" src="" alt="Guerreiro" />
 				<div class="conteudo">
 					<i class="logo"></i>
-					<h2 class="nome-personagem">Tony Chopper</h2>
-					<p class="descricao">Esta pequena rena ganhou a habilidade de mudar sua forma e de pensar como humanos após comer a fruta Hito Hito no Mi. Chopper é um valioso membro da tripulação dos Piratas do Chapéu de Palha, atuando como médico da tripulação.</p>
+					<h2 class="nome-personagem">Guerreiro</h2>
+					<p class="descricao">.</p>
 				</div>
 			</div>
 
 			<div class="personagem">
-				<img class="imagem" src="./src/imagens/personagem-roronoa-zoro.png" alt="Personagem Roronoa Zoro" />
+				<img class="imagem" src="" alt="Mago" />
 				<div class="conteudo">
 					<i class="logo"></i>
-					<h2 class="nome-personagem">Roronoa Zoro</h2>
-					<p class="descricao">Primeiro pirata (segundo membro se contarmos com Luffy) a se juntar à tripulação de Piratas do Chapéu de Palha, Zoro aceitou o convite de Luffy após o capitão salvar sua vida.</p>
+					<h2 class="nome-personagem">Mago</h2>
+					<p class="descricao">.</p>
 				</div>
 			</div>
 
 			<div class="personagem selecionado">
-				<img class="imagem" src="./src/imagens/personagem-monkey-d-luffy.png" alt="Personagem Monkey D. Luffy" />
+				<img class="imagem" src="" alt="Berserker" />
 				<div class="conteudo">
 					<i class="logo"></i>
-					<h2 class="nome-personagem">Monkey D. Luffy</h2>
-					<p class="descricao">Luffy do Chapéu de Palha", como ficou conhecido, é o protagonista do anime, e o fundador e capitão da tripulação Piratas do Chapéu de Palha. Desde muito jovem, tem como seu maior sonho um dia encontrar o lendário tesouro de Gol D. Roger, para se tornar o novo Rei dos Piratas.</p>
+					<h2 class="nome-personagem">Berserker</h2>
+					<p class="descricao">.</p>
 				</div>
 			</div>
 
 			<div class="personagem">
 
-				<img class="imagem" src="./src/imagens/personagem-nami.png" alt="Personagem Nami" />
+				<img class="imagem" src="" alt="Atirador" />
 				<div class="conteudo">
 					<i class="logo"></i>
-					<h2 class="nome-personagem">Nami</h2>
-					<p class="descricao">órfã de guerra, ainda criança Nami foi adotada por Bell-mère, uma mulher da Marinha. Enquanto crescia ao lado de sua irmã adotiva Nojiko, Nami já demonstrava sua paixão por desenhar mapas, sonhando em um dia fazer o mapa de todo o mundo.</p>
+					<h2 class="nome-personagem">Atirador</h2>
+					<p class="descricao">.</p>
 				</div>
 			</div>
 
 			<div class="personagem">
-				<img class="imagem" src="./src/imagens/personagem-sanji.png" alt="Personagem Sanji" />
+				<img class="imagem" src="" alt="Assasino" />
 				<div class="conteudo">
 					<i class="logo"></i>
-					<h2 class="nome-personagem">Sanji</h2>
-					<p class="descricao">Também conhecido como "Perna Negra" Sanji, este pirata foi o quinto a integrar a tripulação de Luffy. Suas ações como pirata lhe renderam a terceira maior recompensa entre os membros do Chapéu de Palha, além de atuar como cozinheiro oficial do grupo.</p>
+					<h2 class="nome-personagem">Assasina</h2>
+					<p class="descricao">.</p>
+				</div>
+			</div>
+			<div class="personagem">
+				<img class="imagem" src="" alt="Paladino" />
+				<div class="conteudo">
+					<i class="logo"></i>
+					<h2 class="nome-personagem">Paladino</h2>
+					<p class="descricao">.</p>
+				</div>
+			</div>
+			<div class="personagem">
+				<img class="imagem" src="" alt="Espiritualista" />
+				<div class="conteudo">
+					<i class="logo"></i>
+					<h2 class="nome-personagem">Espiritualista</h2>
+					<p class="descricao">.</p>
+				</div>
+			</div>
+			<div class="personagem">
+				<img class="imagem" src="" alt="Desbravador" />
+				<div class="conteudo">
+					<i class="logo"></i>
+					<h2 class="nome-personagem">Desbravador</h2>
+					<p class="descricao">.</p>
 				</div>
 			</div>
 		</main>
 		<ul class="botoes">
 			<li>
 				<button class="botao">
-					<img src="./src/imagens/tripulacao-chopper.png" alt="Tripulação Chopper" />
+					<img src="" alt="Guerreiro" />
 				</button>
 			</li>
 			<li>
 				<button class="botao">
-					<img src="./src/imagens/tripulacao-zoro.png" alt="Tripulação Roronoa Zoro" />
+					<img src="" alt="Mago" />
 				</button>
 			</li>
 			<li>
 				<button class="botao selecionado">
-					<img src="./src/imagens/tripulacao-luffy.png" alt="Tripulação Monkey D. Luffy" />
+					<img src="" alt="Berserker" />
 				</button>
 			</li>
 			<li>
 				<button class="botao">
-					<img src="./src/imagens/tripulacao-nami.png" alt="Tripulação Nami" />
+					<img src="" alt="Atirador" />
 				</button>
 			</li>
 			<li>
 				<button class="botao">
-					<img src="./src/imagens/tripulacao-sanji.png" alt="Tripulação Sanji" />
+					<img src="" alt="Assasino" />
+				</button>
+			</li>
+			<li>
+				<button class="botao">
+					<img src="" alt="Paladino" />
+				</button>
+			</li>
+			<li>
+				<button class="botao">
+					<img src="" alt="Espiritualista" />
+				</button>
+			</li>
+			<li>
+				<button class="botao selecionado">
+					<img src="" alt="Desbravador" />
 				</button>
 			</li>
 		</ul>
+
 
 		<script src="./src/js/index.js"></script>
 	</body>
