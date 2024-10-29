@@ -28,17 +28,21 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: transform 0.2s;
+            text-align: center;
         }
         .card:hover {
             transform: scale(1.05);
         }
         .card h2 {
             color: #007bff;
-            text-align: center;
         }
         .card p {
-            text-align: center;
             color: #666;
+        }
+        .card img {
+            width: 100%;
+            border-radius: 5px;
+            margin-bottom: 10px;
         }
         #details {
             margin-top: 20px;
@@ -48,8 +52,27 @@
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             display: none;
         }
-        #karmaIndicator {
+        #subclassContainer {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        .subclass-card {
+            background-color: #e9ecef;
+            border-radius: 8px;
+            padding: 10px;
+            cursor: pointer;
+            text-align: center;
+            width: 120px;
+            transition: transform 0.2s;
+        }
+        .subclass-card:hover {
+            transform: scale(1.05);
+        }
+        .karma-bar {
             margin-top: 10px;
+            width: 100%;
             height: 10px;
             background: linear-gradient(to right, #00ff00, #ff0000);
             border-radius: 5px;
@@ -108,7 +131,7 @@
         <p><strong>Habilidades:</strong> <span id="classHabilidades"></span></p>
         <p><strong>Pontos de Status:</strong> <span id="classStatus"></span></p>
         <p><strong>Karma:</strong> <span id="classKarma"></span></p>
-        <div id="karmaIndicator"></div>
+        <div id="karmaIndicator" class="karma-bar"></div>
     </div>
 
     <script>
@@ -256,7 +279,7 @@
                         karmaPercent: 50
                     }
                 }
-            }
+            },
         }
         function mostrarDetalhes(classe) {
             const detailsDiv = document.getElementById("details");
@@ -269,7 +292,7 @@
             for (let sub in subclasses) {
                 const subCard = document.createElement("div");
                 subCard.className = "subclass-card";
-                subCard.innerHTML = `<h3>${sub}</h3><p>${subclasses[sub].status}</p>`;
+                subCard.innerHTML = `<h3>${sub}</h3><p>${subclasses[sub].status}</p><div class="karma-bar" style="width: ${subclasses[sub].karmaPercent}%"></div>`;
                 subCard.onclick = () => mostrarSubclasseDetalhes(classe, sub);
                 subclassContainer.appendChild(subCard);
             }
