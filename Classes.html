@@ -87,7 +87,7 @@
         <!-- Classe Atirador -->
         <div class="card" onclick="mostrarDetalhes('Atirador')">
             <h2>Atirador</h2>
-            <p>Destreza e Velocidade de movimento .</p>
+            <p>Destreza e Agilidade de movimento .</p>
         </div>
         <!-- Classe Espiritualista -->
         <div class="card" onclick="mostrarDetalhes('Espiritualista')">
@@ -118,14 +118,14 @@
                     "Gladiador": {
                         passiva: "Aumento de resistência ao dano",
                         habilidades: "Fúria de Batalha, Muralha de Escudos",
-                        status: "Força: 9, Agilidade: 4, Movimento: 3",
+                        status: "Força: 10, Agilidade: 5,Resistência: 5 ",
                         karma: "Neutro",
                         karmaPercent: 50
                     },
                     "Cavaleiro": {
                         passiva: "Proteção aprimorada em armadura",
                         habilidades: "Investida, Defesa Implacável",
-                        status: "Força: 8, Agilidade: 5, Resistência: 4",
+                        status: "Força: 5, Resistência: 15",
                         karma: "Bom",
                         karmaPercent: 70
                     }
@@ -136,31 +136,33 @@
                     "Feiticeiro": {
                         passiva: "Regeneração mágica constante",
                         habilidades: "Bola de Fogo, Míssil Mágico",
-                        status: "Força: 2, Agilidade: 3, Inteligência: 10",
+                        status: "Vitalidade: 4, Agilidade: 4, Inteligência: 12",
                         karma: "Neutro",
                         karmaPercent: 50
                     },
                     "Necromante": {
                         passiva: "Controle sobre os mortos",
                         habilidades: "Invocação Sombria, Drenar Vida",
-                        status: "Força: 2, Agilidade: 2, Inteligência: 10",
+                        status: "Agilidade: 5, Inteligência: 20",
                         karma: "Maligno",
-                        karmaPercent: 40
-                    },
+                        karmaPercent: 1
+                    }
+                }
+            },
             "Berserker": {
                 subclasses: {
-                    "Gladiador": {
+                    "Ensandecido": {
                         passiva: "Aumenta a resistência ao dano em combate prolongado",
                         habilidades: "Corte Devastador, Fúria Destrutiva",
-                        status: "Força: 10, Resistência: 8, Velocidade: 4",
-                        karma: "Caótico",
+                        status: "Força: 13, Resistência: 6, Agilidade: 6",
+                        karma: "Mal amado",
                         karmaPercent: 40
                     },
                     "Destruidor": {
                         passiva: "Amplia o dano de área contra múltiplos inimigos",
                         habilidades: "Impacto Sísmico, Onda de Choque",
-                        status: "Força: 12, Defesa: 6, Controle: 5",
-                        karma: "Caótico",
+                        status: "Força: 15, Resistência: 5, agilidade: 5",
+                        karma: "Mal encaminhado",
                         karmaPercent: 30
                     }
                 }
@@ -170,14 +172,14 @@
                     "Ninja": {
                         passiva: "Aumento da furtividade em terrenos adversos",
                         habilidades: "Lâmina Sombria, Passo Silencioso",
-                        status: "Destreza: 10, Agilidade: 9, Força: 4",
-                        karma: "Mal",
+                        status: "Destreza: 10, Percepção: 5, Força: 5",
+                        karma: "Maldito",
                         karmaPercent: 25
                     },
                     "Sicária": {
                         passiva: "Dano crítico elevado contra alvos isolados",
                         habilidades: "Golpe Mortal, Arremesso Sombrio",
-                        status: "Destreza: 11, Precisão: 8, Velocidade: 5",
+                        status: "Destreza: 15, Agilidade: 10",
                         karma: "traiçoeiro",
                         karmaPercent: 20
                     }
@@ -188,15 +190,15 @@
                     "Guardião": {
                         passiva: "Redução de dano mágico recebido",
                         habilidades: "Escudo Sagrado, Luz Purificadora",
-                        status: "Defesa: 10, Força: 7, Cura: 6",
-                        karma: "Puro",
+                        status: "Resistência: 12, Percepção: 2, Vida: 6",
+                        karma: "Puro demais",
                         karmaPercent: 90
                     },
                     "Justicar": {
                         passiva: "Aumento da resistência a ataques físicos",
                         habilidades: "Golpe de Justiça, Defesa Divina",
-                        status: "Força: 8, Defesa: 9, Velocidade: 4",
-                        karma: "Puro",
+                        status: "Força: 8, Defesa: 9, Agilidade: 4",
+                        karma: "Bondoso",
                         karmaPercent: 80
                     }
                 }
@@ -206,15 +208,15 @@
                     "Sniper": {
                         passiva: "Dano aumentado em tiros de longo alcance",
                         habilidades: "Tiro Preciso, Flecha Penetrante",
-                        status: "Destreza: 12, Precisão: 10, Agilidade: 6",
+                        status: "Destreza: 12, Agilidade: 8",
                         karma: "Neutro",
                         karmaPercent: 50
                     },
                     "Arqueiro": {
                         passiva: "Maior velocidade de ataque com arco e flecha",
                         habilidades: "Rajada de Flechas, Flecha Veloz",
-                        status: "Destreza: 10, Velocidade: 8, Controle: 6",
-                        karma: "Neutro",
+                        status: "Destreza: 10, Agilidade: 8, percepção: 5",
+                        karma: "indeciso",
                         karmaPercent: 45
                     }
                 }
@@ -224,15 +226,15 @@
                     "Pactualista": {
                         passiva: "Invoca espíritos malignos temporários",
                         habilidades: "Espírito Protetor, Chama Fantasma",
-                        status: "Inteligência: 11, Vida Espiritual: 9, Defesa: 5",
-                        karma: "Puro",
-                        karmaPercent: 35
+                        status: "Inteligência: 11, Vida Espiritual: 14, ",
+                        karma: "Caotico demais",
+                        karmaPercent: 5
                     },
                     "Xamã": {
                         passiva: "Regeneração passiva de vida espiritual",
                         habilidades: "Totem Curador, Aura de Proteção",
-                        status: "Inteligência: 9, Defesa: 8, Cura: 7",
-                        karma: "Puro",
+                        status: "Inteligência: 9, Resistência: 11",
+                        karma: "fé perdida",
                         karmaPercent: 40
                     }
                 }
@@ -242,8 +244,8 @@
                     "Explorador": {
                         passiva: "Aumenta a capacidade de evasão em terrenos selvagens",
                         habilidades: "Passo Ágil, Conhecimento Selvagem",
-                        status: "Destreza: 9, Velocidade: 7, Resistência: 6",
-                        karma: "Neutro",
+                        status: "Destreza: 9, Agilidade: 7, Resistência: 6",
+                        karma: "caminhante",
                         karmaPercent: 45
                     },
                     "Caçador": {
@@ -255,23 +257,23 @@
                     }
                 }
             }
-        };
-        function mostrarDetalhes(classe) {
-        const detailsDiv = document.getElementById("details");
-        const className = document.getElementById("className");
-        const subclassContainer = document.getElementById("subclassContainer");
-        className.innerText = classe;
-        subclassContainer.innerHTML = '';
-            
-        const subclasses = classesInfo[classe].subclasses;
-        for (let sub in subclasses) {
-            const subCard = document.createElement("div");
-            subCard.className = "subclass-card";
-            subCard.innerHTML = `<h3>${sub}</h3><p>${subclasses[sub].status}</p>`;
-            subCard.onclick = () => mostrarSubclasseDetalhes(classe, sub);
-            subclassContainer.appendChild(subCard);
         }
-        detailsDiv.style.display = "block";
+        function mostrarDetalhes(classe) {
+            const detailsDiv = document.getElementById("details");
+            const className = document.getElementById("className");
+            const subclassContainer = document.getElementById("subclassContainer");
+            className.innerText = classe;
+            subclassContainer.innerHTML = '';
+            
+            const subclasses = classesInfo[classe].subclasses;
+            for (let sub in subclasses) {
+                const subCard = document.createElement("div");
+                subCard.className = "subclass-card";
+                subCard.innerHTML = `<h3>${sub}</h3><p>${subclasses[sub].status}</p>`;
+                subCard.onclick = () => mostrarSubclasseDetalhes(classe, sub);
+                subclassContainer.appendChild(subCard);
+            }
+            detailsDiv.style.display = "block";
         }
 
         function mostrarSubclasseDetalhes(classe, subclasse) {
@@ -284,7 +286,7 @@
         }
 
         function calcularKarma(karmaPercent) {
-            const dado = Math.floor(Math.random() * 100) + 1 * (karmaPercent / 100);
+            const dado = Math.floor(Math.random() * (karmaPercent + 1));
             if (dado <= 20) return "Caótico";
             else if (dado <= 40) return "Mal";
             else if (dado <= 60) return "Indeciso";
