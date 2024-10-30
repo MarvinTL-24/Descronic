@@ -111,8 +111,8 @@
         <div class="section">
             <h2>Estilo de Luta e Elemento</h2>
             <div class="form-group">
-                <label for="estiloLuta">Estilo de Luta:</label>
-                <select id="estiloLuta">
+                <label for="Estilo">Estilo de Luta:</label>
+                <select id="Estilo">
                     <option value="">Selecione um estilo de luta</option>
                     <option value="Espadachim">Samurai</option>
                     <option value="Arqueiro">Arqueiro</option>
@@ -189,11 +189,11 @@
             const peso = document.getElementById("peso").value;
             const classe = document.getElementById("classeEscolhida").value;
             const subclasse = document.getElementById("subclasseEscolhida").value;
-            const estiloLuta = document.getElementById("estiloLuta").value;
+            const estilo = document.getElementById("Estilo").value;
             const elemento = document.getElementById("elementoPrincipal").value;
 
             // Validações básicas
-            if (!classe || !subclasse || !estiloLuta || !elemento) {
+            if (!classe || !subclasse || !Estilo || !elemento) {
                 alert("Preencha todos os campos obrigatórios.");
                 return;
             }
@@ -222,7 +222,7 @@
                 <p><strong>Peso:</strong> ${peso} kg</p>
                 <p><strong>Classe:</strong> ${classe}</p>
                 <p><strong>Subclasse:</strong> ${subclasse}</p>
-                <p><strong>Estilo de Luta:</strong> ${estiloLuta}</p>
+                <p><strong>Estilo de Luta:</strong> ${estilo}</p>
                 <p><strong>Elemento Principal:</strong> ${elemento}</p>
             `;
         }

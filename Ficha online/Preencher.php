@@ -25,10 +25,10 @@ if ($conn->connect_error) {
         session_start();
         if(mysqli_affected_rows($conn) > 0){
             $_SESSION["insert"] = "1";
-            header('Location: ');
+            header('Location:index.html');
         }else{
             $_SESSION["insert"] = "2";
-            header('Location: ');
+            header('Location:index.html');
         }
     }else{
         echo "Falha no comando SQL";
