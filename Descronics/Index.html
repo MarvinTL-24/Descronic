@@ -9,62 +9,72 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 
     <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #9e7620;
+        }
+        .navbar-custom {
+            background-color: rgb(38, 240, 240);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .navbar-nav {
+            font-size: large;
+            font-style: italic;
+            gap: 30px;
+        }
         .navbar-logo {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            overflow: hidden;
+            width: 200px;
+            height: 150px;
+            
         }
         .navbar-logo img {
             width: 100%;
             height: 100%;
             object-fit: cover;
         }
+    
     </style>
 </head>
-<body style="background-color: rgb(78, 78, 133);">
-    <nav class="navbar bg-success navbar-expand-lg">
-        <div class="container-fluid justify-content-between">
-            <a href="#" class="navbar-brand"> 
-                <img src="/IMG/brasil.jpg" width="150">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMenu" aria-controls="navbarMenu" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-custom">
+        <div class="container-fluid justify-content-center">
             <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav align-items-center">
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Classes</a>
+                        <a class="nav-link text-white" href="classes.html">Classes</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbardropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Armas</a>
                         <ul class="dropdown-menu" aria-labelledby="navbardropdown">
-                            <li><a class="dropdown-item" href="#">Espadas</a></li>
-                            <li><a class="dropdown-item" href="#">Adagas</a></li>
-                            <li><a class="dropdown-item" href="#">Relicários</a></li>
-                            <li><a class="dropdown-item" href="#">Pactualista</a></li>
-                            <li><a class="dropdown-item" href="#">Armas</a></li>
-                            <li><a class="dropdown-item" href="#">Arcos</a></li>
-                            <li><a class="dropdown-item" href="#">Instrumentos</a></li>
-                            <li><a class="dropdown-item" href="#">Lanças</a></li>
-                            <li><a class="dropdown-item" href="#">Manoplas</a></li>
-                            <li><a class="dropdown-item" href="#">Escudos</a></li>
-                            <li><a class="dropdown-item" href="#">Construtor</a></li>
+                            <li><a class="dropdown-item" href="espadas.html">Espadas</a></li>
+                            <li><a class="dropdown-item" href="adagas.html">Adagas</a></li>
+                            <li><a class="dropdown-item" href="relicarios.html">Relicários</a></li>
+                            <li><a class="dropdown-item" href="pactualista.html">Pactualista</a></li>
+                            <li><a class="dropdown-item" href="armas.html">Armas</a></li>
+                            <li><a class="dropdown-item" href="arcos.html">Arcos</a></li>
+                            <li><a class="dropdown-item" href="instrumentos.html">Instrumentos</a></li>
+                            <li><a class="dropdown-item" href="lancas.html">Lanças</a></li>
+                            <li><a class="dropdown-item" href="manoplas.html">Manoplas</a></li>
+                            <li><a class="dropdown-item" href="escudos.html">Escudos</a></li>
+                            <li><a class="dropdown-item" href="construtor.html">Construtor</a></li>
                         </ul>
                     </li>
 
                     <!-- Logotipo circular -->
                     <li class="nav-item navbar-logo mx-3">
                         <a href="#">
-                            <img src="/IMG/logo.png" alt="Logo">
+                            <img src="./imagens/Logo.png" alt="Logo">
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Ideia</a>
+                        <a class="nav-link text-white" href="ideia.html">Ideia</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link text-white" href="#">Contato</a>
+                        <a class="nav-link text-white" href="contato.html">Contato</a>
                     </li>
                 </ul>
             </div>
