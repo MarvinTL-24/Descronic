@@ -7,7 +7,7 @@
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -35,17 +35,42 @@
             height: 100%;
             object-fit: cover;
         }
-    
+        .btn img {
+            width: 124px; /* Imagem ocupa toda a largura do botão */
+            height: auto; /* Mantém a proporção da imagem */
+        }
+        .container-fluid {
+            padding-left: 0; /* Remove padding à esquerda */
+            padding-right: 0; /* Remove padding à direita */
+        }
+        img.img-fluid{
+            width: 124px;
+            height: 124px;
+        }
+
+        .icon-container {
+            display: inline-block; /* Faz os ícones ficarem lado a lado */
+            margin: 15px; /* Margem entre ícones */
+            text-align: center; /* Centraliza o texto abaixo dos ícones */
+        }
+
+        .status-info {
+            background-color: rgba(0, 0, 0, 0.6); /* Fundo semi-transparente */
+            padding: 10px; /* Espaçamento interno */
+            border-radius: 5px; /* Cantos arredondados */
+            margin-top: 5px; /* Espaço acima do status */
+        }
+
     </style>
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-custom">
-        <div class="container-fluid justify-content-center">
+    <nav class="navbar navbar-expand-lg navbar-custom"> <!--Criando o menu de cima-->
+        <div class="container-fluid justify-content-center"> 
             <div class="collapse navbar-collapse justify-content-center" id="navbarMenu">
                 <ul class="navbar-nav align-items-center">
-                    <li class="nav-item">
-                        <a class="nav-link text-white" href="classes.html">Classes</a>
-                    </li>
+                    <li class="nav-item"> 
+                        <a class="nav-link text-white" href="#">Classes</a>
+                    </li> 
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle text-white" href="#" id="navbardropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Armas</a>
                         <ul class="dropdown-menu" aria-labelledby="navbardropdown">
@@ -80,5 +105,51 @@
             </div>
         </div>
     </nav>
+
+    <!--Criando a divisão das classes e visualização-->
+    <div class="container-fluid text-end my-4" style="background-image: url('./imagens/fundo.jpg'); background-size: cover;" id="backgroundContainer">
+        <div class="row">
+            <div class="col"> <!--As imagens estão em 1295x1134 e os slogan 124x124-->
+                <div class="icon-container">
+                    <a href="#" class="btn" data-bg="./imagens/guerreiro.png">
+                        <img src="./imagens/guerreiro.png" alt="Ícone 1" class="img-fluid">
+                    </a><br>
+                    <a href="#" class="btn" data-bg="./imagens/mago.png">
+                        <img src="./imagens/mago.png" alt="Ícone 2" class="img-fluid">
+                    </a><br>
+                    <a href="#" class="btn" data-bg="./imagens/assasino.png">
+                        <img src="./imagens/assasino.png" alt="Ícone 3" class="img-fluid">
+                    </a><br>
+                    <a href="#" class="btn" data-bg="./imagens/beserker.jpg">
+                        <img src="./imagens/beserker.jpg" alt="Ícone 4" class="img-fluid">
+                    </a><br>
+                    <a href="#" class="btn" data-bg="./imagens/Paladino.png">
+                        <img src="./imagens/Paladino.png" alt="Ícone 5" class="img-fluid">
+                    </a><br>
+                    <a href="#" class="btn" data-bg="./imagens/Atirador.png">
+                        <img src="./imagens/Atirador.png" alt="Ícone 6" class="img-fluid">
+                    </a><br>
+                    <a href="#" class="btn" data-bg="./imagens/pactualista.png">
+                        <img src="./imagens/pactualista.png" alt="Ícone 7" class="img-fluid">
+                    </a><br>
+                    <a href="#" class="btn" data-bg="./imagens/desbravador.png">
+                        <img src="./imagens/desbravador.png" alt="Ícone 8" class="img-fluid">
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    
+    <script> //Ao clicar em um ícone, o fundo mudará imediatamente para a imagem correspondente, criando uma experiência interativa.
+        document.querySelectorAll('.icon-container a').forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault(); // Impede o comportamento padrão do link
+                const newBackground = this.getAttribute('data-bg'); // Pega a nova imagem de fundo
+                document.getElementById('backgroundContainer').style.backgroundImage = `url('${newBackground}')`; // Altera a imagem de fundo
+            });
+        });
+    </script>
 </body>
 </html>
