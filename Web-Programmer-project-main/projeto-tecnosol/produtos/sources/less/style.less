@@ -1,0 +1,883 @@
+@import url(http://fonts.googleapis.com/css?family=Changa+One);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:700);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:800);
+@import url(http://fonts.googleapis.com/css?family=Open+Sans);
+@import url(http://fonts.googleapis.com/css?family=Changa+One);
+@import "jquery.fancybox.css";
+/*------------------mixins------------------*/
+@shadownone: 0 0 0 rgba(0,0,0,0);
+@footercolor : #3d3c3c;
+@colorred : #c60505;
+@basetextcolor: #4c4c4c;
+.white {
+    color:@white;
+}
+.red {
+    color: @colorred
+}
+/*---------- template stylization -----------*/
+body{
+    background-color:@black;
+	font:@baseLineHeight @baseFontSize @sansFontFamily;
+	color:@basetextcolor;
+	min-width:1170px;
+}
+#webSiteLoader{
+	position: fixed;
+    .size(100%,100%);
+	background:#171514;
+	z-index: 1023;
+    top: 0;
+}
+#webSiteLoader > span{
+    position: absolute;
+    left: 50%;
+    top: 50%;
+}
+#pageLoader{
+	position: fixed;
+    .size(10px,10px);
+	top: 50%;
+	left: 50%;
+	margin: -5px 0 0 -5px;
+	z-index: 1000;
+	display: none;
+}
+p{
+    font:@baseLineHeight @baseFontSize @sansFontFamily;
+    color: @basetextcolor;
+    margin:0 0 9px 0;
+}
+h2 {
+    letter-spacing: 2px;
+	color:@white;
+	font: 700 24px/24px 'Open Sans', @sansFontFamily;
+    margin-top:0;
+    display: block;
+    text-transform:uppercase;
+    margin-bottom:28px;
+}
+h3 {
+	color: @white;
+	font: 13px/20px @sansFontFamily;
+    margin:0;
+}
+h4 {
+	color: #636363;
+	font: 11px/20px @sansFontFamily;
+    text-transform:uppercase;
+    margin: 0 0 8px 0;
+    display: inline-block;
+}
+.textStyle1{
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: @colorred ;
+    font: 36px/34px 'Changa One', cursive;
+    margin-bottom: 2px;
+    display: block;
+}
+.textStyle2{
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: @basetextcolor;
+    font: 29px/28px 'Changa One',cursive;
+    margin-bottom: 29px;
+    display: block;
+}
+.textStyle3{
+    display: block;
+    margin-bottom: 7px;
+    position: relative;
+    letter-spacing: 2px;
+    color:@colorred;
+	font: 700 24px/24px 'Open Sans', @sansFontFamily;    
+}
+.extra-wrap {
+    overflow:hidden;
+}
+.btn-link{
+    text-shadow: none;
+    box-shadow: none;
+    padding: 0;
+}
+.btn{
+    padding: 0;
+    border: none;
+}
+.btn:hover{
+     background-position: 0 0;
+}
+.lspace1{
+    letter-spacing: 1px;
+}
+#back-top{
+	position: fixed;
+	bottom: 10px;
+	right: 10px;
+	width: 50px;
+	height: 50px;
+	background: url("../img/up-arrow.png") center 12px no-repeat;
+	z-index: 1000;
+	border-radius: 5px;
+	display: none;
+	cursor: pointer;
+}
+/*----------------------------header---------------------------*/
+header{
+	width: 100%;
+    top: 0;
+    position: relative;
+    z-index: 5;
+    overflow:visible !important;
+    height: 138px;
+    background: #1a1a1a;
+}
+header h1{
+    .size(48px,255px);
+    display: inline-block;
+    margin: 47px 0 0 -2px;
+    text-align: center;
+    position: relative;
+}
+
+/*----------------search-----------------------------------*/
+#search{
+    margin: 0;
+    display: inline-block;
+    width: 100%;
+    text-decoration: none;
+    margin-bottom:50px;
+}
+.search {
+    color:@colorred;    
+}
+.search_link {
+    color:@white !important;
+    font-weight:normal !important;
+    text-transform:uppercase;
+    margin-top:0;
+    margin-bottom:23px;
+    text-decoration:none !important;
+    .transition(all 0.5s ease);
+    text-decoration:underline !important;
+}
+.search_link:hover {
+    color:@colorred !important;
+    .transition(all 0.5s ease);
+}
+#search input{
+	outline: none;
+	box-shadow: none;
+	margin:0;
+    color: @basetextcolor;
+    width: 243px;
+    padding: 8px 9px 9px 9px;
+	line-height: 21px;
+    background-color:#151515;
+    border: 1px solid #212020;
+    border-radius:0;
+}
+#search #searchButton{
+    margin-top: 0;
+    margin-left: 1px;
+    position: relative;
+    left: 223px;
+    top: -32px;
+}
+#searchButton{
+    border: none;
+    box-shadow: none;
+    .size(27px,33px);
+    background: url(../img/searchimg.png);  
+    .transition(all 0.25s ease); 
+}
+#searchButton:hover{
+    opacity: 0.25;
+    border: none;
+    box-shadow: none;
+    .size(27px,33px);
+    background: url(../img/searchimg.png);   
+    .transition(all 0.25s ease);
+}
+#search #advancedSearch:hover{
+	color: @colorred;
+}
+/*--------------------------------menu---------------------------------*/
+header .navbar{
+    float: right;
+    margin: 0;
+    position: relative;
+    text-align: right;
+    display: inline-block;
+}
+header .navbar > .navbar-inner{
+    display: inline-block;
+    position: relative;
+    padding: 0;
+    border-radius: 0;
+    margin: 0;
+    background: none;
+    border: none;
+    filter:none;
+}
+.navbar-inner{
+    .box-shadow(@shadownone);
+}
+.sf-menu{
+    position:relative;
+    z-index:1;
+	list-style: none;
+	padding: 0;
+    display: inline-block;
+    margin: 0;
+    float: right;
+}
+.sf-menu > li {
+	position: relative;
+	display: inline-block;
+    text-align:center;
+    margin: 61px 49px 0;
+    line-height: 0px;
+}
+.sf-menu > li > a {
+	position: relative;
+    display: inline-block;	
+    overflow: hidden;
+}
+
+.sf-menu > li.last {
+    margin:61px 23px 0 50px; 
+}
+.sf-menu > li > a .base_text{
+    color:@white;
+    font: 16px/22px 'Changa One', cursive;
+	text-decoration: none;
+    position: relative;
+    text-transform:uppercase;
+    text-align: center;
+	display: inline-block;
+    z-index: 1;
+}
+.sf-menu > li > a .button_act {
+    position: absolute;
+    top: 0;
+    left: 0;
+    .size(100%,100%);
+}
+/*----------------------submenu-----------------------*/
+.sf-menu ul a{
+	color:#6f6f6f;
+    padding-left: 33px;
+    width: 100%;
+	font: 800 12px/22px 'Open Sans', @sansFontFamily;
+    text-transform:uppercase;
+	text-decoration: none;
+	position: relative;
+    .transition(all 0.3s ease);
+    display: inline-block;
+}
+.sf-menu ul a:hover{
+    .transition(all 0.3s ease);
+    text-decoration: none;
+    color: #1c1c1c;
+    background: @white;
+}
+.sf-menu ul{
+	position: absolute;
+    margin:0;
+    left: -35px;
+    top: 39px;
+	list-style: none;
+	z-index: 10;
+    background-color: #1a1a1a;
+    width: 225px;
+    padding-bottom: 30px !important;
+    text-align:left;
+}
+.sf-menu ul > li {
+    width: 225px;
+    overflow: hidden;
+	display:block;
+    margin-bottom: 4px;
+}
+.sf-menu ul > .last {
+    padding-bottom:0;
+    background:none;
+}
+.sf-menu .subMenu2 {
+    top: 0 !important;
+    padding-bottom: 0!important;
+	position: relative;
+    left: 0!important;
+    margin:0;
+	list-style: none;
+	z-index: 10;
+    text-align:left;
+}
+.subMenu2 > li.last{
+    margin-bottom: 0!important;
+}
+.sf-menu .subMenu2 a {
+	color:#6f6f6f;
+    padding-left: 42px;
+	font: 300 12px/22px 'Open Sans', @sansFontFamily;
+    text-transform:uppercase;
+	text-decoration: none;
+	position: relative;
+    display: inline-block;
+    .transition(all 0.3s ease);
+}
+.sf-menu .subMenu2 a:hover {
+    color:@white !important;
+    background: #151515;
+    .transition(all 0.3s ease);
+}
+.subMenu2 > .last {
+    padding-bottom:0 !important;
+    background:none !important;
+}
+/*----------------------------content----------------------------*/
+#wrapper .global {
+	position: relative;
+	width:100%;
+	height:100% !important;
+    z-index:1;
+    background: #151515;
+}
+#wrapper .global > div{
+	position: relative;
+}
+.dynamicContent{
+	position: absolute;
+	width: 100%;
+}
+.dynamicContent > .content{
+    padding: 61px 0 40px 0;
+}
+a.btn-link.more1 {
+    text-align: left;
+    color: @white;
+	font: 800 12px/22px 'Open Sans', @sansFontFamily;
+	position:relative;
+    border-radius: 0;
+    display:inline-block;
+    z-index: 1;
+    left: 0;
+    text-transform:uppercase;
+    background: none;
+    text-decoration: underline;
+    .transition(all 0.3s ease);
+}
+a.btn-link.more1:hover {
+    color: @colorred;
+    .transition(all 0.3s ease);
+}
+a.btn-link.more2 {
+    margin-right: 11px;
+    letter-spacing: 2px;
+    margin-bottom: 13px;
+    text-align: left;
+    color: @colorred;
+	font: 700 24px/24px 'Open Sans', @sansFontFamily;
+	position:relative;
+    border-radius: 0;
+    text-decoration: none;
+    display:inline-block;
+    z-index: 1;
+    left: 0;
+    text-transform:uppercase;
+    background: none;
+    .transition(all 0.3s ease);
+}
+a.btn-link.more2:hover {
+    color: @white;
+    .transition(all 0.3s ease);
+}
+/*--------------navGall--------------*/
+.navGall {
+    top: 138px;
+    left: 0;
+    position: absolute;
+	display: inline-block;
+	z-index: 2;
+	height: 780px;
+	overflow: hidden;
+    background: #151515;
+}
+.navGall > ul {
+	position: relative;
+	display: inline-block;
+    margin: 0;
+}
+.navGall > ul > li {
+    float: left;
+    overflow: hidden;
+	position: relative;
+    .size(714px, 270px);
+	display: inline-block;
+}
+.navGall > ul > li > a {
+    .size(714px, 270px);
+	position: relative;
+	display: inline-block;
+}
+.navGall > ul ._last {
+	margin: 0;
+}
+.box1{
+    text-align: center;
+    width: 100%;
+    position: absolute;
+    overflow: hidden;
+    bottom: 83px;
+    padding: 28px 0px 25px 0;
+    background: @white ;
+}
+.box1 > p{
+    text-transform: uppercase;
+    font: 700 12px/16px 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    color: #a3a3a3;
+    margin-bottom: 10px;
+}
+.box1 > span{
+    font: 700 18px/21px 'Open Sans', @baseFontFamily;
+    color: #232323;
+    display: block;
+    margin-bottom: 4px;
+}
+.box1 > span + span{
+    font: 700 18px/21px 'Open Sans', @baseFontFamily;
+    display: block;
+    color: #a3a3a3;
+}
+.box1 > hr{
+    position: relative;
+    margin: 0 auto 9px auto;
+    height: 2px;
+    width: 17px;
+    background: #dadada;
+    border: none;
+    outline: none;
+}
+.box2{
+    text-align: center;
+    width: 100%;
+    left: 270px;
+    position: absolute;
+    overflow: hidden;
+    bottom: 83px;
+    padding: 28px 0px 25px 0;
+    background: url(../img/pattern1.png);
+}
+.box2 > p{
+    text-transform: uppercase;
+    font: 700 12px/16px 'Open Sans', sans-serif;
+    letter-spacing: 1px;
+    color: #a3a3a3;
+    margin-bottom: 10px;
+}
+.box2 > span{
+    font: 700 18px/21px 'Open Sans', @baseFontFamily;
+    color: @white;
+    display: block;
+    margin-bottom: 4px;
+}
+.box2 > span + span{
+    font: 700 18px/21px 'Open Sans', @baseFontFamily;
+    display: block;
+    color: @white;
+}
+.box2 > hr{
+    border: none;
+    outline: none;
+    position: relative;
+    margin: 0 auto 9px auto;
+    height: 2px;
+    width: 17px;
+    background: #6d6d6d;
+}
+/*----------------end navgall---------------*/
+/*---------------carousel1------------------*/
+.carousel1 {
+    height: 377px;
+    border-top: 1px solid #212020;
+    margin-top: 40px;
+    padding-top: 48px;
+    position: relative;
+    width: 1170px !important;    
+}
+.carousel1 > ul > li{
+    position: relative;
+    height: 300px;
+    width: 270px;
+    margin-right: 30px;
+}
+.thumbnail{
+    border: none;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+}
+.thumbnail > a{
+    overflow: hidden;
+    .size(129px,270px);
+    margin: 0 0 23px 0;
+    position: relative;
+    display: block;
+    box-shadow: none;
+}
+.thumbnail > a > .hover_bg{
+    left: 270px;
+    position: absolute;
+    .size(129px,270px);
+    background: url(../img/pattern1.png);
+    .transition(all 0.5s ease);
+}
+.thumbnail > a:hover > .hover_bg {
+    left: 0;
+    .transition(all 0.3s ease);
+}
+.thumbnail > .caption{
+    padding: 0 !important;
+}
+.pagination{
+    margin: 0;
+    top: 39px;
+    position: relative;
+    background: transparent;
+    .size(38px,100%);
+    overflow: hidden;
+}
+.next{
+    cursor: pointer;
+    position: relative;
+    float: right;
+    padding: 0;
+    outline: none;
+    background: transparent;
+    .size(38px,38px);
+    border: none;    
+}
+.prev{
+    cursor: pointer;
+    position: relative;
+    left: 1px;
+    float: left;
+    padding: 0;
+    outline: none;
+    background: transparent;
+    .size(38px,38px);
+    border: none;
+}
+/*-------------end carousel1----------------*/
+/*---------------carousel2------------------*/
+.carousel2 {
+    height: 652px;
+    position: relative;
+    width: 1170px !important;    
+}
+.carousel2 > ul > li{
+    position: relative;
+    height: 575px;
+    width: 270px;
+    margin-right: 30px;
+}
+.carousel2 > ul > li > div > .thumbnail{
+    border: none;
+    padding: 0;
+    outline: none;
+    box-shadow: none;
+}
+.carousel2 > ul > li > div > .thumbnail > a{
+    overflow: hidden;
+    .size(385px,270px);
+    margin: 0 0 28px 0;
+    position: relative;
+    display: block;
+    box-shadow: none;
+}
+.carousel2 > ul > li > div > .thumbnail > a > .hover_bg{
+    left: 270px;
+    position: absolute;
+    .size(385px,270px);
+    background: url(../img/pattern1.png);
+    .transition(all 0.5s ease);
+}
+.carousel2 > ul > li > div > .thumbnail > a:hover > .hover_bg {
+    left: 0;
+    .transition(all 0.3s ease);
+}
+.carousel2 > ul > li > div > .thumbnail > .caption{
+    padding: 0 !important;
+}
+.carousel2 > ul > li > div > .thumbnail > .caption > h2{
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+}
+.spacing1{
+    position: relative;
+    word-spacing: 8px;
+    margin-bottom: 21px !important;
+}
+.carousel2 > ul > li > div > .thumbnail > .caption > p{
+    margin-bottom: 13px;
+}
+/*-------------end carousel1----------------*/
+.box3 {
+    position: relative;
+    top: -4px;
+    width:100%;
+}
+.box3>table {
+    margin-bottom:5px;
+    width:100%;
+}
+.box3>table tr>td{
+    white-space: nowrap;
+}
+.box3>table a{
+    color:#787373; 
+    text-decoration:none; 
+	font:@baseLineHeight @baseFontSize @sansFontFamily;
+	color:@basetextcolor;
+    .transition(all 0.35s ease);
+}
+.dots{
+    background: url(../img/background-point.png) 30% 15px repeat-x;
+    width: 100%;
+}
+.box3>table a:hover {
+    color:@white;
+    .transition(all 0.35s ease);
+}
+
+/*---------------------------- GOOGLE MAP --------------------------------*/
+.g_map{
+    top: 4px;
+    position: relative;
+    .size(219px,1170px);
+    margin:0;
+    background-color:@white;
+    display:inline-block;
+}
+.g_map > iframe{
+	border: none;
+	outline: none;
+    .size(219px,1170px);
+    background: url(../img/googleMapLoader.gif) center no-repeat !important;
+	padding:0;
+}
+.bottom1{
+    border-bottom: 1px solid #212020;
+    position: relative;
+    padding-bottom: 53px;
+}
+/*----address----*/
+.phone2 {
+    color: @basetextcolor ;
+	display:inline-block;
+	width: 91px;
+}
+.c1 {
+	position: relative;
+	line-height: 18px;
+    color: @basetextcolor ;
+	width: 210px;
+    margin-bottom: 15px;
+}
+.contactText_2 {
+	text-decoration: underline;
+	display: inline-block;
+	cursor: pointer;
+    color: @basetextcolor ;
+	margin: -2px 0px 0 -45px;
+    .transition(all 0.3s ease);
+}
+.contactText_2:hover {
+	text-decoration: underline;
+	display: inline-block;
+	cursor: pointer;
+    color: @colorred ;
+	margin: -2px 0px 0 -45px;
+    .transition(all 0.3s ease);
+}
+/*-------------------------- CONTACT FORM ----------------------------*/
+#form1 {
+    margin:0;
+}
+#form1{
+    position: relative;
+    display: inline-block;
+}
+#form1 label{
+    float: left;
+    margin-bottom:24px;
+	position: relative;
+    display: inline-block;
+}
+#form1 label.message {
+    display:inline-block;
+}
+#form1 label input, #form1 label textarea{
+	outline: none;
+	box-shadow: none;
+	margin:0;
+	color:#585858;
+	width:500px;
+	padding: 11px 9px 11px 14px;
+    font:@baseLineHeight @baseFontSize @sansFontFamily;
+    color:#575757;
+    margin-bottom:-4px;
+    background-color:#151515;
+    border: 1px solid #212020;
+    border-radius:0;
+}
+#form1 label textarea{
+    height: 123px;
+    width: 744px;
+    resize: none;
+}
+#form1 label.name {
+    margin-right:20px;
+}
+#form1 label.email {
+    margin-right:20px;
+}
+#form1 label input{
+	width: 218px;
+}
+#form1 .error{
+   width: 100%;
+   font-size: 10px;
+   line-height: 12px;
+   position: absolute;
+   top: 43px;
+   color:@colorred;
+}
+#form1 .empty {
+   font-size: 10px;
+   line-height: 12px;
+   position: absolute;
+   top:43px;
+   color:@colorred;
+   text-align: right;
+}
+#form1 .message .empty, #form1 .message .error {
+    top: 148px;
+    text-align: left;
+}
+#form1 .success{
+    border: 1px solid #212020 ;
+    position: absolute;
+    background-color:#131313;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    padding-top: 5px;
+    .size(37px,768px);
+}
+#form1 .success > span{
+    color: @colorred;
+    font:13px 'Arial';
+    text-align: center;
+    width: 100%;
+    display: inline-block;
+}
+.btns{
+    position: absolute;
+    top: 223px;
+}
+.btns > a {
+    margin-right: 17px;
+}
+.mail{
+    color: @basetextcolor;
+    text-decoration: none;
+    .transition(all 0.3s ease);
+}
+.mail:hover{
+    color: @colorred;
+    text-decoration: none;
+    .transition(all 0.3s ease);
+}
+/*-----serach list-----*/
+.search_list > li{
+    margin-bottom: 15px;
+}
+.search_list > li h4{
+    margin: 0;
+}
+.search_list > li .match{
+    display: block;
+    color:@white;
+    font-size: 12px;
+    font-weight: bold;
+}
+/*------404img----*/
+.img1{
+    top: 29px;
+    position: relative;
+    left: 59px;
+}
+/*-------------- FOOTER ---------------------------------------------------- */
+footer{
+	position: absolute;
+    height: 86px;
+    z-index:10; 
+    bottom: 0;
+    width:100%;
+    background: #1a1a1a;
+}
+.privacy_text{
+    margin-top: 3px;
+    color:@footercolor;    
+    font: 700 11px 'Open Sans', @baseFontFamily;
+}
+footer .privacy_text a {
+    letter-spacing: 1px;
+    font: 700 11px 'Open Sans', @baseFontFamily;
+    color: @footercolor;
+    display: inline-block;
+    text-transform:uppercase;
+    .transition(all 0.5s ease);
+}
+footer .privacy_text a:hover {
+    color:#c60505;
+    text-decoration:none;
+    .transition(all 0.5s ease);
+}
+.smalllogo{
+    margin-top: 23px;
+    position: relative;
+    display: block;
+}
+/*-------------------------------------margins padding other misc----------------------------------------------*/
+.margTop1{
+    margin-top: 72px;
+}
+.margTop2{
+    margin-top: 48px;
+}
+.margBot1{
+    margin-bottom: 25px;
+}
+.margBot2{
+    margin-bottom: 23px;
+}
+.margBot3{
+    margin-bottom: 17px;
+}
+.margBot4{
+    margin-bottom: 15px;
+}
+.margBot5{
+    margin-bottom: 6px;
+}
+.margBot6{
+    margin-bottom: 27px;
+}
+/*Core variables and mixins*/
+@import "variables.less"; // Modify this for custom colors, font-sizes, etc
+@import "mixins.less";
