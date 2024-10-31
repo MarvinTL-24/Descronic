@@ -34,7 +34,7 @@
         }
 
         .navbar-logo img {
-            width: 150px;
+            width: 100px;
             height: auto;
             transition: transform 0.3s ease;
         }
@@ -56,7 +56,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px 0;
+            padding: px 0;
             overflow-y: auto;
             z-index: 1;
         }
@@ -70,29 +70,13 @@
         }
 
         .icon-container .btn {
-            margin-bottom: 5px;
+            margin-bottom: 2px;
         }
 
         .background-display {
             flex-grow: 1;
             transition: background-image 0.5s ease, background-size 0.5s ease;
-            position: relative; /* Para manter o controle de posicionamento */
-        }
-
-        .cards-container {
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: rgba(0, 0, 0, 0.7);
-            color: white;
-            padding: 20px;
-            max-height: 200px; /* Ajuste conforme necessário */
-            overflow-y: auto;
-        }
-
-        .card {
-            margin-bottom: 10px;
+            position: relative;
         }
     </style>
 </head>
@@ -142,56 +126,43 @@
         <div class="background-display" id="backgroundContainer"></div>
     
         <div class="icon-container">
-            <a href="#" class="btn" data-bg="./imagens/guerreiro.png" data-cards="Guerreiro Card 1|Guerreiro Card 2">
+            <a href="#" class="btn" data-bg="./imagens/guerreiro.png">
                 <img src="./imagens/Logo.guerreiro.jpg" alt="Ícone Guerreiro" class="img-fluid">
             </a>
-            <a href="#" class="btn" data-bg="./imagens/mago.png" data-cards="Mago Card 1|Mago Card 2">
+            <a href="#" class="btn" data-bg="./imagens/mago.png">
                 <img src="./imagens/Logo.mago.jpg" alt="Ícone Mago" class="img-fluid">
             </a>
-            <a href="#" class="btn" data-bg="./imagens/assasino.png" data-cards="Assassino Card 1|Assassino Card 2">
+            <a href="#" class="btn" data-bg="./imagens/assasino.png">
                 <img src="./imagens/Logo.Assasino.jpg" alt="Ícone Assassino" class="img-fluid">
             </a>
-            <a href="#" class="btn" data-bg="./imagens/beserker.jpg" data-cards="Berserker Card 1|Berserker Card 2">
+            <a href="#" class="btn" data-bg="./imagens/beserker.jpg">
                 <img src="./imagens/Logo.Berserker.jpg" alt="Ícone Berserker" class="img-fluid">
             </a>
-            <a href="#" class="btn" data-bg="./imagens/Paladino.png" data-cards="Paladino Card 1|Paladino Card 2">
+            <a href="#" class="btn" data-bg="./imagens/Paladino.png">
                 <img src="./imagens/Logo.Paladino.jpg" alt="Ícone Paladino" class="img-fluid">
             </a>
-            <a href="#" class="btn" data-bg="./imagens/Atirador.png" data-cards="Atirador Card 1|Atirador Card 2">
+            <a href="#" class="btn" data-bg="./imagens/Atirador.png">
                 <img src="./imagens/Logo.Atirador.jpg" alt="Ícone Atirador" class="img-fluid">
             </a>
-            <a href="#" class="btn" data-bg="./imagens/pactualista.png" data-cards="Pactualista Card 1|Pactualista Card 2">
+            <a href="#" class="btn" data-bg="./imagens/pactualista.png">
                 <img src="./imagens/Logo.pactualista.jpg" alt="Ícone Pactualista" class="img-fluid">
             </a>
-            <a href="#" class="btn" data-bg="./imagens/desbravador.png" data-cards="Desbravador Card 1|Desbravador Card 2">
+            <a href="#" class="btn" data-bg="./imagens/desbravador.png">
                 <img src="./imagens/Logo.Desbravador.jpg" alt="Ícone Desbravador" class="img-fluid">
             </a>
         </div>
     </div>
 
-    <div class="cards-container" id="cardsContainer"></div>
-
     <script>
         const backgroundContainer = document.getElementById('backgroundContainer');
-        const cardsContainer = document.getElementById('cardsContainer');
 
         document.querySelectorAll('.icon-container a').forEach(button => {
             button.addEventListener('click', function(event) {
                 event.preventDefault();
                 const newBackground = this.getAttribute('data-bg');
-                const cardsData = this.getAttribute('data-cards').split('|');
                 
                 // Atualiza a imagem de fundo
                 backgroundContainer.style.backgroundImage = `url('${newBackground}')`;
-                
-                // Atualiza os cards
-                cardsContainer.innerHTML = ''; // Limpa os cards anteriores
-                cardsData.forEach(card => {
-                    const cardElement = document.createElement('div');
-                    cardElement.className = 'card';
-                    cardElement.innerHTML = `<div class="card-body">${card}</div>`;
-                    cardsContainer.appendChild(cardElement);
-                });
             });
         });
     </script>
