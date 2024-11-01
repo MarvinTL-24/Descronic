@@ -695,17 +695,15 @@ img {
 .hero-slides {
     .single-hero-slide {
         height: 950px;
-        position: relative;
+        position: fixed;
         z-index: 1;
         padding: 0 40px 100px;
-        @include trans-duration(800ms);
         overflow: visible;
         cursor: pointer;
         .hero-slides-content {
-            position: relative;
+            position: fixed;
             z-index: 1;
             @include transform(translateY(75%));
-            @include trans-duration(800ms);
             bottom: 0;
             .line {
                 width: 100px;
@@ -721,7 +719,6 @@ img {
             p {
                 color: $color-white;
                 margin-bottom: 0;
-                @include trans-duration(500ms);
                 margin-top: 140px;
             }
         }
