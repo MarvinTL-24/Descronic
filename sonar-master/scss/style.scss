@@ -1,7 +1,7 @@
 /* [ -- Master Stylesheet -- ] */
 
 /* ----------------------------------------------------------
-:: Template Name: Sonar - Photography Template
+:: Template Name: descronic_ - Photography Template
 :: Author: Colorlib
 :: Author URL: https://colorlib.com
 :: Version: 1.0
@@ -82,7 +82,7 @@ a {
     z-index: 1000000;
 }
 
-#sonar-load {
+#descronic_-load {
     width: 70px;
     height: 70px;
     border-radius: 50%;
@@ -90,7 +90,7 @@ a {
     border-style: solid;
     border-color: transparent;
     border-top-color: $bg-gray;
-    @include animation(sonar 2400ms linear infinite);
+    @include animation(descronic_ 2400ms linear infinite);
     z-index: 999;
     &:before {
         content: "";
@@ -104,7 +104,7 @@ a {
         border-style: solid;
         border-color: transparent;
         border-top-color: $bg-gray;
-        @include animation(sonar 2700ms linear infinite);
+        @include animation(descronic_ 2700ms linear infinite);
     }
     &:after {
         content: "";
@@ -118,11 +118,11 @@ a {
         border-style: solid;
         border-color: transparent;
         border-top-color: $bg-gray;
-        @include animation(sonar 1800ms linear infinite);
+        @include animation(descronic_ 1800ms linear infinite);
     }
 }
 
-@-webkit-keyframes sonar {
+@-webkit-keyframes descronic_ {
     0% {
         @include transform(rotate(0deg));
 
@@ -132,7 +132,7 @@ a {
     }
 }
 
-@keyframes sonar {
+@keyframes descronic_ {
     0% {
         @include transform(rotate(0deg));
 
@@ -155,7 +155,7 @@ img {
     max-width: 100%;
 }
 
-.sonar-table {
+.descronic_-table {
     display: table;
     z-index: 9;
     position: absolute;
@@ -164,7 +164,7 @@ img {
     margin: 0;
 }
 
-.sonar-table-cell {
+.descronic_-table-cell {
     display: table-cell;
     vertical-align: middle;
 }
@@ -385,7 +385,7 @@ img {
     }
 }
 
-.sonar-btn {
+.descronic_-btn {
     position: relative;
     z-index: 1;
     min-width: 180px;
@@ -955,7 +955,7 @@ img {
     }
 }
 
-.sonar-call-to-action-area {
+.descronic_-call-to-action-area {
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -1145,7 +1145,7 @@ img {
 
 /* :: Testimonials Area CSS */
 
-.sonar-testimonials-area {
+.descronic_-testimonials-area {
     position: relative;
     z-index: 1;
     padding: 70px 0;
@@ -1217,7 +1217,7 @@ img {
 
 /* :: Portfolio Area CSS */
 
-.sonar-projects-area {
+.descronic_-projects-area {
     position: relative;
     z-index: 1;
     padding: 100px 35px 50px;
@@ -1240,7 +1240,7 @@ img {
     }
 }
 
-.sonar-portfolio-menu {
+.descronic_-portfolio-menu {
     position: absolute;
     bottom: 40px;
     right: 0;
@@ -1282,8 +1282,8 @@ img {
 
 /* :: Blog Area CSS */
 
-.sonar-blog-area,
-.sonar-contact-area {
+.descronic_-blog-area,
+.descronic_-contact-area {
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -1385,7 +1385,7 @@ img {
     }
 }
 
-.sonar-catagories-widget-area {
+.descronic_-catagories-widget-area {
     h6 {
         margin-bottom: 15px;
     }
@@ -1502,7 +1502,7 @@ img {
 
 /* :: About Area CSS */
 
-.sonar-about-us-area {
+.descronic_-about-us-area {
     position: relative;
     z-index: 1;
     padding: 120px 0;

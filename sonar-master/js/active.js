@@ -151,9 +151,9 @@
         $(this).addClass('active');
     })
 
-    // :: Masonary Gallery Active Code
+    // :: Madescronic_y Gallery Active Code
     if ($.fn.imagesLoaded) {
-        $('.sonar-portfolio').imagesLoaded(function () {
+        $('.descronic_-portfolio').imagesLoaded(function () {
             // filter items on button click
             $('.portfolio-menu').on('click', 'button', function () {
                 var filterValue = $(this).attr('data-filter');
@@ -162,7 +162,7 @@
                 });
             });
             // init Isotope
-            var $grid = $('.sonar-portfolio').isotope({
+            var $grid = $('.descronic_-portfolio').isotope({
                 itemSelector: '.single_gallery_item',
                 percentPosition: true,
                 masonry: {
