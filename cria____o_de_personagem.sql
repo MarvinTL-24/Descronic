@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 30/10/2024 às 14:39
+-- Tempo de geração: 26/11/2024 às 12:41
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -38,6 +38,40 @@ CREATE TABLE `criação` (
   `Estilo de luta` varchar(14) NOT NULL,
   `Elemento` varchar(12) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabela de dados';
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `equipamentos`
+--
+
+CREATE TABLE `equipamentos` (
+  `Arma principal` varchar(12) NOT NULL,
+  `Secundaria` varchar(12) NOT NULL,
+  `Cabeça` varchar(15) NOT NULL,
+  `Peitoral` varchar(15) NOT NULL,
+  `Calça` varchar(15) NOT NULL,
+  `Calçado` varchar(15) NOT NULL,
+  `Artefato 1` varchar(15) NOT NULL,
+  `Artefato 2` varchar(15) NOT NULL,
+  `Consumivel 1` varchar(18) NOT NULL,
+  `Consumivel 2` varchar(18) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura para tabela `mochila`
+--
+
+CREATE TABLE `mochila` (
+  `Aparato 1` varchar(18) NOT NULL,
+  `Aparato 2` varchar(18) NOT NULL,
+  `Item 1` varchar(18) NOT NULL,
+  `Item 2` varchar(18) NOT NULL,
+  `Item 3` varchar(18) NOT NULL,
+  `Item 4` varchar(18) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Índices para tabelas despejadas
