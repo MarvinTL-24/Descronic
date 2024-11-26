@@ -26,7 +26,7 @@
             border-radius: 10px;
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
         }
-        h1 {
+        h1, h2 {
             text-align: center;
             color: #ff4500; /* Cor vibrante para o título */
             text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
@@ -38,7 +38,7 @@
             display: block;
             font-weight: bold;
         }
-        select, input[type="number"], input[type="text"], button {
+        select, input, textarea, button {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -53,14 +53,6 @@
             cursor: pointer;
             font-weight: bold;
             transition: background-color 0.3s;
-        }
-        #result {
-            display: none;
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #f9f9f9;
-            border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         button:hover {
             background-color: #e63900;
@@ -81,12 +73,45 @@
         .visualizar-classes-btn:hover {
             background-color: #0056b3;
         }
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: rgba(255, 255, 255, 0.9);
+            color: #000;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        #karmaIndicator {
+            margin-top: 10px;
+            height: 20px;
+            border-radius: 5px;
+            background: linear-gradient(to right, #00ff00, #ff0000);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            margin-bottom: 15px;
+        }
+        #historiaPersonagem {
+            width: 100%;
+            padding: 10px;
+            font-family: 'Arial', sans-serif;
+            font-size: 14px;
+            line-height: 1.6;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+            resize: vertical; /* permite redimensionar somente na vertical */
+        }
+
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Criação de Personagem</h1>
-        <form action="Preencher.php" method="POST">
+        <form id="characterForm" onsubmit="event.preventDefault(); gerarFicha();">
             <div class="form-group">
                 <label for="nomePersonagem">Nome do Personagem:</label>
                 <input type="text" id="nomePersonagem" name="Nome" placeholder="Digite o nome do personagem" required>
@@ -115,16 +140,13 @@
                 <input type="number" id="peso" name="Peso" min="50" max="150" required>
             </div>
 
-            <a href="Classes.html" class="visualizar-classes-btn">Visualizar Classes</a>
-
             <div class="form-group">
                 <label for="classeEscolhida">Classe:</label>
                 <select id="classeEscolhida" name="Classe" onchange="carregarSubclasses()" required>
-                    <option value="">Selecione uma classe</option>
                     <option value="Guerreiro">Guerreiro</option>
                     <option value="Mago">Mago</option>
                     <option value="Berserker">Berserker</option>
-                    <option value="Assasina">Assasina</option>
+                    <option value="Assasin">Assasin</option>
                     <option value="Atirador">Atirador</option>
                     <option value="Paladino">Paladino</option>
                     <option value="Espiritualista">Espiritualista</option>
@@ -145,7 +167,7 @@
                     <option value="">Selecione um estilo</option>
                     <option value="Espadachim">Espadachim</option>
                     <option value="Arqueiro">Arqueiro</option>
-                    <option value="Mago">Mago</option>
+                    <option value="Mago">Feiticeiro</option>
                     <option value="Monge">Monge</option>
                     <option value="Duas espadas">Espadachim</option>
                     <option value="Atirador">Fogareu</option>
@@ -155,32 +177,55 @@
             </div>
 
             <div class="form-group">
-                <label for="elementoPrincipal">Elemento Principal:</label>
-                <select id="elementoPrincipal" name="Elemento" required>
-                    <option value="">Selecione um elemento</option>
-                    <option value="Fogo">Fogo</option>
-                    <option value="Água">Água</option>
-                    <option value="Terra">Terra</option>
-                    <option value="Ar">Ar</option>
-                    <option value="Luz">Luz</option>
-                    <option value="Trevas">Trevas</option>
-                </select>
+                <label for="imagemPersonagem">Imagem do Personagem:</label>
+                <input type="file" id="imagemPersonagem" accept="image/*">
             </div>
 
-            <button  type="submit">Criar Ficha de Personagem</button>
+            <div class="form-group">
+                <label for="historiaPersonagem">História do Personagem:</label>
+                <input type="file" id="historiaPersonagem" name="historiaPersonagem" accept=".txt, .pdf" required>
+            </div>
+            
+            <button type="submit">Criar Ficha de Personagem</button>
         </form>
+
+        <div id="result"></div>
     </div>
 
     <script>
         const subclasses = {
             "Guerreiro": [
-                { nome: "Gladiador", buffs: "+10% Força", debuffs: "-5% Velocidade", armas: "Espadas, Machados" },
-                { nome: "Cavaleiro", buffs: "+15% Defesa", debuffs: "-10% Agilidade", armas: "Lanças, Escudos" }
+                { nome: "Gladiador", buffs: "Força: 10, Agilidade: 5, Resistência: 5 " , debuffs: "-5% Velocidade", armas: "Espadas, Machados em geral." },
+                { nome: "Cavaleiro", buffs: "Força: 5, Resistência: 15", debuffs: "-10% Agilidade", armas: "Lanças, Escudos em geral." }
             ],
             "Mago": [
-                { nome: "Feiticeiro", buffs: "+20% Magia", debuffs: "-10% Vida", armas: "Cajados, Livros" },
-                { nome: "Necromante", buffs: "+30% Controle", debuffs: "-15% Resistência", armas: "Cajados, Orbes" }
-            ]
+                { nome: "Feiticeiro", buffs: "Vitalidade: 4, Agilidade: 4, Inteligência: 12", debuffs: "-10% Vida", armas: "Cajados, Livros em geral." },
+                { nome: "Necromante", buffs: "+30% Controle", debuffs: "-15% Resistência", armas: "Orbes corrompidos, Foices em geral." }
+            ],
+            "Berserker": [
+                { nome: "Ensandecido", buffs: "Força: 13, Resistência: 6, Agilidade: 6", debuffs: "-10% em resistência", armas: "Espadas, Machados, Punhos em geral." },
+                { nome: "Destruidor", buffs: "Força: 15, Resistência: 5, agilidade: 5", debuffs: "-10% Agilidade", armas: "De dano perfurante em geral." }
+            ],
+            "Assasin": [
+                { nome: "Ninja", buffs: "Destreza: 10, Percepção: 5, Força: 5", debuffs: "-10% Vida", armas: "Adagas, dual blades curtas, itens de furtividade em geral." },
+                { nome: "Sicário", buffs: "Destreza: 15, Agilidade: 10", debuffs: "-15% Resistência", armas: "Espadachim nato, dual blades, venenos em geral." }
+            ],
+            "Atirador": [
+                { nome: "Sniper", buffs: "Destreza: 12, Agilidade: 8", debuffs: "-10% Velocidade", armas: "Armas de longo e medio alacance em geral." },
+                { nome: "Arqueiro", buffs: "Destreza: 10, Agilidade: 8, percepção: 5", debuffs: "-10% Agilidade", armas: "Lanças, Escudos" }
+            ],
+            "Paladino": [
+                { nome: "Guardião", buffs: "Resistência: 12, Percepção: 2, Vida: 6", debuffs: "-10% Vida", armas: "Espadas magicas, Escudos com simbolos especificos, Livros especificos" },
+                { nome: "Justiceiro", buffs: "Força: 8, Defesa: 9, Agilidade: 4", debuffs: "-15% de resistência", armas: "Punhos, frascos, maçã de guerra  " }
+            ],
+            "Espiritualista": [
+                { nome: "Pactualista", buffs: "Inteligência: 11, Vida Espiritual: 14,", debuffs: "-5% Velocidade", armas: "Espadas, Machados" },
+                { nome: "Xamã", buffs: "Inteligência: 9, Resistência: 11", debuffs: "-10% Agilidade", armas: "Lanças, Escudos" }
+            ],
+            "Desbravador": [
+                { nome: "Explorador", buffs: "Destreza: 9, Agilidade: 7, Resistência: 6", debuffs: "-10% Vida", armas: "Criação de itens próprio tem tendencia a maior buff aleatorio." },
+                { nome: "Caçador", buffs: "Destreza: 10, Precisão: 8, Força: 6", debuffs: "-15% Resistência", armas: "Criação de itens especificos para matar a criatura tem maior chance de receber bonificações misteriosas." }
+            ],
         };
 
         function carregarSubclasses() {
@@ -196,6 +241,7 @@
                     option.textContent = subclasse.nome;
                     subclasseSelect.appendChild(option);
                 });
+                subclasseSelect.disabled = false;
             }
         }
 
@@ -208,26 +254,32 @@
             const classe = document.getElementById("classeEscolhida").value;
             const subclasse = document.getElementById("subclasseEscolhida").value;
             const estilo = document.getElementById("Estilo").value;
-            const elemento = document.getElementById("elementoPrincipal").value;
-
+            const historia = document.getElementById("historiaPersonagem").value;
+            const imagemInput = document.getElementById("imagemPersonagem");
             const subclasseInfo = subclasses[classe]?.find(s => s.nome === subclasse);
-            if (!classe || !subclasse || !estilo || !elemento) {
+
+            if (!classe || !subclasse || !historia || !estilo) {
                 alert("Preencha todos os campos obrigatórios.");
                 return;
             }
+
+            const imagemURL = imagemInput.files[0] ? URL.createObjectURL(imagemInput.files[0]) : '';
 
             const resultDiv = document.getElementById("result");
             resultDiv.style.display = "block";
             resultDiv.innerHTML = `
                 <h2>Ficha do Personagem</h2>
+                ${imagemURL ? `<img src="${imagemURL}" alt="${nome}">` : ''}
                 <p><strong>Nome:</strong> ${nome}</p>
                 <p><strong>Classe:</strong> ${classe}</p>
                 <p><strong>Subclasse:</strong> ${subclasse}</p>
                 <p><strong>Buffs:</strong> ${subclasseInfo.buffs}</p>
-                <p><strong>Debuffs:</strong> ${subclasseInfo.debuffs}</p>
-                <p><strong>Armas Recomendadas:</strong> ${subclasseInfo.armas}</p>
+                <div id="karmaIndicator" style="width: ${subclasseInfo.karmaPercent}%;"></div>
+                <h3>História:</h3>
+                <p>${historia}</p>
             `;
         }
+        
     </script>
 </body>
 </html>
