@@ -21,14 +21,48 @@ if ($conn->connect_error) {
     die("Erro ao conectar ao banco de dados: " . $conn->connect_error);
 }
 
+// Variáveis para o upload
+$imagem_nome = null;
+$historia_nome = null;
+
+// Verificação e upload da imagem
+if (isset($_FILES['imagemPersonagem']) && $_FILES['imagemPersonagem']['error'] == 0) {
+    $imagem_nome = $_FILES['imagemPersonagem']['name'];
+    $imagem_tmp = $_FILES['imagemPersonagem']['tmp_name'];
+    $imagem_ext = pathinfo($imagem_nome, PATHINFO_EXTENSION);
+
+    // Validar o tipo de imagem (se necessário)
+    if (in_array(strtolower($imagem_ext), ['jpg', 'jpeg', 'png', 'gif'])) {
+        $imagem_destino = 'uploads/imagens/' . uniqid() . '.' . $imagem_ext;
+        move_uploaded_file($imagem_tmp, $imagem_destino);
+    } else {
+        die("Erro: Tipo de imagem não permitido.");
+    }
+}
+
+// Verificação e upload da história
+if (isset($_FILES['historiaPersonagem']) && $_FILES['historiaPersonagem']['error'] == 0) {
+    $historia_nome = $_FILES['historiaPersonagem']['name'];
+    $historia_tmp = $_FILES['historiaPersonagem']['tmp_name'];
+    $historia_ext = pathinfo($historia_nome, PATHINFO_EXTENSION);
+
+    // Validar o tipo de arquivo (somente .txt ou .pdf)
+    if (in_array(strtolower($historia_ext), ['txt', 'pdf'])) {
+        $historia_destino = 'uploads/historias/' . uniqid() . '.' . $historia_ext;
+        move_uploaded_file($historia_tmp, $historia_destino);
+    } else {
+        die("Erro: Tipo de arquivo de história não permitido.");
+    }
+}
+
 // Comando SQL preparado para evitar injeção
-$sql = "INSERT INTO `criação` (`Nome`, `Idade`, `Sexo`, `Altura`, `Peso`, `Classe`, `Sub-Classe`, `Estilo de luta`, `Elemento`)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+$sql = "INSERT INTO `criação` (`Nome`, `Idade`, `Sexo`, `Altura`, `Peso`, `Classe`, `Sub-Classe`, `Estilo de luta`, `Elemento`, `Imagem`, `Historia`)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
 $stmt = $conn->prepare($sql);
 if ($stmt) {
     $stmt->bind_param(
-        "sissdssss",
+        "sissdssssss",
         $nome,
         $idade,
         $sexo,
@@ -37,7 +71,9 @@ if ($stmt) {
         $classe,
         $sub_classe,
         $estilo,
-        $elemento
+        $elemento,
+        $imagem_nome, // Nome do arquivo da imagem
+        $historia_nome // Nome do arquivo da história
     );
 
     if ($stmt->execute()) {

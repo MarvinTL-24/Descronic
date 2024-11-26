@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 26/11/2024 às 12:41
+-- Tempo de geração: 26/11/2024 às 15:01
 -- Versão do servidor: 10.4.32-MariaDB
 -- Versão do PHP: 8.0.30
 
@@ -36,7 +36,9 @@ CREATE TABLE `criação` (
   `Classe` varchar(14) NOT NULL,
   `Sub-classe` varchar(14) NOT NULL,
   `Estilo de luta` varchar(14) NOT NULL,
-  `Elemento` varchar(12) NOT NULL
+  `Elemento` varchar(12) NOT NULL,
+  `Imagem` varchar(250) NOT NULL,
+  `Historia` varchar(250) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci COMMENT='Tabela de dados';
 
 -- --------------------------------------------------------
