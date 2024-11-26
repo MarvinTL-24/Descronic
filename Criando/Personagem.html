@@ -3,30 +3,33 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Criação de Personagem - Index</title>
+    <title>Criação de Personagem</title>
     <style>
+        @font-face {
+            font-family: 'Breathe Fire';
+            src: url('Breathe-Fire.ttf') format('truetype'); /* Certifique-se de que o arquivo esteja na pasta correta */
+        }
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f8ff;
+            font-family: 'Breathe Fire', Arial, sans-serif;
+            background-image: url('/imagens/blackgrounds/primeiro.jpg'); /* Substitua pelo caminho da sua imagem */
+            background-size: cover;
+            background-position: center;
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            color: #fff;
         }
         .container {
             max-width: 800px;
-            margin: 0 auto;
+            margin: 50px auto;
             padding: 20px;
-            background-color: #fff;
+            background-color: rgba(0, 0, 0, 0.7); /* Fundo escuro com transparência */
             border-radius: 10px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
         }
         h1 {
             text-align: center;
-        }
-        .section {
-            margin-bottom: 20px;
-        }
-        .section h2 {
-            margin-top: 0;
+            color: #ff4500; /* Cor vibrante para o título */
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
         }
         .form-group {
             margin-bottom: 15px;
@@ -37,58 +40,86 @@
         }
         select, input[type="number"], input[type="text"], button {
             width: 100%;
-            padding: 8px;
+            padding: 10px;
             margin-top: 5px;
             border: 1px solid #ccc;
             border-radius: 5px;
+            font-size: 16px;
         }
         button {
-            background-color: #007bff;
-            color: #fff;
+            background-color: #ff4500;
+            color: white;
             border: none;
             cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        #result {
+            display: none;
+            margin-top: 20px;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
         button:hover {
-            background-color: #0056b3;
+            background-color: #e63900;
         }
-        .result {
-            background-color: #e7f3ff;
-            padding: 15px;
+        .visualizar-classes-btn {
+            display: block;
+            margin: 20px auto;
+            text-align: center;
+            background-color: #007bff;
+            color: white;
+            padding: 10px 20px;
             border-radius: 5px;
-            font-size: 16px;
+            text-decoration: none;
+            font-size: 18px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+        .visualizar-classes-btn:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h1>Criação de Personagem</h1>
+        <form action="Preencher.php" method="POST">
+            <div class="form-group">
+                <label for="nomePersonagem">Nome do Personagem:</label>
+                <input type="text" id="nomePersonagem" name="Nome" placeholder="Digite o nome do personagem" required>
+            </div>
 
-        <div class="form-group">
-            <label for="nomePersonagem">Nome do Personagem:</label>
-            <input type="text" id="nomePersonagem" placeholder="Digite o nome do personagem">
-        </div>
+            <div class="form-group">
+                <label for="idade">Idade (17 a 65):</label>
+                <input type="number" id="idade" name="Idade" min="17" max="65" required>
+            </div>
 
-        <label for="idade">Idade (17 a 65):</label>
-        <input type="number" id="idade" min="17" max="65">
+            <div class="form-group">
+                <label for="sexo">Sexo:</label>
+                <select id="sexo" name="Sexo" required>
+                    <option value="Masculino">Masculino</option>
+                    <option value="Feminino">Feminino</option>
+                </select>
+            </div>
 
-        <label for="sexo">Sexo:</label>
-        <select id="sexo">
-            <option value="Masculino">Masculino</option>
-            <option value="Feminino">Feminino</option>
-        </select>
+            <div class="form-group">
+                <label for="altura">Altura (150 a 200 cm):</label>
+                <input type="number" id="altura" name="Altura" min="150" max="200" required>
+            </div>
 
-        <label for="altura">Altura (150 a 200 cm):</label>
-        <input type="number" id="altura" min="150" max="200">
+            <div class="form-group">
+                <label for="peso">Peso (50 a 150 kg):</label>
+                <input type="number" id="peso" name="Peso" min="50" max="150" required>
+            </div>
 
-        <label for="peso">Peso (50 a 150 kg):</label>
-        <input type="number" id="peso" min="50" max="150">
+            <a href="Classes.html" class="visualizar-classes-btn">Visualizar Classes</a>
 
-        <div class="section">
-            <h2>Escolha de Classe e Subclasse</h2>
-            <p><a href="Classes.html" target="_blank">Clique aqui para ver a lista de classes</a></p>
             <div class="form-group">
                 <label for="classeEscolhida">Classe:</label>
-                <select id="classeEscolhida" onchange="carregarSubclasses()">
+                <select id="classeEscolhida" name="Classe" onchange="carregarSubclasses()" required>
                     <option value="">Selecione uma classe</option>
                     <option value="Guerreiro">Guerreiro</option>
                     <option value="Mago">Mago</option>
@@ -100,21 +131,19 @@
                     <option value="Desbravador">Desbravador</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="subclasseEscolhida">Subclasse:</label>
-                <select id="subclasseEscolhida" disabled>
+                <select id="subclasseEscolhida" name="Sub-Classe" disabled required>
                     <option value="">Selecione uma subclasse</option>
                 </select>
             </div>
-        </div>
 
-        <div class="section">
-            <h2>Estilo de Luta e Elemento</h2>
             <div class="form-group">
                 <label for="Estilo">Estilo de Luta:</label>
-                <select id="Estilo">
-                    <option value="">Selecione um estilo de luta</option>
-                    <option value="Espadachim">Samurai</option>
+                <select id="Estilo" name="Estilo de luta" required>
+                    <option value="">Selecione um estilo</option>
+                    <option value="Espadachim">Espadachim</option>
                     <option value="Arqueiro">Arqueiro</option>
                     <option value="Mago">Mago</option>
                     <option value="Monge">Monge</option>
@@ -124,9 +153,10 @@
                     <option value="Ceifeiro">Ceifador</option>
                 </select>
             </div>
+
             <div class="form-group">
                 <label for="elementoPrincipal">Elemento Principal:</label>
-                <select id="elementoPrincipal">
+                <select id="elementoPrincipal" name="Elemento" required>
                     <option value="">Selecione um elemento</option>
                     <option value="Fogo">Fogo</option>
                     <option value="Água">Água</option>
@@ -136,52 +166,40 @@
                     <option value="Trevas">Trevas</option>
                 </select>
             </div>
-        </div>
 
-        <div class="section">
-            <button onclick="gerarFicha()">Criar Ficha de Personagem</button>
-        </div>
-
-        <div class="result" id="result"></div>
+            <button  type="submit">Criar Ficha de Personagem</button>
+        </form>
     </div>
 
     <script>
-        // Definição de subclasses para cada classe
         const subclasses = {
-            "Guerreiro": ["Gladiador", "Cavaleiro"],
-            "Mago": ["Feiticeiro", "Necromante"],
-            "Berserker": ["Ensandecido", "Destruidor"],
-            "Assasina": ["Ninja", "Caçador"],
-            "Paladino": ["Guardião", "Justiceiro"],
-            "Atirador": ["Sniper", "Arqueiro"],
-            "Espiritualista": ["Xamã", "Pactualista"],
-            "Desbravador": ["Explorador", "Forjador"]
+            "Guerreiro": [
+                { nome: "Gladiador", buffs: "+10% Força", debuffs: "-5% Velocidade", armas: "Espadas, Machados" },
+                { nome: "Cavaleiro", buffs: "+15% Defesa", debuffs: "-10% Agilidade", armas: "Lanças, Escudos" }
+            ],
+            "Mago": [
+                { nome: "Feiticeiro", buffs: "+20% Magia", debuffs: "-10% Vida", armas: "Cajados, Livros" },
+                { nome: "Necromante", buffs: "+30% Controle", debuffs: "-15% Resistência", armas: "Cajados, Orbes" }
+            ]
         };
 
-        // Função para carregar subclasses com base na classe selecionada
         function carregarSubclasses() {
-            const classeSelecionada = document.getElementById("classeEscolhida").value;
+            const classe = document.getElementById("classeEscolhida").value;
             const subclasseSelect = document.getElementById("subclasseEscolhida");
-
-            // Limpa as subclasses anteriores
             subclasseSelect.innerHTML = '<option value="">Selecione uma subclasse</option>';
-            subclasseSelect.disabled = true;
+            subclasseSelect.disabled = !classe;
 
-            if (classeSelecionada && subclasses[classeSelecionada]) {
-                // Habilita o campo de subclasse e adiciona as opções
-                subclasses[classeSelecionada].forEach(subclasse => {
+            if (classe && subclasses[classe]) {
+                subclasses[classe].forEach(subclasse => {
                     const option = document.createElement("option");
-                    option.value = subclasse;
-                    option.textContent = subclasse;
+                    option.value = subclasse.nome;
+                    option.textContent = subclasse.nome;
                     subclasseSelect.appendChild(option);
                 });
-                subclasseSelect.disabled = false;
             }
         }
 
-        // Função para gerar a ficha de personagem
         function gerarFicha() {
-            // Coleta dos valores preenchidos pelo usuário
             const nome = document.getElementById("nomePersonagem").value;
             const idade = document.getElementById("idade").value;
             const sexo = document.getElementById("sexo").value;
@@ -192,38 +210,22 @@
             const estilo = document.getElementById("Estilo").value;
             const elemento = document.getElementById("elementoPrincipal").value;
 
-            // Validações básicas
-            if (!classe || !subclasse || !Estilo || !elemento) {
+            const subclasseInfo = subclasses[classe]?.find(s => s.nome === subclasse);
+            if (!classe || !subclasse || !estilo || !elemento) {
                 alert("Preencha todos os campos obrigatórios.");
                 return;
             }
-            if (idade < 17 || idade > 65) {
-                alert("Idade inválida! Escolha uma idade entre 17 e 65 anos.");
-                return;
-            }
-            if (altura < 150 || altura > 200) {
-                alert("Altura inválida! Escolha uma altura entre 150 e 200 cm.");
-                return;
-            }
-            if (peso < 50 || peso > 150) {
-                alert("Peso inválido! Escolha um peso entre 50 e 150 kg.");
-                return;
-            }
 
-            // Exibição do resultado da ficha de personagem
             const resultDiv = document.getElementById("result");
             resultDiv.style.display = "block";
             resultDiv.innerHTML = `
                 <h2>Ficha do Personagem</h2>
                 <p><strong>Nome:</strong> ${nome}</p>
-                <p><strong>Idade:</strong> ${idade} anos</p>
-                <p><strong>Sexo:</strong> ${sexo}</p>
-                <p><strong>Altura:</strong> ${altura} cm</p>
-                <p><strong>Peso:</strong> ${peso} kg</p>
                 <p><strong>Classe:</strong> ${classe}</p>
                 <p><strong>Subclasse:</strong> ${subclasse}</p>
-                <p><strong>Estilo de Luta:</strong> ${estilo}</p>
-                <p><strong>Elemento Principal:</strong> ${elemento}</p>
+                <p><strong>Buffs:</strong> ${subclasseInfo.buffs}</p>
+                <p><strong>Debuffs:</strong> ${subclasseInfo.debuffs}</p>
+                <p><strong>Armas Recomendadas:</strong> ${subclasseInfo.armas}</p>
             `;
         }
     </script>

@@ -23,12 +23,13 @@
         .card {
             background-color: #fff;
             border-radius: 8px;
-            width: 200px;
+            width: 220px;
             padding: 15px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
             cursor: pointer;
             transition: transform 0.2s;
             text-align: center;
+            position: relative;
         }
         .card:hover {
             transform: scale(1.05);
@@ -44,19 +45,11 @@
             border-radius: 5px;
             margin-bottom: 10px;
         }
-        #details {
-            margin-top: 20px;
-            padding: 20px;
-            background-color: #ffffff;
-            border-radius: 8px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-            display: none;
-        }
-        #subclassContainer {
-            display: flex;
-            gap: 10px;
+        .subclass-container {
             margin-top: 15px;
-            justify-content: center;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
         }
         .subclass-card {
             background-color: #e9ecef;
@@ -64,88 +57,59 @@
             padding: 10px;
             cursor: pointer;
             text-align: center;
-            width: 120px;
-            transition: transform 0.2s;
+            transition: transform 0.2s, background-color 0.3s;
+            position: relative;
         }
         .subclass-card:hover {
             transform: scale(1.05);
         }
+        .subclass-card .details {
+            display: none;
+            margin-top: 10px;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+        }
         .karma-bar {
             margin-top: 10px;
-            width: 100%;
             height: 10px;
             background: linear-gradient(to right, #00ff00, #ff0000);
             border-radius: 5px;
+        }
+        .toggle-details {
+            margin-top: 10px;
+            background-color: #007bff;
+            color: white;
+            padding: 5px 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .toggle-details:hover {
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
     <h1>Escolha sua Classe</h1>
-    <div class="container">
-        <!-- Classe Guerreira -->
-        <div class="card" onclick="mostrarDetalhes('Guerreiro')">
-            <h2>Guerreiro</h2>
-            <p>Força e Vida.</p>
-        </div>
-        <!-- Classe Mago -->
-        <div class="card" onclick="mostrarDetalhes('Mago')">
-            <h2>Mago</h2>
-            <p>Inteligência e Alma.</p>
-        </div>
-        <!-- Classe Berserker -->
-        <div class="card" onclick="mostrarDetalhes('Berserker')">
-            <h2>Berserker</h2>
-            <p>Força e Estamina.</p>
-        </div>
-        <!-- Classe Assasina -->
-        <div class="card" onclick="mostrarDetalhes('Assasina')">
-            <h2>Assasina</h2>
-            <p>Critico e Destreza.</p>
-        </div>
-        <!-- Classe Paladino -->
-        <div class="card" onclick="mostrarDetalhes('Paladino')">
-            <h2>Paladino</h2>
-            <p>Vida e Resistência.</p>
-        </div>
-        <!-- Classe Atirador -->
-        <div class="card" onclick="mostrarDetalhes('Atirador')">
-            <h2>Atirador</h2>
-            <p>Destreza e Agilidade de movimento .</p>
-        </div>
-        <!-- Classe Espiritualista -->
-        <div class="card" onclick="mostrarDetalhes('Espiritualista')">
-            <h2>Espiritualista</h2>
-            <p>Vida espiritual e Inteligência.</p>
-        </div>
-        <!-- Classe Desbravador -->
-        <div class="card" onclick="mostrarDetalhes('Desbravador')">
-            <h2>Desbravador</h2>
-            <p>Destreza e Vida</p>
-        </div>
-    </div>
-
-    <div id="details">
-        <h2 id="className"></h2>
-        <div id="subclassContainer"></div>
-        <p><strong>Passiva:</strong> <span id="classPassiva"></span></p>
-        <p><strong>Habilidades:</strong> <span id="classHabilidades"></span></p>
-        <p><strong>Pontos de Status:</strong> <span id="classStatus"></span></p>
-        <p><strong>Karma:</strong> <span id="classKarma"></span></p>
-        <div id="karmaIndicator" class="karma-bar"></div>
-    </div>
+    <div class="container" id="classContainer"></div>
 
     <script>
         const classesInfo = {
             "Guerreiro": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Gladiador": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Aumento de resistência ao dano",
                         habilidades: "Fúria de Batalha, Muralha de Escudos",
-                        status: "Força: 10, Agilidade: 5,Resistência: 5 ",
+                        status: "Força: 10, Agilidade: 5, Resistência: 5",
                         karma: "Neutro",
                         karmaPercent: 50
                     },
                     "Cavaleiro": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Proteção aprimorada em armadura",
                         habilidades: "Investida, Defesa Implacável",
                         status: "Força: 5, Resistência: 15",
@@ -155,8 +119,10 @@
                 }
             },
             "Mago": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Feiticeiro": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Regeneração mágica constante",
                         habilidades: "Bola de Fogo, Míssil Mágico",
                         status: "Vitalidade: 4, Agilidade: 4, Inteligência: 12",
@@ -164,6 +130,7 @@
                         karmaPercent: 50
                     },
                     "Necromante": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Controle sobre os mortos",
                         habilidades: "Invocação Sombria, Drenar Vida",
                         status: "Agilidade: 5, Inteligência: 20",
@@ -173,8 +140,10 @@
                 }
             },
             "Berserker": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Ensandecido": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Aumenta a resistência ao dano em combate prolongado",
                         habilidades: "Corte Devastador, Fúria Destrutiva",
                         status: "Força: 13, Resistência: 6, Agilidade: 6",
@@ -182,6 +151,7 @@
                         karmaPercent: 40
                     },
                     "Destruidor": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Amplia o dano de área contra múltiplos inimigos",
                         habilidades: "Impacto Sísmico, Onda de Choque",
                         status: "Força: 15, Resistência: 5, agilidade: 5",
@@ -191,8 +161,10 @@
                 }
             },
             "Assasina": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Ninja": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Aumento da furtividade em terrenos adversos",
                         habilidades: "Lâmina Sombria, Passo Silencioso",
                         status: "Destreza: 10, Percepção: 5, Força: 5",
@@ -200,6 +172,7 @@
                         karmaPercent: 25
                     },
                     "Sicária": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Dano crítico elevado contra alvos isolados",
                         habilidades: "Golpe Mortal, Arremesso Sombrio",
                         status: "Destreza: 15, Agilidade: 10",
@@ -209,8 +182,10 @@
                 }
             },
             "Paladino": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Guardião": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Redução de dano mágico recebido",
                         habilidades: "Escudo Sagrado, Luz Purificadora",
                         status: "Resistência: 12, Percepção: 2, Vida: 6",
@@ -218,6 +193,7 @@
                         karmaPercent: 90
                     },
                     "Justicar": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Aumento da resistência a ataques físicos",
                         habilidades: "Golpe de Justiça, Defesa Divina",
                         status: "Força: 8, Defesa: 9, Agilidade: 4",
@@ -227,8 +203,10 @@
                 }
             },
             "Atirador": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Sniper": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Dano aumentado em tiros de longo alcance",
                         habilidades: "Tiro Preciso, Flecha Penetrante",
                         status: "Destreza: 12, Agilidade: 8",
@@ -236,6 +214,7 @@
                         karmaPercent: 50
                     },
                     "Arqueiro": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Maior velocidade de ataque com arco e flecha",
                         habilidades: "Rajada de Flechas, Flecha Veloz",
                         status: "Destreza: 10, Agilidade: 8, percepção: 5",
@@ -245,8 +224,10 @@
                 }
             },
             "Espiritualista": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Pactualista": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Invoca espíritos malignos temporários",
                         habilidades: "Espírito Protetor, Chama Fantasma",
                         status: "Inteligência: 11, Vida Espiritual: 14, ",
@@ -254,6 +235,7 @@
                         karmaPercent: 5
                     },
                     "Xamã": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Regeneração passiva de vida espiritual",
                         habilidades: "Totem Curador, Aura de Proteção",
                         status: "Inteligência: 9, Resistência: 11",
@@ -263,8 +245,10 @@
                 }
             },
             "Desbravador": {
+                imagem: "imagens/", // Caminho para a imagem da classe
                 subclasses: {
                     "Explorador": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Aumenta a capacidade de evasão em terrenos selvagens",
                         habilidades: "Passo Ágil, Conhecimento Selvagem",
                         status: "Destreza: 9, Agilidade: 7, Resistência: 6",
@@ -272,6 +256,7 @@
                         karmaPercent: 45
                     },
                     "Caçador": {
+                        imagem: "imagens/", // Caminho para a imagem da subclasse
                         passiva: "Dano aumentado contra monstros selvagens",
                         habilidades: "Armadilha Letal, Disparo Preciso",
                         status: "Destreza: 10, Precisão: 8, Força: 6",
@@ -281,41 +266,45 @@
                 }
             },
         }
-        function mostrarDetalhes(classe) {
-            const detailsDiv = document.getElementById("details");
-            const className = document.getElementById("className");
-            const subclassContainer = document.getElementById("subclassContainer");
-            className.innerText = classe;
-            subclassContainer.innerHTML = '';
-            
-            const subclasses = classesInfo[classe].subclasses;
-            for (let sub in subclasses) {
-                const subCard = document.createElement("div");
-                subCard.className = "subclass-card";
-                subCard.innerHTML = `<h3>${sub}</h3><p>${subclasses[sub].status}</p><div class="karma-bar" style="width: ${subclasses[sub].karmaPercent}%"></div>`;
-                subCard.onclick = () => mostrarSubclasseDetalhes(classe, sub);
-                subclassContainer.appendChild(subCard);
+        function criarCards() {
+            const container = document.getElementById("classContainer");
+            for (let classe in classesInfo) {
+                const card = document.createElement("div");
+                card.className = "card";
+                card.innerHTML = `<h2>${classe}</h2>`;
+                const subclassContainer = document.createElement("div");
+                subclassContainer.className = "subclass-container";
+
+                const subclasses = classesInfo[classe].subclasses;
+                for (let sub in subclasses) {
+                    const subCard = document.createElement("div");
+                    subCard.className = "subclass-card";
+                    subCard.innerHTML = `
+                        <h3>${sub}</h3>
+                        <p>${subclasses[sub].status}</p>
+                        <button class="toggle-details">Detalhes</button>
+                        <div class="details">
+                            <p><strong>Passiva:</strong> ${subclasses[sub].passiva}</p>
+                            <p><strong>Habilidades:</strong> ${subclasses[sub].habilidades}</p>
+                            <p><strong>Karma:</strong> ${subclasses[sub].karma}</p>
+                            <div class="karma-bar" style="width: ${subclasses[sub].karmaPercent}%"></div>
+                        </div>
+                    `;
+                    const toggleDetailsBtn = subCard.querySelector(".toggle-details");
+                    const detailsDiv = subCard.querySelector(".details");
+
+                    toggleDetailsBtn.addEventListener("click", () => {
+                        detailsDiv.style.display = detailsDiv.style.display === "block" ? "none" : "block";
+                    });
+
+                    subclassContainer.appendChild(subCard);
+                }
+                card.appendChild(subclassContainer);
+                container.appendChild(card);
             }
-            detailsDiv.style.display = "block";
         }
 
-        function mostrarSubclasseDetalhes(classe, subclasse) {
-            const info = classesInfo[classe].subclasses[subclasse];
-            document.getElementById("classPassiva").innerText = info.passiva;
-            document.getElementById("classHabilidades").innerText = info.habilidades;
-            document.getElementById("classStatus").innerText = info.status;
-            document.getElementById("classKarma").innerText = calcularKarma(info.karmaPercent);
-            document.getElementById("karmaIndicator").style.width = info.karmaPercent + "%";
-        }
-
-        function calcularKarma(karmaPercent) {
-            const dado = Math.floor(Math.random() * (karmaPercent + 1));
-            if (dado <= 20) return "Caótico";
-            else if (dado <= 40) return "Mal";
-            else if (dado <= 60) return "Indeciso";
-            else if (dado <= 80) return "Bom";
-            else return "Puro";
-        }
+        criarCards();
     </script>
 </body>
 </html>
