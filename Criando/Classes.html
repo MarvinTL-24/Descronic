@@ -40,9 +40,12 @@
         .card p {
             color: #666;
         }
-        .card img {
+        .class-image {
             width: 100%;
-            border-radius: 5px;
+            height: 200px; /* Ajuste a altura conforme necessário */
+            background-size: cover;
+            background-position: center;
+            border-radius: 8px;
             margin-bottom: 10px;
         }
         .subclass-container {
@@ -98,10 +101,10 @@
     <script>
         const classesInfo = {
             "Guerreiro": {
-                imagem: ".ima", // Caminho para a imagem da classe
+                imagem: "./imagens/classes/guerreiro.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Gladiador": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/gladiador", // Caminho para a imagem da subclasse
                         passiva: "Aumento de resistência ao dano",
                         habilidades: "Fúria de Batalha, Muralha de Escudos",
                         status: "Força: 10, Agilidade: 5, Resistência: 5",
@@ -109,7 +112,7 @@
                         karmaPercent: 50
                     },
                     "Cavaleiro": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/cavaleiro.png", // Caminho para a imagem da subclasse
                         passiva: "Proteção aprimorada em armadura",
                         habilidades: "Investida, Defesa Implacável",
                         status: "Força: 5, Resistência: 15",
@@ -119,10 +122,10 @@
                 }
             },
             "Mago": {
-                imagem: "imagens/", // Caminho para a imagem da classe
+                imagem: "./imagens/classes/mago.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Feiticeiro": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/feiticeiro.png", // Caminho para a imagem da subclasse
                         passiva: "Regeneração mágica constante",
                         habilidades: "Bola de Fogo, Míssil Mágico",
                         status: "Vitalidade: 4, Agilidade: 4, Inteligência: 12",
@@ -130,7 +133,7 @@
                         karmaPercent: 50
                     },
                     "Necromante": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/Necromante.png", // Caminho para a imagem da subclasse
                         passiva: "Controle sobre os mortos",
                         habilidades: "Invocação Sombria, Drenar Vida",
                         status: "Agilidade: 5, Inteligência: 20",
@@ -140,10 +143,10 @@
                 }
             },
             "Berserker": {
-                imagem: "imagens/", // Caminho para a imagem da classe
+                imagem: "./imagens/classes/Berseker.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Ensandecido": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/ensandecido.png", // Caminho para a imagem da subclasse
                         passiva: "Aumenta a resistência ao dano em combate prolongado",
                         habilidades: "Corte Devastador, Fúria Destrutiva",
                         status: "Força: 13, Resistência: 6, Agilidade: 6",
@@ -151,7 +154,7 @@
                         karmaPercent: 40
                     },
                     "Destruidor": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/destruidor.png", // Caminho para a imagem da subclasse
                         passiva: "Amplia o dano de área contra múltiplos inimigos",
                         habilidades: "Impacto Sísmico, Onda de Choque",
                         status: "Força: 15, Resistência: 5, agilidade: 5",
@@ -160,19 +163,19 @@
                     }
                 }
             },
-            "Assasina": {
-                imagem: "imagens/", // Caminho para a imagem da classe
+            "Assasin": {
+                imagem: "./imagens/classes/assasin.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Ninja": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/Ninja.png", // Caminho para a imagem da subclasse
                         passiva: "Aumento da furtividade em terrenos adversos",
                         habilidades: "Lâmina Sombria, Passo Silencioso",
                         status: "Destreza: 10, Percepção: 5, Força: 5",
                         karma: "Maldito",
                         karmaPercent: 25
                     },
-                    "Sicária": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                    "Sicário": {
+                        imagem: "./imagens/classes/sicario.png", // Caminho para a imagem da subclasse
                         passiva: "Dano crítico elevado contra alvos isolados",
                         habilidades: "Golpe Mortal, Arremesso Sombrio",
                         status: "Destreza: 15, Agilidade: 10",
@@ -182,18 +185,18 @@
                 }
             },
             "Paladino": {
-                imagem: "imagens/", // Caminho para a imagem da classe
+                imagem: "./imagens/classes/paladino.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Guardião": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/guardião.png", // Caminho para a imagem da subclasse
                         passiva: "Redução de dano mágico recebido",
                         habilidades: "Escudo Sagrado, Luz Purificadora",
                         status: "Resistência: 12, Percepção: 2, Vida: 6",
                         karma: "Puro demais",
                         karmaPercent: 90
                     },
-                    "Justicar": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                    "Justiceiro": {
+                        imagem: "./imagens/classes/justiceiro.png", // Caminho para a imagem da subclasse
                         passiva: "Aumento da resistência a ataques físicos",
                         habilidades: "Golpe de Justiça, Defesa Divina",
                         status: "Força: 8, Defesa: 9, Agilidade: 4",
@@ -203,10 +206,10 @@
                 }
             },
             "Atirador": {
-                imagem: "imagens/", // Caminho para a imagem da classe
+                imagem: "./imagens/classes/atirador.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Sniper": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/sniper.png", // Caminho para a imagem da subclasse
                         passiva: "Dano aumentado em tiros de longo alcance",
                         habilidades: "Tiro Preciso, Flecha Penetrante",
                         status: "Destreza: 12, Agilidade: 8",
@@ -214,7 +217,7 @@
                         karmaPercent: 50
                     },
                     "Arqueiro": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/Arqueiro.png", // Caminho para a imagem da subclasse
                         passiva: "Maior velocidade de ataque com arco e flecha",
                         habilidades: "Rajada de Flechas, Flecha Veloz",
                         status: "Destreza: 10, Agilidade: 8, percepção: 5",
@@ -224,10 +227,10 @@
                 }
             },
             "Espiritualista": {
-                imagem: "imagens/", // Caminho para a imagem da classe
+                imagem: "./imagens/classes/espiritualista.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Pactualista": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/pactualista.png", // Caminho para a imagem da subclasse
                         passiva: "Invoca espíritos malignos temporários",
                         habilidades: "Espírito Protetor, Chama Fantasma",
                         status: "Inteligência: 11, Vida Espiritual: 14, ",
@@ -235,7 +238,7 @@
                         karmaPercent: 5
                     },
                     "Xamã": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/xamã.png", // Caminho para a imagem da subclasse
                         passiva: "Regeneração passiva de vida espiritual",
                         habilidades: "Totem Curador, Aura de Proteção",
                         status: "Inteligência: 9, Resistência: 11",
@@ -245,10 +248,10 @@
                 }
             },
             "Desbravador": {
-                imagem: "imagens/", // Caminho para a imagem da classe
+                imagem: "./imagens/classes/desbravador.png", // Caminho para a imagem da classe
                 subclasses: {
                     "Explorador": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/explorador.png", // Caminho para a imagem da subclasse
                         passiva: "Aumenta a capacidade de evasão em terrenos selvagens",
                         habilidades: "Passo Ágil, Conhecimento Selvagem",
                         status: "Destreza: 9, Agilidade: 7, Resistência: 6",
@@ -256,7 +259,7 @@
                         karmaPercent: 45
                     },
                     "Caçador": {
-                        imagem: "imagens/", // Caminho para a imagem da subclasse
+                        imagem: "./imagens/classes/caçador.png", // Caminho para a imagem da subclasse
                         passiva: "Dano aumentado contra monstros selvagens",
                         habilidades: "Armadilha Letal, Disparo Preciso",
                         status: "Destreza: 10, Precisão: 8, Força: 6",
@@ -272,6 +275,19 @@
                 const card = document.createElement("div");
                 card.className = "card";
                 card.innerHTML = `<h2>${classe}</h2>`;
+
+                // Criando a div para a imagem da classe
+                const classImageDiv = document.createElement("div");
+                classImageDiv.className = "class-image";
+                // Verificando o caminho da imagem e aplicando o background-image corretamente
+                const imageUrl = classesInfo[classe].imagem;
+                classImageDiv.style.backgroundImage = `url('${imageUrl}')`;
+
+                // Verifique se a URL foi aplicada corretamente
+                console.log(`Imagem da classe ${classe}: ${imageUrl}`);
+
+                card.appendChild(classImageDiv);
+
                 const subclassContainer = document.createElement("div");
                 subclassContainer.className = "subclass-container";
 
@@ -290,6 +306,7 @@
                             <div class="karma-bar" style="width: ${subclasses[sub].karmaPercent}%"></div>
                         </div>
                     `;
+
                     const toggleDetailsBtn = subCard.querySelector(".toggle-details");
                     const detailsDiv = subCard.querySelector(".details");
 
@@ -299,6 +316,7 @@
 
                     subclassContainer.appendChild(subCard);
                 }
+
                 card.appendChild(subclassContainer);
                 container.appendChild(card);
             }
