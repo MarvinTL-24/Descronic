@@ -180,11 +180,6 @@
                 <label for="imagemPersonagem">Imagem do Personagem:</label>
                 <input type="file" id="imagemPersonagem" accept="image/*">
             </div>
-
-            <div class="form-group">
-                <label for="historiaPersonagem">História do Personagem:</label>
-                <input type="file" id="historiaPersonagem" name="historiaPersonagem" accept=".txt, .pdf" required>
-            </div>
             
             <button type="submit">Criar Ficha de Personagem</button>
         </form>
@@ -192,39 +187,42 @@
         <div id="result"></div>
     </div>
 
+    <!-- Inclua este script no cabeçalho ou antes do fechamento do body -->
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
+
     <script>
         const subclasses = {
             "Guerreiro": [
-                { nome: "Gladiador", buffs: "Força: 10, Agilidade: 5, Resistência: 5 " , debuffs: "-5% Velocidade", armas: "Espadas, Machados em geral." },
-                { nome: "Cavaleiro", buffs: "Força: 5, Resistência: 15", debuffs: "-10% Agilidade", armas: "Lanças, Escudos em geral." }
+                { nome: "Gladiador", buffs: "Força: 10, Agilidade: 5, Resistência: 5 " , debuffs: "-5% Velocidade", karmaPercent: 60 },
+                { nome: "Cavaleiro", buffs: "Força: 5, Resistência: 15", debuffs: "-10% Agilidade", karmaPercent: 70 }
             ],
             "Mago": [
-                { nome: "Feiticeiro", buffs: "Vitalidade: 4, Agilidade: 4, Inteligência: 12", debuffs: "-10% Vida", armas: "Cajados, Livros em geral." },
-                { nome: "Necromante", buffs: "+30% Controle", debuffs: "-15% Resistência", armas: "Orbes corrompidos, Foices em geral." }
+                { nome: "Feiticeiro", buffs: "Vitalidade: 4, Agilidade: 4, Inteligência: 12", debuffs: "-10% Vida", karmaPercent: 60 },
+                { nome: "Necromante", buffs: "+30% Controle", debuffs: "-15% Resistência", karmaPercent: 30 }
             ],
             "Berserker": [
-                { nome: "Ensandecido", buffs: "Força: 13, Resistência: 6, Agilidade: 6", debuffs: "-10% em resistência", armas: "Espadas, Machados, Punhos em geral." },
-                { nome: "Destruidor", buffs: "Força: 15, Resistência: 5, agilidade: 5", debuffs: "-10% Agilidade", armas: "De dano perfurante em geral." }
+                { nome: "Ensandecido", buffs: "Força: 13, Resistência: 6, Agilidade: 6", debuffs: "-10% em resistência", karmaPercent: 20 },
+                { nome: "Destruidor", buffs: "Força: 15, Resistência: 5, agilidade: 5", debuffs: "-10% Agilidade", karmaPercent: 30 }
             ],
             "Assasin": [
-                { nome: "Ninja", buffs: "Destreza: 10, Percepção: 5, Força: 5", debuffs: "-10% Vida", armas: "Adagas, dual blades curtas, itens de furtividade em geral." },
-                { nome: "Sicário", buffs: "Destreza: 15, Agilidade: 10", debuffs: "-15% Resistência", armas: "Espadachim nato, dual blades, venenos em geral." }
+                { nome: "Ninja", buffs: "Destreza: 10, Percepção: 5, Força: 5", debuffs: "-10% Vida", karmaPercent: 40 },
+                { nome: "Sicário", buffs: "Destreza: 15, Agilidade: 10", debuffs: "-15% Resistência", karmaPercent: 10 }
             ],
             "Atirador": [
-                { nome: "Sniper", buffs: "Destreza: 12, Agilidade: 8", debuffs: "-10% Velocidade", armas: "Armas de longo e medio alacance em geral." },
-                { nome: "Arqueiro", buffs: "Destreza: 10, Agilidade: 8, percepção: 5", debuffs: "-10% Agilidade", armas: "Lanças, Escudos" }
+                { nome: "Sniper", buffs: "Destreza: 12, Agilidade: 8", debuffs: "-10% Velocidade", karmaPercent: 50 },
+                { nome: "Arqueiro", buffs: "Destreza: 10, Agilidade: 8, percepção: 5", debuffs: "-10% Agilidade", karmaPercent: 70 }
             ],
             "Paladino": [
-                { nome: "Guardião", buffs: "Resistência: 12, Percepção: 2, Vida: 6", debuffs: "-10% Vida", armas: "Espadas magicas, Escudos com simbolos especificos, Livros especificos" },
-                { nome: "Justiceiro", buffs: "Força: 8, Defesa: 9, Agilidade: 4", debuffs: "-15% de resistência", armas: "Punhos, frascos, maçã de guerra  " }
+                { nome: "Guardião", buffs: "Resistência: 12, Percepção: 2, Vida: 6", debuffs: "-10% Vida", karmaPercent: 90 },
+                { nome: "Justiceiro", buffs: "Força: 8, Defesa: 9, Agilidade: 4", debuffs: "-15% de resistência", karmaPercent: 60 }
             ],
             "Espiritualista": [
-                { nome: "Pactualista", buffs: "Inteligência: 11, Vida Espiritual: 14,", debuffs: "-5% Velocidade", armas: "Espadas, Machados" },
-                { nome: "Xamã", buffs: "Inteligência: 9, Resistência: 11", debuffs: "-10% Agilidade", armas: "Lanças, Escudos" }
+                { nome: "Pactualista", buffs: "Inteligência: 11, Vida Espiritual: 14,", debuffs: "-5% Velocidade", karmaPercent: 20 },
+                { nome: "Xamã", buffs: "Inteligência: 9, Resistência: 11", debuffs: "-10% Agilidade", karmaPercent: 50 }
             ],
             "Desbravador": [
-                { nome: "Explorador", buffs: "Destreza: 9, Agilidade: 7, Resistência: 6", debuffs: "-10% Vida", armas: "Criação de itens próprio tem tendencia a maior buff aleatorio." },
-                { nome: "Caçador", buffs: "Destreza: 10, Precisão: 8, Força: 6", debuffs: "-15% Resistência", armas: "Criação de itens especificos para matar a criatura tem maior chance de receber bonificações misteriosas." }
+                { nome: "Explorador", buffs: "Destreza: 9, Agilidade: 7, Resistência: 6", debuffs: "-10% Vida", karmaPercent: 80 },
+                { nome: "Caçador", buffs: "Destreza: 10, Precisão: 8, Força: 6", debuffs: "-15% Resistência", karmaPercent: 80 }
             ],
         };
 
@@ -254,11 +252,11 @@
             const classe = document.getElementById("classeEscolhida").value;
             const subclasse = document.getElementById("subclasseEscolhida").value;
             const estilo = document.getElementById("Estilo").value;
-            const historia = document.getElementById("historiaPersonagem").value;
             const imagemInput = document.getElementById("imagemPersonagem");
+
             const subclasseInfo = subclasses[classe]?.find(s => s.nome === subclasse);
 
-            if (!classe || !subclasse || !historia || !estilo) {
+            if (!nome || !classe || !subclasse || !estilo) {
                 alert("Preencha todos os campos obrigatórios.");
                 return;
             }
@@ -268,18 +266,32 @@
             const resultDiv = document.getElementById("result");
             resultDiv.style.display = "block";
             resultDiv.innerHTML = `
-                <h2>Ficha do Personagem</h2>
-                ${imagemURL ? `<img src="${imagemURL}" alt="${nome}">` : ''}
-                <p><strong>Nome:</strong> ${nome}</p>
-                <p><strong>Classe:</strong> ${classe}</p>
-                <p><strong>Subclasse:</strong> ${subclasse}</p>
-                <p><strong>Buffs:</strong> ${subclasseInfo.buffs}</p>
-                <div id="karmaIndicator" style="width: ${subclasseInfo.karmaPercent}%;"></div>
-                <h3>História:</h3>
-                <p>${historia}</p>
+                <div id="fichaParaImagem">
+                    <h2>Ficha do Personagem</h2>
+                    ${imagemURL ? `<img src="${imagemURL}" alt="${nome}">` : '<p>Sem imagem selecionada.</p>'}
+                    <p><strong>Nome:</strong> ${nome}</p>
+                    <p><strong>Idade:</strong> ${idade}</p>
+                    <p><strong>Sexo:</strong> ${sexo}</p>
+                    <p><strong>Altura:</strong> ${altura} cm</p>
+                    <p><strong>Peso:</strong> ${peso} kg</p>
+                    <p><strong>Classe:</strong> ${classe}</p>
+                    <p><strong>Subclasse:</strong> ${subclasse}</p>
+                    <p><strong>Buffs:</strong> ${subclasseInfo.buffs}</p>
+                    <p><strong>Karma:</strong> ${subclasseInfo.karmaPercent}%</p>
+                </div>
+                <button onclick="salvarComoImagem()">Salvar como Imagem</button>
             `;
         }
-        
+
+        function salvarComoImagem() {
+            const ficha = document.getElementById("fichaParaImagem");
+            html2canvas(ficha).then(canvas => {
+                const link = document.createElement("a");
+                link.href = canvas.toDataURL("image/png");
+                link.download = "FichaPersonagem.png";
+                link.click();
+            });
+        }
     </script>
 </body>
 </html>

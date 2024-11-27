@@ -16,7 +16,7 @@ if (empty($nome) || empty($idade) || empty($sexo) || empty($altura) || empty($pe
 }
 
 // Conexão segura com o banco de dados
-$conn = new mysqli('localhost', 'root', '', 'criação_de_personagem');
+$conn = new mysqli('localhost', 'root', '', 'criação de personagem');
 if ($conn->connect_error) {
     die("Erro ao conectar ao banco de dados: " . $conn->connect_error);
 }
