@@ -1,7 +1,17 @@
 const data = [
     {
-        "anime": "Guerreiro",
-        "name": ['', ''],
+        "classe": "Guerreiro",
+        "name": ['Gladiador', 'Cavaleiro'],
+        "desc": [
+            ''
+        ],
+        "tokens": ['Logo', '', ''],
+        "wpp": ['', '', ''],
+        "video": "1w.mp4"
+    },
+    {
+        "classe": "Mago",
+        "name": ['Feiticeiro', 'Necromante'],
         "desc": [
             ''
         ],
@@ -10,8 +20,8 @@ const data = [
         "video": "1w.mp4"
     },
     {
-        "anime": "Mago",
-        "name": ['', ''],
+        "classe": "Atirador",
+        "name": ['Sniper', 'Arqueiro'],
         "desc": [
             ''
         ],
@@ -20,18 +30,8 @@ const data = [
         "video": "1w.mp4"
     },
     {
-        "anime": "Atirador",
-        "name": ['', ''],
-        "desc": [
-            ''
-        ],
-        "tokens": ['', '', ''],
-        "wpp": ['', '', ''],
-        "video": "1w.mp4"
-    },
-    {
-        "anime": "Berserker",
-        "name": ['', ''],
+        "classe": "Berserker",
+        "name": ['Ensandecido', 'Destruidor'],
         "desc": [
             ''
         ],
@@ -40,8 +40,8 @@ const data = [
         "video": '1w.mp4'
     },
     {
-        "anime": "Assasin",
-        "name": ['', ''],
+        "classe": "Assasin",
+        "name": ['Ninja', 'Sicário'],
         "desc": [
             ''
         ],
@@ -50,8 +50,8 @@ const data = [
         "video": "1w.mp4"
     },
     {
-        "anime": "Paladino",
-        "name": ['', ''],
+        "classe": "Paladino",
+        "name": ['Guardião', 'Justiceiro'],
         "desc": [
             ''
         ],
@@ -60,8 +60,8 @@ const data = [
         "video": "1w.mp4"
     },
     {
-        "anime": "Novo",
-        "name": ['', ''],
+        "classe": "Desbravador",
+        "name": ['Explorador', 'Caçador'],
         "desc": [
             ''
         ],
@@ -70,8 +70,8 @@ const data = [
         "video": "1w.mp4"
     },
     {
-        "anime": "Espiritualista",
-        "name": ['', ''],
+        "classe": "Espiritualista",
+        "name": ['Pactualista', 'Xamã'],
         "desc": [
             ''
         ],
