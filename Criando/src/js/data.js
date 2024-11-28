@@ -5,8 +5,8 @@ const data = [
         "desc": [
             ''
         ],
-        "tokens": ['Logo', '', ''],
-        "wpp": ['', '', ''],
+        "tokens": ['Guerreiro_logo.png', '', ''],
+        "wpp": ['Guerreiro_logo.png', '', ''],
         "video": "1w.mp4"
     },
     {
