@@ -27,7 +27,7 @@ function createSelectWorldEl(a,i) {
     const d1 = document.createElement('div')
     d1.classList.add('select-world')
     const i1 = document.createElement('img')
-    i1.setAttribute('alt', `Escolha o classes ${a}`)
+    i1.setAttribute('alt', `Escolha a classes ${a}`)
     i1.setAttribute('src', `src/assets/classes/${a}/wpp/${a}_${data[i]['wpp'][0]}`)
     const i2 = document.createElement('img')
     i2.setAttribute('alt', a)

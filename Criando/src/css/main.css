@@ -15,8 +15,8 @@ body { background: var(--bg); overflow: hidden; }
     align-items: center;
     align-content: center;
     flex-wrap: wrap;
-    gap: 5vw;
-    padding: 10%;
+    gap: 2vw;
+    padding: 5%;
     z-index: 5;
     transition: .5s;
 }
@@ -161,11 +161,9 @@ nav {
 
 .character-selector {
     display: flex;
-    justify-content: flex-end;
+    justify-content: flex-start;
     align-items: center;
-    flex: 1;
-    gap: 2.5vh;
-    transform: translateX(0%);
+    gap: 20px; /* Ajustando o espaçamento entre as imagens */
     transition: .5s;
 }
 
@@ -173,16 +171,14 @@ nav {
     transform: translateX(-10%);
 }
 
-.character-selector:hover span{
-    opacity: 1;
-}
-
 .character-selector span {
-    display: block;
-    text-wrap: nowrap;
     opacity: 0;
     pointer-events: none;
     transition: .5s;
+}
+
+.character-selector:hover span {
+    opacity: 1;
 }
 
 main.off .character-selector img {
@@ -190,16 +186,19 @@ main.off .character-selector img {
 }
 
 .character-selector img {
-    display: inline;
-    height: 5vh;
+    display: inline-block;
+    height: 12vh;  /* Aumentando o tamanho da imagem */
+    width: 12vh;   /* Garantindo que a largura seja proporcional */
     object-fit: cover;
     border-radius: 50%;
     transform: rotate(0deg);
     transition: .5s;
+    margin-right: 0 10vh;  /* Adicionando margem entre as imagens */
 }
 
 .character-selector img:hover {
     cursor: pointer;
+    transform: scale(1.1); /* Pequeno efeito de zoom no hover */
 }
 
 #view-bg {

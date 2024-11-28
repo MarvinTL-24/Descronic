@@ -3,11 +3,12 @@ const data = [
         "classe": "Guerreiro",
         "name": ['Gladiador', 'Cavaleiro'],
         "desc": [
-            ''
+            'Um combatente poderoso que domina batalhas corpo a corpo.',
+            'Defensor habilidoso com grande força e armadura pesada.'
         ],
-        "tokens": ['Guerreiro_logo.png', '', ''],
-        "wpp": ['Guerreiro_logo.png', '', ''],
-        "video": "1w.mp4"
+        "tokens": ['Guerreiro_logo.png', 'gladiador.png', 'cavaleiro.png'], // Caminhos para os tokens
+        "wpp": ['guerreiro_bg.jpg', 'gladiador_bg.jpg', 'cavaleiro_bg.jpg'], // Caminhos dos wallpapers
+        "video": "Guerreiro_logo.png" // Pode ser usado para outras funções, se necessário
     },
     {
         "classe": "Mago",
