@@ -106,7 +106,7 @@ main.off {
 #content {
     display: flex;
     flex-direction: column;
-    gap: 5vh;
+    gap: 30vh;
     width: 50%;
     min-width: 35vw;
 }
