@@ -1,10 +1,13 @@
-@media (orientation: portrait) {
-    .select-world img {
-        width: 80%; /* Ajuste para dispositivos verticais */
-        height: 80%;
+@media (max-width: 768px) {
+    #menu-button {
+        width: 40px;
+        height: 40px;
+        top: 5px;
+        left: 5px;
     }
 
-    .character-selector {
-        display: none;
+    .menu-bar {
+        width: 60%;
+        height: 3px;
     }
 }

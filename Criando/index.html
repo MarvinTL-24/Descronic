@@ -8,28 +8,27 @@
     <link rel="stylesheet" href="src/css/config.css">
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/responsive.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
     <title>Classes</title>
 </head>
 <body>
-    <!-- Botão no lugar do navbar -->
-    <button id="menu-button">
-        <img href="Personagem.html" src="" alt="Menu">
-    </button>
+    <!-- Botão de menu com barras -->
+    <a href="Personagem.html">
+        <button id="menu-button">
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+            <span class="menu-bar"></span>
+        </button>
+    </a>
+    
     <section id="selection" class="scene">
-        <!-- 
-            <div class="select-world">
-                <img alt="Escolha a classe">
-                <img alt="">
-            </div>
-         -->
+        <!-- Aqui poderiam estar as seleções, imagens, etc -->
     </section>
 
     <main id="view" class="scene off">
         <div id="controls">
+            <!-- Ícone de troca de classe -->
             <img src="src/assets/swap.svg" alt="Trocar classe" id="swap">
-            <button id="menu-button">
-                <img src="src/assets/menu-icon.svg" alt="Menu">
-            </button>
         </div>
         <section id="content">
             <img id="content-img" src="" alt="Logo da classe">

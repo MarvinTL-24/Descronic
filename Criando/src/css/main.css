@@ -81,9 +81,10 @@ main {
 }
 
 main.off {
-    opacity: 0;
-    pointer-events: none;
+    opacity: 0; /* Isso pode esconder o conteúdo e outros elementos */
+    pointer-events: none; /* Isso pode desabilitar a interação */
 }
+
 
 #swap {
     display: block;
@@ -99,7 +100,7 @@ main.off {
 }
 
 #swap:hover {
-    transform: rotate(720deg);
+    transform: rotate(360deg);
 }
 
 #content {
@@ -226,45 +227,64 @@ main.off .character-selector img {
 }
 
 #menu-button {
-    position: fixed; /* Garante que ele seja fixo na tela */
-    top: 10px; /* Mesma posição vertical do #swap */
-    left: 5vw; /* Mesma posição horizontal do #swap */
-    width: 50px; /* Mesmo tamanho do #swap */
-    height: 50px;
+    position: fixed; /* Mantém o botão fixo na tela */
+    top: 10px; /* Distância do topo da tela */
+    left: 10px; /* Distância da lateral esquerda */
+    width: 50px; /* Largura do botão */
+    height: 50px; /* Altura do botão */
     background-color: var(--bg); /* Fundo no mesmo estilo do layout */
     border: none; /* Remove bordas padrão */
     border-radius: 50%; /* Botão arredondado */
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+    gap: 5px; /* Espaçamento entre as barras */
     box-shadow: 2px 2px 5px var(--shadow);
     cursor: pointer;
-    z-index: 1001; /* Certifica-se de que fique acima do #swap */
+    z-index: 1100; /* Garante que fique acima de todos os outros elementos */
 }
 
-#menu-button img {
-    width: 70%; /* Ícone ajustado ao botão */
-    height: auto;
+#menu-button i {
+    font-size: 24px; /* Tamanho do ícone */
+    color: var(--c); /* Cor do ícone */
+}
+
+.menu-bar {
+    width: 70%; /* Largura das barras */
+    height: 4px; /* Altura das barras */
+    background-color: var(--c); /* Cor das barras */
+    border-radius: 2px; /* Bordas arredondadas das barras */
 }
 
 #menu-button:hover {
-    background-color: var(--shadowFar); /* Efeito de hover */
-    transform: scale(1.1); /* Aumenta levemente no hover */
-    transition: 0.3s;
+    background-color: var(--shadowFar); /* Cor de fundo ao passar o mouse */
+    transform: scale(1.1); /* Leve aumento no tamanho ao passar o mouse */
+    transition: 0.3s; /* Animação suave */
 }
 
-
+/* Botão de troca (#swap) */
 #swap {
-    position: fixed;
+    position: fixed; /* Fixo na tela */
     top: 10px;
-    left: 70px; /* Posicionado ao lado do botão */
-    width: 50px; /* Tamanho do símbolo */
+    left: 70px; /* Colocado ao lado do botão de menu */
+    width: 50px; /* Tamanho do botão */
     height: 50px;
     cursor: pointer;
-    z-index: 1000; /* Mesmo nível do botão */
+    z-index: 1000; /* Z-index menor que o do menu, para não sobrepor o botão de menu */
     transition: transform 0.3s;
 }
 
 #swap:hover {
     transform: rotate(360deg); /* Animação no hover */
+}
+
+/* Mantém o conteúdo centralizado sem interferir nos botões fixos */
+#content {
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
+    width: 50%;
+    min-width: 35vw;
+    z-index: 10; /* Menor que os botões fixos */
 }
