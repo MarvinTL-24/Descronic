@@ -67,7 +67,7 @@ body { background: var(--bg); overflow: hidden; }
 .select-world img:nth-child(2) {
     width: 85%; /* Consistente com o primeiro logo */
     height: 85%;
-    opacity: 0; /* Para o hover */
+    opacity: 1; /* Para o hover */
 }
 /* VIEW */
 
