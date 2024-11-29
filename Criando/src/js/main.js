@@ -10,6 +10,10 @@ const contentP = document.getElementById('content-p')
 const swap = document.getElementById('swap')
 
 /* FUNÇÕES */
+document.getElementById('menu-button').addEventListener('click', () => {
+    alert('Botão de menu clicado!');
+    // Adicione a funcionalidade desejada aqui
+});
 
 function selectionSceneOnOff() {
     (selectionScene.classList.contains('off')) ? selectionScene.classList.remove('off') : selectionScene.classList.add('off')

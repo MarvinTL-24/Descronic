@@ -105,10 +105,57 @@
             box-sizing: border-box;
             resize: vertical; /* permite redimensionar somente na vertical */
         }
+        #navbar1 {
+            position: fixed; /* Mantém a barra fixa na tela */
+            top: 0;
+            left: 0;
+            width: 200px; /* Define a largura da navbar */
+            height: 100%; /* Ocupa toda a altura da tela */
+            background-color: var(--bg); /* Cor de fundo preta (já definida como var(--bg)) */
+            z-index: 1000; /* Garante que fique acima de outros elementos */
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 2px 0px 5px var(--shadow);
+        }
+
+        #navbar1 ul {
+            list-style: none; /* Remove o estilo de lista padrão */
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Organiza os itens verticalmente */
+            gap: 15px; /* Espaçamento entre os links */
+        }
+
+        #navbar1 li {
+            display: block;
+        }
+
+        #navbar1 a {
+            text-decoration: none; /* Remove o sublinhado dos links */
+            color: var(--c); /* Cor do texto (branca, conforme sua configuração de variáveis) */
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        #navbar1 a:hover {
+            color: var(--shadowFar); /* Muda a cor no hover para um efeito visual */
+        }
+
 
     </style>
 </head>
 <body>
+    <!-- Barra de Navegação -->
+    <nav id="navbar1">
+        <ul>
+            <li><a href="Personagem.html">Criar Personagem</a></li>
+            <li><a href="index.html">Visualizar Classes</a></li>
+            <li><a href="#equipment">Equipamento</a></li>
+            <li><a href="#bag">Bolsa</a></li>
+        </ul>
+    </nav>
     <div class="container">
         <h1>Criação de Personagem</h1>
         <form id="characterForm" onsubmit="event.preventDefault(); gerarFicha();">

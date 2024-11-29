@@ -95,7 +95,7 @@ main.off {
     cursor: pointer;
     transition: .5s;
     transition-timing-function: ease-in-out;
-    z-index: 100;
+    z-index: 80;
 }
 
 #swap:hover {
@@ -225,40 +225,46 @@ main.off .character-selector img {
     z-index: -9;
 }
 
-#navbar1 {
-    position: fixed; /* Mantém a barra fixa na tela */
-    top: 0;
-    left: 0;
-    width: 200px; /* Define a largura da navbar */
-    height: 100%; /* Ocupa toda a altura da tela */
-    background-color: var(--bg); /* Cor de fundo preta (já definida como var(--bg)) */
-    z-index: 1000; /* Garante que fique acima de outros elementos */
+#menu-button {
+    position: fixed; /* Garante que ele seja fixo na tela */
+    top: 10px; /* Mesma posição vertical do #swap */
+    left: 5vw; /* Mesma posição horizontal do #swap */
+    width: 50px; /* Mesmo tamanho do #swap */
+    height: 50px;
+    background-color: var(--bg); /* Fundo no mesmo estilo do layout */
+    border: none; /* Remove bordas padrão */
+    border-radius: 50%; /* Botão arredondado */
     display: flex;
-    flex-direction: column;
-    padding: 20px;
-    box-shadow: 2px 0px 5px var(--shadow);
+    justify-content: center;
+    align-items: center;
+    box-shadow: 2px 2px 5px var(--shadow);
+    cursor: pointer;
+    z-index: 1001; /* Certifica-se de que fique acima do #swap */
 }
 
-#navbar1 ul {
-    list-style: none; /* Remove o estilo de lista padrão */
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column; /* Organiza os itens verticalmente */
-    gap: 15px; /* Espaçamento entre os links */
+#menu-button img {
+    width: 70%; /* Ícone ajustado ao botão */
+    height: auto;
 }
 
-#navbar1 li {
-    display: block;
+#menu-button:hover {
+    background-color: var(--shadowFar); /* Efeito de hover */
+    transform: scale(1.1); /* Aumenta levemente no hover */
+    transition: 0.3s;
 }
 
-#navbar1 a {
-    text-decoration: none; /* Remove o sublinhado dos links */
-    color: var(--c); /* Cor do texto (branca, conforme sua configuração de variáveis) */
-    font-size: 1rem;
-    transition: color 0.3s;
+
+#swap {
+    position: fixed;
+    top: 10px;
+    left: 70px; /* Posicionado ao lado do botão */
+    width: 50px; /* Tamanho do símbolo */
+    height: 50px;
+    cursor: pointer;
+    z-index: 1000; /* Mesmo nível do botão */
+    transition: transform 0.3s;
 }
 
-#navbar1 a:hover {
-    color: var(--shadowFar); /* Muda a cor no hover para um efeito visual */
+#swap:hover {
+    transform: rotate(360deg); /* Animação no hover */
 }

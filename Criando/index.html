@@ -1,9 +1,9 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <!-- conexões css -->
     <link rel="stylesheet" href="src/css/config.css">
     <link rel="stylesheet" href="src/css/main.css">
@@ -11,16 +11,10 @@
     <title>Classes</title>
 </head>
 <body>
-    <!-- Barra de Navegação -->
-    <nav id="navbar1">
-        <ul>
-            <li><a href="Personagem.html">Criar Personagem</a></li>
-            <li><a href="index.html">Visualizar Classes</a></li>
-            <li><a href="#equipment">Equipamento</a></li>
-            <li><a href="#bag">Bolsa</a></li>
-        </ul>
-    </nav>
-
+    <!-- Botão no lugar do navbar -->
+    <button id="menu-button">
+        <img href="Personagem.html" src="" alt="Menu">
+    </button>
     <section id="selection" class="scene">
         <!-- 
             <div class="select-world">
@@ -31,23 +25,22 @@
     </section>
 
     <main id="view" class="scene off">
-        <img src="src/assets/swap.svg" alt="Trocar classe" id="swap">
+        <div id="controls">
+            <img src="src/assets/swap.svg" alt="Trocar classe" id="swap">
+            <button id="menu-button">
+                <img src="src/assets/menu-icon.svg" alt="Menu">
+            </button>
+        </div>
         <section id="content">
             <img id="content-img" src="" alt="Logo da classe">
             <h2 id="content-h2">Aa</h2>
-            <p id="content-p">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Officia nobis rem error blanditiis consequatur et corporis rerum quia dicta, explicabo eaque quam commodi iusto, quisquam ipsum magni, voluptates praesentium unde?</p>
+            <p id="content-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia nobis rem error blanditiis consequatur et corporis rerum quia dicta, explicabo eaque quam commodi iusto, quisquam ipsum magni, voluptates praesentium unde?</p>
         </section>
         <nav class="mobile">
             <div id="cs-m" class="character-selector">
                 <span></span>
                 <img>
             </div>
-            <!--
-                <div class="character-selector">
-                    <span></span>
-                    <img>
-                </div>
-            -->
         </nav>
     </main>
     <div id="view-bg"></div>
