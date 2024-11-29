@@ -214,10 +214,9 @@ main.off .character-selector img {
     border-radius: 50%;
     opacity: 0.8;
     z-index: -10;
-    background-image: url('path-to-image.jpg');
-    background-size: cover; /* A imagem cobre todo o espaço */
+    background-size: cover; /* A imagem é ajustada para caber no contêiner sem corte */
     background-position: center; /* Centraliza a imagem */
-    background-repeat: no-repeat;
+    background-repeat: no-repeat; /* Evita repetição da imagem */
 }
 
 
