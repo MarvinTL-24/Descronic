@@ -36,8 +36,8 @@ const data = [
         "anime": "Berserker",
         "name": ['Ensandecido', 'Destruidor'],
         "desc": [
-            '->Habilidade unica: Capacidade de suportar um golpe mortal e se manter de pé, dependendo do contra ataque a vida pode ser restaurada 10%. \n ->Proeficiência: Se torna imune a qualquer ataque ou habilidade de debuff na area, enquanto estiver atacando. \n ->Status fixos: Força: 13, Resistência: 6, Agilidade: 6.  \n ->karma: Mal encaminhado -> karmaPercent: 20',
-            'Habilidade unica: . \n ->Proeficiência: . \n ->Status fixos: Força: 15, Resistência: 5, agilidade: 5.  \n ->karma: Desonesto -> karmaPercent: 30'
+            '->Habilidade unica: Capacidade de suportar um golpe mortal e se manter de pé, dependendo do contra ataque a vida pode ser restaurada 10%. \n ->Proeficiência:  \n ->Status fixos: Força: 13, Resistência: 6, Agilidade: 6.  \n ->karma: Mal encaminhado -> karmaPercent: 20',
+            'Habilidade unica: Se torna imune a qualquer ataque ou habilidade de debuff na area, enquanto estiver atacando. . \n ->Proeficiência: . \n ->Status fixos: Força: 15, Resistência: 5, agilidade: 5.  \n ->karma: Desonesto -> karmaPercent: 30'
         ],
         "tokens": ['1t.png', '2t.png'],
         "wpp": ['1w.png', '2w.png'],
@@ -51,7 +51,7 @@ const data = [
             '->Habilidade unica: Dependendo da criatura que você tiver proeficiência maior, tem chance dela usar uma das habilidades antes de ser morta. \n ->Proeficiência: . \n ->Status fixos:  \n ->karma: Mal encaminhado -> karmaPercent: 20'
         ],
         "tokens": ['1t.png', '2t.png'],
-        "wpp": ['1w.png', '2w.jpg'],
+        "wpp": ['1w.png', '2w.png'],
         "video": "1w.mp4"
     },
     {
@@ -62,7 +62,7 @@ const data = [
             '->Habilidade unica: Tem uma capacidade maior de persuasão, mas seres maleficos ficam mais agressivos ao seu redor. \n ->Proeficiência: . \n ->Status fixos: Força: 8, Defesa: 9, Agilidade: 8. \n ->karma: Perdido -> karmaPercent: 40'
         ],
         "tokens": ['1t.png', '2t.png'],
-        "wpp": ['1w.png', '2w.jpg'],
+        "wpp": ['1w.png', '2w.png'],
         "video": "1w.mp4"
     },
     {
@@ -73,7 +73,7 @@ const data = [
             '->Habilidade unica: Ataques mentais ou de cunho espiritual tem seus efeitos reduzidos ou cessados baseados na própria resistência do mesmo.   \n ->Proeficiência: . \n Status fixos: Inteligência: 9, Resistência: 11.  \n ->karma: Neutro -> karmaPercent: 50'
         ],
         "tokens": ['1t.png', '2t.png'],
-        "wpp": ['1w.png', '2w.jpg'],
+        "wpp": ['1w.png', '2w.png'],
         "video": "1w.mp4"
     },
     {
@@ -84,7 +84,7 @@ const data = [
             '->Habilidade unica: Capacidade de rastrear ou mapear a região de monstros. \n ->Proeficiência: . \n ->Status fixos: Percepção: 15, Agilidade: 5.  \n ->karma: Neutro -> karmaPercent: 50'
         ],
         "tokens": ['1t.png', '2t.png'],
-        "wpp": ['1w.png', '2w.jpg'],
+        "wpp": ['1w.png', '2w.png'],
         "video": "1w.mp4"
     }
 ]

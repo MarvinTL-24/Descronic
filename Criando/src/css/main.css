@@ -1,4 +1,4 @@
-body { background: var(--bg); overflow: cover; }
+body { background: var(--bg); overflow: hidden; }
 
 .scene {
     width: 100vw;
