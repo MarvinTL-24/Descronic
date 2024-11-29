@@ -1,4 +1,4 @@
-body { background: var(--bg); overflow: hidden; }
+body { background: var(--bg); overflow: cover; }
 
 .scene {
     width: 100vw;
@@ -58,8 +58,8 @@ body { background: var(--bg); overflow: hidden; }
 }
 
 .select-world img:nth-child(1) {
-    width: 70%; /* Ajuste de tamanho menor */
-    height: 70%; /* Ajuste de tamanho menor */
+    width: 20%; /* Ajuste de tamanho menor */
+    height: 20%; /* Ajuste de tamanho menor */
     border-radius: 50%; /* Mantém o formato circular */
     object-fit: contain; /* Evita corte das imagens */
 }
@@ -76,7 +76,7 @@ main {
     justify-content: center;
     align-content: flex-start;
     align-items: flex-start;
-    padding: 10%;
+    padding: 5%;
     transition: .5s;
 }
 
@@ -152,7 +152,7 @@ nav {
     align-items: flex-end;
     width: 100vw;
     height: 100vh;
-    padding: 5% 2%;
+    padding: 2% 2%;
     overflow-y: auto;
     opacity: 1;
     transform: translateX(0%);

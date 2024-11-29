@@ -3,7 +3,7 @@ const data = [
         "anime": "Guerreiro",
         "name": ['Cavaleiro', 'Gladiador'],
         "desc": [
-            '->Habilidade unica: Capacidade de parry elevada, ao usar escudos leves a capacidade de atodoar o inimigo num parry certeiro é instântanea. \n ->Proeficiência: . \n ->Status fixos: Força: 10, Agilidade: 5, Resistência: 5. \n ->karma: Neutro -> karmaPercent: 50',
+            '->Habilidade unica: Capacidade de parry elevada, ao usar escudos leves a capacidade de atodoar o inimigo num parry certeiro é instântanea. \n ->Proeficiência: . \n ->Status fixos: Força: 10, Agilidade: 5, Resistência: 5. \n ->karma: Legal -> karmaPercent: 60',
             '->Habilidade unica: A capacidade de desviar de golpes pode ser algo essêncial em uma luta ate a morte. Sua chance é de 20% em golpes decisivos. \n ->Proeficiência: . \n ->Status fixos: Força: 5, Resistência: 15  \n ->karma: Neutro -> karmaPercent: 50'
         ],
         "tokens": ['1t.png', '2t.png'],
