@@ -3,7 +3,7 @@ const data = [
         "anime": "Guerreiro",
         "name": ['Cavaleiro', 'Gladiador'],
         "desc": [
-            '',
+            'passiva:  Aumento de resistência ao dano habilidades: Fúria de Batalha, Muralha de Escudos status: Força: 10, Agilidade: 5, Resistência: 5 karma: Neutro karmaPercent: 50',
             ''
         ],
         "tokens": ['1t.png', '2t.png'],
