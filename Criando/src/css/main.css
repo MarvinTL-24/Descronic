@@ -33,8 +33,8 @@ body { background: var(--bg); overflow: hidden; }
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 20vw;
-    height: 20vw;
+    width: 15vw;
+    height: 15vw;
     border-radius: 50%;
     box-shadow: 5px 5px 10px 1px var(--shadow);
     cursor: pointer;
@@ -63,7 +63,7 @@ body { background: var(--bg); overflow: hidden; }
 }
 
 .select-world img:nth-child(2) {
-    width: 75%;
+    width: 95%;
     opacity: 0;
 }
 /* VIEW */
@@ -87,8 +87,8 @@ main.off {
     position: absolute;
     top: 5vw;
     left: 5vw;
-    width: 20px;
-    height: 20px;
+    width: 30px;
+    height: 30px;
     cursor: pointer;
     transition: .5s;
     transition-timing-function: ease-in-out;
@@ -119,7 +119,7 @@ main.off #content * {
 }
 
 #content img {
-    width: 30vh;
+    width: 20vh;
     height: auto;
     object-fit: cover;
     transition-delay: 0s;
@@ -191,7 +191,7 @@ main.off .character-selector img {
 
 .character-selector img {
     display: inline;
-    height: 5vh;
+    height: 30vh;
     object-fit: cover;
     border-radius: 50%;
     transform: rotate(0deg);

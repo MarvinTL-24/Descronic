@@ -1,7 +1,7 @@
 const data = [
     {
         "anime": "Guerreiro",
-        "name": ['Kurosaki Ichigo', 'Zaraki Kenpachi'],
+        "name": ['Cavaleiro', 'Gladiador'],
         "desc": [
             '',
             ''
@@ -12,7 +12,7 @@ const data = [
     },
     {
         "anime": "Atirador",
-        "name": ['Makima', 'Power'],
+        "name": ['Sniper', 'Arqueiro'],
         "desc": [
             '',
             ''
@@ -23,7 +23,7 @@ const data = [
     },
     {
         "anime": "Assasin",
-        "name": ['Son Goku', 'Vegeta'],
+        "name": ['Ninja', 'Sicário'],
         "desc": [
             '',
             ''
@@ -34,7 +34,7 @@ const data = [
     },
     {
         "anime": "Berserker",
-        "name": ['Satoru Gojo', 'Yuji Itadori'],
+        "name": ['Ensandecido', 'Destruidor'],
         "desc": [
             '',
             ''
@@ -45,7 +45,7 @@ const data = [
     },
     {
         "anime": "Mago",
-        "name": ['Uzumaki Naruto', 'Uchiha Itachi'],
+        "name": ['Feiticeiro', 'Necromante'],
         "desc": [
             '',
             ''
@@ -56,7 +56,7 @@ const data = [
     },
     {
         "anime": "Paladino",
-        "name": ['Monkey D. Luffy', 'Roronoa Zoro'],
+        "name": ['Guardião', 'Justiceiro'],
         "desc": [
             '',
             ''
@@ -67,7 +67,7 @@ const data = [
     },
     {
         "anime": "Espiritualista",
-        "name": ['Monkey D. Luffy', 'Roronoa Zoro'],
+        "name": ['Pactualista', 'Xamã'],
         "desc": [
             '',
             ''
@@ -78,7 +78,7 @@ const data = [
     },
     {
         "anime": "Desbravador",
-        "name": ['Monkey D. Luffy', 'Roronoa Zoro'],
+        "name": ['Explorador', 'Caçador'],
         "desc": [
             '',
             ''
