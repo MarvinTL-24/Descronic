@@ -1,6 +1,6 @@
 const data = [
     {
-        "anime": "bleach",
+        "anime": "Guerreiro",
         "name": ['Kurosaki Ichigo', 'Zaraki Kenpachi', 'Urahara Kisuke', 'Aizen Sousuke', 'Hitsugaya Toushirou', 'Kuchiki Rukia', 'Kuchiki Byakuya', 'Jaegerjaquez Grimmjow', 'Shihouin Yoruichi', 'Ichimaru Gin'],
         "desc": [
             'Na maior parte do tempo, Ichigo parece um adolescente normal, a única exceção é seu cabelo espetado e laranja, uma característica que ele tem sido ridicularizado por anos. Ele é uma pessoa bastante alta e magra, com pele de pêssego e olhos castanhos. Quando em sua forma espiritual, Ichigo usa traje Shinigami padrão com a adição de uma alça em seu peito.',
