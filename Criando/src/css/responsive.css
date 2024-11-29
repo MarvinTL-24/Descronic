@@ -1,6 +1,7 @@
-@media (orientation: portrait){
-    #cs-m {
-        display: flex;
+@media (orientation: portrait) {
+    .select-world img {
+        width: 80%; /* Ajuste para dispositivos verticais */
+        height: 80%;
     }
 
     .character-selector {

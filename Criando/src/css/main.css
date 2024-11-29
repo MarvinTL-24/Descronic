@@ -35,8 +35,9 @@ body { background: var(--bg); overflow: hidden; }
     align-items: center;
     width: 15vw;
     height: 15vw;
-    border-radius: 50%;
-    box-shadow: 5px 5px 10px 1px var(--shadow);
+    border: 1px solid transparent;
+    overflow: hidden; /* Impede que o conteúdo exceda os limites */
+    box-shadow: none;
     cursor: pointer;
     transition: .5s;
 }
@@ -57,14 +58,16 @@ body { background: var(--bg); overflow: hidden; }
 }
 
 .select-world img:nth-child(1) {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
+    width: 90%; /* Ajuste de tamanho menor */
+    height: 90%; /* Ajuste de tamanho menor */
+    border-radius: 50%; /* Mantém o formato circular */
+    object-fit: contain; /* Evita corte das imagens */
 }
 
 .select-world img:nth-child(2) {
-    width: 95%;
-    opacity: 0;
+    width: 85%; /* Consistente com o primeiro logo */
+    height: 85%;
+    opacity: 0; /* Para o hover */
 }
 /* VIEW */
 
@@ -193,7 +196,7 @@ main.off .character-selector img {
     display: inline;
     height: 30vh;
     object-fit: cover;
-    border-radius: 50%;
+    border: 1px solid transparent;
     transform: rotate(0deg);
     transition: .5s;
 }
