@@ -58,8 +58,8 @@ body { background: var(--bg); overflow: hidden; }
 }
 
 .select-world img:nth-child(1) {
-    width: 90%; /* Ajuste de tamanho menor */
-    height: 90%; /* Ajuste de tamanho menor */
+    width: 70%; /* Ajuste de tamanho menor */
+    height: 70%; /* Ajuste de tamanho menor */
     border-radius: 50%; /* Mantém o formato circular */
     object-fit: contain; /* Evita corte das imagens */
 }
@@ -106,7 +106,7 @@ main.off {
 #content {
     display: flex;
     flex-direction: column;
-    gap: 30vh;
+    gap: 50vh;
     width: 50%;
     min-width: 35vw;
 }
@@ -209,12 +209,17 @@ main.off .character-selector img {
 #view-bg {
     position: absolute;
     display: flex;
-    width: 20vw;
-    height: 20vw;
+    width: 100vw;
+    height: 100vh;
     border-radius: 50%;
-    opacity: 0;
+    opacity: 0.8;
     z-index: -10;
+    background-image: url('path-to-image.jpg');
+    background-size: cover; /* A imagem cobre todo o espaço */
+    background-position: center; /* Centraliza a imagem */
+    background-repeat: no-repeat;
 }
+
 
 #fade {
     position: absolute;
