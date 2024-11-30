@@ -62,8 +62,8 @@
             loop: true,
             dots: true,
             autoplay: true,
-            autoplayTimeout: 5000,
-            smartSpeed: 1000,
+            autoplayTimeout: 0,
+            smartSpeed: 0,
             responsive: {
                 0: {
                     items: 1

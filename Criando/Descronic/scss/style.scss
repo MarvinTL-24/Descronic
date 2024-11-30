@@ -50,7 +50,7 @@ h6 {
 
 p {
     color: $text-color;
-    font-size: 15px;
+    font-size: 30px;
     line-height: 2;
     font-weight: 100;
 }
@@ -793,20 +793,20 @@ img {
             position: absolute;
             font-size: 230px;
             color: #f0f0f0;
-            z-index: -10;
+            z-index: 10;
             top: -170px;
             right: 40%;
             @media #{$breakpoint-lg} {
                 font-size: 170px;
-                top: -120px;
+                top: 120px;
             }
             @media #{$breakpoint-md} {
                 font-size: 80px;
-                top: -50px;
+                top: 50px;
             }
             @media #{$breakpoint-xs} {
                 font-size: 80px;
-                top: -50px;
+                top: 50px;
             }
         }
     }
