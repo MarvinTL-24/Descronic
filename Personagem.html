@@ -389,11 +389,12 @@
                     <p><strong>Peso:</strong> ${peso} kg</p>
                     <p><strong>Classe:</strong> ${classe}</p>
                     <p><strong>Subclasse:</strong> ${subclasse}</p>
+                    <p><strong>Traços de personalidade:</strong> ${subclasseInfo.Personalidade}</p>
                     <p><strong>Status:</strong> ${subclasseInfo.Status}</p>
-                    <p><strong>Força Ajustada:</strong> ${ajustes.força}</p>
-                    <p><strong>Agilidade Ajustada:</strong> ${ajustes.agilidade}</p>
-                    <p><strong>Resistência Ajustada:</strong> ${ajustes.resistência}</p>
-                    <p><strong>Karma:</strong> ${subclasseInfo.karmaPercent}%</p>
+                    <p><strong>Status acrescentado de força de acordo com a peso,altura,idade e raça:</strong> ${ajustes.força}</p>
+                    <p><strong>Status acrescentado de agilidade de acordo com a peso,altura,idade e raça:</strong> ${ajustes.agilidade}</p>
+                    <p><strong>Status acrescentado de resistência de acordo com a peso,altura,idade e raça:</strong> ${ajustes.resistência}</p>
+                    <p><strong>Karma que define seu carater em si:</strong> ${subclasseInfo.karmaPercent}%</p>
                 </div>
                 <button onclick="salvarComoImagem()">Salvar como Imagem</button>
             `;
