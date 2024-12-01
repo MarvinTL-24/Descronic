@@ -3,7 +3,7 @@ const data = [
         "anime": "Guerreiro",
         "name": ['Cavaleiro', 'Gladiador'],
         "desc": [
-            '->Habilidade unica: Capacidade de parry elevada, ao usar escudos leves a capacidade de atodoar o inimigo num parry certeiro é instântanea. \n ->Proeficiência: . \n ->Status fixos: Força: 10, Agilidade: 5, Resistência: 5. \n ->karma: Legal -> karmaPercent: 60',
+            '->Habilidade unica: Capacidade de parry elevada, ao usar escudos leves a capacidade de atodoar o inimigo num parry certeiro é instântanea. \n ->Proeficiência: . \n ->Status fixos: Força: 10, Agilidade: 5, Resistência: 5. \n ->karma: Legal -> karmaPercent: 70',
             '->Habilidade unica: A capacidade de desviar de golpes pode ser algo essêncial em uma luta ate a morte. Sua chance é de 20% em golpes decisivos. \n ->Proeficiência: . \n ->Status fixos: Força: 5, Resistência: 15  \n ->karma: Neutro -> karmaPercent: 50'
         ],
         "tokens": ['1t.png', '2t.png'],
@@ -15,7 +15,7 @@ const data = [
         "name": ['Sniper', 'Arqueiro'],
         "desc": [
             '->Habilidade unica: Quanto maior for a dificuldade de manusear a arma e a distância o poder de ataque sera maior. \n ->Proeficiência: . \n ->Status fixos: Destreza: 12, Agilidade: 8. \n ->karma: Neutro -> karmaPercent: 50',
-            '->Habilidade unica: Armas de tiro unico e de dificuldade elevada, podem conter um debuff aleatorio a cada squência de tiro. \n ->Proeficiência: . \n ->Status fixos: Destreza: 10, Agilidade: 8, percepção: 2.  \n ->karma: bom -> karmaPercent: 70'
+            '->Habilidade unica: Armas de tiro unico e de dificuldade elevada, podem conter um debuff aleatorio a cada squência de tiro. \n ->Proeficiência: . \n ->Status fixos: Destreza: 10, Agilidade: 8, percepção: 2.  \n ->karma: Perdido -> karmaPercent: 40'
         ],
         "tokens": ['1t.png', '2t.png'],
         "wpp": ['1w.png', '2w.png'],
@@ -25,8 +25,8 @@ const data = [
         "anime": "Assasin",
         "name": ['Ninja', 'Sicário'],
         "desc": [
-            '->Habilidade unica: Habilidade de furtividade aprimorada no qual tem maiores chances do inimigo lhe perder de vista e o ataque ser critico se ele não ver. \n ->Proeficiência: . \n vStatus fixos: Destreza: 10, Percepção: 5, Força: 5. \n ->karma: Perdido -> karmaPercent: 40',
-            '->Habilidade unica: A maestria em combate faz com que qualquer arma de cunho perfurante tenham chances de critico maiores ou causar feridas de sangramento. \n ->Proeficiência: . \n ->Status fixos: Destreza: 15, Agilidade: 10. \n ->karma: Mal encarnado -> karmaPercent: 10'
+            '->Habilidade unica: Habilidade de furtividade aprimorada no qual tem maiores chances do inimigo lhe perder de vista e o ataque ser critico se ele não ver. \n ->Proeficiência: . \n vStatus fixos: Destreza: 10, Percepção: 5, Força: 5. \n ->karma: Mal-Encaminhado -> karmaPercent: 30',
+            '->Habilidade unica: A maestria em combate faz com que qualquer arma de cunho perfurante tenham chances de critico maiores ou causar feridas de sangramento. \n ->Proeficiência: . \n ->Status fixos: Destreza: 15, Agilidade: 10. \n ->karma: Maligno -> karmaPercent: 10'
         ],
         "tokens": ['1t.png', '2t.png'],
         "wpp": ['1w.png', '2w.png'],
@@ -36,7 +36,7 @@ const data = [
         "anime": "Berserker",
         "name": ['Ensandecido', 'Destruidor'],
         "desc": [
-            '->Habilidade unica: Capacidade de suportar um golpe mortal e se manter de pé, dependendo do contra ataque a vida pode ser restaurada 10%. \n ->Proeficiência:  \n ->Status fixos: Força: 13, Resistência: 6, Agilidade: 6.  \n ->karma: Mal encaminhado -> karmaPercent: 20',
+            '->Habilidade unica: Capacidade de suportar um golpe mortal e se manter de pé, dependendo do contra ataque a vida pode ser restaurada 10%. \n ->Proeficiência:  \n ->Status fixos: Força: 13, Resistência: 6, Agilidade: 6.  \n ->karma: Mal amado -> karmaPercent: 20',
             'Habilidade unica: Se torna imune a qualquer ataque ou habilidade de debuff na area, enquanto estiver atacando. . \n ->Proeficiência: . \n ->Status fixos: Força: 15, Resistência: 5, agilidade: 5.  \n ->karma: Desonesto -> karmaPercent: 30'
         ],
         "tokens": ['1t.png', '2t.png'],
@@ -48,7 +48,7 @@ const data = [
         "name": ['Feiticeiro', 'Necromante'],
         "desc": [
             '->Habilidade unica: Invocações de feitiços tem maiores chances de funcionarem de maneira perfeita sem uso de artefatos. \n ->Proeficiência: . \n ->Status fixos: Vitalidade: 4, Agilidade: 4, Inteligência: 12  \n ->karma: Neutro -> karmaPercent: 50',
-            '->Habilidade unica: Dependendo da criatura que você tiver proeficiência maior, tem chance dela usar uma das habilidades antes de ser morta. \n ->Proeficiência: . \n ->Status fixos:  \n ->karma: Mal encaminhado -> karmaPercent: 20'
+            '->Habilidade unica: Dependendo da criatura que você tiver proeficiência maior, tem chance dela usar uma das habilidades antes de ser morta. \n ->Proeficiência: . \n ->Status fixos:  \n ->karma: Mal em si -> karmaPercent: 0'
         ],
         "tokens": ['1t.png', '2t.png'],
         "wpp": ['1w.png', '2w.png'],
