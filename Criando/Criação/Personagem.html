@@ -187,8 +187,8 @@
             </div>
 
             <div class="form-group">
-                <label for="classeEscolhida">Classe:</label>
-                <select id="classeEscolhida" name="Classe" onchange="carregarSubclasses()" required>
+                <label for="raça">Classe:</label>
+                <select id="raça" name="Classe" onchange="carregarSubclasses()" required>
                     <option value="Guerreiro">Guerreiro</option>
                     <option value="Mago">Mago</option>
                     <option value="Berserker">Berserker</option>
@@ -197,6 +197,20 @@
                     <option value="Paladino">Paladino</option>
                     <option value="Espiritualista">Espiritualista</option>
                     <option value="Desbravador">Desbravador</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="classeEscolhida">Raça:</label>
+                <select id="classeEscolhida" name="Raça" required>
+                    <option value="Humano">Humano</option>
+                    <option value="Elfos">Elfo</option>
+                    <option value="Anões">Anão</option>
+                    <option value="Nefelin">Nefelin</option>
+                    <option value="Dragonewtes">Dragonewtes</option>
+                    <option value="Megavles">Megavles</option>
+                    <option value="Android's">Android's</option>
+                    <option value="Marinos">Marinos</option>
                 </select>
             </div>
 
@@ -239,36 +253,36 @@
     <script>
         const subclasses = {
             "Guerreiro": [
-                { nome: "Gladiador", buffs: "Força: 10, Agilidade: 5, Resistência: 5 " , debuffs: "-5% Velocidade", karmaPercent: 50 },
-                { nome: "Cavaleiro", buffs: "Força: 5, Resistência: 15", debuffs: "-10% Agilidade", karmaPercent: 70 }
+                { nome: "Gladiador", Status: "Força: 10, Agilidade: 5, Resistência: 5 ", karmaPercent: 50 },
+                { nome: "Cavaleiro", Status: "Força: 5, Resistência: 15", karmaPercent: 70 }
             ],
             "Mago": [
-                { nome: "Feiticeiro", buffs: "Vitalidade: 4, Agilidade: 4, Inteligência: 12", debuffs: "-10% Vida", karmaPercent: 60 },
-                { nome: "Necromante", buffs: "+30% Controle", debuffs: "-15% Resistência", karmaPercent: 1 }
+                { nome: "Feiticeiro", Status: "Vitalidade: 4, Agilidade: 4, Inteligência: 12", karmaPercent: 60 },
+                { nome: "Necromante", Status: "Inteligência: 20, Resistência: 10", karmaPercent: 1 }
             ],
             "Berserker": [
-                { nome: "Ensandecido", buffs: "Força: 13, Resistência: 6, Agilidade: 6", debuffs: "-10% em resistência", karmaPercent: 20 },
-                { nome: "Destruidor", buffs: "Força: 15, Resistência: 5, agilidade: 5", debuffs: "-10% Agilidade", karmaPercent: 30 }
+                { nome: "Ensandecido", Status: "Força: 13, Resistência: 6, Agilidade: 6", karmaPercent: 20 },
+                { nome: "Destruidor", Status: "Força: 15, Resistência: 5, agilidade: 5", karmaPercent: 30 }
             ],
             "Assasin": [
-                { nome: "Ninja", buffs: "Destreza: 10, Percepção: 5, Força: 5", debuffs: "-10% Vida", karmaPercent: 30 },
-                { nome: "Sicário", buffs: "Destreza: 15, Agilidade: 10", debuffs: "-15% Resistência", karmaPercent: 10 }
+                { nome: "Ninja", Status: "Destreza: 10, Percepção: 5, Força: 5", karmaPercent: 30 },
+                { nome: "Sicário", Status: "Destreza: 15, Agilidade: 10", karmaPercent: 10 }
             ],
             "Atirador": [
-                { nome: "Sniper", buffs: "Destreza: 12, Agilidade: 8", debuffs: "-10% Velocidade", karmaPercent: 50 },
-                { nome: "Arqueiro", buffs: "Destreza: 10, Agilidade: 8, percepção: 2", debuffs: "-10% Agilidade", karmaPercent: 40 }
+                { nome: "Sniper", Status: "Destreza: 12, Agilidade: 8", karmaPercent: 50 },
+                { nome: "Arqueiro", Status: "Destreza: 10, Agilidade: 8, percepção: 2", karmaPercent: 40 }
             ],
             "Paladino": [
-                { nome: "Guardião", buffs: "Resistência: 12, Percepção: 2, Vida: 6", debuffs: "-10% Vida", karmaPercent: 90 },
-                { nome: "Justiceiro", buffs: "Força: 8, Defesa: 9, Agilidade: 3", debuffs: "-15% de resistência", karmaPercent: 40 }
+                { nome: "Guardião", Status: "Resistência: 12, Vida: 8.", karmaPercent: 90 },
+                { nome: "Justiceiro", Status: "Força: 8, Defesa: 9, Agilidade: 8", karmaPercent: 40 }
             ],
             "Espiritualista": [
-                { nome: "Pactualista", buffs: "Inteligência: 11, Vida Espiritual: 14,", debuffs: "-5% Velocidade", karmaPercent: 20 },
-                { nome: "Xamã", buffs: "Inteligência: 9, Resistência: 11", debuffs: "-10% Agilidade", karmaPercent: 50 }
+                { nome: "Pactualista", Status: "Inteligência: 11, Vida Espiritual: 14,", karmaPercent: 20 },
+                { nome: "Xamã", Status: "Inteligência: 9, Resistência: 11", karmaPercent: 50 }
             ],
             "Desbravador": [
-                { nome: "Explorador", buffs: "Percepção: 15, Resistência: 5", debuffs: "-10% Vida", karmaPercent: 50 },
-                { nome: "Caçador", buffs: "Percepção: 15, Agilidade: 5", debuffs: "-15% Resistência", karmaPercent: 50 }
+                { nome: "Explorador", Status: "Percepção: 15, Resistência: 5", karmaPercent: 50 },
+                { nome: "Caçador", Status: "Percepção: 15, Agilidade: 5", karmaPercent: 50 }
             ],
         };
 
@@ -291,6 +305,7 @@
 
         function gerarFicha() {
             const nome = document.getElementById("nomePersonagem").value;
+            const raça = document.getElementById("Raça").value;
             const idade = document.getElementById("idade").value;
             const sexo = document.getElementById("sexo").value;
             const altura = document.getElementById("altura").value;
@@ -316,6 +331,7 @@
                     <h2>Ficha do Personagem</h2>
                     ${imagemURL ? `<img src="${imagemURL}" alt="${nome}">` : '<p>Sem imagem selecionada.</p>'}
                     <p><strong>Nome:</strong> ${nome}</p>
+                    <p><strong>Raça:</strong> ${raça}</p>
                     <p><strong>Idade:</strong> ${idade}</p>
                     <p><strong>Sexo:</strong> ${sexo}</p>
                     <p><strong>Altura:</strong> ${altura} cm</p>
