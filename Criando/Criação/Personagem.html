@@ -164,8 +164,9 @@
             </div>
 
             <div class="form-group">
-                <label for="idade">Idade (17 a 65):</label>
-                <input type="number" id="idade" name="Idade" min="17" max="65" required>
+                <label for="idade">Idade (17 a 120) -> OBS: Dependendo da raça a idade será multiplicado por 50 e outro por 1000.</label>
+                <input type="number" id="idade" name="Idade" min="17" max="120" required>
+                <a></a>
             </div>
 
             <div class="form-group">
@@ -204,27 +205,27 @@
                 <label for="classeEscolhida">Raça:</label>
                 <select id="classeEscolhida" name="Raça" required>
                     <option value="Humano">Humano</option>
-                    <option value="Elfos">Elfo</option>
-                    <option value="Anões">Anão</option>
+                    <option value="Elfo">Elfo</option>
+                    <option value="Anão">Anão</option>
                     <option value="Nephilim">Nephilim</option>
-                    <option value="Dragonewtes">Dragonewtes</option>
+                    <option value="Dragonewte">Dragonewtes</option>
                     <option value="Megavles">Megavles</option>
-                    <option value="Android's">Android's</option>
-                    <option value="Marinos">Marinos</option>
+                    <option value="Android">Android</option>
+                    <option value="Marino">Marino</option>
                     <option value="Doppelganger">Doppelganger</option>
-                    <option value="Reclusos">Reclusos</option>
-                    <option value="Oculares">Oculares</option>
+                    <option value="Recluso">Recluso</option>
+                    <option value="Ocular">Ocular</option>
                     <option value="Desvivido">Desvivido</option>
                     <option value="Psicodelico">Psicodelico</option>
                     <option value="Tecnoman">Tecnoman</option>
-                    <option value="Vampiros">Vampiros</option>
+                    <option value="Vampiro">Vampiro</option>
                     <option value="Shinigami">Shinigami</option>
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="subclasseEscolhida">Subclasse:</label>
-                <select id="subclasseEscolhida" name="Sub-Classe" disabled required>
+                <select id="subclasseEscolhida" name="Sub-Classes" disabled required>
                     <option value="">Selecione uma subclasse</option>
                 </select>
             </div>
@@ -310,18 +311,48 @@
                 subclasseSelect.disabled = false;
             }
         }
+        function calcularAjustes(raça, idade, peso, altura) {
+            let ajustes = {
+                agilidade: 0,
+                força: 0,
+                resistência: 0
+            };
+            // Ajustes por Peso
+            if (peso < 90) ajustes.agilidade += 2;
+            else if (peso > 120) ajustes.agilidade -= 2;
+
+            // Ajustes por Altura
+            if (altura < 140) ajustes.força -= 2;
+            else if (altura > 180) ajustes.força += 2;
+
+            // Ajustes por Idade e Raça
+            if (raça === "Recluso" || raça === "Shinigami" ||raça === "Androide" || raça === "Elfo"||raça === "Anão" || raça === "Vampiro") {
+                if ((idade*1000) < 4000) ajustes.resistência += 2, ajustes.força += 2; // Jovens são mais ágeis
+                else if ((idade*1000) > 8000) ajustes.força -= 2, ajustes.resistência -= 2; // Anciãos têm menor força
+            } else if (raça === "Doppelganger" || raça === "Dragonewte" ||raça === "Nephilim" || raça === "Marino") {
+                if ((idade*50) < 50) ajustes.resistência += 2, ajustes.força += 2;
+                else if ((idade*50) > 500) ajustes.força -= 2, ajustes.resistência -= 2;
+            } else if (raça === "Humano" || raça === "Tecnoman" ||raça === "Megavles" || raça === "Psicodelico"||raça === "Ocular" || raça === "Desvivido") {
+                if (idade < 40) ajustes.resistência += 2, ajustes.força += 2;
+                else if (idade > 80) ajustes.força -= 2, ajustes.resistência -= 2;
+            }
+
+            return ajustes;
+        }
 
         function gerarFicha() {
             const nome = document.getElementById("nomePersonagem").value;
-            const raça = document.getElementById("Raça").value;
-            const idade = document.getElementById("idade").value;
+            const raça = document.getElementById("classeEscolhida").value;
+            const idade = parseInt(document.getElementById("idade").value, 10);
+            const altura = parseInt(document.getElementById("altura").value, 10);
+            const peso = parseInt(document.getElementById("peso").value, 10);
+            const ajustes = calcularAjustes(raça, idade, peso, altura);
             const sexo = document.getElementById("sexo").value;
-            const altura = document.getElementById("altura").value;
-            const peso = document.getElementById("peso").value;
             const classe = document.getElementById("classeEscolhida").value;
             const subclasse = document.getElementById("subclasseEscolhida").value;
             const estilo = document.getElementById("Estilo").value;
             const imagemInput = document.getElementById("imagemPersonagem");
+        
 
             const subclasseInfo = subclasses[classe]?.find(s => s.nome === subclasse);
 
@@ -346,7 +377,10 @@
                     <p><strong>Peso:</strong> ${peso} kg</p>
                     <p><strong>Classe:</strong> ${classe}</p>
                     <p><strong>Subclasse:</strong> ${subclasse}</p>
-                    <p><strong>Buffs:</strong> ${subclasseInfo.buffs}</p>
+                    <p><strong>Status:</strong> ${subclasseInfo.Status}</p>
+                    <p><strong>Força Ajustada:</strong> ${ajustes.força}</p>
+                    <p><strong>Agilidade Ajustada:</strong> ${ajustes.agilidade}</p>
+                    <p><strong>Resistência Ajustada:</strong> ${ajustes.resistência}</p>
                     <p><strong>Karma:</strong> ${subclasseInfo.karmaPercent}%</p>
                 </div>
                 <button onclick="salvarComoImagem()">Salvar como Imagem</button>
