@@ -188,8 +188,8 @@
             </div>
 
             <div class="form-group">
-                <label for="raça">Classe:</label>
-                <select id="raça" name="Classe" onchange="carregarSubclasses()" required>
+                <label for="classeEscolhida">Classe:</label>
+                <select id="classeEscolhida" name="Classe" onchange="carregarSubclasses()" required>
                     <option value="Guerreiro">Guerreiro</option>
                     <option value="Mago">Mago</option>
                     <option value="Berserker">Berserker</option>
@@ -202,8 +202,8 @@
             </div>
 
             <div class="form-group">
-                <label for="classeEscolhida">Raça:</label>
-                <select id="classeEscolhida" name="Raça" required>
+                <label for="raça">Raça:</label>
+                <select id="raça" name="Raça" required>
                     <option value="Humano">Humano</option>
                     <option value="Elfo">Elfo</option>
                     <option value="Anão">Anão</option>
@@ -225,7 +225,7 @@
 
             <div class="form-group">
                 <label for="subclasseEscolhida">Subclasse:</label>
-                <select id="subclasseEscolhida" name="Sub-Classes" disabled required>
+                <select id="subclasseEscolhida" name="Sub-Classe" disabled required>
                     <option value="">Selecione uma subclasse</option>
                 </select>
             </div>
@@ -296,7 +296,7 @@
         };
 
         function carregarSubclasses() {
-            const classe = document.getElementById("classeEscolhida").value;
+            const classe = document.getElementById("classeEscolhida").value; // Corrigido para o ID correto
             const subclasseSelect = document.getElementById("subclasseEscolhida");
             subclasseSelect.innerHTML = '<option value="">Selecione uma subclasse</option>';
             subclasseSelect.disabled = !classe;
@@ -311,6 +311,7 @@
                 subclasseSelect.disabled = false;
             }
         }
+
         function calcularAjustes(raça, idade, peso, altura) {
             let ajustes = {
                 agilidade: 0,
@@ -342,13 +343,13 @@
 
         function gerarFicha() {
             const nome = document.getElementById("nomePersonagem").value;
-            const raça = document.getElementById("classeEscolhida").value;
+            const raça = document.getElementById("raça").value;
             const idade = parseInt(document.getElementById("idade").value, 10);
             const altura = parseInt(document.getElementById("altura").value, 10);
             const peso = parseInt(document.getElementById("peso").value, 10);
             const ajustes = calcularAjustes(raça, idade, peso, altura);
             const sexo = document.getElementById("sexo").value;
-            const classe = document.getElementById("classeEscolhida").value;
+            const classe = document.getElementById("classeEscolhida").value; // Atualizado
             const subclasse = document.getElementById("subclasseEscolhida").value;
             const estilo = document.getElementById("Estilo").value;
             const imagemInput = document.getElementById("imagemPersonagem");
