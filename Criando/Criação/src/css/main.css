@@ -96,7 +96,7 @@ main.off {
     cursor: pointer;
     transition: .5s;
     transition-timing-function: ease-in-out;
-    z-index: 80;
+    z-index: 180;
 }
 
 #swap:hover {
