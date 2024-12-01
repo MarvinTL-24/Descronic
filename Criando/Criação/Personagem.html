@@ -328,8 +328,8 @@
 
             // Ajustes por Idade e Raça
             if (raça === "Recluso" || raça === "Shinigami" ||raça === "Androide" || raça === "Elfo"||raça === "Anão" || raça === "Vampiro") {
-                if ((idade*1000) < 4000) ajustes.resistência += 2, ajustes.força += 2; // Jovens são mais ágeis
-                else if ((idade*1000) > 8000) ajustes.força -= 2, ajustes.resistência -= 2; // Anciãos têm menor força
+                if ((idade*100) < 4000) ajustes.resistência += 2, ajustes.força += 2; // Jovens são mais ágeis
+                else if ((idade*100) > 8000) ajustes.força -= 2, ajustes.resistência -= 2; // Anciãos têm menor força
             } else if (raça === "Doppelganger" || raça === "Dragonewte" ||raça === "Nephilim" || raça === "Marino") {
                 if ((idade*50) < 50) ajustes.resistência += 2, ajustes.força += 2;
                 else if ((idade*50) > 500) ajustes.força -= 2, ajustes.resistência -= 2;
@@ -340,6 +340,17 @@
 
             return ajustes;
         }
+        function calcularIdadeConvertida(idade, raça) {
+            let idadeConvertida = idade;
+
+            if (raça === "Recluso" || raça === "Shinigami" || raça === "Androide" || raça === "Elfo" || raça === "Anão" || raça === "Vampiro") {
+                idadeConvertida = idade * 100; // Multiplicador para essas raças
+            } else if (raça === "Doppelganger" || raça === "Dragonewte" || raça === "Nephilim" || raça === "Marino") {
+                idadeConvertida = idade * 50; // Multiplicador para essas raças
+            }
+
+            return idadeConvertida;
+        }
 
         function gerarFicha() {
             const nome = document.getElementById("nomePersonagem").value;
@@ -348,12 +359,12 @@
             const altura = parseInt(document.getElementById("altura").value, 10);
             const peso = parseInt(document.getElementById("peso").value, 10);
             const ajustes = calcularAjustes(raça, idade, peso, altura);
+            const idadeConvertida = calcularIdadeConvertida(idade, raça); // Calcula a idade convertida
             const sexo = document.getElementById("sexo").value;
-            const classe = document.getElementById("classeEscolhida").value; // Atualizado
+            const classe = document.getElementById("classeEscolhida").value;
             const subclasse = document.getElementById("subclasseEscolhida").value;
             const estilo = document.getElementById("Estilo").value;
             const imagemInput = document.getElementById("imagemPersonagem");
-        
 
             const subclasseInfo = subclasses[classe]?.find(s => s.nome === subclasse);
 
@@ -372,7 +383,7 @@
                     ${imagemURL ? `<img src="${imagemURL}" alt="${nome}">` : '<p>Sem imagem selecionada.</p>'}
                     <p><strong>Nome:</strong> ${nome}</p>
                     <p><strong>Raça:</strong> ${raça}</p>
-                    <p><strong>Idade:</strong> ${idade}</p>
+                    <p><strong>Idade:</strong> ${idade} anos (Equivalente: ${idadeConvertida} anos para ${raça})</p>
                     <p><strong>Sexo:</strong> ${sexo}</p>
                     <p><strong>Altura:</strong> ${altura} cm</p>
                     <p><strong>Peso:</strong> ${peso} kg</p>
@@ -387,6 +398,7 @@
                 <button onclick="salvarComoImagem()">Salvar como Imagem</button>
             `;
         }
+
 
         function salvarComoImagem() {
             const ficha = document.getElementById("fichaParaImagem");
