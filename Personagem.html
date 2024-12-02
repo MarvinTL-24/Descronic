@@ -164,7 +164,7 @@
             </div>
 
             <div class="form-group">
-                <label for="idade">Idade (17 a 120) -> OBS: Dependendo da raça a idade será multiplicado por 50 e outro por 100.</label>
+                <label for="idade">Idade (17 a 120) -> OBS: Dependendo da raça a idade será convertida atraves da multiplicação por 50 ou por 100.</label>
                 <input type="number" id="idade" name="Idade" min="17" max="120" required>
                 <a></a>
             </div>
@@ -234,14 +234,21 @@
                 <label for="Estilo">Estilo de Luta:</label>
                 <select id="Estilo" name="Estilo de luta" required>
                     <option value="">Selecione um estilo</option>
-                    <option value="Espadachim">Espadachim</option>
-                    <option value="Arqueiro">Arqueiro</option>
-                    <option value="Mago">Feiticeiro</option>
-                    <option value="Monge">Monge</option>
-                    <option value="Duas espadas">Espadachim</option>
-                    <option value="Atirador">Fogareu</option>
-                    <option value="Xamã">Espiritualista</option>
-                    <option value="Ceifeiro">Ceifador</option>
+                    <option value="Artes Marciais Orientais">Artes Marciais Orientais</option>
+                    <option value="Artes Marciais Ocidentais">Artes Marciais Ocidentais</option>
+                    <option value="Estilos Modernos de Combate">Estilos Modernos de Combate</option>
+                    <option value="Estilos Históricos de Combate">Estilos Históricos de Combate</option>
+                    <option value="Armas de Haste">Armas de Haste</option>
+                    <option value="Armas de Impacto">Armas de Impacto</option>
+                    <option value="Armas de Arremesso">Armas de Arremesso</option>
+                    <option value="Duas espadas">Duas espadas</option>
+                    <option value="Atirador">Atirador</option>
+                    <option value="Espiritualista">Espiritualista</option>
+                    <option value="Ceifeador">Ceifador</option>
+                    <option value="Armas pesadas">Armas pesadas</option>
+                    <option value="Protetor">Protetor</option>
+                    <option value="Chicoteador">Chicoteador</option>
+                    <option value="Esgrima">Esgrimista</option>
                 </select>
             </div>
 
@@ -319,7 +326,7 @@
                 resistência: 0
             };
             // Ajustes por Peso
-            if (peso < 90) ajustes.agilidade += 2;
+            if (peso < 60) ajustes.agilidade += 2;
             else if (peso > 120) ajustes.agilidade -= 2;
 
             // Ajustes por Altura
@@ -391,9 +398,8 @@
                     <p><strong>Subclasse:</strong> ${subclasse}</p>
                     <p><strong>Traços de personalidade:</strong> ${subclasseInfo.Personalidade}</p>
                     <p><strong>Status:</strong> ${subclasseInfo.Status}</p>
-                    <p><strong>Status acrescentado de força de acordo com a peso,altura,idade e raça:</strong> ${ajustes.força}</p>
-                    <p><strong>Status acrescentado de agilidade de acordo com a peso,altura,idade e raça:</strong> ${ajustes.agilidade}</p>
-                    <p><strong>Status acrescentado de resistência de acordo com a peso,altura,idade e raça:</strong> ${ajustes.resistência}</p>
+                    <p><strong>Status acrescentado de força, agilidade e resistência de acordo com a peso,altura,idade e raça: \n
+                    </strong> ${ajustes.força},\n ${ajustes.agilidade}, ${ajustes.resistência}.</p>
                     <p><strong>Karma que define seu carater em si:</strong> ${subclasseInfo.karmaPercent}%</p>
                 </div>
                 <button onclick="salvarComoImagem()">Salvar como Imagem</button>
