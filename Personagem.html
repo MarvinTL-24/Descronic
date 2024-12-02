@@ -335,7 +335,7 @@
             else if (altura > 180) ajustes.força += 2;
 
             // Ajustes por Idade e Raça
-            if (raça === "Recluso" || raça === "Shinigami" ||raça === "Androide" || raça === "Elfo"||raça === "Anão" || raça === "Vampiro") {
+            if (raça === "Recluso" || raça === "Shinigami" ||raça === "Android" || raça === "Elfo"||raça === "Anão" || raça === "Vampiro") {
                 if ((idade*100) < 4000) ajustes.resistência += 2, ajustes.força += 2; // Jovens são mais ágeis
                 else if ((idade*100) > 8000) ajustes.força -= 2, ajustes.resistência -= 2; // Anciãos têm menor força
             } else if (raça === "Doppelganger" || raça === "Dragonewte" ||raça === "Nephilim" || raça === "Marino") {
@@ -351,7 +351,7 @@
         function calcularIdadeConvertida(idade, raça) {
             let idadeConvertida = idade;
 
-            if (raça === "Recluso" || raça === "Shinigami" || raça === "Androide" || raça === "Elfo" || raça === "Anão" || raça === "Vampiro") {
+            if (raça === "Recluso" || raça === "Shinigami" || raça === "Android" || raça === "Elfo" || raça === "Anão" || raça === "Vampiro") {
                 idadeConvertida = idade * 100; // Multiplicador para essas raças
             } else if (raça === "Doppelganger" || raça === "Dragonewte" || raça === "Nephilim" || raça === "Marino") {
                 idadeConvertida = idade * 50; // Multiplicador para essas raças
