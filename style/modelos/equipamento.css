@@ -68,7 +68,7 @@ button:hover {
 }
 
 .card img {
-    width: 100%; /* A imagem irá ocupar toda a largura disponível */
+    width: 300px; /* A imagem irá ocupar toda a largura disponível */
     height: auto; /* A altura será ajustada proporcionalmente */
     border-radius: 10px 10px 0 0; /* Para arredondar os cantos superiores */
 }
