@@ -4,7 +4,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planilha de criação e obtenção</title>
-    <link rel="stylesheet" href="/style/modelos/Forja.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #7a5c2f; /* Tom de pedra */
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #c47e27; /* Cor dourada metálica, simbolizando forja */
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra leve */
+            border-radius: 10px;
+            overflow: hidden;
+            background-color: rgba(255, 255, 255, 0.8); /* Transparente para um toque mais leve */
+        }
+
+        th, td {
+            padding: 15px 20px;
+            text-align: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #3e2a47; /* Cor metálica e escura */
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            background-color: #f7f7f7; /* Cor de pedra leve */
+            color: #333;
+            font-size: 14px;
+        }
+
+        tr:nth-child(even) td {
+            background-color: #e2e2e2; /* Alternância de cor para maior contraste */
+        }
+
+        tr:hover td {
+            background-color: rgba(182, 138, 38, 0.2); /* Efeito de hover dourado suave */
+            cursor: pointer;
+        }
+
+        caption {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 10px;
+            color: #4a3d23; /* Cor de pedra mais escura */
+        }
+
+        td, th {
+            border-radius: 8px; /* Bordas arredondadas para um efeito mais suave */
+        }
+
+        #menu-button {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 10px;
+            background-color: #f3f1f1;
+            color: rgb(148, 21, 21);
+            border: none;
+            border-radius: 50%;
+        }
+    </style>
 </head>
 <body>
     <a href="../Informações.html">
