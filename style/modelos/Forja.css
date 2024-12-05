@@ -59,13 +59,16 @@ td, th {
 }
 
 #menu-button {
+    width: 50px;
+    height: 50px;
     position: fixed;
     top: 10px;
-    right: 10px;
+    left: 10px;
     z-index: 10;
     padding: 10px;
-    background-color: #333;
-    color: white;
+    background-color: #f3f1f1;
+    color: rgb(148, 21, 21);
     border: none;
     border-radius: 50%;
 }
+
