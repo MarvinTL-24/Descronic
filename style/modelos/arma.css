@@ -119,5 +119,16 @@ html, body {
     height: 100%;
 }
 
+#menu-button {
+    position: fixed;
+    top: 10px;
+    right: 10px;
+    z-index: 10;
+    padding: 10px;
+    background-color: #333;
+    color: white;
+    border: none;
+    border-radius: 50%;
+}
 
 
