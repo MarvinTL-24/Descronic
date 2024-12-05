@@ -152,7 +152,7 @@ button:hover {
 
 /* Estilo para as imagens */
 #result .equipamento-card img {
-    max-width: 100%;
+    max-width: 300px;
     height: auto;
     border-radius: 10px 10px 0 0; /* Arredonda os cantos da imagem */
 }
