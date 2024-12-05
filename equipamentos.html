@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Equipamentos</title>
+    <link rel="stylesheet" href="style/modelos/equipamento.css">
+</head>
+<body style="background-image: url('imagens/blackgrounds/primeiro.jpg');">
+    <!-- Barra de Navegação -->
+    <nav id="navbar1">
+        <ul>
+            <li><a href="index.html">Pagina Inicial</a></li>
+            <li><a href="classe.html">Visualizar Classes</a></li>
+            <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
+            <li><a href="equipamentos.html">Armadura</a></li>
+            <li><a href="itens.html">Itens</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Equipamentos adquiridos</h1>
+        <form id="characterForm" onsubmit="event.preventDefault(); gerarFicha();">
+            <div class="form-group">
+                <label for="capacete">Capacete:</label>
+                <input type="text" id="capaceteNome" name="capacete" placeholder="Digite o nome do Capacete:">
+                <input type="text" id="capaceteDano" name="capaceteDano" placeholder="Dano:">
+                <input type="text" id="capaceteHabilidade" name="capaceteHabilidade" placeholder="Habilidade:">
+                <select id="capaceteElemento" name="capaceteElemento">
+                    <option value="??????">??????</option>
+                    <option value="Água">Água</option>
+                    <option value="Fogo">Fogo</option>
+                    <option value="Sagrado">Sagrado</option>
+                    <option value="Demoniaco">Demoniaco</option>
+                    <option value="Eletricidade">Eletricidade</option>
+                    <option value="Gelo">Gelo</option>
+                    <option value="Veneno">Veneno</option>
+                    <option value="Gravidade">Gravidade</option>
+                    <option value="Magia">Magia</option>
+                </select>
+                <input type="file" id="capaceteImagem" name="capaceteImagem">
+            </div>
+            <button type="button" onclick="criarCardCapacete()">Criar Card</button>
+            <br><br>
+            <div class="form-group">
+                <label for="peitoral">Peitoral:</label>
+                <input type="text" id="peitoralNome" name="peitoral" placeholder="Digite o nome do Peitoral:">
+                <input type="text" id="peitoralDano" name="peitoralDano" placeholder="Dano:">
+                <input type="text" id="peitoralHabilidade" name="peitoralHabilidade" placeholder="Habilidade:">
+                <select id="peitoralElemento" name="peitoralElemento">
+                    <option value="??????">??????</option>
+                    <option value="Água">Água</option>
+                    <option value="Fogo">Fogo</option>
+                    <option value="Sagrado">Sagrado</option>
+                    <option value="Demoniaco">Demoniaco</option>
+                    <option value="Eletricidade">Eletricidade</option>
+                    <option value="Gelo">Gelo</option>
+                    <option value="Veneno">Veneno</option>
+                    <option value="Gravidade">Gravidade</option>
+                    <option value="Magia">Magia</option>
+                </select>
+                <input type="file" id="peitoralImagem" name="peitoralImagem">
+            </div>
+            <button type="button" onclick="criarCardPeitoral()">Criar Card</button>
+            <br><br>
+            <div class="form-group">
+                <label for="calça">Calça:</label>
+                <input type="text" id="calcaNome" name="calça" placeholder="Digite o nome da Calça:">
+                <input type="text" id="calcaDano" name="calcaDano" placeholder="Dano:">
+                <input type="text" id="calcaHabilidade" name="calcaHabilidade" placeholder="Habilidade:">
+                <select id="calcaElemento" name="calcaElemento">
+                    <option value="??????">??????</option>
+                    <option value="Água">Água</option>
+                    <option value="Fogo">Fogo</option>
+                    <option value="Sagrado">Sagrado</option>
+                    <option value="Demoniaco">Demoniaco</option>
+                    <option value="Eletricidade">Eletricidade</option>
+                    <option value="Gelo">Gelo</option>
+                    <option value="Veneno">Veneno</option>
+                    <option value="Gravidade">Gravidade</option>
+                    <option value="Magia">Magia</option>
+                </select>
+                <input type="file" id="calcaImagem" name="calcaImagem">
+            </div>
+            <button type="button" onclick="criarCardCalca()">Criar Card</button>
+            <br><br>
+            <div class="form-group">
+                <label for="calçado">Calçado:</label>
+                <input type="text" id="calcadoNome" name="calçado" placeholder="Digite o nome do Calçado:">
+                <input type="text" id="calcadoDano" name="calcadoDano" placeholder="Dano:">
+                <input type="text" id="calcadoHabilidade" name="calcadoHabilidade" placeholder="Habilidade:" >
+                <select id="calcadoElemento" name="calcadoElemento">
+                    <option value="??????">??????</option>
+                    <option value="Água">Água</option>
+                    <option value="Fogo">Fogo</option>
+                    <option value="Sagrado">Sagrado</option>
+                    <option value="Demoniaco">Demoniaco</option>
+                    <option value="Eletricidade">Eletricidade</option>
+                    <option value="Gelo">Gelo</option>
+                    <option value="Veneno">Veneno</option>
+                    <option value="Gravidade">Gravidade</option>
+                    <option value="Magia">Magia</option>
+                </select>
+                <input type="file" id="calcadoImagem" name="calcadoImagem">
+            </div>
+            <button type="button" onclick="criarCardCalcado()">Criar Card</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
+    <script>
+        function criarCardCapacete() {
+            const capacete = {
+                nome: document.getElementById("capaceteNome").value,
+                dano: document.getElementById("capaceteDano").value,
+                habilidade: document.getElementById("capaceteHabilidade").value,
+                elemento: document.getElementById("capaceteElemento").value,
+                imagem: document.getElementById("capaceteImagem").files[0],
+            };
+            gerarFichaIndividual(capacete, "Capacete");
+        }
+        function criarCardPeitoral() {
+            const peitoral = {
+                nome: document.getElementById("peitoralNome").value,
+                dano: document.getElementById("peitoralDano").value,
+                habilidade: document.getElementById("peitoralHabilidade").value,
+                elemento: document.getElementById("peitoralElemento").value,
+                imagem: document.getElementById("peitoralImagem").files[0],
+            };
+            gerarFichaIndividual(peitoral, "Peitoral");
+        }
+        function criarCardCalca() {
+            const calca = {
+                nome: document.getElementById("calcaNome").value,
+                dano: document.getElementById("calcaDano").value,
+                habilidade: document.getElementById("calcaHabilidade").value,
+                elemento: document.getElementById("calcaElemento").value,
+                imagem: document.getElementById("calcaImagem").files[0],
+            };
+            gerarFichaIndividual(calca, "Calça");
+        }
+        function criarCardCalcado() {
+            const calcado = {
+                nome: document.getElementById("calcadoNome").value,
+                dano: document.getElementById("calcadoDano").value,
+                habilidade: document.getElementById("calcadoHabilidade").value,
+                elemento: document.getElementById("calcadoElemento").value,
+                imagem: document.getElementById("calcadoImagem").files[0],
+            };
+            gerarFichaIndividual(calcado, "Calçado");
+        }
+
+        function gerarFichaIndividual(equipamento, nomeEquipamento) {
+            const container = document.createElement('div');
+            container.classList.add('equipamento-card'); // Adiciona a classe para a ficha
+
+            // Título da ficha
+            const titulo = document.createElement('h2');
+            titulo.innerText = nomeEquipamento;
+            container.appendChild(titulo);
+
+            // Criar a imagem, caso exista
+            if (equipamento.imagem) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(equipamento.imagem);
+                img.style.maxWidth = '100%'; // A imagem vai ocupar toda a largura disponível
+                img.style.height = 'auto'; // Manter a proporção
+                img.style.borderRadius = "10px 10px 0 0"; // Arredondar os cantos superiores da imagem
+                container.appendChild(img);
+            }
+
+            // Adicionar o texto, com a cor preta
+            const texto = document.createElement('div');
+            texto.classList.add('texto'); // Adiciona a classe para o texto
+            texto.style.color = "#000"; // Cor do texto preta
+
+            // Adicionar informações do equipamento ao texto
+            if (equipamento.nome) texto.innerHTML += `<p><strong>Nome:</strong> ${equipamento.nome}</p>`;
+            if (equipamento.dano) texto.innerHTML += `<p><strong>Dano:</strong> ${equipamento.dano}</p>`;
+            if (equipamento.habilidade) texto.innerHTML += `<p><strong>Habilidade:</strong> ${equipamento.habilidade}</p>`;
+            if (equipamento.elemento) texto.innerHTML += `<p><strong>Elemento:</strong> ${equipamento.elemento}</p>`;
+
+            container.appendChild(texto);
+
+            // Adicionar o botão de download
+            const botaoDownload = document.createElement('button');
+            botaoDownload.innerText = 'Baixar Card';
+            botaoDownload.onclick = () => {
+                //Sumir o botão durante o download
+                botaoDownload.style.display = 'none'; 
+                html2canvas(container).then(canvas => {
+                    const dataURL = canvas.toDataURL('image/png'); // Converte para imagem
+                    const link = document.createElement('a');
+                    link.href = dataURL;
+                    link.download = `${nomeEquipamento}.png`; // Nome do arquivo de imagem
+                    link.click();
+                    //Reaparecer o botão
+                    botaoDownload.style.display = 'inline-block';
+                });
+            };
+            container.appendChild(botaoDownload);
+
+            // Adicionar a ficha ao contêiner de resultados
+            document.getElementById('result').appendChild(container);
+        }
+
+    </script>
+</body>
+</html>

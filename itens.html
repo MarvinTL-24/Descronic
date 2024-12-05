@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Utilizaveis</title>
+    <link rel="stylesheet" href="style/modelos/itens.css">
+</head>
+<body style="background-image: url('imagens/blackgrounds/primeiro.jpg');">
+    <!-- Barra de Navegação -->
+    <nav id="navbar1">
+        <ul>
+            <li><a href="index.html">Pagina Inicial</a></li>
+            <li><a href="classe.html">Visualizar Classes</a></li>
+            <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
+            <li><a href="equipamentos.html">Armadura</a></li>
+            <li><a href="itens.html">Itens</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <h1>Itens utilizaveis</h1>
+        <form id="characterForm" onsubmit="event.preventDefault(); gerarFicha();">
+            <div class="form-group">
+                <label for="arma">arma:</label>
+                <input type="text" id="armaNome" name="arma" placeholder="Digite o nome do arma:">
+                <input type="text" id="armaDano" name="armaDano" placeholder="Dano:">
+                <input type="text" id="armaHabilidade" name="armaHabilidade" placeholder="Habilidade:">
+                <select id="armaElemento" name="armaElemento">
+                    <option value="??????">??????</option>
+                    <option value="Água">Água</option>
+                    <option value="Fogo">Fogo</option>
+                    <option value="Sagrado">Sagrado</option>
+                    <option value="Demoniaco">Demoniaco</option>
+                    <option value="Eletricidade">Eletricidade</option>
+                    <option value="Gelo">Gelo</option>
+                    <option value="Veneno">Veneno</option>
+                    <option value="Gravidade">Gravidade</option>
+                    <option value="Magia">Magia</option>
+                </select>
+                <input type="file" id="armaImagem" name="armaImagem">
+            </div>
+            <button type="button" onclick="criarCardarma()">Criar Card</button>
+            <br><br>
+            <div class="form-group">
+                <label for="secundaria">secundaria:</label>
+                <input type="text" id="secundariaNome" name="secundaria" placeholder="Digite o nome da secundaria:">
+                <input type="text" id="secundariaDano" name="secundariaDano" placeholder="Dano:">
+                <input type="text" id="secundariaHabilidade" name="secundariaHabilidade" placeholder="Habilidade:">
+                <select id="secundariaElemento" name="secundariaElemento">
+                    <option value="??????">??????</option>
+                    <option value="Água">Água</option>
+                    <option value="Fogo">Fogo</option>
+                    <option value="Sagrado">Sagrado</option>
+                    <option value="Demoniaco">Demoniaco</option>
+                    <option value="Eletricidade">Eletricidade</option>
+                    <option value="Gelo">Gelo</option>
+                    <option value="Veneno">Veneno</option>
+                    <option value="Gravidade">Gravidade</option>
+                    <option value="Magia">Magia</option>
+                </select>
+                <input type="file" id="secundariaImagem" name="secundariaImagem">
+            </div>
+            <button type="button" onclick="criarCardsecundaria()">Criar Card</button>
+            <br><br>
+            <div class="form-group">
+                <label for="utilizavel1">utilizavel1:</label>
+                <input type="text" id="utilizavel1Nome" name="utilizavel1" placeholder="Digite o nome da utilizavel1:">
+                <input type="text" id="utilizavel1Dano" name="utilizavel1Dano" placeholder="Dano:">
+                <input type="text" id="utilizavel1Habilidade" name="utilizavel1Habilidade" placeholder="Habilidade:">
+                <input type="file" id="utilizavel1Imagem" name="utilizavel1Imagem">
+            </div>
+            <button type="button" onclick="criarCardutilizavel1()">Criar Card</button>
+            <br><br>
+            <div class="form-group">
+                <label for="utilizavel2do">utilizavel2do:</label>
+                <input type="text" id="utilizavel2Nome" name="utilizavel2" placeholder="Digite o nome do utilizavel2:">
+                <input type="text" id="utilizavel2Dano" name="utilizavel1Dano" placeholder="Dano:">
+                <input type="text" id="utilizavel2Habilidade" name="utilizavel2Habilidade" placeholder="Habilidade:" >
+                <input type="file" id="utilizavel2Imagem" name="utilizavel2Imagem">
+            </div>
+            <button type="button" onclick="criarCardutilizavel1do()">Criar Card</button>
+        </form>
+        <div id="result"></div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/html2canvas"></script>
+    <script>
+        function criarCardarma() {
+            const arma = {
+                nome: document.getElementById("armaNome").value,
+                dano: document.getElementById("armaDano").value,
+                habilidade: document.getElementById("armaHabilidade").value,
+                elemento: document.getElementById("armaElemento").value,
+                imagem: document.getElementById("armaImagem").files[0],
+            };
+            gerarFichaIndividual(arma, "arma");
+        }
+        function criarCardsecundaria() {
+            const secundaria = {
+                nome: document.getElementById("secundariaNome").value,
+                dano: document.getElementById("secundariaDano").value,
+                habilidade: document.getElementById("secundariaHabilidade").value,
+                elemento: document.getElementById("secundariaElemento").value,
+                imagem: document.getElementById("secundariaImagem").files[0],
+            };
+            gerarFichaIndividual(secundaria, "secundaria");
+        }
+        function criarCardutilizavel1() {
+            const utilizavel1 = {
+                nome: document.getElementById("utilizavel1Nome").value,
+                dano: document.getElementById("utilizavel1Dano").value,
+                habilidade: document.getElementById("utilizavel1Habilidade").value,
+                imagem: document.getElementById("utilizavel1Imagem").files[0],
+            };
+            gerarFichaIndividual(utilizavel1, "utilizavel1");
+        }
+        function criarCardutilizavel1do() {
+            const utilizavel1do = {
+                nome: document.getElementById("utilizavel2Nome").value,
+                dano: document.getElementById("utilizavel2Dano").value,
+                habilidade: document.getElementById("utilizavel2Habilidade").value,
+                imagem: document.getElementById("utilizavel2Imagem").files[0],
+            };
+            gerarFichaIndividual(utilizavel2, "utilizavel2");
+        }
+
+        function gerarFichaIndividual(itens, nomeitens) {
+            const container = document.createElement('div');
+            container.classList.add('itens-card'); // Adiciona a classe para a ficha
+
+            // Título da ficha
+            const titulo = document.createElement('h2');
+            titulo.innerText = nomeitens;
+            container.appendChild(titulo);
+
+            // Criar a imagem, caso exista
+            if (itens.imagem) {
+                const img = document.createElement('img');
+                img.src = URL.createObjectURL(itens.imagem);
+                img.style.maxWidth = '100%'; // A imagem vai ocupar toda a largura disponível
+                img.style.height = 'auto'; // Manter a proporção
+                img.style.borderRadius = "10px 10px 0 0"; // Arredondar os cantos superiores da imagem
+                container.appendChild(img);
+            }
+
+            // Adicionar o texto, com a cor preta
+            const texto = document.createElement('div');
+            texto.classList.add('texto'); // Adiciona a classe para o texto
+            texto.style.color = "#000"; // Cor do texto preta
+
+            // Adicionar informações do itens ao texto
+            if (itens.nome) texto.innerHTML += `<p><strong>Nome:</strong> ${itens.nome}</p>`;
+            if (itens.dano) texto.innerHTML += `<p><strong>Dano:</strong> ${itens.dano}</p>`;
+            if (itens.habilidade) texto.innerHTML += `<p><strong>Habilidade:</strong> ${itens.habilidade}</p>`;
+            if (itens.elemento) texto.innerHTML += `<p><strong>Elemento:</strong> ${itens.elemento}</p>`;
+
+            container.appendChild(texto);
+
+            // Adicionar o botão de download
+            const botaoDownload = document.createElement('button');
+            botaoDownload.innerText = 'Baixar Card';
+            botaoDownload.onclick = () => {
+                //Sumir o botão durante o download
+                botaoDownload.style.display = 'none'; 
+                html2canvas(container).then(canvas => {
+                    const dataURL = canvas.toDataURL('image/png'); // Converte para imagem
+                    const link = document.createElement('a');
+                    link.href = dataURL;
+                    link.download = `${nomeitens}.png`; // Nome do arquivo de imagem
+                    link.click();
+                    //Reaparecer o botão
+                    botaoDownload.style.display = 'inline-block';
+                });
+            };
+            container.appendChild(botaoDownload);
+
+            // Adicionar a ficha ao contêiner de resultados
+            document.getElementById('result').appendChild(container);
+        }
+
+    </script>
+</body>
+</html>
