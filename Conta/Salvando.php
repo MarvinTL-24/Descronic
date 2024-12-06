@@ -33,6 +33,10 @@ ON DUPLICATE KEY UPDATE
     fortitude = :fortitude, arcano = :arcano, percepcao = :percepcao, vida_espiritual = :vida_espiritual;";
 
     $stmt = $pdo->prepare($sql);
+
+    // Criptografa a senha antes de salvar
+    $data['senha'] = password_hash($data['senha'], PASSWORD_DEFAULT);
+
     $stmt->execute($data);
 }
 
@@ -40,60 +44,66 @@ ON DUPLICATE KEY UPDATE
 function getCharacter($nome, $senha) {
     global $pdo;
 
-    $sql = "SELECT * FROM personagens WHERE nome = :nome AND senha = :senha";
+    $sql = "SELECT * FROM personagens WHERE nome = :nome";
     $stmt = $pdo->prepare($sql);
-    $stmt->execute(['nome' => $nome, 'senha' => $senha]);
-    return $stmt->fetch(PDO::FETCH_ASSOC);
+    $stmt->execute(['nome' => $nome]);
+    $character = $stmt->fetch(PDO::FETCH_ASSOC);
+
+    if ($character && password_verify($senha, $character['senha'])) {
+        return $character;
+    }
+
+    return false;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if (isset($_POST['action']) && $_POST['action'] === 'save') {
-        // Recebendo os dados do formulário para salvar
-        $data = [
-            'nome' => $_POST['nome'],
-            'senha' => $_POST['senha'],
-            'raca' => $_POST['raca'],
-            'idade' => $_POST['idade'],
-            'sexo' => $_POST['sexo'],
-            'altura' => $_POST['altura'],
-            'peso' => $_POST['peso'],
-            'classe' => $_POST['classe'],
-            'subclasse' => $_POST['subclasse'],
-            'personalidade' => $_POST['personalidade'],
-            'status' => $_POST['status'],
-            'forca' => $_POST['forca'],
-            'agilidade' => $_POST['agilidade'],
-            'resistencia' => $_POST['resistencia'],
-            'karma' => $_POST['karma'],
-            'arma' => $_POST['arma'],
-            'secundaria' => $_POST['secundaria'],
-            'utilizavel1' => $_POST['utilizavel1'],
-            'utilizavel2' => $_POST['utilizavel2'],
-            'artefato1' => $_POST['artefato1'],
-            'artefato2' => $_POST['artefato2'],
-            'capacete' => $_POST['capacete'],
-            'peitoral' => $_POST['peitoral'],
-            'calca' => $_POST['calca'],
-            'calcado' => $_POST['calcado'],
-            'vitalidade' => $_POST['vitalidade'],
-            'fortitude' => $_POST['fortitude'],
-            'arcano' => $_POST['arcano'],
-            'percepcao' => $_POST['percepcao'],
-            'vida_espiritual' => $_POST['vida_espiritual']
-        ];
-        
+// Processa a requisição do formulário
 
-        // Salvando ou atualizando a ficha do personagem
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $action = $_POST['action'] ?? null;
+
+    if ($action === 'save') {
+        $data = [
+            'nome' => strip_tags($_POST['nome']),
+            'senha' => strip_tags($_POST['senha']),
+            'raca' => strip_tags($_POST['raca']),
+            'idade' => filter_var($_POST['idade'], FILTER_VALIDATE_INT),
+            'sexo' => strip_tags($_POST['sexo']),
+            'altura' => filter_var($_POST['altura'], FILTER_VALIDATE_FLOAT),
+            'peso' => filter_var($_POST['peso'], FILTER_VALIDATE_FLOAT),
+            'classe' => strip_tags($_POST['classe']),
+            'subclasse' => strip_tags($_POST['subclasse']),
+            'personalidade' => htmlspecialchars($_POST['personalidade'], ENT_QUOTES, 'UTF-8'),
+            'status' => strip_tags($_POST['status']),
+            'forca' => filter_var($_POST['forca'], FILTER_VALIDATE_INT),
+            'agilidade' => filter_var($_POST['agilidade'], FILTER_VALIDATE_INT),
+            'resistencia' => filter_var($_POST['resistencia'], FILTER_VALIDATE_INT),
+            'karma' => filter_var($_POST['karma'], FILTER_VALIDATE_INT),
+            'arma' => strip_tags($_POST['arma']),
+            'secundaria' => strip_tags($_POST['secundaria']),
+            'utilizavel1' => strip_tags($_POST['utilizavel1']),
+            'utilizavel2' => strip_tags($_POST['utilizavel2']),
+            'artefato1' => strip_tags($_POST['artefato1']),
+            'artefato2' => strip_tags($_POST['artefato2']),
+            'capacete' => strip_tags($_POST['capacete']),
+            'peitoral' => strip_tags($_POST['peitoral']),
+            'calca' => strip_tags($_POST['calca']),
+            'calcado' => strip_tags($_POST['calcado']),
+            'vitalidade' => filter_var($_POST['vitalidade'], FILTER_VALIDATE_INT),
+            'fortitude' => filter_var($_POST['fortitude'], FILTER_VALIDATE_INT),
+            'arcano' => filter_var($_POST['arcano'], FILTER_VALIDATE_INT),
+            'percepcao' => filter_var($_POST['percepcao'], FILTER_VALIDATE_INT),
+            'vida_espiritual' => filter_var($_POST['vida_espiritual'], FILTER_VALIDATE_INT),
+        ];
+
         try {
             saveCharacter($data);
             echo "Ficha do personagem salva com sucesso!";
         } catch (Exception $e) {
             echo "Erro ao salvar a ficha: " . $e->getMessage();
         }
-    } elseif (isset($_POST['action']) && $_POST['action'] === 'search') {
-        // Recebendo os dados do formulário para buscar
-        $nome = $_POST['nome'];
-        $senha = $_POST['senha'];
+    } elseif ($action === 'search') {
+        $nome = strip_tags($_POST['nome']);
+        $senha = strip_tags($_POST['senha']);
 
         $character = getCharacter($nome, $senha);
 

@@ -4,9 +4,83 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizar</title>
-    <link rel="stylesheet" href="./style/modelos/visualizar.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        h1, h3 {
+            color: #333;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            font-weight: bold;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007BFF;
+            color: #fff;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #characterDetails {
+            display: none;
+        }
+        #statusSection {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .status-group {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 10px;
+            align-items: center;
+        }
+        .status-group p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+        .status-group button {
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+        .status-group button:hover {
+            background-color: #218838;
+        }
+    </style>
 </head>
-<body style="background-image: url('imagens/blackgrounds/primeiro.jpg');">
+<body>
     <!-- Barra de Navegação -->
     <nav id="navbar1">
         <ul>
@@ -16,12 +90,12 @@
             <li><a href="equipamentos.html">Armadura</a></li>
             <li><a href="artefatos.html">Artefatos</a></li>
             <li><a href="itens.html">Itens</a></li>
-            <li><a href="Visualizar.html.php">Seu Personagem</a></li>
+            <li><a href="Visualizar.html">Seu Personagem</a></li>
         </ul>
     </nav>
     <div class="container">
         <h1>Ficha de Personagem</h1>
-        <form action="Conta/Salvando.php" method="post">
+        <form id="searchForm" action="Conta/Salvando.php" method="post">
             <input type="hidden" name="action" value="search">
             <label for="nome">Nome do Personagem:</label>
             <input type="text" id="nome" name="nome" required>
@@ -42,11 +116,11 @@
                 </div>
                 <div class="form-group">
                     <label for="editRaca">Raça:</label>
-                    <input type="text" id="editRaca" name="raca" disabled>
+                    <input type="text" id="editRaca" name="raca" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editIdade">Idade:</label>
-                    <input type="number" id="editIdade" name="idade" disabled>
+                    <input type="number" id="editIdade" name="idade" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editSexo">Sexo:</label>
@@ -54,19 +128,19 @@
                 </div>
                 <div class="form-group">
                     <label for="editAltura">Altura:</label>
-                    <input type="number" step="0.01" id="editAltura" name="altura" disabled>
+                    <input type="number" step="0.01" id="editAltura" name="altura" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editPeso">Peso:</label>
-                    <input type="number" step="0.01" id="editPeso" name="peso" disabled>
+                    <input type="number" step="0.01" id="editPeso" name="peso" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editClasse">Classe:</label>
-                    <input type="text" id="editClasse" name="classe" disabled>
+                    <input type="text" id="editClasse" name="classe" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editSubclasse">Subclasse:</label>
-                    <input type="text" id="editSubclasse" name="subclasse" disabled>
+                    <input type="text" id="editSubclasse" name="subclasse" readonly>
                 </div>
                 <div class="form-group">
                     <label for="editPersonalidade">Personalidade:</label>
@@ -74,19 +148,19 @@
                 </div>
                 <div class="form-group">
                     <label for="editStatus">Status:</label>
-                    <textarea id="editStatus" name="status" disabled></textarea>
+                    <textarea id="editStatus" name="status" readonly></textarea>
                 </div>
                 <div class="form-group">
                     <label for="editForca">Força:</label>
-                    <input type="number" id="editForca" name="forca" disabled>
+                    <input type="number" id="editForca" name="forca">
                 </div>
                 <div class="form-group">
                     <label for="editAgilidade">Agilidade:</label>
-                    <input type="number" id="editAgilidade" name="agilidade" disabled>
+                    <input type="number" id="editAgilidade" name="agilidade">
                 </div>
                 <div class="form-group">
                     <label for="editResistencia">Resistência:</label>
-                    <input type="number" id="editResistencia" name="resistencia" disabled>
+                    <input type="number" id="editResistencia" name="resistencia">
                 </div>
                 <div class="form-group">
                     <label for="editKarma">Karma:</label>
@@ -169,10 +243,38 @@
             .then(data => {
                 if (data) {
                     characterDetails.style.display = 'block';
+                                        
                     document.getElementById('editNome').value = data.nome;
+                    document.getElementById('editSenha').value = data.senha;
                     document.getElementById('editRaca').value = data.raca;
+                    document.getElementById('editIdade').value = data.idade;
+                    document.getElementById('editSexo').value = data.sexo;
+                    document.getElementById('editAltura').value = data.altura;
+                    document.getElementById('editPeso').value = data.peso;
                     document.getElementById('editClasse').value = data.classe;
-                    // Preencha outros campos aqui
+                    document.getElementById('editSubclasse').value = data.subclasse;
+                    document.getElementById('editPersonalidade').value = data.personalidade;
+                    document.getElementById('editStatus').value = data.status;
+                    document.getElementById('editForca').value = data.forca;
+                    document.getElementById('editAgilidade').value = data.agilidade;
+                    document.getElementById('editResistencia').value = data.resistencia;
+                    document.getElementById('editKarma').value = data.karma;
+                    document.getElementById('editArma').value = data.arma;
+                    document.getElementById('editSecundaria').value = data.secundaria;
+                    document.getElementById('editUtilizavel1').value = data.utilizavel1;
+                    document.getElementById('editUtilizavel2').value = data.utilizavel2;
+                    document.getElementById('editArtefato1').value = data.artefato1;
+                    document.getElementById('editArtefato2').value = data.artefato2;
+                    document.getElementById('editCapacete').value = data.capacete;
+                    document.getElementById('editPeitoral').value = data.peitoral;
+                    document.getElementById('editCalca').value = data.calca;
+                    document.getElementById('editCalcado').value = data.calcado;
+                    document.getElementById('editVitalidade').value = data.vitalidade;
+                    document.getElementById('editFortitude').value = data.fortitude;
+                    document.getElementById('editArcano').value = data.arcano;
+                    document.getElementById('editPercepcao').value = data.percepcao;
+                    document.getElementById('editVidaEspiritual').value = data.vida_espiritual;
+
                 } else {
                     alert('Personagem não encontrado ou senha incorreta.');
                 }
@@ -233,31 +335,7 @@
         document.getElementById('statusVidaEspiritual').textContent = statusFinais.vidaEspiritual;
 
     </script>
-    <?php
-    // Simulação de dados da ficha do personagem
-    $statusBase = [
-        'vitalidade' => $character['status_vitalidade'],
-        'agilidade' => $character['status_agilidade'],
-        'fortitude' => $character['status_fortitude'],
-        'forca' => $character['status_forca'],
-        'arcano' => $character['status_arcano'],
-        'resistencia' => $character['status_resistencia'],
-        'percepcao' => $character['status_percepcao'],
-        'vidaEspiritual' => $character['status_vidaEspiritual']
-    ];
 
-    // Ajustes com base nos atributos do personagem
-    $ajustes = [
-        'agilidade' => $ajusteAgilidade,
-        'forca' => $ajusteForca,
-        'resistencia' => $ajusteResistencia
-    ];
-
-    echo '<script>';
-    echo 'const statusBase = ' . json_encode($statusBase) . ';';
-    echo 'const ajustes = ' . json_encode($ajustes) . ';';
-    echo '</script>';
-    ?>
 
 </body>
 </html>
