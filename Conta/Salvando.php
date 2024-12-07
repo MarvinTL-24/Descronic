@@ -2,8 +2,8 @@
 // Configuração do banco de dados
 $host = 'localhost';
 $dbname = 'rpg_database';
-$user = 'root';
-$password = '';
+$user = 'Descrente24';
+$password = 'Descrente&amor300p';
 
 try {
     $pdo = new PDO("mysql:host=$host;dbname=$dbname", $user, $password);
@@ -25,12 +25,14 @@ VALUES (:nome, :senha, :raca, :idade, :sexo, :altura, :peso, :classe, :subclasse
     :artefato1, :artefato2, :capacete, :peitoral, :calca, :calcado, :vitalidade, :fortitude, 
     :arcano, :percepcao, :vida_espiritual)
 ON DUPLICATE KEY UPDATE
-    senha = :senha, raca = :raca, idade = :idade, sexo = :sexo, altura = :altura, peso = :peso, classe = :classe, 
-    subclasse = :subclasse, personalidade = :personalidade, status = :status, forca = :forca, 
-    agilidade = :agilidade, resistencia = :resistencia, karma = :karma, arma = :arma, secundaria = :secundaria, 
-    utilizavel1 = :utilizavel1, utilizavel2 = :utilizavel2, artefato1 = :artefato1, artefato2 = :artefato2, 
-    capacete = :capacete, peitoral = :peitoral, calca = :calca, calcado = :calcado, vitalidade = :vitalidade, 
-    fortitude = :fortitude, arcano = :arcano, percepcao = :percepcao, vida_espiritual = :vida_espiritual;";
+    raca = VALUES(raca), idade = VALUES(idade), sexo = VALUES(sexo), altura = VALUES(altura), peso = VALUES(peso), 
+    classe = VALUES(classe), subclasse = VALUES(subclasse), personalidade = VALUES(personalidade), 
+    status = VALUES(status), forca = VALUES(forca), agilidade = VALUES(agilidade), resistencia = VALUES(resistencia), 
+    karma = VALUES(karma), arma = VALUES(arma), secundaria = VALUES(secundaria), utilizavel1 = VALUES(utilizavel1), 
+    utilizavel2 = VALUES(utilizavel2), artefato1 = VALUES(artefato1), artefato2 = VALUES(artefato2), 
+    capacete = VALUES(capacete), peitoral = VALUES(peitoral), calca = VALUES(calca), calcado = VALUES(calcado), 
+    vitalidade = VALUES(vitalidade), fortitude = VALUES(fortitude), arcano = VALUES(arcano), 
+    percepcao = VALUES(percepcao), vida_espiritual = VALUES(vida_espiritual);";
 
     $stmt = $pdo->prepare($sql);
 
@@ -57,7 +59,6 @@ function getCharacter($nome, $senha) {
 }
 
 // Processa a requisição do formulário
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $action = $_POST['action'] ?? null;
 
@@ -108,6 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $character = getCharacter($nome, $senha);
 
         if ($character) {
+            header('Content-Type: application/json');
             echo json_encode($character);
         } else {
             echo "Nenhum personagem encontrado ou senha incorreta.";
