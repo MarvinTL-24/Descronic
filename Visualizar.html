@@ -4,81 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Visualizar</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
-        .container {
-            max-width: 800px;
-            margin: 20px auto;
-            padding: 20px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background-color: #fff;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-        h1, h3 {
-            color: #333;
-        }
-        .form-group {
-            margin-bottom: 15px;
-        }
-        label {
-            font-weight: bold;
-        }
-        input, textarea {
-            width: 100%;
-            padding: 10px;
-            margin-top: 5px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-        }
-        button {
-            padding: 10px 20px;
-            border: none;
-            border-radius: 4px;
-            background-color: #007BFF;
-            color: #fff;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #0056b3;
-        }
-        #characterDetails {
-            display: none;
-        }
-        #statusSection {
-            margin-top: 20px;
-            padding: 15px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-        }
-        .status-group {
-            display: grid;
-            grid-template-columns: 1fr auto;
-            gap: 10px;
-            align-items: center;
-        }
-        .status-group p {
-            margin: 5px 0;
-            font-size: 14px;
-        }
-        .status-group button {
-            background-color: #28a745;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-        .status-group button:hover {
-            background-color: #218838;
-        }
-    </style>
+    <link rel="stylesheet" href="style/modelos/visualizar.css">
 </head>
 <body>
     <!-- Barra de Navegação -->
@@ -334,6 +260,42 @@
         document.getElementById('statusPercepcao').textContent = statusFinais.percepcao;
         document.getElementById('statusVidaEspiritual').textContent = statusFinais.vidaEspiritual;
 
+        const statusLabels = {
+            vitalidade: "Vitalidade",
+            agilidade: "Agilidade",
+            fortitude: "Fortitude",
+            forca: "Força",
+            arcano: "Arcano",
+            resistencia: "Resistência",
+            percepcao: "Percepção",
+            vidaEspiritual: "Vida Espiritual",
+        };
+        
+        // Função para exibir os status com botões de edição
+        function renderStatus(statusData) {
+            statusList.innerHTML = ""; // Limpa os status antigos
+
+            for (const key in statusLabels) {
+                const statusValue = statusData[key] || 0;
+
+                const div = document.createElement("div");
+                div.classList.add("status-group");
+
+                const label = document.createElement("p");
+                label.innerHTML = `<strong>${statusLabels[key]}:</strong> <span id="status_${key}">${statusValue}</span>`;
+
+                const button = document.createElement("button");
+                button.textContent = "+";
+                button.addEventListener("click", () => {
+                    const newValue = parseInt(prompt(`Digite o novo valor para ${statusLabels[key]}:`, statusValue)) || statusValue;
+                    document.getElementById(`status_${key}`).textContent = newValue;
+                });
+
+                div.appendChild(label);
+                div.appendChild(button);
+                statusList.appendChild(div);
+            }
+        }
     </script>
 
 
