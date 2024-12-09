@@ -13,7 +13,7 @@
             <li><a href="index.html">Pagina Inicial</a></li>
             <li><a href="classe.html">Visualizar Classes</a></li>
             <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
-            <li><a href="equipamentos.html">Armadura</a></li>
+            <li><a href="equipamentos.html">Equipamentos</a></li>
             <li><a href="artefatos.html">Artefatos</a></li>
             <li><a href="itens.html">Itens</a></li>
             <li><a href="Visualizar.html">Seu Personagem</a></li>
@@ -21,7 +21,7 @@
     </nav>
     <div class="container">
         <h1>Ficha de Personagem</h1>
-        <form id="searchForm" action="Conta/Salvando.php" method="post">
+        <form id="searchForm" action="Conta/Salvando.php" method="post" onsubmit="return validarFormulario()">
             <input type="hidden" name="action" value="search">
             <label for="nome">Nome do Personagem:</label>
             <input type="text" id="nome" name="nome" required>
@@ -29,113 +29,6 @@
             <input type="password" id="senha" name="senha" required>
             <button type="submit">Buscar</button>
         </form>
-        <div id="characterDetails">
-            <h3>Detalhes do Personagem</h3>
-            <form id="editForm">
-                <div class="form-group">
-                    <label for="editNome">Nome:</label>
-                    <input type="text" id="editNome" name="nome">
-                </div>
-                <div class="form-group">
-                    <label for="editSenha">Senha:</label>
-                    <input type="password" id="editSenha" name="senha">
-                </div>
-                <div class="form-group">
-                    <label for="editRaca">Raça:</label>
-                    <input type="text" id="editRaca" name="raca" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="editIdade">Idade:</label>
-                    <input type="number" id="editIdade" name="idade" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="editSexo">Sexo:</label>
-                    <input type="text" id="editSexo" name="sexo">
-                </div>
-                <div class="form-group">
-                    <label for="editAltura">Altura:</label>
-                    <input type="number" step="0.01" id="editAltura" name="altura" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="editPeso">Peso:</label>
-                    <input type="number" step="0.01" id="editPeso" name="peso" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="editClasse">Classe:</label>
-                    <input type="text" id="editClasse" name="classe" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="editSubclasse">Subclasse:</label>
-                    <input type="text" id="editSubclasse" name="subclasse" readonly>
-                </div>
-                <div class="form-group">
-                    <label for="editPersonalidade">Personalidade:</label>
-                    <textarea id="editPersonalidade" name="personalidade"></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="editStatus">Status:</label>
-                    <textarea id="editStatus" name="status" readonly></textarea>
-                </div>
-                <div class="form-group">
-                    <label for="editForca">Força:</label>
-                    <input type="number" id="editForca" name="forca">
-                </div>
-                <div class="form-group">
-                    <label for="editAgilidade">Agilidade:</label>
-                    <input type="number" id="editAgilidade" name="agilidade">
-                </div>
-                <div class="form-group">
-                    <label for="editResistencia">Resistência:</label>
-                    <input type="number" id="editResistencia" name="resistencia">
-                </div>
-                <div class="form-group">
-                    <label for="editKarma">Karma:</label>
-                    <input type="number" id="editKarma" name="karma">
-                </div>
-                <div class="form-group">
-                    <label for="editArma">Arma:</label>
-                    <input type="text" id="editArma" name="arma">
-                </div>
-                <div class="form-group">
-                    <label for="editSecundaria">Secundária:</label>
-                    <input type="text" id="editSecundaria" name="secundaria">
-                </div>
-                <div class="form-group">
-                    <label for="editUtilizavel1">Utilizável 1:</label>
-                    <input type="text" id="editUtilizavel1" name="utilizavel1">
-                </div>
-                <div class="form-group">
-                    <label for="editUtilizavel2">Utilizável 2:</label>
-                    <input type="text" id="editUtilizavel2" name="utilizavel2">
-                </div>
-                <div class="form-group">
-                    <label for="editArtefato1">Artefato 1:</label>
-                    <input type="text" id="editArtefato1" name="artefato1">
-                </div>
-                <div class="form-group">
-                    <label for="editArtefato2">Artefato 2:</label>
-                    <input type="text" id="editArtefato2" name="artefato2">
-                </div>
-                <div class="form-group">
-                    <label for="editCapacete">Capacete:</label>
-                    <input type="text" id="editCapacete" name="capacete">
-                </div>
-                <div class="form-group">
-                    <label for="editPeitoral">Peitoral:</label>
-                    <input type="text" id="editPeitoral" name="peitoral">
-                </div>
-                <div class="form-group">
-                    <label for="editCalca">Calça:</label>
-                    <input type="text" id="editCalca" name="calca">
-                </div>
-                <div class="form-group">
-                    <label for="editCalcado">Calçado:</label>
-                    <input type="text" id="editCalcado" name="calcado">
-                </div>
-                <button type="submit">Salvar Alterações</button>
-            </form>
-        </div>
-    </div>
     <div id="statusSection">
         <h3>Status Atuais do Personagem</h3>
         <div class="status-group">
@@ -151,150 +44,19 @@
     </div>
     
     <script>
-        const searchForm = document.getElementById('searchForm');
-        const editForm = document.getElementById('editForm');
-        const characterDetails = document.getElementById('characterDetails');
-
-        searchForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(searchForm);
-            formData.append('action', 'search');
-
-            fetch('Salvando.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    characterDetails.style.display = 'block';
-                                        
-                    document.getElementById('editNome').value = data.nome;
-                    document.getElementById('editSenha').value = data.senha;
-                    document.getElementById('editRaca').value = data.raca;
-                    document.getElementById('editIdade').value = data.idade;
-                    document.getElementById('editSexo').value = data.sexo;
-                    document.getElementById('editAltura').value = data.altura;
-                    document.getElementById('editPeso').value = data.peso;
-                    document.getElementById('editClasse').value = data.classe;
-                    document.getElementById('editSubclasse').value = data.subclasse;
-                    document.getElementById('editPersonalidade').value = data.personalidade;
-                    document.getElementById('editStatus').value = data.status;
-                    document.getElementById('editForca').value = data.forca;
-                    document.getElementById('editAgilidade').value = data.agilidade;
-                    document.getElementById('editResistencia').value = data.resistencia;
-                    document.getElementById('editKarma').value = data.karma;
-                    document.getElementById('editArma').value = data.arma;
-                    document.getElementById('editSecundaria').value = data.secundaria;
-                    document.getElementById('editUtilizavel1').value = data.utilizavel1;
-                    document.getElementById('editUtilizavel2').value = data.utilizavel2;
-                    document.getElementById('editArtefato1').value = data.artefato1;
-                    document.getElementById('editArtefato2').value = data.artefato2;
-                    document.getElementById('editCapacete').value = data.capacete;
-                    document.getElementById('editPeitoral').value = data.peitoral;
-                    document.getElementById('editCalca').value = data.calca;
-                    document.getElementById('editCalcado').value = data.calcado;
-                    document.getElementById('editVitalidade').value = data.vitalidade;
-                    document.getElementById('editFortitude').value = data.fortitude;
-                    document.getElementById('editArcano').value = data.arcano;
-                    document.getElementById('editPercepcao').value = data.percepcao;
-                    document.getElementById('editVidaEspiritual').value = data.vida_espiritual;
-
-                } else {
-                    alert('Personagem não encontrado ou senha incorreta.');
-                }
-            })
-            .catch(error => console.error('Erro:', error));
-        });
-
-        editForm.addEventListener('submit', function (e) {
-            e.preventDefault();
-
-            const formData = new FormData(editForm);
-            formData.append('action', 'save');
-
-            fetch('Salvando.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-            })
-            .catch(error => console.error('Erro:', error));
-        });
-        // Função para calcular status ajustados
-        function calcularStatus(statusBase, ajustes) {
-            const status = {
-                vitalidade: statusBase.vitalidade || 0,
-                agilidade: (statusBase.agilidade || 0) + (ajustes.agilidade || 0),
-                fortitude: statusBase.fortitude || 0,
-                forca: (statusBase.forca || 0) + (ajustes.forca || 0),
-                arcano: statusBase.arcano || 0,
-                resistencia: (statusBase.resistencia || 0) + (ajustes.resistencia || 0),
-                percepcao: statusBase.percepcao || 0,
-                vidaEspiritual: statusBase.vidaEspiritual || 0,
-            };
-
-            return status;
-        }
-
-        // Dados
-        const statusBase = {
-            
-        };
-
-        const ajustes = {
-            
-        };
-
-        // Calcula e exibe os status finais
-        const statusFinais = calcularStatus(statusBase, ajustes);
-        document.getElementById('statusVitalidade').textContent = statusFinais.vitalidade;
-        document.getElementById('statusAgilidade').textContent = statusFinais.agilidade;
-        document.getElementById('statusFortitude').textContent = statusFinais.fortitude;
-        document.getElementById('statusForca').textContent = statusFinais.forca;
-        document.getElementById('statusArcano').textContent = statusFinais.arcano;
-        document.getElementById('statusResistencia').textContent = statusFinais.resistencia;
-        document.getElementById('statusPercepcao').textContent = statusFinais.percepcao;
-        document.getElementById('statusVidaEspiritual').textContent = statusFinais.vidaEspiritual;
-
-        const statusLabels = {
-            vitalidade: "Vitalidade",
-            agilidade: "Agilidade",
-            fortitude: "Fortitude",
-            forca: "Força",
-            arcano: "Arcano",
-            resistencia: "Resistência",
-            percepcao: "Percepção",
-            vidaEspiritual: "Vida Espiritual",
-        };
+        function validarFormulario() {
+            // Pega os valores dos campos
+            const nome = document.getElementById('nome').value;
+            const senha = document.getElementById('senha').value;
         
-        // Função para exibir os status com botões de edição
-        function renderStatus(statusData) {
-            statusList.innerHTML = ""; // Limpa os status antigos
-
-            for (const key in statusLabels) {
-                const statusValue = statusData[key] || 0;
-
-                const div = document.createElement("div");
-                div.classList.add("status-group");
-
-                const label = document.createElement("p");
-                label.innerHTML = `<strong>${statusLabels[key]}:</strong> <span id="status_${key}">${statusValue}</span>`;
-
-                const button = document.createElement("button");
-                button.textContent = "+";
-                button.addEventListener("click", () => {
-                    const newValue = parseInt(prompt(`Digite o novo valor para ${statusLabels[key]}:`, statusValue)) || statusValue;
-                    document.getElementById(`status_${key}`).textContent = newValue;
-                });
-
-                div.appendChild(label);
-                div.appendChild(button);
-                statusList.appendChild(div);
+            // Verifica se os campos estão preenchidos
+            if (nome.trim() === "" || senha.trim() === "") {
+                alert("Por favor, preencha todos os campos.");
+                return false; // Impede o envio do formulário
             }
+        
+            // Se tudo estiver correto, pode enviar o formulário
+            return true;
         }
     </script>
 
