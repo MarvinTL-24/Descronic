@@ -51,7 +51,7 @@ if ($result_personagem->num_rows > 0) {
     // Verifica se a senha é válida
     if (password_verify($senha, $personagem_data['senha'])) {
         // Se a senha estiver correta, redireciona para a página de sucesso
-        header("Location: Ficha.html");  // Substitua "pagina_sucesso.php" pela página desejada
+        header("Location: /DADOS/Ficha.html");  // Substitua "pagina_sucesso.php" pela página desejada
         $itens_data = $result_itens->fetch_assoc();
         $status_data = $result_status->fetch_assoc();
         $response = array(
@@ -88,12 +88,12 @@ if ($result_personagem->num_rows > 0) {
         exit();
     } else {
         // Se a senha estiver incorreta, redireciona para a página de erro
-        header("Location: "); // Exemplo de redirecionamento para erro
+        header("Location: Visualizar.html"); // Exemplo de redirecionamento para erro
         exit(); // Evita que o script continue executando
     }
 } else {
     // Se o personagem não for encontrado, redireciona para a página de erro
-    header("Location: ");
+    header("Location: Visualizar.html ");
 }
 $stmt->close();
 $conn->close();
