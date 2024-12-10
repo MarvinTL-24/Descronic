@@ -199,3 +199,24 @@ button:hover {
 #navbar1 a:hover {
     color: var(--shadowFar); /* Muda a cor no hover para um efeito visual */
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+li {
+    margin: 5px 0;
+}
+a {
+    text-decoration: none;
+    color: #007BFF;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: underline;
+}
+.submenu {
+    display: none; /* Inicialmente oculto */
+    margin-left: 20px;
+}

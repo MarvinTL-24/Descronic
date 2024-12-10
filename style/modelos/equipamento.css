@@ -181,3 +181,24 @@ button:hover {
 #result .equipamento-card button:hover {
     background-color: #45a049;
 }
+
+ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+li {
+    margin: 5px 0;
+}
+a {
+    text-decoration: none;
+    color: #007BFF;
+    cursor: pointer;
+}
+a:hover {
+    text-decoration: underline;
+}
+.submenu {
+    display: none; /* Inicialmente oculto */
+    margin-left: 20px;
+}
