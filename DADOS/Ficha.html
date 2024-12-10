@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Personagem</title>
+    <link rel="stylesheet" href="style/modelos/visualizar.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav id="navbar1">
+        <ul>
+            <li><a href="index.html">Página Inicial</a></li>
+            <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
+            <li><a href="Visualizar.html">Seu Personagem</a></li>
+            <li><a href="Ficha.html">Editar Personagem</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <!-- O nome do personagem será preenchido aqui -->
+        <h1 id="characterNameDisplay">Nome do Personagem</h1>
+        
+        <div id="characterDetails" style="display:none;">
+            <h3>Detalhes do Personagem</h3>
+            
+            <!-- Exibir as informações do personagem (não editáveis) -->
+            <div>
+                <label>Raça:</label> <span id="raca"></span>
+            </div>
+            <div>
+                <label>Idade:</label> <span id="idade"></span>
+            </div>
+            <div>
+                <label>Peso:</label> <span id="peso"></span>
+            </div>
+            <div>
+                <label>Altura:</label> <span id="altura"></span>
+            </div>
+            <div>
+                <label>Classe:</label> <span id="classe"></span>
+            </div>
+            <div>
+                <label>Subclasse:</label> <span id="subclasse"></span>
+            </div>
+            <div>
+                <label for="Estilo">Estilo de Luta:</label>
+                <select id="Estilo" name="Estilo" required>
+                    <option value="">Selecione um estilo</option>
+                    <option value="Artes Marciais Orientais">Artes Marciais Orientais</option>
+                    <option value="Artes Marciais Ocidentais">Artes Marciais Ocidentais</option>
+                    <option value="Estilos Modernos de Combate">Estilos Modernos de Combate</option>
+                    <option value="Estilos Históricos de Combate">Estilos Históricos de Combate</option>
+                    <option value="Armas de Haste">Armas de Haste</option>
+                    <option value="Armas de Impacto">Armas de Impacto</option>
+                    <option value="Armas de Arremesso">Armas de Arremesso</option>
+                    <option value="Ceifeador">Usuario de foices</option>
+                    <option value="Mago">Usuario de magia</option>
+                    <option value="Duas espadas">Duas espadas</option>
+                    <option value="Atirador">Atirador</option>
+                    <option value="Espiritualista">Espiritualista</option>
+                    <option value="Armas pesadas">Armas pesadas</option>
+                    <option value="Protetor">Protetor</option>
+                    <option value="Chicoteador">Chicoteador</option>
+                    <option value="Esgrima">Esgrimista</option>
+                </select>
+            </div>
+            <div>
+                <label>Personalidade:</label> <span id="personalidade"></span>
+            </div>
+            <div>
+                <label>Karma:</label>
+                <input type="text" id="karma" name="karma">
+            </div>
+
+            <!-- Exibir e editar Imagem -->
+            <div class="character-image">
+                <label for="characterImage">Imagem do Personagem:</label>
+                <input type="file" id="characterImage" name="characterImage">
+                <div id="imagePreview"></div> <!-- Área para mostrar a imagem selecionada -->
+            </div>
+
+            <!-- Botão para salvar as alterações -->
+            <button id="saveChanges" type="button">Salvar Alterações</button>
+        </div>
+        
+        <div class="edit-options">
+            <h3>Escolha o que deseja editar:</h3>
+            <ul>
+                <li><a href="itens.html">Itens</a></li>
+                <li><a href="status.html">Status</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Recuperar o nome do personagem armazenado no localStorage
+        const characterName = localStorage.getItem('characterName');
+
+        // Se o nome do personagem estiver armazenado, exiba-o na página
+        if (characterName) {
+            document.getElementById('characterNameDisplay').textContent = characterName;
+        }
+
+        // Manipulação do formulário de busca
+        document.getElementById('searchForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const formData = new FormData(e.target);
+            formData.append('action', 'search');
+
+            fetch('Salvando.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data) {
+                    // Exibe a área de detalhes do personagem
+                    document.getElementById('characterDetails').style.display = 'block';
+                    
+                    // Preenche os campos com os dados recebidos, exceto Karma e Imagem
+                    document.getElementById('raca').textContent = data.raca;
+                    document.getElementById('idade').textContent = data.idade;
+                    document.getElementById('peso').textContent = data.peso;
+                    document.getElementById('altura').textContent = data.altura;
+                    document.getElementById('classe').textContent = data.classe;
+                    document.getElementById('subclasse').textContent = data.subclasse;
+                    document.getElementById('personalidade').textContent = data.personalidade;
+                    
+                    // Preenche o campo Karma com o valor do personagem
+                    document.getElementById('karma').value = data.karma;
+                    document.getElementById('Estilo').value = data.Estilo;
+
+                    // Se houver uma imagem do personagem, exiba-a
+                    const imagePreview = document.getElementById('imagePreview');
+                    if (data.imagem) {
+                        const imgElement = document.createElement('img');
+                        imgElement.src = data.imagem;
+                        imgElement.alt = 'Imagem do personagem';
+                        imgElement.style.maxWidth = '400px';
+                        imagePreview.innerHTML = '';  // Limpa qualquer imagem anterior
+                        imagePreview.appendChild(imgElement);
+                    }
+                } else {
+                    alert('Personagem não encontrado ou senha incorreta.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao buscar personagem.');
+            });
+        });
+
+        // Função para salvar as alterações de Karma , Imagem e Estilo
+        document.getElementById('saveChanges').addEventListener('click', function() {
+            const updatedData = {
+                Estilo: document.getElementById('Estilo').value,
+                karma: document.getElementById('karma').value,
+                imagem: document.getElementById('characterImage').files[0] // A imagem escolhida pelo usuário
+            };
+
+            const formData = new FormData();
+            formData.append('action', 'save');
+            Object.keys(updatedData).forEach(key => formData.append(key, updatedData[key]));
+
+            fetch('Salvando.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    alert('Alterações salvas com sucesso!');
+                } else {
+                    alert('Erro ao salvar alterações.');
+                }
+            })
+            .catch(error => {
+                console.error('Erro:', error);
+                alert('Erro ao salvar alterações.');
+            });
+        });
+    </script>
+</body>
+</html>

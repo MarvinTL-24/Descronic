@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>STATUS</title>
+    <link rel="stylesheet" href="style/modelos/visualizar.css">
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav id="navbar1">
+        <ul>
+            <li><a href="index.html">Pagina Inicial</a></li>
+            <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
+            <li><a href="visualizar.html">Seu Personagem</a></li>
+            <li><a href="Ficha.html">Editar Personagem</a></li>
+        </ul>
+    </nav>
+
+    <div id="statusSection">
+        <h3>Status Atuais do Personagem</h3>
+        <div class="status-group">
+            <p><strong>Vitalidade:</strong> <span id="statusVitalidade">0</span></p>
+            <p><strong>Agilidade:</strong> <span id="statusAgilidade">0</span></p>
+            <p><strong>Fortitude:</strong> <span id="statusFortitude">0</span></p>
+            <p><strong>Força:</strong> <span id="statusForca">0</span></p>
+            <p><strong>Arcano:</strong> <span id="statusArcano">0</span></p>
+            <p><strong>Resistência:</strong> <span id="statusResistencia">0</span></p>
+            <p><strong>Percepção:</strong> <span id="statusPercepcao">0</span></p>
+            <p><strong>Vida Espiritual:</strong> <span id="statusVidaEspiritual">0</span></p>
+        </div>
+    </div>
+
+    <div id="statusList"></div>
+    <div id="levelInfo">
+        <p>Nível atual: <span id="nivel">1</span></p>
+        <p>Pontos disponíveis: <span id="pontosDisponiveis">3</span></p>
+    </div>
+    <button id="confirmarAlteracoes">Confirmar Alterações</button>
+    <button id="cancelarAlteracoes">Cancelar Alterações</button>
+
+    <script>
+        const statusSection = document.getElementById('statusSection');
+        const statusList = document.getElementById('statusList');
+        const nivelDisplay = document.getElementById('nivel');
+        const pontosDisponiveisDisplay = document.getElementById('pontosDisponiveis');
+        const confirmarAlteracoesBtn = document.getElementById('confirmarAlteracoes');
+        const cancelarAlteracoesBtn = document.getElementById('cancelarAlteracoes');
+
+        let nivel = 1;
+        let pontosDisponiveis = 3;
+        let statusBase = {
+            
+        };
+
+        let statusFinais = { ...statusBase };
+        let statusAlterados = { ...statusBase };  // Mantém os status que foram alterados
+
+        // Função para atualizar os status na interface
+        function atualizarStatus() {
+            // Exibe os status no HTML
+            document.getElementById('statusVitalidade').textContent = statusAlterados.vitalidade;
+            document.getElementById('statusAgilidade').textContent = statusAlterados.agilidade;
+            document.getElementById('statusFortitude').textContent = statusAlterados.fortitude;
+            document.getElementById('statusForca').textContent = statusAlterados.forca;
+            document.getElementById('statusArcano').textContent = statusAlterados.arcano;
+            document.getElementById('statusResistencia').textContent = statusAlterados.resistencia;
+            document.getElementById('statusPercepcao').textContent = statusAlterados.percepcao;
+            document.getElementById('statusVidaEspiritual').textContent = statusAlterados.vidaEspiritual;
+
+            // Atualiza os pontos disponíveis
+            pontosDisponiveisDisplay.textContent = pontosDisponiveis;
+        }
+
+        // Função para renderizar status com botões de edição
+        function renderStatus() {
+            statusList.innerHTML = ""; // Limpa os status antigos
+
+            for (const key in statusAlterados) {
+                const statusValue = statusAlterados[key];
+
+                const div = document.createElement("div");
+                div.classList.add("status-group");
+
+                const label = document.createElement("p");
+                label.innerHTML = `<strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> <span id="status_${key}">${statusValue}</span>`;
+
+                const button = document.createElement("button");
+                button.textContent = "+";
+                button.disabled = pontosDisponiveis <= 0;  // Desabilita o botão se não houver pontos disponíveis
+                button.addEventListener("click", () => {
+                    if (pontosDisponiveis > 0) {
+                        statusAlterados[key]++;
+                        pontosDisponiveis--;
+                        atualizarStatus();
+                    }
+                });
+
+                div.appendChild(label);
+                div.appendChild(button);
+                statusList.appendChild(div);
+            }
+        }
+
+        // Função para confirmar as alterações
+        function confirmarAlteracoes() {
+            statusBase = { ...statusAlterados };  // Salva as alterações
+            pontosDisponiveis = 3;  // Reseta os pontos para o próximo nível
+            nivel++;  // Aumenta o nível
+            nivelDisplay.textContent = nivel;
+            pontosDisponiveisDisplay.textContent = pontosDisponiveis;
+            renderStatus();  // Atualiza a interface
+        }
+
+        // Função para cancelar as alterações
+        function cancelarAlteracoes() {
+            statusAlterados = { ...statusBase };  // Restaura os status originais
+            pontosDisponiveis = 3;  // Reseta os pontos
+            atualizarStatus();  // Atualiza a interface
+        }
+
+        // Inicializa a interface
+        renderStatus();
+
+        // Eventos dos botões de confirmação e cancelamento
+        confirmarAlteracoesBtn.addEventListener('click', confirmarAlteracoes);
+        cancelarAlteracoesBtn.addEventListener('click', cancelarAlteracoes);
+    </script>
+
+</body>
+</html>
