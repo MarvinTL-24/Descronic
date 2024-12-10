@@ -3,122 +3,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Itens</title>
-    <link rel="stylesheet" href="style/modelos/visualizar.css">
+    <title>Cadastro de Itens</title>
 </head>
 <body>
-    <!-- Barra de Navegação -->
-    <nav id="navbar1">
-        <ul>
-            <li><a href="index.html">Pagina Inicial</a></li>
-            <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
-            <li><a href="Visualizar.html">Seu Personagem</a></li>
-            <li><a href="Ficha.html">Editar Personagem</a></li>
-        </ul>
-    </nav>
-    <div class="container">
-        <div class="form-group">
-                    <label for="editArma">Arma:</label>
-                    <input type="text" id="editArma" name="arma">
-                </div>
-                <div class="form-group">
-                    <label for="editSecundaria">Secundária:</label>
-                    <input type="text" id="editSecundaria" name="secundaria">
-                </div>
-                <div class="form-group">
-                    <label for="editCapacete">Capacete:</label>
-                    <input type="text" id="editCapacete" name="capacete">
-                </div>
-                <div class="form-group">
-                    <label for="editPeitoral">Peitoral:</label>
-                    <input type="text" id="editPeitoral" name="peitoral">
-                </div>
-                <div class="form-group">
-                    <label for="editCalca">Calça:</label>
-                    <input type="text" id="editCalca" name="calca">
-                </div>
-                <div class="form-group">
-                    <label for="editCalcado">Calçado:</label>
-                    <input type="text" id="editCalcado" name="calcado">
-                </div>
-                <div class="form-group">
-                    <label for="editArtefato1">Artefato 1:</label>
-                    <input type="text" id="editArtefato1" name="artefato1">
-                </div>
-                <div class="form-group">
-                    <label for="editArtefato2">Artefato 2:</label>
-                    <input type="text" id="editArtefato2" name="artefato2">
-                </div>
-                <div class="form-group">
-                    <label for="editUtilizavel1">Utilizável 1:</label>
-                    <input type="text" id="editUtilizavel1" name="utilizavel1">
-                </div>
-                <div class="form-group">
-                    <label for="editUtilizavel2">Utilizável 2:</label>
-                    <input type="text" id="editUtilizavel2" name="utilizavel2">
-                </div>
-                <button type="submit">Salvar Alterações</button>
-            </form>
-        </div>
-    </div>
-    
-    <script>
-        const searchForm = document.getElementById('searchForm');
-        const editForm = document.getElementById('editForm');
-        const characterDetails = document.getElementById('characterDetails');
+    <h3>Cadastro de Itens</h3>
 
-        searchForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+    <form action="PHP/itens.php" method="POST" enctype="multipart/form-data">
+        <label for="arma">Arma: </label>
+        <input type="file" name="arma" id="arma"><br>
 
-            const formData = new FormData(searchForm);
-            formData.append('action', 'search');
+        <label for="secundaria">Secundária: </label>
+        <input type="file" name="secundaria" id="secundaria"><br>
 
-            fetch('Salvando.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data) {
-                    characterDetails.style.display = 'block';
-                                        
-                    
-                    document.getElementById('editArma').value = data.arma;
-                    document.getElementById('editSecundaria').value = data.secundaria;
-                    document.getElementById('editUtilizavel1').value = data.utilizavel1;
-                    document.getElementById('editUtilizavel2').value = data.utilizavel2;
-                    document.getElementById('editArtefato1').value = data.artefato1;
-                    document.getElementById('editArtefato2').value = data.artefato2;
-                    document.getElementById('editCapacete').value = data.capacete;
-                    document.getElementById('editPeitoral').value = data.peitoral;
-                    document.getElementById('editCalca').value = data.calca;
-                    document.getElementById('editCalcado').value = data.calcado;
+        <label for="utilizavel1">Utilizável 1: </label>
+        <input type="file" name="utilizavel1" id="utilizavel1"><br>
 
-                } else {
-                    alert('Personagem não encontrado ou senha incorreta.');
-                }
-            })
-            .catch(error => console.error('Erro:', error));
-        });
+        <label for="utilizavel2">Utilizável 2: </label>
+        <input type="file" name="utilizavel2" id="utilizavel2"><br>
 
-        editForm.addEventListener('submit', function (e) {
-            e.preventDefault();
+        <label for="artefato1">Artefato 1: </label>
+        <input type="file" name="artefato1" id="artefato1"><br>
 
-            const formData = new FormData(editForm);
-            formData.append('action', 'save');
+        <label for="artefato2">Artefato 2: </label>
+        <input type="file" name="artefato2" id="artefato2"><br>
 
-            fetch('Salvando.php', {
-                method: 'POST',
-                body: formData
-            })
-            .then(response => response.text())
-            .then(data => {
-                alert(data);
-            })
-            .catch(error => console.error('Erro:', error));
-        });
-    </script>
+        <label for="capacete">Capacete: </label>
+        <input type="file" name="capacete" id="capacete"><br>
 
+        <label for="peitoral">Peitoral: </label>
+        <input type="file" name="peitoral" id="peitoral"><br>
 
+        <label for="calca">Calça: </label>
+        <input type="file" name="calca" id="calca"><br>
+
+        <label for="calcado">Calcado: </label>
+        <input type="file" name="calcado" id="calcado"><br>
+
+        <button type="submit">Salvar Itens</button>
+    </form>
 </body>
 </html>

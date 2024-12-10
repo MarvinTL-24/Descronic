@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Tempo de geração: 07-Dez-2024 às 18:35
+-- Tempo de geração: 10-Dez-2024 às 18:49
 -- Versão do servidor: 10.4.32-MariaDB
 -- versão do PHP: 8.2.12
 
@@ -40,18 +40,19 @@ CREATE TABLE `conta` (
 
 CREATE TABLE `itens` (
   `id` int(11) NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `senha` varchar(255) DEFAULT NULL,
-  `arma` varchar(100) DEFAULT NULL,
-  `secundaria` varchar(100) DEFAULT NULL,
-  `utilizavel1` varchar(100) DEFAULT NULL,
-  `utilizavel2` varchar(100) DEFAULT NULL,
-  `artefato1` varchar(100) DEFAULT NULL,
-  `artefato2` varchar(100) DEFAULT NULL,
-  `capacete` varchar(100) DEFAULT NULL,
-  `peitoral` varchar(100) DEFAULT NULL,
-  `calca` varchar(100) DEFAULT NULL,
-  `calcado` varchar(100) DEFAULT NULL
+  `nome` varchar(255) NOT NULL,
+  `arma` varchar(255) DEFAULT NULL,
+  `secundaria` varchar(255) DEFAULT NULL,
+  `utilizavel1` varchar(255) DEFAULT NULL,
+  `utilizavel2` varchar(255) DEFAULT NULL,
+  `artefato1` varchar(255) DEFAULT NULL,
+  `artefato2` varchar(255) DEFAULT NULL,
+  `capacete` varchar(255) DEFAULT NULL,
+  `peitoral` varchar(255) DEFAULT NULL,
+  `calca` varchar(255) DEFAULT NULL,
+  `calcado` varchar(255) DEFAULT NULL,
+  `nome_personagem` varchar(100) NOT NULL,
+  `senha_personagem` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -88,8 +89,8 @@ CREATE TABLE `personagem` (
 
 CREATE TABLE `status` (
   `id` int(11) NOT NULL,
-  `nome` varchar(100) DEFAULT NULL,
-  `senha` varchar(255) DEFAULT NULL,
+  `nome_personagem` varchar(100) NOT NULL,
+  `senha_personagem` varchar(255) NOT NULL,
   `vitalidade` int(11) DEFAULT 0,
   `agilidade` int(11) DEFAULT 0,
   `fortitude` int(11) DEFAULT 0,
@@ -114,7 +115,7 @@ ALTER TABLE `conta`
 --
 ALTER TABLE `itens`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `nome` (`nome`,`senha`);
+  ADD KEY `itens_ibfk_1` (`nome_personagem`,`senha_personagem`);
 
 --
 -- Índices para tabela `personagem`
@@ -127,7 +128,7 @@ ALTER TABLE `personagem`
 --
 ALTER TABLE `status`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `nome` (`nome`,`senha`);
+  ADD KEY `status_ibfk_1` (`nome_personagem`,`senha_personagem`);
 
 --
 -- AUTO_INCREMENT de tabelas despejadas
@@ -153,7 +154,7 @@ ALTER TABLE `status`
 -- Limitadores para a tabela `itens`
 --
 ALTER TABLE `itens`
-  ADD CONSTRAINT `itens_ibfk_1` FOREIGN KEY (`nome`,`senha`) REFERENCES `personagem` (`nome`, `senha`);
+  ADD CONSTRAINT `itens_ibfk_1` FOREIGN KEY (`nome_personagem`,`senha_personagem`) REFERENCES `personagem` (`nome`, `senha`);
 
 --
 -- Limitadores para a tabela `personagem`
@@ -165,7 +166,7 @@ ALTER TABLE `personagem`
 -- Limitadores para a tabela `status`
 --
 ALTER TABLE `status`
-  ADD CONSTRAINT `status_ibfk_1` FOREIGN KEY (`nome`,`senha`) REFERENCES `personagem` (`nome`, `senha`);
+  ADD CONSTRAINT `status_ibfk_1` FOREIGN KEY (`nome_personagem`,`senha_personagem`) REFERENCES `personagem` (`nome`, `senha`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

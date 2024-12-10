@@ -62,6 +62,7 @@ if ($result_personagem->num_rows > 0) {
             'classe' => $personagem_data['classe'],
             'subclasse' => $personagem_data['subclasse'],
             'personalidade' => $personagem_data['personalidade'],
+            'estilo' => $personagem_data['estilo'],
             'karma' => $personagem_data['karma'],
             'imagem' => $personagem_data['imagem'],
             'arma' => $itens_data['arma'],

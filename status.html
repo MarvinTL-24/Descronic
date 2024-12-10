@@ -39,6 +39,21 @@
     <button id="confirmarAlteracoes">Confirmar Alterações</button>
     <button id="cancelarAlteracoes">Cancelar Alterações</button>
 
+    <form id="formStatus" method="POST" action="PHP/status.php">
+        <!-- Nome e senha para identificar o personagem -->
+        <input type="text" name="nome" id="nome" placeholder="Nome do Personagem" required>
+        <input type="password" name="senha" id="senha" placeholder="Senha" required>
+
+        <!-- Campos ocultos para os status -->
+        <input type="hidden" name="vitalidade" id="inputVitalidade" value="0">
+        <input type="hidden" name="agilidade" id="inputAgilidade" value="0">
+        <input type="hidden" name="fortitude" id="inputFortitude" value="0">
+        <input type="hidden" name="arcano" id="inputArcano" value="0">
+        <input type="hidden" name="resistencia" id="inputResistencia" value="0">
+        <input type="hidden" name="percepcao" id="inputPercepcao" value="0">
+        <input type="hidden" name="vidaEspiritual" id="inputVidaEspiritual" value="0">
+    </form>
+
     <script>
         const statusSection = document.getElementById('statusSection');
         const statusList = document.getElementById('statusList');
@@ -46,19 +61,24 @@
         const pontosDisponiveisDisplay = document.getElementById('pontosDisponiveis');
         const confirmarAlteracoesBtn = document.getElementById('confirmarAlteracoes');
         const cancelarAlteracoesBtn = document.getElementById('cancelarAlteracoes');
+        const formStatus = document.getElementById('formStatus');
 
         let nivel = 1;
         let pontosDisponiveis = 3;
         let statusBase = {
-            
+            vitalidade: 0,
+            agilidade: 0,
+            fortitude: 0,
+            arcano: 0,
+            resistencia: 0,
+            percepcao: 0,
+            vidaEspiritual: 0
         };
 
-        let statusFinais = { ...statusBase };
-        let statusAlterados = { ...statusBase };  // Mantém os status que foram alterados
+        let statusAlterados = { ...statusBase };
 
         // Função para atualizar os status na interface
         function atualizarStatus() {
-            // Exibe os status no HTML
             document.getElementById('statusVitalidade').textContent = statusAlterados.vitalidade;
             document.getElementById('statusAgilidade').textContent = statusAlterados.agilidade;
             document.getElementById('statusFortitude').textContent = statusAlterados.fortitude;
@@ -68,13 +88,12 @@
             document.getElementById('statusPercepcao').textContent = statusAlterados.percepcao;
             document.getElementById('statusVidaEspiritual').textContent = statusAlterados.vidaEspiritual;
 
-            // Atualiza os pontos disponíveis
             pontosDisponiveisDisplay.textContent = pontosDisponiveis;
         }
 
         // Função para renderizar status com botões de edição
         function renderStatus() {
-            statusList.innerHTML = ""; // Limpa os status antigos
+            statusList.innerHTML = "";
 
             for (const key in statusAlterados) {
                 const statusValue = statusAlterados[key];
@@ -87,7 +106,7 @@
 
                 const button = document.createElement("button");
                 button.textContent = "+";
-                button.disabled = pontosDisponiveis <= 0;  // Desabilita o botão se não houver pontos disponíveis
+                button.disabled = pontosDisponiveis <= 0;
                 button.addEventListener("click", () => {
                     if (pontosDisponiveis > 0) {
                         statusAlterados[key]++;
@@ -104,28 +123,38 @@
 
         // Função para confirmar as alterações
         function confirmarAlteracoes() {
-            statusBase = { ...statusAlterados };  // Salva as alterações
-            pontosDisponiveis = 3;  // Reseta os pontos para o próximo nível
-            nivel++;  // Aumenta o nível
+            statusBase = { ...statusAlterados };
+            pontosDisponiveis = 3;
+            nivel++;
             nivelDisplay.textContent = nivel;
             pontosDisponiveisDisplay.textContent = pontosDisponiveis;
-            renderStatus();  // Atualiza a interface
+            atualizarStatus();
+            renderStatus();
+
+            // Atualiza os campos ocultos do formulário com os valores dos status
+            document.getElementById('inputVitalidade').value = statusAlterados.vitalidade;
+            document.getElementById('inputAgilidade').value = statusAlterados.agilidade;
+            document.getElementById('inputFortitude').value = statusAlterados.fortitude;
+            document.getElementById('inputArcano').value = statusAlterados.arcano;
+            document.getElementById('inputResistencia').value = statusAlterados.resistencia;
+            document.getElementById('inputPercepcao').value = statusAlterados.percepcao;
+            document.getElementById('inputVidaEspiritual').value = statusAlterados.vidaEspiritual;
+
+            // Envia o formulário via POST
+            formStatus.submit();
         }
 
         // Função para cancelar as alterações
         function cancelarAlteracoes() {
-            statusAlterados = { ...statusBase };  // Restaura os status originais
-            pontosDisponiveis = 3;  // Reseta os pontos
-            atualizarStatus();  // Atualiza a interface
+            statusAlterados = { ...statusBase };
+            pontosDisponiveis = 3;
+            atualizarStatus();
         }
 
-        // Inicializa a interface
         renderStatus();
 
-        // Eventos dos botões de confirmação e cancelamento
         confirmarAlteracoesBtn.addEventListener('click', confirmarAlteracoes);
         cancelarAlteracoesBtn.addEventListener('click', cancelarAlteracoes);
     </script>
-
 </body>
 </html>
