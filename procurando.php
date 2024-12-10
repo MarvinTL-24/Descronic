@@ -20,39 +20,38 @@ $senha = $_POST['senha'];
 
 // Sanitizar a entrada (evitar SQL Injection)
 $nome = $conn->real_escape_string($nome);
-$senha = $conn->real_escape_string($senha);
 
-// Busca os dados do personagem
-$sql_personagem = "SELECT * FROM personagem WHERE nome = ? AND senha = ?";
+// Busca os dados do personagem (não se deve buscar senha diretamente no banco)
+$sql_personagem = "SELECT nome, senha FROM personagem WHERE nome = ?";
 $stmt = $conn->prepare($sql_personagem);
-$stmt->bind_param("ss", $nome, $senha);
+$stmt->bind_param("s", $nome);
 $stmt->execute();
 $result_personagem = $stmt->get_result();
 
-// Busca os itens do personagem
-$sql_itens = "SELECT * FROM itens WHERE nome = ? AND senha = ?";
-$stmt = $conn->prepare($sql_itens);
-$stmt->bind_param("ss", $nome, $senha);
-$stmt->execute();
-$result_itens = $stmt->get_result();
-
-// Busca os status do personagem
-$sql_status = "SELECT * FROM status WHERE nome = ? AND senha = ?";
-$stmt = $conn->prepare($sql_status);
-$stmt->bind_param("ss", $nome, $senha);
-$stmt->execute();
-$result_status = $stmt->get_result();
-
-// Verifica se o personagem existe
+// Verifica se o personagem foi encontrado
 if ($result_personagem->num_rows > 0) {
-    // Retorna os dados encontrados como JSON
     $personagem_data = $result_personagem->fetch_assoc();
-    // Verifica se a senha é válida
+    
+    // Verifica se a senha fornecida é válida
     if (password_verify($senha, $personagem_data['senha'])) {
-        // Se a senha estiver correta, redireciona para a página de sucesso
-        header("Location: Ficha.html");  // Substitua "pagina_sucesso.php" pela página desejada
+        
+        // Busca os itens do personagem
+        $sql_itens = "SELECT * FROM itens WHERE nome = ?";
+        $stmt_itens = $conn->prepare($sql_itens);
+        $stmt_itens->bind_param("s", $nome);
+        $stmt_itens->execute();
+        $result_itens = $stmt_itens->get_result();
         $itens_data = $result_itens->fetch_assoc();
+        
+        // Busca os status do personagem
+        $sql_status = "SELECT * FROM status WHERE nome = ?";
+        $stmt_status = $conn->prepare($sql_status);
+        $stmt_status->bind_param("s", $nome);
+        $stmt_status->execute();
+        $result_status = $stmt_status->get_result();
         $status_data = $result_status->fetch_assoc();
+        
+        // Criação da resposta para o personagem
         $response = array(
             'nome' => $personagem_data['nome'],
             'raca' => $personagem_data['raca'],
@@ -84,17 +83,21 @@ if ($result_personagem->num_rows > 0) {
             'vidaEspiritual' => $status_data['vidaEspiritual'],
         );
         
+        // Envia a resposta como JSON
         echo json_encode($response);
         exit();
+        
     } else {
-        // Se a senha estiver incorreta, redireciona para a página de erro
-        header("Location: Visualizar.html"); // Exemplo de redirecionamento para erro
-        exit(); // Evita que o script continue executando
+        // Se a senha estiver incorreta
+        header("Location: Visualizar.html");
+        exit();
     }
 } else {
-    // Se o personagem não for encontrado, redireciona para a página de erro
-    header("Location: Visualizar.html ");
+    // Se o personagem não for encontrado
+    header("Location: Visualizar.html");
 }
+
+// Fechar a conexão
 $stmt->close();
 $conn->close();
 ?>
