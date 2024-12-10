@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha do Personagem</title>
+    <link rel="stylesheet" href="style/modelos/ficha.css">
+</head>
+<body>
+    <h2>Preencha a Ficha do Personagem</h2>
+    <p>OBS: Faça os cards antes, para que tenha os dados certos para criação do personagem.</p>
+    <form action="DADOS/Salvando.php" method="POST">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Ex: Aragon,Bravo." required>
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Escolha uma senha segura." required>
+
+        <label for="raça">Raça:</label>
+                <select id="raça" name="Raça" required>
+                    <option value="Humano">Humano</option>
+                    <option value="Elfo">Elfo</option>
+                    <option value="Anão">Anão</option>
+                    <option value="Nephilim">Nephilim</option>
+                    <option value="Dragonewte">Dragonewtes</option>
+                    <option value="Megavles">Megavles</option>
+                    <option value="Android">Android</option>
+                    <option value="Marino">Marino</option>
+                    <option value="Doppelganger">Doppelganger</option>
+                    <option value="Recluso">Recluso</option>
+                    <option value="Ocular">Ocular</option>
+                    <option value="Desvivido">Desvivido</option>
+                    <option value="Psicodelico">Psicodelico</option>
+                    <option value="Tecnoman">Tecnoman</option>
+                    <option value="Vampiro">Vampiro</option>
+                    <option value="Shinigami">Shinigami</option>
+                </select>
+
+        <label for="idade">Idade</label>
+        <input type="number" id="idade" name="idade" placeholder="Digite a idade do personagem." required>
+
+        <label for="sexo">Sexo</label>
+        <select id="sexo" name="sexo" required>
+            <option value="" disabled selected>Selecione o sexo</option>
+            <option value="Masculino">Masculino</option>
+            <option value="Feminino">Feminino</option>
+            <option value="Outro">Outro</option>
+        </select>
+
+        <label for="altura">Altura</label>
+        <input type="number" step="0.01" id="altura" name="altura" placeholder="Altura em metros." required>
+
+        <label for="peso">Peso</label>
+        <input type="number" step="0.1" id="peso" name="peso" placeholder="Peso em kg." required>
+
+        
+        <label for="classe">Classe:</label>
+            <select id="classeEscolhida" name="Classe" required>
+                <option value="Escolha">Qual sua classe?</option>
+                <option value="Guerreiro">Guerreiro</option>
+                <option value="Mago">Mago</option>
+                <option value="Berserker">Berserker</option>
+                <option value="Assasin">Assasin</option>
+                <option value="Atirador">Atirador</option>
+                <option value="Paladino">Paladino</option>
+                <option value="Espiritualista">Espiritualista</option>
+                <option value="Desbravador">Desbravador</option>
+            </select>
+
+        <label for="subclasse">Subclasse</label>
+        <input type="text" id="subclasse" name="subclasse" placeholder="Ex: Tem que ser de acordo com a classe" required>
+                
+        <label for="Estilo">Estilo de Luta:</label>
+                <select id="Estilo" name="Estilo" required>
+                    <option value="">Selecione um estilo</option>
+                    <option value="Artes Marciais Orientais">Artes Marciais Orientais</option>
+                    <option value="Artes Marciais Ocidentais">Artes Marciais Ocidentais</option>
+                    <option value="Estilos Modernos de Combate">Estilos Modernos de Combate</option>
+                    <option value="Estilos Históricos de Combate">Estilos Históricos de Combate</option>
+                    <option value="Armas de Haste">Armas de Haste</option>
+                    <option value="Armas de Impacto">Armas de Impacto</option>
+                    <option value="Armas de Arremesso">Armas de Arremesso</option>
+                    <option value="Ceifeador">Usuario de foices</option>
+                    <option value="Mago">Usuario de magia</option>
+                    <option value="Duas espadas">Duas espadas</option>
+                    <option value="Atirador">Atirador</option>
+                    <option value="Espiritualista">Espiritualista</option>
+                    <option value="Armas pesadas">Armas pesadas</option>
+                    <option value="Protetor">Protetor</option>
+                    <option value="Chicoteador">Chicoteador</option>
+                    <option value="Esgrima">Esgrimista</option>
+                </select>
+
+        <label for="personalidade">Personalidade</label>
+        <textarea id="personalidade" name="personalidade" placeholder="Descreva a personalidade do personagem" rows="4" required></textarea>
+
+        <label for="status">Status</label>
+        <input type="text" id="status" name="status" placeholder="Ex: Vivo, Morto, Em treinamento" required>
+
+        <label for="forca">Força</label>
+        <input type="number" id="forca" name="forca" placeholder="Pontuação de força." required>
+
+        <label for="agilidade">Agilidade</label>
+        <input type="number" id="agilidade" name="agilidade" placeholder="Pontuação de agilidade." required>
+
+        <label for="resistencia">Resistência</label>
+        <input type="number" id="resistencia" name="resistencia" placeholder="Pontuação de resistência." required>
+
+        <label for="karma">Karma</label>
+        <input type="number" id="karma" name="karma" placeholder="Pontuação de karma (ex: 5)" required>
+
+        <button type="submit">Salvar Ficha</button>
+    </form>
+</body>
+</html>

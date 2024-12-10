@@ -2,7 +2,7 @@
 return [
     'host' => 'localhost',
     'dbname' => 'rpg_database',
-    'user' => '',
-    'password' => '',
+    'user' => 'Descrente24',
+    'password' => 'Descrente&amor300p',
 ];
 ?>
