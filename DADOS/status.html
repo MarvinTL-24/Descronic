@@ -10,10 +10,27 @@
     <!-- Barra de Navegação -->
     <nav id="navbar1">
         <ul>
-            <li><a href="index.html">Pagina Inicial</a></li>
-            <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
-            <li><a href="visualizar.html">Seu Personagem</a></li>
-            <li><a href="Ficha.html">Editar Personagem</a></li>
+            <li><a href="/index.html">Pagina Inicial</a></li>
+            <li>
+                <a id="toggle-cards" href="#">Criação de cards</a>
+                <!-- Subcategoria -->
+                <ul class="submenu" id="cards-menu">
+                    <li><a href="/Personagem.html">Personagem</a></li>
+                    <li><a href="/CARDS/equipamentos.html">Armadura</a></li>
+                    <li><a href="/CARDS/artefatos.html">Artefatos</a></li>
+                    <li><a href="/CARDS/itens.html">Itens</a></li>
+                </ul>
+            </li>
+            <li>
+                <a id="toggle-cards" href="#">Conta</a>
+                <!-- Subcategoria -->
+                <ul class="submenu" id="cards-menu">
+                    <li><a href="/Visualizar.html">Conta</a></li>
+                    <li><a href="/DADOS/Ficha.html">Ficha</a></li>
+                    <li><a href="/DADOS/itens.html">Itens</a></li>
+                    <li><a href="/DADOS/status.html">Status</a></li>
+                </ul>
+            </li>
         </ul>
     </nav>
 
@@ -33,8 +50,8 @@
 
     <div id="statusList"></div>
     <div id="levelInfo">
-        <p>Nível atual: <span id="nivel">1</span></p>
-        <p>Pontos disponíveis: <span id="pontosDisponiveis">3</span></p>
+        <p>Nível atual: <span id="nivel">0</span></p>
+        <p>Pontos disponíveis: <span id="pontosDisponiveis">40</span></p>
     </div>
     <button id="confirmarAlteracoes">Confirmar Alterações</button>
     <button id="cancelarAlteracoes">Cancelar Alterações</button>
