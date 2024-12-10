@@ -1,11 +1,10 @@
 <?php
-$config = include 'config.php';
 
 // Configuração do banco de dados
-$host = $config['host'];
-$dbname = $config['dbname'];
-$user = $config['user'];
-$password = $config['password'];
+$host = "localhost";
+$dbname = "dbname";
+$user = "Descrente24";
+$password = "Descrente&amor300p";
 
 // Criando a conexão
 $conn = new mysqli($host, $user, $password, $dbname);
@@ -51,7 +50,7 @@ if ($result_personagem->num_rows > 0) {
     // Verifica se a senha é válida
     if (password_verify($senha, $personagem_data['senha'])) {
         // Se a senha estiver correta, redireciona para a página de sucesso
-        header("Location: /DADOS/Ficha.html");  // Substitua "pagina_sucesso.php" pela página desejada
+        header("Location: Ficha.html");  // Substitua "pagina_sucesso.php" pela página desejada
         $itens_data = $result_itens->fetch_assoc();
         $status_data = $result_status->fetch_assoc();
         $response = array(
