@@ -7,16 +7,15 @@
     <link rel="stylesheet" href="style/modelos/visualizar.css">
 </head>
 <body>
-    <!-- Barra de Navegação -->
     <nav id="navbar1">
         <ul>
-            <li><a href="index.html">Pagina Inicial</a></li>
-            <li><a href="Personagem.html">Criar ficha de Personagem</a></li>
-            <li><a href="Visualizar.html">Seu Personagem</a></li>
-            <li><a href="Ficha.html">Editar Personagem</a></li>
+            <li><a href="perfil.php">Perfil</a></li>
+            <li><a href="Ficha.html">Personagem</a></li>
+            <li><a href="itens.html">Equipamentos</a></li>
+            <li><a href="status.html">Status</a></li>
+            <li><a href="logout.php">Sair</a></li>
         </ul>
     </nav>
-
     <div id="statusSection">
         <h3>Status Atuais do Personagem</h3>
         <div class="status-group">
@@ -39,10 +38,8 @@
     <button id="confirmarAlteracoes">Confirmar Alterações</button>
     <button id="cancelarAlteracoes">Cancelar Alterações</button>
 
-    <form id="formStatus" method="POST" action="/Contas/status.html">
-        <!-- Nome e senha para identificar o personagem -->
-        <input type="text" name="nome" id="nome" placeholder="Nome do Personagem" required>
-        <input type="password" name="senha" id="senha" placeholder="Senha" required>
+    <form id="formStatus" method="POST" action="status.html">
+        Identificar por meio do personagem ID
 
         <!-- Campos ocultos para os status -->
         <input type="hidden" name="vitalidade" id="inputVitalidade" value="0">
@@ -156,6 +153,6 @@
         confirmarAlteracoesBtn.addEventListener('click', confirmarAlteracoes);
         cancelarAlteracoesBtn.addEventListener('click', cancelarAlteracoes);
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+
 </body>
 </html>

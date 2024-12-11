@@ -89,16 +89,17 @@ CREATE TABLE `personagem` (
 --
 
 CREATE TABLE `status` (
-  `id` int(11) NOT NULL,
-  `nome_personagem` varchar(100) NOT NULL,
-  `senha_personagem` varchar(255) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `personagem_id` int(11) NOT NULL,
   `vitalidade` int(11) DEFAULT 0,
   `agilidade` int(11) DEFAULT 0,
   `fortitude` int(11) DEFAULT 0,
   `arcano` int(11) DEFAULT 0,
   `resistencia` int(11) DEFAULT 0,
   `percepcao` int(11) DEFAULT 0,
-  `vidaEspiritual` int(11) DEFAULT 0
+  `vidaEspiritual` int(11) DEFAULT 0,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `personagem_id` (`personagem_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --

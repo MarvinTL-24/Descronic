@@ -235,10 +235,11 @@ $conn->close();
         <ul>
             <li><a href="perfil.php">Perfil</a></li>
             <li><a href="Ficha.html">Personagem</a></li>
+            <li><a href="itens.html">Equipamentos</a></li>
+            <li><a href="status.html">Status</a></li>
             <li><a href="logout.php">Sair</a></li>
         </ul>
     </nav>
-
     <div class="perfil-container">
         <h2>Perfil de <?php echo htmlspecialchars($nome); ?></h2>
 

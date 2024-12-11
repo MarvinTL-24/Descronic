@@ -1,17 +1,6 @@
 <?php
-// Configuração do banco de dados
-$host = "localhost";
-$dbname = "descronic";
-$user = "root";
-$password = "";
 
-// Criando a conexão
-$conn = new mysqli($host, $user, $password, $dbname);
-
-// Verificar conexão
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
+include_once('conectar.php');
 
 // Função para fazer o upload de uma imagem e retornar o caminho
 function uploadImage($file, $targetDir = "uploads/") {
@@ -24,8 +13,8 @@ function uploadImage($file, $targetDir = "uploads/") {
         return null;
     }
 
-    // Verificar o tamanho da imagem (5MB máximo)
-    if ($file["size"] > 5000000) {
+    // Verificar o tamanho da imagem (500MB máximo)
+    if ($file["size"] > 5000000000) {
         echo "O arquivo é muito grande.";
         return null;
     }
@@ -47,8 +36,13 @@ function uploadImage($file, $targetDir = "uploads/") {
 }
 
 // Receber os dados do formulário
+$personagem_id = isset($_POST['personagem_id']) ? intval($_POST['personagem_id']) : null; // Obtém o ID do personagem
+if (!$personagem_id) {
+    die("O ID do personagem é obrigatório.");
+}
+
 $arma = isset($_FILES['arma']) ? uploadImage($_FILES['arma']) : null;
-$secundaria = isset($_FILES['secundaria']) ? uploadImage($_FILES['secundaria']) : null;
+$secundario = isset($_FILES['secundario']) ? uploadImage($_FILES['secundario']) : null;
 $utilizavel1 = isset($_FILES['utilizavel1']) ? uploadImage($_FILES['utilizavel1']) : null;
 $utilizavel2 = isset($_FILES['utilizavel2']) ? uploadImage($_FILES['utilizavel2']) : null;
 $artefato1 = isset($_FILES['artefato1']) ? uploadImage($_FILES['artefato1']) : null;
@@ -59,9 +53,9 @@ $calca = isset($_FILES['calca']) ? uploadImage($_FILES['calca']) : null;
 $calcado = isset($_FILES['calcado']) ? uploadImage($_FILES['calcado']) : null;
 
 // Preparar a query de inserção com prepared statements
-$stmt = $conn->prepare("INSERT INTO itens (arma, secundaria, utilizavel1, utilizavel2, artefato1, artefato2, capacete, peitoral, calca, calcado)
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-$stmt->bind_param("ssssssssss", $arma, $secundaria, $utilizavel1, $utilizavel2, $artefato1, $artefato2, $capacete, $peitoral, $calca, $calcado);
+$stmt = $conn->prepare("INSERT INTO itens (personagem_id, arma, secundario, utilizavel1, utilizavel2, artefato1, artefato2, capacete, peitoral, calca, calcado, status)
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 'bag')");
+$stmt->bind_param("issssssssss", $personagem_id, $arma, $secundario, $utilizavel1, $utilizavel2, $artefato1, $artefato2, $capacete, $peitoral, $calca, $calcado);
 
 // Executar a query
 if ($stmt->execute()) {
@@ -73,4 +67,35 @@ if ($stmt->execute()) {
 // Fechar a conexão
 $stmt->close();
 $conn->close();
+
+// Função para atualizar o status do item
+function atualizarStatusItem($itemId, $novoStatus) {
+    global $conn;
+
+    $stmt = $conn->prepare("UPDATE itens SET status = ? WHERE id = ?");
+    $stmt->bind_param("si", $novoStatus, $itemId);
+
+    if ($stmt->execute()) {
+        echo "Item atualizado para status: $novoStatus";
+    } else {
+        echo "Erro ao atualizar o item: " . $stmt->error;
+    }
+
+    $stmt->close();
+}
+
+// Exemplo de uso das funções de atualização
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['item_id'], $_POST['acao'])) {
+    $itemId = intval($_POST['item_id']);
+    $acao = $_POST['acao'];
+
+    if ($acao === 'usar') {
+        atualizarStatusItem($itemId, 'usado');
+    } elseif ($acao === 'bag') {
+        atualizarStatusItem($itemId, 'bag');
+    } else {
+        echo "Ação inválida.";
+    }
+}
+
 ?>
