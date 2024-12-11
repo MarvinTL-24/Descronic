@@ -4,7 +4,228 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>STATUS</title>
-    <link rel="stylesheet" href="style/modelos/visualizar.css">
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; /* Fundo escuro para o corpo */
+            color: #ffffff; /* Cor do texto para branco */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            background-color: #1e1e1e; /* Fundo escuro para o container */
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Sombra mais intensa */
+            margin-top: 40px;
+            transition: transform 0.3s ease-in-out; /* Efeito de transição */
+        }
+
+        .container:hover {
+            transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
+        }
+
+        h1 {
+            color: #f4a261; /* Cor vibrante para o título */
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+            display: block;
+            color: #f4a261; /* Cor do label em laranja */
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin-top: 5px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #2c2c2c; /* Fundo escuro nos campos */
+            color: #ffffff; /* Texto claro nos campos */
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, textarea:focus {
+            border-color: #f4a261; /* Foco laranja para inputs */
+            background-color: #333333; /* Fundo escuro ao focar */
+        }
+
+        textarea {
+            resize: vertical; /* Permite redimensionamento vertical */
+            min-height: 120px;
+        }
+
+        button {
+            width: 100%;
+            padding: 10px 20px;
+            background-color: #f4a261; /* Cor de fundo do botão */
+            color: #ffffff;
+            font-size: 14px;
+            font-weight: bold;
+            border: none;
+            border-radius: 50px; /* Botões mais redondos */
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 10px;
+        }
+
+        button:hover {
+            background-color: #e76f51; /* Cor do botão ao passar o mouse */
+            transform: scale(1.05); /* Efeito de escala no hover */
+        }
+
+        #characterDetails {
+            display: none;
+        }
+
+        #statusSection {
+            margin-top: 30px;
+            padding: 20px;
+            background-color: #2c2c2c; /* Fundo escuro para o status */
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .status-group {
+            display: inline-block;
+            text-align: center;
+            background-color: #333333; /* Fundo mais escuro para o grupo de status */
+            padding: 15px;
+            margin: 10px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .status-group button {
+            margin-bottom: 10px; /* Posiciona os botões acima dos status */
+            background-color: #444444;
+            border-radius: 10px;
+            padding: 8px 15px;
+            font-size: 12px;
+            color: #ffffff;
+        }
+
+        .status-group p {
+            margin: 10px 0;
+            font-size: 18px; /* Fonte maior para os textos de status */
+            color: #ffffff; /* Texto claro para o status */
+        }
+
+        .status-group p span {
+            font-weight: 800; /* Números mais chamativos */
+            color: #f4a261; /* Destaque em laranja para os valores */
+            font-size: 20px; /* Números ainda maiores */
+        }
+
+        .status-group button:hover {
+            background-color: #555555;
+        }
+
+        #confirmarAlteracoes, #cancelarAlteracoes {
+            width: auto; /* Botões menores */
+            padding: 8px 16px;
+            font-size: 25px; /* Texto menor */
+            border-radius: 50px; /* Totalmente arredondado */
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+            }
+
+            button {
+                width: 100%;
+            }
+        }
+
+        #navbar1 {
+            position: fixed; /* Mantém a barra fixa na tela */
+            top: 0;
+            left: 0;
+            width: 200px; /* Define a largura da navbar */
+            height: 100%; /* Ocupa toda a altura da tela */
+            background-color: var(--bg); /* Cor de fundo preta (já definida como var(--bg)) */
+            z-index: 1000; /* Garante que fique acima de outros elementos */
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 2px 0px 5px var(--shadow);
+        }
+
+        #navbar1 ul {
+            list-style: none; /* Remove o estilo de lista padrão */
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column; /* Organiza os itens verticalmente */
+            gap: 15px; /* Espaçamento entre os links */
+        }
+
+        #navbar1 li {
+            display: block;
+        }
+
+        #navbar1 a {
+            text-decoration: none; /* Remove o sublinhado dos links */
+            color: var(--c); /* Cor do texto (branca, conforme sua configuração de variáveis) */
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        #navbar1 a:hover {
+            color: var(--shadowFar); /* Muda a cor no hover para um efeito visual */
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            margin: 5px 0;
+        }
+
+        a {
+            text-decoration: none;
+            color: #007BFF;
+            cursor: pointer;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .submenu {
+            display: none; /* Inicialmente oculto */
+            margin-left: 20px;
+        }
+
+    </style>
 </head>
 <body>
     <nav id="navbar1">
@@ -16,6 +237,17 @@
             <li><a href="logout.php">Sair</a></li>
         </ul>
     </nav>
+    <form id="formStatus" method="POST" action="status.html">
+        <!-- Campos ocultos para os status -->
+        <input type="hidden" name="vitalidade" id="inputVitalidade" value="0">
+        <input type="hidden" name="agilidade" id="inputAgilidade" value="0">
+        <input type="hidden" name="fortitude" id="inputFortitude" value="0">
+        <input type="hidden" name="arcano" id="inputArcano" value="0">
+        <input type="hidden" name="resistencia" id="inputResistencia" value="0">
+        <input type="hidden" name="percepcao" id="inputPercepcao" value="0">
+        <input type="hidden" name="vidaEspiritual" id="inputVidaEspiritual" value="0">
+    </form>
+
     <div id="statusSection">
         <h3>Status Atuais do Personagem</h3>
         <div class="status-group">
@@ -29,7 +261,6 @@
             <p><strong>Vida Espiritual:</strong> <span id="statusVidaEspiritual">0</span></p>
         </div>
     </div>
-
     <div id="statusList"></div>
     <div id="levelInfo">
         <p>Nível atual: <span id="nivel">0</span></p>
@@ -38,18 +269,7 @@
     <button id="confirmarAlteracoes">Confirmar Alterações</button>
     <button id="cancelarAlteracoes">Cancelar Alterações</button>
 
-    <form id="formStatus" method="POST" action="status.html">
-        Identificar por meio do personagem ID
-
-        <!-- Campos ocultos para os status -->
-        <input type="hidden" name="vitalidade" id="inputVitalidade" value="0">
-        <input type="hidden" name="agilidade" id="inputAgilidade" value="0">
-        <input type="hidden" name="fortitude" id="inputFortitude" value="0">
-        <input type="hidden" name="arcano" id="inputArcano" value="0">
-        <input type="hidden" name="resistencia" id="inputResistencia" value="0">
-        <input type="hidden" name="percepcao" id="inputPercepcao" value="0">
-        <input type="hidden" name="vidaEspiritual" id="inputVidaEspiritual" value="0">
-    </form>
+    
 
     <script>
         const statusSection = document.getElementById('statusSection');
@@ -60,8 +280,8 @@
         const cancelarAlteracoesBtn = document.getElementById('cancelarAlteracoes');
         const formStatus = document.getElementById('formStatus');
 
-        let nivel = 1;
-        let pontosDisponiveis = 3;
+        let nivel = 0;
+        let pontosDisponiveis = 40;
         let statusBase = {
             vitalidade: 0,
             agilidade: 0,
