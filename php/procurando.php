@@ -1,10 +1,10 @@
 <?php
 
-// Configuração do banco de dados
-$host = "localhost";
-$dbname = "descronic";
-$user = "root";
-$password = "";
+// Conexão com o banco de dados (substitua os parâmetros de conexão conforme necessário)
+$servername = "127.0.0.1"; // Servidor local
+$username = "root";  // Altere conforme o seu banco de dados, geralmente "root" no MySQL
+$password = "";  // Senha do usuário do MySQL, se for vazio, então ok
+$dbname = "descronic";  // Nome correto do banco de dados
 
 // Criando a conexão
 $conn = new mysqli($host, $user, $password, $dbname);
