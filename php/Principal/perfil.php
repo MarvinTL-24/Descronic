@@ -38,7 +38,7 @@ $conn->close();
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perfil de <?php echo htmlspecialchars($nome); ?></title>
-    <link rel="stylesheet" href="style/modelos/visualizar.css">
+    <link rel="stylesheet" href="/style/modelos/perfil.css">
 </head>
 <body>
     <!-- Barra de Navegação -->
