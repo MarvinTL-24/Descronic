@@ -108,7 +108,7 @@
             const formData = new FormData(e.target);
             formData.append('action', 'search');
 
-            fetch('Salvando.php', {
+            fetch('conta.php', {
                 method: 'POST',
                 body: formData
             })
@@ -163,7 +163,7 @@
             formData.append('action', 'save');
             Object.keys(updatedData).forEach(key => formData.append(key, updatedData[key]));
 
-            fetch('Salvando.php', {
+            fetch('conta.php', {
                 method: 'POST',
                 body: formData
             })
