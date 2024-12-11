@@ -54,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Executa a consulta
     if ($stmt->execute()) {
         // Sucesso ao salvar no banco de dados
-        echo "<script>alert('Conta criada com sucesso!'); window.location.href = '/php/Principal/perfil.php';</script>";
+        echo "<script>alert('Conta criada com sucesso!'); window.location.href = 'perfil.php';</script>";
     } else {
         // Se ocorreu algum erro
         echo "<script>alert('Erro ao criar a conta. Tente novamente.'); window.location.href = 'usuario.html';</script>";
