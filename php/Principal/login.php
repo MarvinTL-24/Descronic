@@ -3,11 +3,6 @@ session_start();  // Inicia uma sessão para armazenar informações do usuário
 
 include_once('conectar.php');
 
-// Verifica a conexão
-if ($conn->connect_error) {
-    die("Erro na conexão: " . $conn->connect_error);
-}
-
 // Verifica se os dados foram enviados pelo formulário
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $nome = $_POST['nome'];
