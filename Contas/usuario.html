@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criando seu Usuario</title>
+    <link rel="stylesheet" href="/style/modelos/ficha.css">
+</head>
+<body>
+    <h2>Usuario principal</h2>
+    <p>OBS: Sera a forma de visualizar, salvar e editar os personagens que criar.</p>
+    <form action="/php/usuario.php" method="POST">
+        <label for="nome">Nome</label>
+        <input type="text" id="nome" name="nome" placeholder="Ex: Do seu usuario, não do personagem." required>
+
+        <label for="senha">Senha</label>
+        <input type="password" id="senha" name="senha" placeholder="Escolha uma senha segura." required>
+
+        <button type="submit">Salvar Ficha</button>
+    </form>
+</body>
+</html>
