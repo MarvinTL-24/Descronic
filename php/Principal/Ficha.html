@@ -9,8 +9,8 @@
             font-family: 'Arial', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #121212; 
-            color: #ffffff;
+            background-color: #121212; /* Fundo escuro para o corpo */
+            color: #ffffff; /* Cor do texto para branco */
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -19,13 +19,13 @@
         }
 
         #navbar1 {
-            position: fixed;
+            position: fixed; /* Mantém a barra fixa na tela */
             top: 0;
             left: 0;
-            width: 220px;
-            height: 100%;
-            background-color: #1e1e1e;
-            z-index: 1000;
+            width: 220px; /* Largura da navbar */
+            height: 100%; /* Ocupa toda a altura da tela */
+            background-color: #1e1e1e; /* Cor de fundo escura */
+            z-index: 1000; /* Garante que fique acima de outros elementos */
             display: flex;
             flex-direction: column;
             padding: 20px;
@@ -33,12 +33,12 @@
         }
 
         #navbar1 ul {
-            list-style: none;
+            list-style: none; /* Remove o estilo de lista */
             padding: 0;
             margin: 0;
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 15px; /* Espaçamento entre os links */
         }
 
         #navbar1 li {
@@ -47,75 +47,50 @@
 
         #navbar1 a {
             text-decoration: none;
-            color: #ffffff;
+            color: #ffffff; /* Cor do texto */
             font-size: 1rem;
             transition: color 0.3s;
         }
 
         #navbar1 a:hover {
-            color: #f4a261;
+            color: #f4a261; /* Cor laranja quando passa o mouse */
         }
 
         .container {
             max-width: 800px;
             width: 100%;
             padding: 30px;
-            background-color: #1e1e1e;
+            background-color: #1e1e1e; /* Fundo escuro para o container */
             border-radius: 10px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-            margin-top: 100px;
-            margin-left: 250px;
-            transition: transform 0.3s ease-in-out;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5); /* Sombra mais intensa */
+            margin-top: 100px; /* Para evitar sobreposição com a barra de navegação */
+            margin-left: 250px; /* Ajuste para navbar */
+            transition: transform 0.3s ease-in-out; /* Efeito de transição */
         }
 
         .container:hover {
-            transform: translateY(-5px);
+            transform: translateY(-5px); /* Efeito de elevação ao passar o mouse */
         }
 
         h1 {
-            color: #f4a261;
+            color: #f4a261; /* Título em laranja */
             text-align: center;
             margin-bottom: 20px;
         }
 
-        .profile-image-container {
-            text-align: center;
-            margin-bottom: 20px;
-            cursor: pointer;
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
 
-        .profile-image-container img {
-            border-radius: 50%;
-            width: 150px;
-            height: 150px;
-            object-fit: cover;
-            border: 5px solid #f4a261;
-            transition: transform 0.3s ease;
-        }
-
-        .profile-image-container img:hover {
-            transform: scale(1.1);
-        }
-
-        .profile-name {
-            font-size: 2rem;
-            font-weight: bold;
-            color: #f4a261;
-            margin-top: 10px;
-        }
-
-        .character-details {
-            display: none;
-            margin-top: 30px;
-        }
-
-        .character-details label {
+        label {
             font-size: 1rem;
-            color: #f4a261;
+            color: #f4a261; /* Laranja */
             margin-bottom: 5px;
         }
 
-        .character-details input, .character-details select, .character-details textarea {
+        input, select, textarea {
             width: 100%;
             padding: 12px;
             border-radius: 8px;
@@ -127,27 +102,27 @@
             transition: border-color 0.3s ease;
         }
 
-        .character-details input:focus, .character-details select:focus, .character-details textarea:focus {
+        input:focus, select:focus, textarea:focus {
             border-color: #f4a261;
             background-color: #333333;
         }
 
-        .character-details button {
+        button {
             width: 100%;
             padding: 12px 24px;
-            background-color: #f4a261;
+            background-color: #f4a261; /* Cor de fundo do botão */
             color: #ffffff;
             font-size: 16px;
             font-weight: bold;
             border: none;
             border-radius: 8px;
             cursor: pointer;
-            margin-top: 10px;
             transition: background-color 0.3s ease, transform 0.3s ease;
+            margin-top: 10px;
         }
 
-        .character-details button:hover {
-            background-color: #e76f51;
+        button:hover {
+            background-color: #e76f51; /* Cor do botão ao passar o mouse */
             transform: scale(1.05);
         }
 
@@ -181,15 +156,12 @@
             <li><a href="logout.php">Sair</a></li>
         </ul>
     </nav>
-    <div class="container">
-        <!-- Nome e Imagem do Personagem -->
-        <div class="profile-image-container" id="profileImageContainer">
-            <img id="characterImageDisplay" src="default_image.jpg" alt="Imagem do Personagem">
-            <div id="characterNameDisplay" class="profile-name">Carregando...</div>
-        </div>
-
+    <div class="fichainer">
+        <!-- Nome do personagem -->
+        <h1 id="characterNameDisplay">Carregando...</h1>
+        
         <!-- Detalhes do Personagem -->
-        <div id="characterDetails" class="character-details">
+        <div id="characterDetails" style="display:none;">
             <h3>Detalhes do Personagem</h3>
             <div><label>Raça:</label> <span id="raca"></span></div>
             <div><label>Idade:</label> <span id="idade"></span></div>
@@ -239,51 +211,61 @@
             fetch('ficha.php', { 
                 method: 'POST', 
                 body: new URLSearchParams({ action: 'search' }),
+                credentials: 'include' // Garante que os cookies de sessão sejam enviados
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert(data.error);
+                    } else {
+                        document.getElementById('characterDetails').style.display = 'block';
+                        document.getElementById('characterNameDisplay').textContent = data.nome;
+                        document.getElementById('raca').textContent = data.raca;
+                        document.getElementById('idade').textContent = data.idade;
+                        document.getElementById('peso').textContent = data.peso;
+                        document.getElementById('altura').textContent = data.altura;
+                        document.getElementById('classe').textContent = data.classe;
+                        document.getElementById('subclasse').textContent = data.subclasse;
+                        document.getElementById('Estilo').value = data.estilo || '';
+                        document.getElementById('personalidade').textContent = data.personalidade;
+                        document.getElementById('karma').value = data.karma || '';
+                        if (data.imagem) {
+                            const imgElement = document.createElement('img');
+                            imgElement.src = data.imagem;
+                            imgElement.alt = 'Imagem do personagem';
+                            imgElement.style.maxWidth = '400px';
+                            document.getElementById('imagePreview').innerHTML = '';
+                            document.getElementById('imagePreview').appendChild(imgElement);
+                        }
+                    }
+                })
+                .catch(error => console.error('Erro:', error));
+        });
+
+        // Salva alterações
+        document.getElementById('saveChanges').addEventListener('click', function () {
+            const formData = new FormData();
+            formData.append('action', 'save');
+            formData.append('Estilo', document.getElementById('Estilo').value);
+            formData.append('karma', document.getElementById('karma').value);
+            const fileInput = document.getElementById('characterImage');
+            if (fileInput.files.length > 0) {
+                formData.append('imagem', fileInput.files[0]);
+            }
+            fetch('ficha.php', { 
+                method: 'POST', 
+                body: formData, 
                 credentials: 'include' 
             })
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);  // Verificar o que foi retornado
-                if (data.error) {
-                    alert(data.error);
-                } else {
-                    document.getElementById('characterNameDisplay').textContent = data.nome;
-                    // Preencher outros dados do personagem
-                }
-            })
-            .catch(error => console.error('Erro:', error));
-
-
-            // Exibe a edição de perfil ao clicar na imagem
-            document.getElementById('profileImageContainer').addEventListener('click', function() {
-                document.getElementById('characterDetails').style.display = 'block';
-            });
-
-            // Salva alterações
-            document.getElementById('saveChanges').addEventListener('click', function () {
-                const formData = new FormData();
-                formData.append('action', 'save');
-                formData.append('Estilo', document.getElementById('Estilo').value);
-                formData.append('karma', document.getElementById('karma').value);
-                const fileInput = document.getElementById('characterImage');
-                if (fileInput.files.length > 0) {
-                    formData.append('imagem', fileInput.files[0]);
-                }
-                fetch('ficha.php', { 
-                    method: 'POST', 
-                    body: formData, 
-                    credentials: 'include' 
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        alert('Alterações salvas com sucesso!');
+                    } else {
+                        alert('Erro ao salvar alterações.');
+                    }
                 })
-                    .then(response => response.json())
-                    .then(data => {
-                        if (data.success) {
-                            alert('Alterações salvas com sucesso!');
-                        } else {
-                            alert('Erro ao salvar alterações.');
-                        }
-                    })
-                    .catch(error => console.error('Erro:', error));
-            });
+                .catch(error => console.error('Erro:', error));
         });
     </script>
 </body>

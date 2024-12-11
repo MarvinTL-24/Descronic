@@ -1,8 +1,9 @@
 <?php
-session_start();
-var_dump($_SESSION);  // Verificar o conteúdo da sessão
+session_start(); // Garante que a sessão seja iniciada
+
+// Verifica se o usuário está logado
 if (!isset($_SESSION['id'])) {
-    echo "Usuário não está logado.";
+    header('Location: login.php'); // Redireciona para a página de login
     exit;
 }
 
@@ -24,11 +25,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($result->num_rows > 0) {
             $personagem = $result->fetch_assoc();
-            var_dump($personagem);  // Verificar os dados recuperados
-            echo json_encode($personagem);
+            echo json_encode([
+                'nome' => $personagem['nome'],
+                'raca' => $personagem['raca'],
+                'idade' => $personagem['idade'],
+                'peso' => $personagem['peso'],
+                'altura' => $personagem['altura'],
+                'classe' => $personagem['classe'],
+                'subclasse' => $personagem['subclasse'],
+                'karma' => $personagem['karma'],
+                'personalidade' => $personagem['personalidade'],
+                'imagem' => $personagem['imagem'] // Verifique o campo de imagem
+            ]);
         } else {
             echo json_encode(['error' => 'Nenhum personagem encontrado.']);
         }
+        $stmt->close();
     }
 
     // Ação de salvar alterações
@@ -48,8 +60,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
         }
 
+        // Se não foi carregada uma imagem, usar uma imagem padrão
+        if ($imagem === null) {
+            $imagem = 'uploads/default_image.png'; // Imagem padrão se nenhuma imagem for carregada
+        }
+
         // Atualiza os dados no banco
-        $stmt = $conn->prepare("UPDATE personagem SET karma = ?, estilo = ?, imagem = COALESCE(?, imagem) WHERE conta_id = ?");
+        $stmt = $conn->prepare("UPDATE personagem SET karma = ?, estilo = ?, imagem = ? WHERE conta_id = ?");
         $stmt->bind_param("issi", $karma, $estilo, $imagem, $conta_id);
 
         if ($stmt->execute()) {
