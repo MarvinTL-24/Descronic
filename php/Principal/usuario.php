@@ -31,14 +31,21 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $upload_dir = 'uploads/'; // Pasta para armazenar as imagens
         $imagem_perfil = $upload_dir . basename($_FILES['imagem_perfil']['name']);
         
-        // Move o arquivo da imagem para o diretório de uploads
-        if (move_uploaded_file($_FILES['imagem_perfil']['tmp_name'], $imagem_perfil)) {
-            // Sucesso no upload da imagem
-        } else {
-            echo "<script>alert('Erro ao fazer o upload da imagem.');</script>";
-            exit();
+        // Verifica se a pasta uploads existe, se não, cria
+        if (!file_exists($upload_dir)) {
+            mkdir($upload_dir, 0777, true); // Cria a pasta com permissões adequadas
         }
+        
+        // Tenta mover o arquivo para o diretório de uploads
+        if (move_uploaded_file($_FILES['imagem_perfil']['tmp_name'], $imagem_perfil)) {
+            echo "Imagem carregada com sucesso!";
+        } else {
+            echo "Erro ao mover o arquivo para o diretório uploads.";
+        }
+    } else {
+        echo "Erro no envio do arquivo: " . $_FILES['imagem_perfil']['error'];
     }
+    
 
     // Prepara a consulta SQL para inserir os dados na tabela `conta`
     $stmt = $conn->prepare("INSERT INTO conta (nome, senha, imagem_perfil, bio) VALUES (?, ?, ?, ?)");
@@ -47,7 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Executa a consulta
     if ($stmt->execute()) {
         // Sucesso ao salvar no banco de dados
-        echo "<script>alert('Conta criada com sucesso!'); window.location.href = 'login.php';</script>";
+        echo "<script>alert('Conta criada com sucesso!'); window.location.href = '/php/Principal/perfil.php';</script>";
     } else {
         // Se ocorreu algum erro
         echo "<script>alert('Erro ao criar a conta. Tente novamente.'); window.location.href = 'usuario.html';</script>";
