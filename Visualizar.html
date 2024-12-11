@@ -20,16 +20,16 @@
         </ul>
     </nav>    
     <div class="container">
-        <h1>Ficha de Personagem</h1>
-        <form id="searchForm" action="php/Principal/perfil.php" method="post" onsubmit="return validarFormulario()">
-            <input type="hidden" name="action" value="search">
-            <label for="nome">Nome do Usuario:</label>
+        <h1>Login de Usuário</h1>
+        <form id="loginForm" action="php/Principal/login.php" method="post" onsubmit="return validarFormulario()">
+            <label for="nome">Nome do Usuário:</label>
             <input type="text" id="nome" name="nome" required>
             <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
-            <button type="submit">Buscar</button>
-            <button onclick="window.location.href='usuario.html';">Criar Conta</button>
+            <button type="submit">Login</button>
+            <button type="button" onclick="window.location.href='usuario.html';">Criar Conta</button>
         </form>
+    </div>
     <div id="statusSection">
         <h3>Status Atuais do Personagem</h3>
         <div class="status-group">
