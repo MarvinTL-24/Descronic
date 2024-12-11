@@ -3,9 +3,9 @@ session_start();  // Inicia uma sessão para armazenar informações do usuário
 
 // Conexão com o banco de dados
 $servername = "127.0.0.1";
-$username = "root";  // Nome de usuário do banco de dados
-$password = "";  // Senha do banco de dados
-$dbname = "descronic";  // Nome do banco de dados
+$username = "Descrente24";  // Nome de usuário do banco de dados
+$password = "Descrente&amor300p";  // Senha do banco de dados
+$dbname = " descronic's";  // Nome do banco de dados
 
 $conn = new mysqli($servername, $username, $password, $dbname);
 

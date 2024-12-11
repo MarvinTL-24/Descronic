@@ -8,9 +8,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Conexão com o banco de dados (substitua os parâmetros de conexão conforme necessário)
     $servername = "127.0.0.1"; // Servidor local
-    $username = "root";  // Altere conforme o seu banco de dados, geralmente "root" no MySQL
-    $password = "";  // Senha do usuário do MySQL, se for vazio, então ok
-    $dbname = "descronic";  // Nome correto do banco de dados
+    $username = "Descrente24";  // Altere conforme o seu banco de dados, geralmente "root" no MySQL
+    $password = "Descrente&amor300p";  // Senha do usuário do MySQL, se for vazio, então ok
+    $dbname = " descronic's";  // Nome correto do banco de dados
 
     // Cria a conexão
     $conn = new mysqli($servername, $username, $password, $dbname);
