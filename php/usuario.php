@@ -7,10 +7,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha_hash = password_hash($senha, PASSWORD_BCRYPT); // Usa bcrypt para fazer o hash da senha
 
     // Conexão com o banco de dados (substitua os parâmetros de conexão conforme necessário)
-    $servername = "localhost";
-    $username = "root";  // Altere conforme o seu banco de dados
-    $password = "";  // Altere conforme o seu banco de dados
-    $dbname = "descronic";  // Substitua pelo nome do seu banco
+    $servername = "127.0.0.1"; // Servidor local
+    $username = "root";  // Altere conforme o seu banco de dados, geralmente "root" no MySQL
+    $password = "";  // Senha do usuário do MySQL, se for vazio, então ok
+    $dbname = "descronic";  // Nome correto do banco de dados
 
     // Cria a conexão
     $conn = new mysqli($servername, $username, $password, $dbname);
@@ -30,12 +30,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Executa a consulta para a tabela `conta`
     if (!$stmt_conta->execute()) {
-        echo "<script>alert('Erro ao criar a conta. Tente novamente.'); window.location.href = '../Criando.html';</script>";
+        echo "<script>alert('Erro ao criar a conta. Tente novamente.'); window.location.href = 'usuario.html';</script>";
         exit(); // Interrompe a execução após o erro
     }
 
     // Sucesso na criação da conta
-    echo "<script>alert('Conta criada com sucesso!'); window.location.href = 'login.html';</script>";
+    echo "<script>alert('Conta criada com sucesso!'); window.location.href = 'Ficha.html';</script>";
 
     // Fecha a declaração preparada e a conexão
     $stmt_conta->close();
