@@ -27,10 +27,14 @@ SET time_zone = "+00:00";
 -- Estrutura da tabela `conta`
 --
 
-CREATE TABLE `conta` (
-  `nome` varchar(100) NOT NULL,
-  `senha` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+CREATE TABLE conta (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    imagem_perfil VARCHAR(255),
+    bio TEXT
+);
+
 
 -- --------------------------------------------------------
 
