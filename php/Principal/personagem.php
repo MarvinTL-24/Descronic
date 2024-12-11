@@ -1,14 +1,10 @@
 <?php
-session_start(); // Inicia a sessão
-
-// Verifica se o usuário está logado (se a variável de sessão 'id' está definida)
-if (!isset($_SESSION['id'])) {
-    echo "Erro: conta_id não está definido. O usuário não está logado.";
-    exit;  // Interrompe a execução caso o usuário não esteja logado
+session_start();
+if (isset($_SESSION['id'])) {
+    echo "Usuário logado, ID: " . $_SESSION['id'];
+} else {
+    echo "Usuário não está logado.";
 }
-
-// Atribui o conta_id da sessão
-$conta_id = $_SESSION['id'];  // Atribui o conta_id à variável
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera os dados do formulário
@@ -47,23 +43,22 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Prepara a consulta SQL para inserir o personagem
     $stmt_personagem = $conn->prepare("
-        INSERT INTO personagem (
-            nome, raca, idade, sexo, altura, peso, classe, subclasse, estilo, imagem, personalidade, status, forca, agilidade, resistencia, karma, conta_id
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-    ");
-    
-    // Corrige a string de tipos para corresponder a todos os parâmetros
-    $stmt_personagem->bind_param(
-        "ssissdssssssiiii", 
-        $nome, $raca, $idade, $sexo, $altura, $peso, $classe, $subclasse, $estilo, $caminhoImagem, $personalidade, $status, $forca, $agilidade, $resistencia, $karma, $conta_id
-    );
+    INSERT INTO personagem (
+        nome, raca, idade, sexo, altura, peso, classe, subclasse, estilo, imagem, personalidade, status, forca, agilidade, resistencia, karma, conta_id
+    ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+");
 
-    // Executa a consulta
-    if ($stmt_personagem->execute()) {
-        echo "<script>alert('Ficha do personagem criada com sucesso!'); window.location.href = '../Criando.html';</script>";
-    } else {
-        echo "<script>alert('Erro ao criar a ficha do personagem.'); window.location.href = '../Criando.html';</script>";
-    }
+$stmt_personagem->bind_param(
+    "ssissdssssssiiiii",
+    $nome, $raca, $idade, $sexo, $altura, $peso, $classe, $subclasse, $estilo, $caminhoImagem, $personalidade, $status, $forca, $agilidade, $resistencia, $karma, $conta_id
+);
+
+if ($stmt_personagem->execute()) {
+    echo "<script>alert('Ficha do personagem criada com sucesso!'); window.location.href = '../perfil.php';</script>";
+} else {
+    echo "<script>alert('Erro ao criar a ficha do personagem.'); window.location.href = '../perfil.php';</script>";
+}
+
 
     // Fecha as declarações e a conexão
     $stmt_personagem->close();

@@ -234,9 +234,7 @@ $conn->close();
     <nav id="navbar1">
         <ul>
             <li><a href="perfil.php">Perfil</a></li>
-            <li><a href="criar.html">Criar Personagem</a></li>
-            <li><a href="#">Adicionar itens</a></li>
-            <li><a href="#">Status</a></li>
+            <li><a href="Ficha.html">Personagem</a></li>
             <li><a href="logout.php">Sair</a></li>
         </ul>
     </nav>
@@ -265,11 +263,11 @@ $conn->close();
         <button id="saveChanges" type="button" onclick="saveProfileChanges()">Salvar Alterações</button>
 
         <div class="edit-options">
-            <h3>Escolha o que deseja visualizar ?</h3>
+            <h3>Escolha o que deseja fazer:</h3>
             <ul>
-            <li><a href="#">Caracteristicas</a></li>
-                <li><a href="itens.php">Itens</a></li>
-                <li><a href="status.php">Status</a></li>
+                <li><a href="criar.html">Criar um novo personagem</a></li>
+                <li><a href="itens.php">Alterar Equipamentos</a></li>
+                <li><a href="status.php">Atualizar Status</a></li>
             </ul>
         </div>
     </div>

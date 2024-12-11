@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ficha do Personagem</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #121212; 
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            min-height: 100vh;
+        }
+
+        #navbar1 {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 220px;
+            height: 100%;
+            background-color: #1e1e1e;
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-shadow: 2px 0px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        #navbar1 ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        #navbar1 li {
+            display: block;
+        }
+
+        #navbar1 a {
+            text-decoration: none;
+            color: #ffffff;
+            font-size: 1rem;
+            transition: color 0.3s;
+        }
+
+        #navbar1 a:hover {
+            color: #f4a261;
+        }
+
+        .container {
+            max-width: 800px;
+            width: 100%;
+            padding: 30px;
+            background-color: #1e1e1e;
+            border-radius: 10px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            margin-top: 100px;
+            margin-left: 250px;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .container:hover {
+            transform: translateY(-5px);
+        }
+
+        h1 {
+            color: #f4a261;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .profile-image-container {
+            text-align: center;
+            margin-bottom: 20px;
+            cursor: pointer;
+        }
+
+        .profile-image-container img {
+            border-radius: 50%;
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 5px solid #f4a261;
+            transition: transform 0.3s ease;
+        }
+
+        .profile-image-container img:hover {
+            transform: scale(1.1);
+        }
+
+        .profile-name {
+            font-size: 2rem;
+            font-weight: bold;
+            color: #f4a261;
+            margin-top: 10px;
+        }
+
+        .character-details {
+            display: none;
+            margin-top: 30px;
+        }
+
+        .character-details label {
+            font-size: 1rem;
+            color: #f4a261;
+            margin-bottom: 5px;
+        }
+
+        .character-details input, .character-details select, .character-details textarea {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            background-color: #2c2c2c;
+            color: #ffffff;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.3s ease;
+        }
+
+        .character-details input:focus, .character-details select:focus, .character-details textarea:focus {
+            border-color: #f4a261;
+            background-color: #333333;
+        }
+
+        .character-details button {
+            width: 100%;
+            padding: 12px 24px;
+            background-color: #f4a261;
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: bold;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+
+        .character-details button:hover {
+            background-color: #e76f51;
+            transform: scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                margin: 20px;
+                padding: 20px;
+                margin-left: 0;
+            }
+
+            #navbar1 {
+                width: 100%;
+                height: auto;
+                position: static;
+                box-shadow: none;
+            }
+
+            #navbar1 ul {
+                flex-direction: row;
+                justify-content: space-around;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Barra de Navegação -->
+    <nav id="navbar1">
+        <ul>
+            <li><a href="perfil.php">Perfil</a></li>
+            <li><a href="Ficha.html">Personagem</a></li>
+            <li><a href="logout.php">Sair</a></li>
+        </ul>
+    </nav>
+    <div class="container">
+        <!-- Nome e Imagem do Personagem -->
+        <div class="profile-image-container" id="profileImageContainer">
+            <img id="characterImageDisplay" src="default_image.jpg" alt="Imagem do Personagem">
+            <div id="characterNameDisplay" class="profile-name">Carregando...</div>
+        </div>
+
+        <!-- Detalhes do Personagem -->
+        <div id="characterDetails" class="character-details">
+            <h3>Detalhes do Personagem</h3>
+            <div><label>Raça:</label> <span id="raca"></span></div>
+            <div><label>Idade:</label> <span id="idade"></span></div>
+            <div><label>Peso:</label> <span id="peso"></span></div>
+            <div><label>Altura:</label> <span id="altura"></span></div>
+            <div><label>Classe:</label> <span id="classe"></span></div>
+            <div><label>Subclasse:</label> <span id="subclasse"></span></div>
+            <div>
+                <label for="Estilo">Estilo de Luta:</label>
+                <select id="Estilo" name="Estilo" required>
+                    <option value="">Selecione um estilo</option>
+                    <option value="Artes Marciais Orientais">Artes Marciais Orientais</option>
+                    <option value="Artes Marciais Ocidentais">Artes Marciais Ocidentais</option>
+                    <option value="Estilos Modernos de Combate">Estilos Modernos de Combate</option>
+                    <option value="Estilos Históricos de Combate">Estilos Históricos de Combate</option>
+                    <option value="Armas de Haste">Armas de Haste</option>
+                    <option value="Armas de Impacto">Armas de Impacto</option>
+                    <option value="Armas de Arremesso">Armas de Arremesso</option>
+                    <option value="Ceifeador">Usuario de foices</option>
+                    <option value="Mago">Usuario de magia</option>
+                    <option value="Duas espadas">Duas espadas</option>
+                    <option value="Atirador">Atirador</option>
+                    <option value="Espiritualista">Espiritualista</option>
+                    <option value="Armas pesadas">Armas pesadas</option>
+                    <option value="Protetor">Protetor</option>
+                    <option value="Chicoteador">Chicoteador</option>
+                    <option value="Esgrima">Esgrimista</option>
+                </select>
+            </div>
+            <div><label>Personalidade:</label> <span id="personalidade"></span></div>
+            <div>
+                <label>Karma:</label>
+                <input type="text" id="karma" name="karma">
+            </div>
+            <div class="character-image">
+                <label for="characterImage">Imagem do Personagem:</label>
+                <input type="file" id="characterImage" name="characterImage">
+                <div id="imagePreview"></div>
+            </div>
+            <button id="saveChanges">Salvar Alterações</button>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Carrega dados do personagem
+            fetch('ficha.php', { 
+                method: 'POST', 
+                body: new URLSearchParams({ action: 'search' }),
+                credentials: 'include' 
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);  // Verificar o que foi retornado
+                if (data.error) {
+                    alert(data.error);
+                } else {
+                    document.getElementById('characterNameDisplay').textContent = data.nome;
+                    // Preencher outros dados do personagem
+                }
+            })
+            .catch(error => console.error('Erro:', error));
+
+
+            // Exibe a edição de perfil ao clicar na imagem
+            document.getElementById('profileImageContainer').addEventListener('click', function() {
+                document.getElementById('characterDetails').style.display = 'block';
+            });
+
+            // Salva alterações
+            document.getElementById('saveChanges').addEventListener('click', function () {
+                const formData = new FormData();
+                formData.append('action', 'save');
+                formData.append('Estilo', document.getElementById('Estilo').value);
+                formData.append('karma', document.getElementById('karma').value);
+                const fileInput = document.getElementById('characterImage');
+                if (fileInput.files.length > 0) {
+                    formData.append('imagem', fileInput.files[0]);
+                }
+                fetch('ficha.php', { 
+                    method: 'POST', 
+                    body: formData, 
+                    credentials: 'include' 
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.success) {
+                            alert('Alterações salvas com sucesso!');
+                        } else {
+                            alert('Erro ao salvar alterações.');
+                        }
+                    })
+                    .catch(error => console.error('Erro:', error));
+            });
+        });
+    </script>
+</body>
+</html>

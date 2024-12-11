@@ -42,26 +42,19 @@ CREATE TABLE conta (
 -- Estrutura da tabela `itens`
 --
 
-CREATE TABLE `personagem` (
-    `id` INT AUTO_INCREMENT PRIMARY KEY, -- Adicionado um ID único para o personagem
-    `conta_id` INT NOT NULL,             -- Relaciona o personagem com uma conta
-    `nome` VARCHAR(100) NOT NULL,
-    `raca` VARCHAR(50) DEFAULT NULL,
-    `idade` INT(11) DEFAULT NULL,
-    `sexo` VARCHAR(10) DEFAULT NULL,
-    `altura` FLOAT DEFAULT NULL,
-    `peso` FLOAT DEFAULT NULL,
-    `classe` VARCHAR(100) DEFAULT NULL,
-    `subclasse` VARCHAR(50) DEFAULT NULL,
-    `estilo` VARCHAR(100) DEFAULT NULL,
-    `imagem` TEXT DEFAULT NULL,
-    `personalidade` TEXT DEFAULT NULL,
-    `status` TEXT DEFAULT NULL,
-    `forca` INT(11) DEFAULT NULL,
-    `agilidade` INT(11) DEFAULT NULL,
-    `resistencia` INT(11) DEFAULT NULL,
-    `karma` INT(11) DEFAULT NULL,
-    FOREIGN KEY (`conta_id`) REFERENCES `conta`(`id`) ON DELETE CASCADE ON UPDATE CASCADE
+CREATE TABLE `itens` (
+  `id` int(11) NOT NULL,
+  `nome` varchar(255) NOT NULL,
+  `arma` varchar(255) DEFAULT NULL,
+  `secundaria` varchar(255) DEFAULT NULL,
+  `utilizavel1` varchar(255) DEFAULT NULL,
+  `utilizavel2` varchar(255) DEFAULT NULL,
+  `artefato1` varchar(255) DEFAULT NULL,
+  `artefato2` varchar(255) DEFAULT NULL,
+  `capacete` varchar(255) DEFAULT NULL,
+  `peitoral` varchar(255) DEFAULT NULL,
+  `calca` varchar(255) DEFAULT NULL,
+  `calcado` varchar(255) DEFAULT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
