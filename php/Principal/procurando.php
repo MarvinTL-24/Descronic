@@ -6,19 +6,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $senha = $_POST['senha']; // Recupera a senha enviada pelo formulário
     $senha_hash = password_hash($senha, PASSWORD_BCRYPT); // Usa bcrypt para fazer o hash da senha
 
-    // Conexão com o banco de dados (substitua os parâmetros de conexão conforme necessário)
-    $servername = "127.0.0.1"; // Servidor local
-    $username = "Descrente24";  // Altere conforme o seu banco de dados, geralmente "root" no MySQL
-    $password = "Descrente&amor300p";  // Senha do usuário do MySQL, se for vazio, então ok
-    $dbname = " descronic's";  // Nome correto do banco de dados
-
-    // Cria a conexão
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verifica a conexão
-    if ($conn->connect_error) {
-        die("Conexão falhou: " . $conn->connect_error);
-    }
+    include_once('conectar.php');
 
     // Verifica se o nome de usuário já existe
     $stmt_check_user = $conn->prepare("SELECT id FROM conta WHERE nome = ?");

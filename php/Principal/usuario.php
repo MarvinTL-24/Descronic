@@ -9,19 +9,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Faz o hash da senha usando bcrypt
     $senha_hash = password_hash($senha, PASSWORD_BCRYPT);
 
-    // Conexão com o banco de dados
-    $servername = "127.0.0.1"; // Servidor local
-    $username = "Descrente24";  // Usuário do MySQL
-    $password = "Descrente&amor300p";  // Senha do MySQL
-    $dbname = " descronic's";  // Nome do banco de dados
-
-    // Cria a conexão com o banco de dados
-    $conn = new mysqli($servername, $username, $password, $dbname);
-
-    // Verifica se a conexão foi bem-sucedida
-    if ($conn->connect_error) {
-        die("Conexão falhou: " . $conn->connect_error);
-    }
+    include_once('conectar.php');
 
     // Verifica se foi enviado uma imagem
     $imagem_perfil = null; // Inicializa a variável para a imagem

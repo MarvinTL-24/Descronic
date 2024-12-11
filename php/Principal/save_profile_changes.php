@@ -9,18 +9,7 @@ if (!isset($_SESSION['user_id'])) {
 
 $user_id = $_SESSION['user_id']; // Pegando o ID do usuário logado
 
-// Conexão com o banco de dados
-$servername = "127.0.0.1";
-$username = "Descrente24";
-$password = "Descrente&amor300p";
-$dbname = " descronic's";
-
-$conn = new mysqli($servername, $username, $password, $dbname);
-
-// Verifica a conexão
-if ($conn->connect_error) {
-    die("Conexão falhou: " . $conn->connect_error);
-}
+include_once('conectar.php');
 
 // Recupera os dados do formulário
 $bio = $_POST['bio'];
