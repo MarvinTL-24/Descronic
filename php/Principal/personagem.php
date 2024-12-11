@@ -1,14 +1,14 @@
 <?php
 session_start(); // Inicia a sessão
 
-// Verifica se o usuário está logado (se a variável de sessão 'conta_id' está definida)
-if (!isset($_SESSION['conta_id'])) {
+// Verifica se o usuário está logado (se a variável de sessão 'id' está definida)
+if (!isset($_SESSION['id'])) {
     echo "Erro: conta_id não está definido. O usuário não está logado.";
     exit;  // Interrompe a execução caso o usuário não esteja logado
 }
 
-// Agora você pode acessar $_SESSION['conta_id']
-$conta_id = $_SESSION['conta_id'];  // Atribui o conta_id à variável
+// Atribui o conta_id da sessão
+$conta_id = $_SESSION['id'];  // Atribui o conta_id à variável
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera os dados do formulário
@@ -45,7 +45,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Inclui o arquivo de conexão
     include_once('conectar.php');
 
-    // Prepara a consulta SQL
+    // Prepara a consulta SQL para inserir o personagem
     $stmt_personagem = $conn->prepare("
         INSERT INTO personagem (
             nome, raca, idade, sexo, altura, peso, classe, subclasse, estilo, imagem, personalidade, status, forca, agilidade, resistencia, karma, conta_id
