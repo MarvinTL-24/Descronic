@@ -25,8 +25,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Conexão com o banco de dados (substitua os parâmetros de conexão conforme necessário)
     $servername = "localhost";
     $username = "root";  // Altere conforme o seu banco de dados
-    $password = "Descrente&amor300p";  // Altere conforme o seu banco de dados
-    $dbname = "Descrente24";  // Substitua pelo nome do seu banco
+    $password = "";  // Altere conforme o seu banco de dados
+    $dbname = "descronic";  // Substitua pelo nome do seu banco
 
     // Cria a conexão
     $conn = new mysqli($servername, $username, $password, $dbname);

@@ -1,9 +1,9 @@
 <?php
 // Configuração do banco de dados
 $host = "localhost";
-$dbname = "dbname";
-$user = "Descrente24";
-$password = "Descrente&amor300p";
+$dbname = "descronic";
+$user = "root";
+$password = "";
 
 // Criando a conexão
 $conn = new mysqli($host, $user, $password, $dbname);
