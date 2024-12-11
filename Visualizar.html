@@ -21,14 +21,14 @@
     </nav>    
     <div class="container">
         <h1>Ficha de Personagem</h1>
-        <form id="searchForm" action="PHP/procurando.php" method="post" onsubmit="return validarFormulario()">
+        <form id="searchForm" action="/php/procurando.php" method="post" onsubmit="return validarFormulario()">
             <input type="hidden" name="action" value="search">
             <label for="nome">Nome do Personagem:</label>
             <input type="text" id="nome" name="nome" required>
             <label for="senha">Senha:</label>
             <input type="password" id="senha" name="senha" required>
             <button type="submit">Buscar</button>
-            <button onclick="window.location.href='Criando.html';">Criar Conta</button>
+            <button onclick="window.location.href='/Contas/Criando.html';">Criar Conta</button>
         </form>
     <div id="statusSection">
         <h3>Status Atuais do Personagem</h3>
