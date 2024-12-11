@@ -3,42 +3,58 @@
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Recupera os dados do formulário
     $nome = $_POST['nome'];
-    $senha = $_POST['senha']; // Recupera a senha enviada pelo formulário
-    $senha_hash = password_hash($senha, PASSWORD_BCRYPT); // Usa bcrypt para fazer o hash da senha
+    $senha = $_POST['senha']; // Senha do usuário
+    $bio = $_POST['bio']; // Biografia
 
-    // Conexão com o banco de dados (substitua os parâmetros de conexão conforme necessário)
+    // Faz o hash da senha usando bcrypt
+    $senha_hash = password_hash($senha, PASSWORD_BCRYPT);
+
+    // Conexão com o banco de dados
     $servername = "127.0.0.1"; // Servidor local
-    $username = "root";  // Altere conforme o seu banco de dados, geralmente "root" no MySQL
-    $password = "";  // Senha do usuário do MySQL, se for vazio, então ok
-    $dbname = "descronic";  // Nome correto do banco de dados
+    $username = "root";  // Usuário do MySQL
+    $password = "";  // Senha do MySQL
+    $dbname = "descronic";  // Nome do banco de dados
 
-    // Cria a conexão
+    // Cria a conexão com o banco de dados
     $conn = new mysqli($servername, $username, $password, $dbname);
 
-    // Verifica a conexão
+    // Verifica se a conexão foi bem-sucedida
     if ($conn->connect_error) {
         die("Conexão falhou: " . $conn->connect_error);
     }
 
-    // Prepara a consulta SQL para inserir os dados na tabela `conta` com prepared statement
-    $stmt_conta = $conn->prepare("INSERT INTO conta (nome, senha) VALUES (?, ?)");
-    if ($stmt_conta === false) {
-        die("Erro ao preparar a consulta: " . $conn->error);
+    // Verifica se foi enviado uma imagem
+    $imagem_perfil = null; // Inicializa a variável para a imagem
+
+    if (isset($_FILES['imagem_perfil']) && $_FILES['imagem_perfil']['error'] === UPLOAD_ERR_OK) {
+        // Caminho para salvar a imagem no servidor
+        $upload_dir = 'uploads/'; // Pasta para armazenar as imagens
+        $imagem_perfil = $upload_dir . basename($_FILES['imagem_perfil']['name']);
+        
+        // Move o arquivo da imagem para o diretório de uploads
+        if (move_uploaded_file($_FILES['imagem_perfil']['tmp_name'], $imagem_perfil)) {
+            // Sucesso no upload da imagem
+        } else {
+            echo "<script>alert('Erro ao fazer o upload da imagem.');</script>";
+            exit();
+        }
     }
 
-    $stmt_conta->bind_param("ss", $nome, $senha_hash); // "ss" significa dois parâmetros do tipo string
+    // Prepara a consulta SQL para inserir os dados na tabela `conta`
+    $stmt = $conn->prepare("INSERT INTO conta (nome, senha, imagem_perfil, bio) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $nome, $senha_hash, $imagem_perfil, $bio); // "ssss" significa 4 parâmetros do tipo string
 
-    // Executa a consulta para a tabela `conta`
-    if (!$stmt_conta->execute()) {
+    // Executa a consulta
+    if ($stmt->execute()) {
+        // Sucesso ao salvar no banco de dados
+        echo "<script>alert('Conta criada com sucesso!'); window.location.href = 'login.php';</script>";
+    } else {
+        // Se ocorreu algum erro
         echo "<script>alert('Erro ao criar a conta. Tente novamente.'); window.location.href = 'usuario.html';</script>";
-        exit(); // Interrompe a execução após o erro
     }
 
-    // Sucesso na criação da conta
-    echo "<script>alert('Conta criada com sucesso!'); window.location.href = 'Ficha.html';</script>";
-
-    // Fecha a declaração preparada e a conexão
-    $stmt_conta->close();
+    // Fecha a declaração e a conexão
+    $stmt->close();
     $conn->close();
 }
 ?>
