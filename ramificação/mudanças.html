@@ -113,6 +113,28 @@
             color: #ffd700;
             font-style: italic;
         }
+        #menu-button {
+            position: relative;
+            width: 50px;
+            height: 50px;
+            background-color: #f3f1f1;
+            color: rgb(148, 21, 21);
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        #menu-button .arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 10px solid rgb(148, 21, 21); /* Cor da seta */
+        }
     </style>
 </head>
 <body>
