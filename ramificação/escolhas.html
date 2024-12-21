@@ -3,40 +3,50 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planilha de criação e obtenção</title>
+    <title>Peso de suas escolhas</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
+        /* Estilo geral */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #7a5c2f;
+            background: linear-gradient(135deg, #232526, #414345); /* Fundo com gradiente escuro */
             margin: 0;
             padding: 20px;
+            color: #fff; /* Texto branco para contraste */
         }
 
         h2 {
             text-align: center;
-            color: #c47e27;
+            color: #ffd700; /* Amarelo ouro */
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000; /* Sombra para destaque */
         }
 
         svg {
             display: block;
             margin: 0 auto;
-            background-color: #ffffff;
-            border: 1px solid #ccc;
+            background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
         .node rect {
             fill: #69b3a2;
-            stroke: #555;
+            stroke: #ffffff;
             stroke-width: 2;
             rx: 10;
             ry: 10;
+            transition: fill 0.3s ease, transform 0.2s ease; /* Suavizar alterações */
+        }
+
+        .node rect:hover {
+            fill: #ffd700; /* Destaque ao passar o mouse */
+            transform: scale(1.1); /* Leve aumento */
         }
 
         .node text {
-            font-size: 12px;
+            font-size: 14px;
             fill: white;
             text-anchor: middle;
             dominant-baseline: middle;
@@ -49,21 +59,39 @@
         }
 
         .observations {
-            fill: #3e3e3e;
-            font-size: 14px;
+            fill: #ffd700; /* Destaque dourado */
+            font-size: 16px;
             font-weight: bold;
+            text-shadow: 1px 1px 2px #000;
+        }
+        #menu-button {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 10px;
+            background-color: #f3f1f1;
+            color: rgb(148, 21, 21);
+            border: none;
+            border-radius: 50%;
         }
     </style>
 </head>
 <body>
-    <h2>Peso baseado nas variáveis abaixo:</h2>
-
-    <svg width="1400" height="1000">
-        <!-- Observations will be placed here -->
-        <text class="observations" x="50" y="980">
+    <a href="../Informações.html">
+        <button id="menu-button">
+            <i class="fas fa-user"></i> <!-- Ícone de menu -->
+        </button>
+    </a>
+    <h2>Maior peso:</h2>
+    <svg width="1800" height="1000">
+        <!-- Observações -->
+        <text class="observations" x="50" y="920">
             OBS: São pontos de variáveis oscilatórias, pois até mesmo a morte ou fracasso em certas quests podem influenciar na criação ou não de modos de influenciar o local em que está.
         </text>
-        <text class="observations" x="50" y="1000">
+        <text class="observations" x="50" y="950">
             OBS: A porcentagem não representa a escolha ideal, mas o que a sociedade em que estão inseridos mais valoriza.
         </text>
     </svg>
@@ -125,7 +153,7 @@
 
         const g = svg.append("g").attr("transform", "translate(50,50)");
 
-        const tree = d3.tree().size([height - 150, width - 200]);
+        const tree = d3.tree().size([height - 200, width - 200]);
 
         const root = d3.hierarchy(data);
         tree(root);
