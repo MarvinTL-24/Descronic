@@ -3,68 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planilha de criação e obtenção</title>
+    <title>Peso de suas escolhas</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
     <style>
+        /* Estilo geral */
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #7a5c2f; /* Tom de pedra */
+            background: linear-gradient(135deg, #232526, #414345); /* Fundo com gradiente escuro */
             margin: 0;
             padding: 20px;
+            color: #fff; /* Texto branco para contraste */
         }
 
         h2 {
             text-align: center;
-            color: #c47e27; /* Cor dourada metálica, simbolizando forja */
+            color: #ffd700; /* Amarelo ouro */
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000; /* Sombra para destaque */
         }
 
-        table {
-            width: 80%;
+        svg {
+            display: block;
             margin: 0 auto;
-            border-collapse: collapse;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra leve */
+            background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
             border-radius: 10px;
-            overflow: hidden;
-            background-color: rgba(255, 255, 255, 0.8); /* Transparente para um toque mais leve */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
         }
 
-        th, td {
-            padding: 15px 20px;
-            text-align: center;
-            border-bottom: 1px solid #ddd;
+        .node rect {
+            fill: #69b3a2;
+            stroke: #ffffff;
+            stroke-width: 2;
+            rx: 10;
+            ry: 10;
+            transition: fill 0.3s ease, transform 0.2s ease; /* Suavizar alterações */
         }
 
-        th {
-            background-color: #3e2a47; /* Cor metálica e escura */
-            color: white;
-            font-weight: bold;
+        .node rect:hover {
+            fill: #ffd700; /* Destaque ao passar o mouse */
+            transform: scale(1.1); /* Leve aumento */
         }
 
-        td {
-            background-color: #f7f7f7; /* Cor de pedra leve */
-            color: #333;
+        .node text {
             font-size: 14px;
+            fill: white;
+            text-anchor: middle;
+            dominant-baseline: middle;
         }
 
-        tr:nth-child(even) td {
-            background-color: #e2e2e2; /* Alternância de cor para maior contraste */
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2;
         }
 
-        tr:hover td {
-            background-color: rgba(182, 138, 38, 0.2); /* Efeito de hover dourado suave */
-            cursor: pointer;
-        }
-
-        caption {
-            font-size: 24px;
+        .observations {
+            fill: #ffd700; /* Destaque dourado */
+            font-size: 16px;
             font-weight: bold;
-            padding: 10px;
-            color: #4a3d23; /* Cor de pedra mais escura */
+            text-shadow: 1px 1px 2px #000;
         }
-
-        td, th {
-            border-radius: 8px; /* Bordas arredondadas para um efeito mais suave */
-        }
-
         #menu-button {
             width: 50px;
             height: 50px;
@@ -86,4 +85,4 @@
             <i class="fas fa-user"></i> <!-- Ícone de menu -->
         </button>
     </a>
-    <h2>CRIAÇÃO DAS RESPECTIVAS REGIÕES:</h2>
+    <h2>Recompensas:</h2>
