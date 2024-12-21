@@ -3,66 +3,115 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peso de suas escolhas</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Recompensas</title>
     <style>
-        /* Estilo geral */
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #232526, #414345); /* Fundo com gradiente escuro */
+            background: linear-gradient(135deg, #232526, #414345);
             margin: 0;
             padding: 20px;
-            color: #fff; /* Texto branco para contraste */
+            color: #fff;
         }
 
         h2 {
             text-align: center;
-            color: #ffd700; /* Amarelo ouro */
+            color: #ffd700;
             font-size: 36px;
             font-weight: bold;
-            text-shadow: 2px 2px 4px #000; /* Sombra para destaque */
+            text-shadow: 2px 2px 4px #000;
         }
 
-        svg {
-            display: block;
-            margin: 0 auto;
-            background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .image-container img {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 2px solid #ccc;
+            transition: transform 0.3s, border-color 0.3s;
+            cursor: pointer;
+        }
+
+        .image-container img:hover {
+            transform: scale(1.1);
+            border-color: #007BFF;
+        }
+
+        .info-container {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 0, 0, 0.9);
+            color: #fff;
+            padding: 30px;
             border-radius: 10px;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            z-index: 100;
         }
 
-        .node rect {
-            fill: #69b3a2;
-            stroke: #ffffff;
-            stroke-width: 2;
-            rx: 10;
-            ry: 10;
-            transition: fill 0.3s ease, transform 0.2s ease; /* Suavizar alterações */
+        .info-container.active {
+            display: block;
         }
 
-        .node rect:hover {
-            fill: #ffd700; /* Destaque ao passar o mouse */
-            transform: scale(1.1); /* Leve aumento */
+        .info-container h3 {
+            margin-bottom: 20px;
+            font-size: 24px;
+            color: #ffd700;
         }
 
-        .node text {
-            font-size: 14px;
-            fill: white;
-            text-anchor: middle;
-            dominant-baseline: middle;
+        .info-container p {
+            font-size: 18px;
+            line-height: 1.6;
         }
 
-        .link {
-            fill: none;
-            stroke: #ccc;
-            stroke-width: 2;
-        }
-
-        .observations {
-            fill: #ffd700; /* Destaque dourado */
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #ff4c4c;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
             font-size: 16px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px #000;
+            cursor: pointer;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+        }
+
+        .close-button:hover {
+            background: #ff1c1c;
+        }
+        #menu-button {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 10px;
+            background-color: #f3f1f1;
+            color: rgb(148, 21, 21);
+            border: none;
+            border-radius: 50%;
+        }
+        .mystery-message {
+            margin-top: 50px;
+            text-align: center;
+            font-size: 18px;
+            color: #ffd700;
+            font-style: italic;
         }
         #menu-button {
             position: relative;
@@ -94,4 +143,90 @@
             <i class="arrow"></i> <!-- Ícone de seta para trás -->
         </button>
     </a>
-    <h2>Recompensas:</h2>
+    <h2>Como adquirir recompensas.</h2>
+    <div class="image-container">
+        <img src="" alt="Missão" onclick="showInfo('Missão', 1)">
+        <img src="" alt="Inspecionar" onclick="showInfo('Inspecionar', 2)">
+        <img src="" alt="Puzzles" onclick="showInfo('Puzzles', 3)">
+        <img src="" alt="Criaturas" onclick="showInfo('Criaturas', 4)">
+        <img src="" alt="Criação" onclick="showInfo('Criação', 5)">
+    </div>
+
+    <div id="info-container" class="info-container">
+        <button class="close-button" onclick="closeInfo()">&times;</button>
+        <h3 id="info-title">Climas</h3>
+        <div id="info-content">
+            <p>Conteúdo</p>
+        </div>
+    </div>
+    <div class="mystery-message">
+        Nem mesmo a melhor recompensa vale o sacrificio que ira o precidir.
+    </div>
+
+    <script>
+        const infoData = {
+            1: {
+                title: 'Missão',
+                content: `
+                    <p>Duração: 3 horas.</p>
+                    <p>Coloração: Verde neon.</p>
+                    <p>Interferência: O calor pode causar problemas em certas regiões ou facilitar a criação de variáveis.</p>
+                    <p>Bônus: A habilidade de fogo ou de luz tem um potencial maior de funcionar.</p>
+                `,
+            },
+            2: {
+                title: 'Inspecionar',
+                content: `
+                    <p>Duração: 2 horas.</p>
+                    <p>Coloração: Azul marinho.</p>
+                    <p>Interferência: Certas quests, habilidades ou puzzles dependem dessa luz.</p>
+                    <p>Bônus: A habilidade de gelo ou de magia gravitacional tem um potencial maior de funcionar.</p>
+                `,
+            },
+            3: {
+                title: 'Puzzles',
+                content: `
+                    <p>Duração: 1 hora - aleatoriamente.</p>
+                    <p>Coloração: A Puzzles irá deixar mais difícil a visualização de áreas de visão ampla.</p>
+                    <p>Interferência: Mesmo dificultando a visão ele tem como principal foco facilitar missões furtivas, roubos e assassinatos.</p>
+                    <p>Bônus: O uso de classes com destreza e percepção avançados podem aproveitar melhor para uso de suas habilidades.</p>
+                `,
+            },
+            4: {
+                title: 'Criaturas',
+                content: `
+                    <p>Duração: 30 minutos - aleatoriamente.</p>
+                    <p>Coloração: Fica mais escuro, mas ficará com a tonalidade mais ofuscada do clima atual.</p>
+                    <p>Interferência: Poderes com fraqueza à água estarão mais fracos e com potência reduzida. Isso também afetará o mapa em relação a inundações e criação de mudanças no mapa.</p>
+                    <p>Bônus: Eletricidade e poderes sobrenaturais podem ter capacidade maior de funcionar.</p>
+                `,
+            },
+            5: {
+                title: 'Criação',
+                content: `
+                    <p>Duração: 1 dia todo.</p>
+                    <p>Coloração: Roxo com teor de vermelho carmesim.</p>
+                    <p>Interferência: Os monstros têm a bonificação de 30% de poder bruto aumentados. Dependendo do nível e região o monstro pode abrir ou destruir o local em questão criando variações no mapa maior.</p>
+                    <p>Bônus: O XP ganho durante esse horário é 20% maior, mas dependendo do monstro e seu nível de influência pode dar armas de grau maior ao estabelecido na região.</p>
+                `,
+            },
+        };
+
+        function showInfo(title, index) {
+            const container = document.getElementById('info-container');
+            const titleEl = document.getElementById('info-title');
+            const contentEl = document.getElementById('info-content');
+
+            titleEl.textContent = infoData[index].title;
+            contentEl.innerHTML = infoData[index].content;
+
+            container.classList.add('active');
+        }
+
+        function closeInfo() {
+            const container = document.getElementById('info-container');
+            container.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
