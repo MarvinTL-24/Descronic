@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planilha de criação e obtenção</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #7a5c2f;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h2 {
+            text-align: center;
+            color: #c47e27;
+        }
+
+        svg {
+            display: block;
+            margin: 0 auto;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .node rect {
+            fill: #69b3a2;
+            stroke: #555;
+            stroke-width: 2;
+            rx: 10;
+            ry: 10;
+        }
+
+        .node text {
+            font-size: 12px;
+            fill: white;
+            text-anchor: middle;
+            dominant-baseline: middle;
+        }
+
+        .link {
+            fill: none;
+            stroke: #ccc;
+            stroke-width: 2;
+        }
+
+        .observations {
+            fill: #3e3e3e;
+            font-size: 14px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h2>Peso baseado nas variáveis abaixo:</h2>
+
+    <svg width="1400" height="1000">
+        <!-- Observations will be placed here -->
+        <text class="observations" x="50" y="980">
+            OBS: São pontos de variáveis oscilatórias, pois até mesmo a morte ou fracasso em certas quests podem influenciar na criação ou não de modos de influenciar o local em que está.
+        </text>
+        <text class="observations" x="50" y="1000">
+            OBS: A porcentagem não representa a escolha ideal, mas o que a sociedade em que estão inseridos mais valoriza.
+        </text>
+    </svg>
+
+    <script>
+        const data = {
+            name: "Variáveis",
+            children: [
+                {
+                    name: "Atributos",
+                    children: [
+                        { name: "Humanos: 20%" },
+                        { name: "Dragonewtes: 80%" },
+                        { name: "Demônios: 50%" },
+                        { name: "Elfos: 30%" },
+                        { name: "Anões: 50%" },
+                        { name: "Druidas: 30%" }
+                    ]
+                },
+                {
+                    name: "Reputação",
+                    children: [
+                        { name: "Humanos: 60%" },
+                        { name: "Dragonewtes: 10%" },
+                        { name: "Demônios: 20%" },
+                        { name: "Elfos: 50%" },
+                        { name: "Anões: 60%" },
+                        { name: "Druidas: 100%" }
+                    ]
+                },
+                {
+                    name: "Moral",
+                    children: [
+                        { name: "Humanos: 40%" },
+                        { name: "Dragonewtes: 30%" },
+                        { name: "Demônios: 50%" },
+                        { name: "Elfos: 100%" },
+                        { name: "Anões: 30%" },
+                        { name: "Druidas: 80%" }
+                    ]
+                },
+                {
+                    name: "Recursos",
+                    children: [
+                        { name: "Humanos: 30%" },
+                        { name: "Dragonewtes: 10%" },
+                        { name: "Demônios: 30%" },
+                        { name: "Elfos: 50%" },
+                        { name: "Anões: 100%" },
+                        { name: "Druidas: 60%" }
+                    ]
+                }
+            ]
+        };
+
+        const svg = d3.select("svg"),
+            width = +svg.attr("width"),
+            height = +svg.attr("height");
+
+        const g = svg.append("g").attr("transform", "translate(50,50)");
+
+        const tree = d3.tree().size([height - 150, width - 200]);
+
+        const root = d3.hierarchy(data);
+        tree(root);
+
+        const link = g
+            .selectAll(".link")
+            .data(root.links())
+            .enter()
+            .append("path")
+            .attr("class", "link")
+            .attr("d", d3.linkHorizontal()
+                .x(d => d.y)
+                .y(d => d.x));
+
+        const node = g
+            .selectAll(".node")
+            .data(root.descendants())
+            .enter()
+            .append("g")
+            .attr("class", "node")
+            .attr("transform", d => `translate(${d.y},${d.x})`);
+
+        node.append("rect")
+            .attr("width", 120)
+            .attr("height", 30)
+            .attr("x", -60)
+            .attr("y", -15);
+
+        node.append("text")
+            .text(d => d.data.name);
+    </script>
+</body>
+</html>
