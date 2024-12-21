@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peso de suas escolhas</title>
-    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <title>Mudanças</title>
     <style>
         /* Estilo geral */
         body {
@@ -77,6 +76,39 @@
             border: none;
             border-radius: 50%;
         }
+        .image-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px; /* Espaço entre as imagens */
+            margin-top: 20px;
+        }
+        .image-container img {
+            width: 100px; /* Tamanho da imagem */
+            height: 100px; /* Tamanho da imagem */
+            border-radius: 50%; /* Torna a imagem circular */
+            object-fit: cover; /* Ajusta a imagem ao círculo */
+            border: 2px solid #ccc; /* Borda inicial */
+            transition: transform 0.3s, border-color 0.3s; /* Animação no hover */
+            cursor: pointer; /* Mostra o cursor de clique */
+        }
+        .image-container img:hover {
+            transform: scale(1.1); /* Aumenta levemente o tamanho */
+            border-color: #007BFF; /* Altera a cor da borda */
+        }
+        .info-box {
+            display: none; /* Inicialmente oculto */
+            margin-top: 20px;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+            max-width: 400px;
+            text-align: center;
+        }
+        .info-box.active {
+            display: block; /* Mostra a caixa de informações */
+        }
+        
     </style>
 </head>
 <body>
@@ -85,4 +117,40 @@
             <i class="fas fa-user"></i> <!-- Ícone de menu -->
         </button>
     </a>
-    <h2>Mudanças:</h2>
+    <h2>Bem-vindo ao seu novo mundo. O sol neon está brilhando!</h2>
+    <div class="image-container">
+        <img src="imagem1.jpg" alt="Imagem 1" onclick="showInfo(1)">
+        <img src="imagem2.jpg" alt="Imagem 2" onclick="showInfo(2)">
+        <img src="imagem3.jpg" alt="Imagem 3" onclick="showInfo(3)">
+        <img src="imagem4.jpg" alt="Imagem 4" onclick="showInfo(4)">
+        <img src="imagem5.jpg" alt="Imagem 5" onclick="showInfo(5)">
+    </div>
+
+    <div id="info-1" class="info-box">
+        <p>Informações sobre a Imagem 1.</p>
+    </div>
+    <div id="info-2" class="info-box">
+        <p>Informações sobre a Imagem 2.</p>
+    </div>
+    <div id="info-3" class="info-box">
+        <p>Informações sobre a Imagem 3.</p>
+    </div>
+    <div id="info-4" class="info-box">
+        <p>Informações sobre a Imagem 4.</p>
+    </div>
+    <div id="info-5" class="info-box">
+        <p>Informações sobre a Imagem 5.</p>
+    </div>
+
+    <script>
+        function showInfo(index) {
+            // Oculta todas as caixas de informações
+            document.querySelectorAll('.info-box').forEach(box => {
+                box.classList.remove('active');
+            });
+            // Mostra a caixa correspondente à imagem clicada
+            document.getElementById(`info-${index}`).classList.add('active');
+        }
+    </script>
+</body>
+</html>
