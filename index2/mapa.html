@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Peso de suas escolhas</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        /* Estilo geral */
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #232526, #414345); /* Fundo com gradiente escuro */
+            margin: 0;
+            padding: 0;
+            color: #fff; /* Texto branco para contraste */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        h2 {
+            text-align: center;
+            color: #ffd700; /* Amarelo ouro */
+            font-size: 36px;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px #000; /* Sombra para destaque */
+            margin: 20px 0;
+        }
+
+        .image-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            max-height: 80vh; /* Para evitar ultrapassar a altura da tela */
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        #menu-button {
+            width: 50px;
+            height: 50px;
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            padding: 10px;
+            background-color: #f3f1f1;
+            color: rgb(148, 21, 21);
+            border: none;
+            border-radius: 50%;
+        }
+
+        #menu-button .arrow {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 0;
+            height: 0;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+            border-right: 10px solid rgb(148, 21, 21); /* Cor da seta */
+        }
+    </style>
+</head>
+<body>
+    <!-- Botão para voltar -->
+    <a href="/index.html">
+        <button id="menu-button">
+            <i class="arrow"></i>
+        </button>
+    </a>
+
+    <!-- Texto central -->
+    <h2>Visualização do mapa</h2>
+
+    <!-- Contêiner de imagem -->
+    <div class="image-container">
+        <img src="/img/imagens/mapa/visualização teritorial.png" alt="Mapa renderizado">
+    </div>
+</body>
+</html>
