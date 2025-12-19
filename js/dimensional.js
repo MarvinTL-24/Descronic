@@ -133,7 +133,7 @@
             image: "img/imagens/Dimensional/baldur.png"
         },
         {
-            id: "iztamina",
+            id: "iztamna",
             name: "IZTAMINA",
             title: "MINI BOSS MAIA",
             description: "Iztamna é o deus maia do céu, da noite e do dia. Considerado o inventor da escrita e dos livros na mitologia maia.",
@@ -398,58 +398,90 @@
         }
     ];
 
-// Função para abrir o modal
-    function openBossModal(bossId) {
-        const modalOverlay = document.getElementById('bossModal');
-        const modal = document.querySelector('.boss-modal');
-        const bossKey = bossId.toLowerCase().replace(/\s+/g, '');
-        const bossData = bossesData[bossKey];
+// Função para encontrar boss pelo ID
+function getBossById(bossId) {
+    return bossesData.find(boss => boss.id === bossId);
+}
+
+// Função para abrir o modal CORRIGIDA
+function openBossModal(bossId) {
+    console.log("Abrindo modal para:", bossId); // Debug
+    
+    const modalOverlay = document.getElementById('bossModal');
+    const modal = document.querySelector('.boss-modal');
+    const bossData = getBossById(bossId);
+    
+    if (!bossData) {
+        console.error("Boss não encontrado:", bossId);
+        // Dados padrão
+        document.getElementById('modalBossName').textContent = bossId;
+        document.getElementById('modalBossTitle').textContent = 'BOSS';
+        document.getElementById('modalBossImage').src = 'img/imagens/Dimensional/default.png';
+        document.getElementById('modalBossImage').alt = bossId;
+    } else {
+        console.log("Dados do boss encontrados:", bossData); // Debug
         
-        if (!bossData) {
-            // Dados padrão se não encontrar
-            document.getElementById('modalBossName').textContent = bossId;
-            document.getElementById('modalBossTitle').textContent = 'BOSS';
-            document.getElementById('modalBossImage').src = `img/imagens/Dimensional/${bossKey}.png`;
-            document.getElementById('modalBossImage').alt = bossId;
+        // Preencher dados básicos
+        document.getElementById('modalBossName').textContent = bossData.name;
+        document.getElementById('modalBossTitle').textContent = bossData.title;
+        
+        // Corrija o caminho da imagem
+        const imagePath = bossData.image || `img/imagens/Dimensional/${bossId}.png`;
+        document.getElementById('modalBossImage').src = imagePath;
+        document.getElementById('modalBossImage').alt = bossData.name;
+        
+        // Verifique se a imagem carrega
+        document.getElementById('modalBossImage').onerror = function() {
+            console.error("Erro ao carregar imagem:", imagePath);
+            this.src = 'img/imagens/Dimensional/default.png';
+        };
+        
+        // Preencher aba Informações
+        document.getElementById('bossDescription').textContent = bossData.description;
+        document.getElementById('bossMythology').textContent = bossData.mythology;
+        
+        // Preencher aba Lore
+        document.querySelector('#loreTab .info-item:nth-child(1) p').textContent = bossData.lore;
+        document.querySelector('#loreTab .info-item:nth-child(2) p').textContent = bossData.origin;
+        document.querySelector('#loreTab .info-item:nth-child(3) p').textContent = bossData.motivations;
+        
+        // Preencher localização e recompensas
+        document.querySelectorAll('.info-grid .info-item')[1].querySelector('p').textContent = bossData.location;
+        document.querySelectorAll('.info-grid .info-item')[2].querySelector('p').textContent = bossData.rewards;
+        
+        // Preencher habilidades
+        const abilitiesList = document.getElementById('bossAbilities');
+        abilitiesList.innerHTML = '';
+        if (bossData.abilities && bossData.abilities.length > 0) {
+            bossData.abilities.forEach(ability => {
+                const li = document.createElement('li');
+                li.textContent = ability;
+                abilitiesList.appendChild(li);
+            });
         } else {
-            // Preencher dados do boss
-            document.getElementById('modalBossName').textContent = bossData.name;
-            document.getElementById('modalBossTitle').textContent = bossData.title;
-            document.getElementById('modalBossImage').src = `img/imagens/Dimensional/${bossKey}.png`;
-            document.getElementById('modalBossImage').alt = bossData.name;
-            
-            // Preencher aba Informações
-            document.getElementById('bossDescription').textContent = bossData.description;
-            document.getElementById('bossMythology').textContent = bossData.mythology;
-            
-            // Preencher habilidades
-            const abilitiesList = document.getElementById('bossAbilities');
-            abilitiesList.innerHTML = '';
-            if (bossData.abilities && bossData.abilities.length > 0) {
-                bossData.abilities.forEach(ability => {
-                    const li = document.createElement('li');
-                    li.textContent = ability;
-                    abilitiesList.appendChild(li);
-                });
-            } else {
-                abilitiesList.innerHTML = '<li>Informações não disponíveis</li>';
-            }
-            
-            // Preencher fraquezas
-            const weaknessesList = document.getElementById('bossWeaknesses');
-            weaknessesList.innerHTML = '';
-            if (bossData.weaknesses && bossData.weaknesses.length > 0) {
-                bossData.weaknesses.forEach(weakness => {
-                    const li = document.createElement('li');
-                    li.textContent = weakness;
-                    weaknessesList.appendChild(li);
-                });
-            } else {
-                weaknessesList.innerHTML = '<li>Informações não disponíveis</li>';
-            }
-            
-            // Preencher estatísticas
-            if (bossData.stats) {
+            abilitiesList.innerHTML = '<li>Informações não disponíveis</li>';
+        }
+        
+        // Preencher fraquezas
+        const weaknessesList = document.getElementById('bossWeaknesses');
+        weaknessesList.innerHTML = '';
+        if (bossData.weaknesses && bossData.weaknesses.length > 0) {
+            bossData.weaknesses.forEach(weakness => {
+                const li = document.createElement('li');
+                li.textContent = weakness;
+                weaknessesList.appendChild(li);
+            });
+        } else {
+            weaknessesList.innerHTML = '<li>Informações não disponíveis</li>';
+        }
+        
+        // Preencher estratégias
+        document.querySelector('#abilitiesTab .info-item:nth-child(3) p').textContent = bossData.strategies;
+        
+        // Preencher estatísticas
+        if (bossData.stats) {
+            // Animar as barras de estatística
+            setTimeout(() => {
                 document.querySelector('.stat-fill.power').style.width = `${bossData.stats.power}%`;
                 document.querySelector('.stat-fill.defense').style.width = `${bossData.stats.defense}%`;
                 document.querySelector('.stat-fill.speed').style.width = `${bossData.stats.speed}%`;
@@ -459,88 +491,98 @@
                 document.querySelector('.stat-value.defense').textContent = bossData.stats.defense;
                 document.querySelector('.stat-value.speed').textContent = bossData.stats.speed;
                 document.querySelector('.stat-value.magic').textContent = bossData.stats.magic;
-            }
+            }, 100);
         }
-        
-        // Mostrar modal
-        modalOverlay.classList.add('active');
-        setTimeout(() => {
-            modal.classList.add('active');
-        }, 10);
-        
-        // Prevenir scroll do body
-        document.body.style.overflow = 'hidden';
     }
+    
+    // Resetar para a primeira aba
+    switchTab('info');
+    
+    // Mostrar modal
+    modalOverlay.style.display = 'flex';
+    setTimeout(() => {
+        modalOverlay.style.opacity = '1';
+        modal.classList.add('active');
+    }, 10);
+    
+    // Prevenir scroll do body
+    document.body.style.overflow = 'hidden';
+}
 
-    // Função para fechar o modal
-    function closeBossModal() {
-        const modalOverlay = document.getElementById('bossModal');
-        const modal = document.querySelector('.boss-modal');
-        
-        modal.classList.remove('active');
-        setTimeout(() => {
-            modalOverlay.classList.remove('active');
-            document.body.style.overflow = 'auto';
-        }, 300);
+// Função para fechar o modal CORRIGIDA
+function closeBossModal() {
+    const modalOverlay = document.getElementById('bossModal');
+    const modal = document.querySelector('.boss-modal');
+    
+    modal.classList.remove('active');
+    modalOverlay.style.opacity = '0';
+    
+    setTimeout(() => {
+        modalOverlay.style.display = 'none';
+        document.body.style.overflow = 'auto';
+    }, 300);
+}
+
+// Função para trocar abas (mantém igual)
+function switchTab(tabName) {
+    // Remover classe active de todas as abas e conteúdos
+    document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+    document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
+    
+    // Adicionar classe active na aba clicada e seu conteúdo
+    const tabButton = document.querySelector(`[onclick="switchTab('${tabName}')"]`);
+    if (tabButton) {
+        tabButton.classList.add('active');
     }
+    document.getElementById(`${tabName}Tab`).classList.add('active');
+}
 
-    // Função para trocar abas
-    function switchTab(tabName) {
-        // Remover classe active de todas as abas e conteúdos
-        document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
-        document.querySelectorAll('.tab-content').forEach(content => content.classList.remove('active'));
-        
-        // Adicionar classe active na aba clicada e seu conteúdo
-        document.querySelector(`[onclick="switchTab('${tabName}')"]`).classList.add('active');
-        document.getElementById(`${tabName}Tab`).classList.add('active');
-    }
-
-    // Event Listeners quando o DOM estiver carregado
-    document.addEventListener('DOMContentLoaded', function() {
-        // Adicionar evento de clique nas imagens dos bosses
-        document.querySelectorAll('.single_gallery_item').forEach(item => {
-            item.addEventListener('click', function(e) {
-                e.preventDefault();
-                const bossName = this.querySelector('.gallery-content span').textContent.trim();
-                openBossModal(bossName);
-            });
-        });
-        
-        // Fechar modal com ESC
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape') {
-                closeBossModal();
+// Event Listeners quando o DOM estiver carregado
+document.addEventListener('DOMContentLoaded', function() {
+    console.log("DOM Carregado"); // Debug
+    
+    // Adicionar evento de clique nas imagens dos bosses
+    document.querySelectorAll('.single_gallery_item').forEach((item, index) => {
+        item.addEventListener('click', function(e) {
+            e.preventDefault();
+            console.log("Item clicado:", index); // Debug
+            
+            // Extrair o ID do boss - você precisa adicionar data attributes
+            // Ou usar uma lógica baseada na estrutura atual
+            const bossNameElement = this.querySelector('.gallery-content a');
+            if (bossNameElement) {
+                const bossName = bossNameElement.textContent.trim();
+                // Converter para ID (ex: "AH PUCH" -> "ahpuch")
+                const bossId = bossName.toLowerCase().replace(/\s+/g, '');
+                openBossModal(bossId);
             }
-        });
-        
-        // Fechar modal ao clicar fora
-        document.getElementById('bossModal').addEventListener('click', function(e) {
-            if (e.target === this) {
-                closeBossModal();
-            }
-        });
-        
-        // Menu mobile
-        const menuIcon = document.getElementById('menuIcon');
-        const mainMenu = document.querySelector('.mainMenu');
-        const closeIcon = document.querySelector('.closeIcon');
-        
-        if (menuIcon && mainMenu) {
-            menuIcon.addEventListener('click', function() {
-                mainMenu.classList.add('active');
-            });
-        }
-        
-        if (closeIcon && mainMenu) {
-            closeIcon.addEventListener('click', function() {
-                mainMenu.classList.remove('active');
-            });
-        }
-        
-        // Remover preloader quando a página carregar
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                document.getElementById('preloader').style.display = 'none';
-            }, 500);
         });
     });
+    
+    // Adicione data attributes aos seus elementos HTML:
+    // <div class="single_gallery_item" data-boss-id="ahpuch">
+    
+    // Fechar modal com ESC
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            closeBossModal();
+        }
+    });
+    
+    // Fechar modal ao clicar fora
+    document.getElementById('bossModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            closeBossModal();
+        }
+    });
+    
+    // Para testes - adicione botões de teste
+    const testButton = document.createElement('button');
+    testButton.textContent = 'Testar Modal';
+    testButton.style.position = 'fixed';
+    testButton.style.top = '10px';
+    testButton.style.right = '10px';
+    testButton.style.zIndex = '9999';
+    testButton.onclick = () => openBossModal('ahpuch');
+    document.body.appendChild(testButton);
+});

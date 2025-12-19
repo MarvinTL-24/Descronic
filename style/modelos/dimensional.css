@@ -690,3 +690,15 @@ body {
         white-space: nowrap;
     }
 }
+/* Adicione para debug */
+.debug-border {
+    border: 2px solid red !important;
+}
+
+.modal-image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    min-height: 300px;
+    background: linear-gradient(45deg, #333, #666); /* Placeholder */
+}
