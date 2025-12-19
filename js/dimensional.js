@@ -162,7 +162,7 @@ const bossesData = [
         image: "img/imagens/Dimensional/forseti.png"
     },
     {
-        id: "Rei dragão",
+        id: "reidragao",
         name: "REI DRAGÃO",
         title: "BOSS FINAL DIMENSIONAL",
         description: "O Rei Dragão é o boss final da dimensão dimensional. Ele é um ser poderoso e misterioso, conhecido por sua força e sabedoria.",
@@ -193,7 +193,7 @@ const bossesData = [
         image: "img/imagens/Dimensional/Rei dragão.png"
     },
     {
-        id: "Wukong",
+        id: "wukong",
         name: "WUKONG",
         title: "BOSS FINAL DIMENSIONAL",
         description: "Wukong é o Rei Macaco, um ser lendário conhecido por sua astúcia, força e habilidades mágicas. Ele é um mestre do combate e da transformação.",
@@ -254,7 +254,7 @@ const bossesData = [
         image: "img/imagens/Dimensional/poseidon.png"
     },
     {
-        id: "tupã",
+        id: "tupa",
         name: "TUPÃ",
         title: "BOSS TUPI-GUARANI",
         description: "Tupã é o deus tupi-guarani do trovão, relâmpago e tempestades. Ele é considerado o criador do mundo e o responsável pela fertilidade da terra.",
@@ -284,7 +284,7 @@ const bossesData = [
         image: "img/imagens/Dimensional/tupã.png"
     },
     {
-        id: "yepa belo",
+        id: "yepabelo",
         name: "YEPA BELO",
         title: "MINI BOSS TUPI-GUARANI",
         description: "Yepa Belo é um deus tupi-guarani associado à caça e à guerra. Ele é conhecido por sua habilidade de liderar guerreiros e caçadores em batalhas e expedições.",
@@ -315,14 +315,14 @@ const bossesData = [
     },
     {
         id: "iztamna",
-        name: "IZTAMINA",
+        name: "IZTAMNA",
         title: "MINI BOSS MAIA",
-        description: "Iztamina é um deus maia associado à fertilidade, à agricultura e à medicina. Ela é conhecida por sua habilidade de curar doenças e trazer prosperidade à terra.",
+        description: "Iztamna é um deus maia associado à fertilidade, à agricultura e à medicina. Ela é conhecida por sua habilidade de curar doenças e trazer prosperidade à terra.",
         mythology: "Na mitologia maia, Iztamina é um dos doze deuses criadores. Ela é associada à fertilidade, à agricultura e à medicina, sendo uma deusa benevolente que traz vida à terra.",
         location: "Campos e Florestas",
-        rewards: "Cetro de Iztamina, Capa da Fertilidade",
-        lore: "Iztamina é uma deusa benevolente que traz vida à terra. Ela é conhecida por sua habilidade de curar doenças e trazer prosperidade à terra.",
-        origin: "Iztamina nasceu como um dos doze deuses criadores, sendo a responsável pela fertilidade da terra.",
+        rewards: "Cetro de Iztamna, Capa da Fertilidade",
+        lore: "Iztamna é uma deusa benevolente que traz vida à terra. Ela é conhecida por sua habilidade de curar doenças e trazer prosperidade à terra.",
+        origin: "Iztamna nasceu como um dos doze deuses criadores, sendo a responsável pela fertilidade da terra.",
         motivations: "Proteger a terra e manter a ordem entre os seres vivos.",
         abilities: [
             "Habilidade de Cura",
