@@ -3,6 +3,7 @@
         "ahpuch": {
             name: "AH PUCH",
             title: "BOSS MAIA",
+            src: "img/imagens/Dimensional/ah puch.png",
             description: "Ah Puch é o deus maia da morte e do submundo, conhecido como 'O Senhor da Morte'. Ele governa sobre o reino dos mortos e é frequentemente representado como um esqueleto ou cadáver em decomposição.",
             mythology: "Na mitologia maia, Ah Puch é o deus da morte, governante do mais baixo dos nove mundos subterrâneos. É associado com guerras, sacrifícios humanos e desastres naturais.",
             abilities: [
@@ -26,6 +27,7 @@
         "atlas": {
             name: "ATLAS",
             title: "MINI BOSS GREGO",
+            src: "img/imagens/Dimensional/Atlas.png",
             description: "Atlas é um titã condenado por Zeus a carregar o céu sobre seus ombros por toda a eternidade. Sua força é incomparável, mas seu fardo o torna vulnerável.",
             mythology: "Na mitologia grega, Atlas liderou os titãs na guerra contra os deuses do Olimpo. Após a derrota, foi condenado a sustentar o céu para sempre.",
             abilities: [
@@ -49,6 +51,7 @@
         "anubis": {
             name: "ANUBIS",
             title: "BOSS EGÍPCIO",
+            src: "img/imagens/Dimensional/anubis.png",
             description: "Anúbis é o deus egípcio da mumificação e do submundo, guardião das almas e juiz dos mortos. Ele pesa o coração dos falecidos contra a pena da verdade.",
             mythology: "Filho de Osíris e Néftis, Anúbis é um dos deuses mais antigos do panteão egípcio. Preside o processo de mumificação e protege os túmulos.",
             abilities: [
@@ -72,6 +75,7 @@
         "baldur": {
             name: "BALDUR",
             title: "MINI BOSS VIKING",
+            src: "img/imagens/Dimensional/baldur.png",
             description: "Baldur é o deus nórdico da luz, pureza e beleza. Conhecido por sua invulnerabilidade, sua única fraqueza é o visco.",
             mythology: "Filho de Odin e Frigg, Baldur era tão amado que sua mãe fez todos os seres da Terra jurar não machucá-lo, esquecendo-se apenas do visco.",
             abilities: [
@@ -95,6 +99,7 @@
         "iztamina": {
             name: "IZTAMINA",
             title: "MINI BOSS MAIA",
+            src: "img/imagens/Dimensional/iztamna.png",
             description: "Iztamna é o deus maia do céu, da noite e do dia. Considerado o inventor da escrita e dos livros na mitologia maia.",
             mythology: "Filho de Hunab Ku, Iztamna é um dos deuses criadores na mitologia maia, associado ao conhecimento, medicina e agricultura.",
             abilities: [
@@ -118,6 +123,7 @@
         "forseti": {
             name: "FORSETI",
             title: "BOSS VIKING",
+            src: "img/imagens/Dimensional/forseti.png",
             description: "Forseti é o deus nórdico da justiça e da reconciliação. Conhecido por sua sabedoria e habilidade em resolver disputas entre deuses e mortais.",
             mythology: "Filho de Balder e Nanna, Forseti é reverenciado como um deus justo que preside as assembleias e resolve conflitos com imparcialidade.",
             abilities: [
@@ -141,6 +147,7 @@
         "rei dragão": {
             name: "REI DRAGÃO",
             title: "BOSS CHINES",
+            src: "img/imagens/Dimensional/dragao.png",
             description: "O Rei Dragão é uma entidade poderosa na mitologia chinesa, governando os mares e controlando as chuvas. Ele é reverenciado como um símbolo de força e boa sorte.",
             mythology: "Na mitologia chinesa, o Rei Dragão é um ser divino que habita os oceanos e é responsável por regular o clima e as águas.",
             abilities: [
@@ -164,6 +171,7 @@
         "poseidon": {
             name: "POSEIDON",
             title: "BOSS GREGO",
+            src: "img/imagens/Dimensional/poseidon.png",
             description: "Poseidon é o deus grego do mar, da terra e do trovão. Ele é conhecido por sua força e controle sobre os oceanos.",
             mythology: "Poseidon é um dos doze deuses olímpicos, governando o mar e os terremotos. Ele é frequentemente representado com um tridente.",
             abilities: [
@@ -187,6 +195,7 @@
         "tupã": {
             name: "TUPÃ",
             title: "MINI BOSS INDIGENA",
+            src: "img/imagens/Dimensional/tupã.png",
             description: "Tupã é o deus tupi-guarani do trovão, relâmpago e tempestade. Ele é considerado o criador do mundo e o responsável pela chuva que fertiliza a terra.",
             mythology: "Na mitologia tupi-guarani, Tupã é o deus supremo que criou o céu, a terra e todos os seres vivos. Ele é associado ao trovão e à fertilidade.",
             abilities: [
@@ -210,6 +219,7 @@
         "yepa belo": {
             name: "YEPA BELO",
             title: "BOSS INDIGENA",
+            src: "img/imagens/Dimensional/yepa belo.png",
             description: "Yepa Belo é um deus tupi-guarani associado à beleza, amor e fertilidade. Ele é reverenciado como um protetor das florestas e dos animais.",
             mythology: "Na mitologia tupi-guarani, Yepa Belo é um deus que simboliza a harmonia entre os seres humanos e a natureza, promovendo o amor e a beleza.",
             abilities: [
@@ -233,6 +243,7 @@
         "wukong": {
             name: "WUKONG",
             title: "MINI BOSS CHINES",
+            src: "img/imagens/Dimensional/Wukong.png",
             description: "Wukong, também conhecido como o Rei Macaco, é uma figura lendária na mitologia chinesa. Ele é conhecido por sua astúcia, força e habilidades mágicas.",
             mythology: "Wukong é um personagem central no clássico romance chinês 'Jornada ao Oeste'. Ele é um macaco imortal que adquire poderes sobrenaturais através de práticas taoístas.",
             abilities: [
@@ -256,6 +267,7 @@
         "seth": {
             name: "SETH",
             title: "MINI BOSS EGÍPCIO",
+            src: "img/imagens/Dimensional/seth.png",
             description: "Seth é o deus egípcio do caos, do deserto e das tempestades. Ele é conhecido por sua força bruta e por ser o antagonista na mitologia egípcia.",
             mythology: "Na mitologia egípcia, Seth é o deus do caos, do deserto e das tempestades. Ele é conhecido por sua força bruta e por ser o antagonista na mitologia egípcia.",
             abilities: [
