@@ -1,51 +1,621 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- conexões css -->
     <link rel="stylesheet" href="src/css/config.css">
     <link rel="stylesheet" href="src/css/main.css">
     <link rel="stylesheet" href="src/css/responsive.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <title>Classes</title>
+    <title>Classes e Sub-Classes</title>
 </head>
 <body>
-    <!-- Botão de menu com barras -->
-    
     <a href="Personagem.html">
         <button id="menu-button">
-            <i class="fas fa-user"></i> <!-- Ícone de menu -->
+            <i class="fas fa-user"></i>
         </button>
     </a>
-      
     
-    <section id="selection" class="scene">
-        <!-- Aqui poderiam estar as seleções, imagens, etc -->
-    </section>
-
-    <main id="view" class="scene off">
+    <main id="view" class="scene">
         <div id="controls">
-            <!-- Ícone de troca de classe -->
             <img src="src/assets/swap.svg" alt="Trocar classe" id="swap">
-        </div>
-        <section id="content">
-            <img id="content-img" src="" alt="Logo da classe">
-            <h2 id="content-h2">Aa</h2>
-            <p id="content-p">Lorem ipsum dolor sit amet consectetur adipisicing elit. Officia nobis rem error blanditiis consequatur et corporis rerum quia dicta, explicabo eaque quam commodi iusto, quisquam ipsum magni, voluptates praesentium unde?</p>
-        </section>
-        <nav class="mobile">
-            <div id="cs-m" class="character-selector">
-                <span></span>
-                <img>
+            <div id="subclass-controls" class="hidden">
+                <button id="prev-subclass" class="subclass-btn"><i class="fas fa-chevron-left"></i></button>
+                <span id="subclass-name">Subclasse 1</span>
+                <button id="next-subclass" class="subclass-btn"><i class="fas fa-chevron-right"></i></button>
             </div>
-        </nav>
-    </main>
-    <div id="view-bg"></div>
-    <div id="fade"></div>
+        </div>
+        
+        <section id="content">
+            <!-- Classe 1: Assassin -->
+            <div class="class-content active" data-class="assassin">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Assasin/wpp/Assasin_logo.png" alt="Logo Assassin">
+                    <h2 class="content-h2">Assassin</h2>
+                    <p class="content-p">Mestre da furtividade e ataques precisos. Especialista em eliminar alvos importantes antes que percebam sua presença. Movimentação ágil e golpes letais são suas marcas registradas.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Assasin/tokens/Assasin_1.png" alt="Token Assassin">
+                        <img src="src/assets/classes/Assasin/tokens/Assasin_1t.png" alt="Token Assassin 1t">
+                        <img src="src/assets/classes/Assasin/tokens/Assasin_2t.png" alt="Token Assassin 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="shadow-blade">
+                        <h3 class="subclass-title">Shadow Blade</h3>
+                        <p class="subclass-description">Especialista em ataques furtivos com adagas envenenadas. Pode se tornar invisível por curtos períodos e atacar pelas sombras.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-bolt"></i> Dano: Alto</span>
+                            <span><i class="fas fa-shield-alt"></i> Defesa: Baixa</span>
+                            <span><i class="fas fa-running"></i> Mobilidade: Alta</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="night-stalker">
+                        <h3 class="subclass-title">Night Stalker</h3>
+                        <p class="subclass-description">Caçador noturno que usa o ambiente a seu favor. Habilidades de controle de área e emboscadas em grupo.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-bolt"></i> Dano: Médio</span>
+                            <span><i class="fas fa-shield-alt"></i> Defesa: Baixa</span>
+                            <span><i class="fas fa-eye"></i> Visão: Expandida</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-    <script src="src/js/data.js"></script>
-    <script src="src/js/main.js"></script>
+            <!-- Classe 2: Atirador -->
+            <div class="class-content" data-class="atirador">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Atirador/wpp/Atirador_logo.png" alt="Logo Atirador">
+                    <h2 class="content-h2">Atirador</h2>
+                    <p class="content-p">Especialista em combate à distância com armas de fogo e arcos. Mestre da precisão e posicionamento tático. Mantém inimigos à distância enquanto causa dano contínuo.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Atirador/tokens/Atirador_1.png" alt="Token Atirador">
+                        <img src="src/assets/classes/Atirador/tokens/Atirador_1t.png" alt="Token Atirador 1t">
+                        <img src="src/assets/classes/Atirador/tokens/Atirador_2t.png" alt="Token Atirador 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="sniper-elite">
+                        <h3 class="subclass-title">Sniper Elite</h3>
+                        <p class="subclass-description">Precisão extrema à longa distância. Dano crítico aumentado contra alvos isolados e em posições elevadas.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-crosshairs"></i> Precisão: Máxima</span>
+                            <span><i class="fas fa-bolt"></i> Dano: Extremo</span>
+                            <span><i class="fas fa-running"></i> Mobilidade: Baixa</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="gunslinger">
+                        <h3 class="subclass-title">Gunslinger</h3>
+                        <p class="subclass-description">Especialista em armas de fogo rápidas. Alta taxa de disparo e movimento durante o ataque, ideal para combate em movimento.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-tachometer-alt"></i> Velocidade: Alta</span>
+                            <span><i class="fas fa-bolt"></i> Dano: Médio</span>
+                            <span><i class="fas fa-redo"></i> Recarga: Rápida</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe 3: Berserker -->
+            <div class="class-content" data-class="berserker">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Berserker/wpp/Berserker_logo.png" alt="Logo Berserker">
+                    <h2 class="content-h2">Berserker</h2>
+                    <p class="content-p">Guerreiro de fúria incontrolável que ganha poder conforme perde vida. Quanto mais ferido, mais perigoso se torna. Entra em frenesi quando à beira da morte.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Berserker/tokens/Berserker_1.png" alt="Token Berserker">
+                        <img src="src/assets/classes/Berserker/tokens/Berserker_1t.png" alt="Token Berserker 1t">
+                        <img src="src/assets/classes/Berserker/tokens/Berserker_2t.png" alt="Token Berserker 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="blood-fury">
+                        <h3 class="subclass-title">Blood Fury</h3>
+                        <p class="subclass-description">Converte dano recebido em poder de ataque. Fúria aumenta com cada golpe recebido, tornando-se imbatível em batalhas prolongadas.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-fist-raised"></i> Força: Extrema</span>
+                            <span><i class="fas fa-heart"></i> Vida: Média</span>
+                            <span><i class="fas fa-fire"></i> Fúria: Crescente</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="war-machine">
+                        <h3 class="subclass-title">War Machine</h3>
+                        <p class="subclass-description">Foco em armas de duas mãos e destruição em área. Pode quebrar defesas inimigas e causar dano massivo a grupos.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-shield-alt"></i> Quebra-defesa: Alta</span>
+                            <span><i class="fas fa-bolt"></i> Dano em Área: Alto</span>
+                            <span><i class="fas fa-user-shield"></i> Armadura: Pesada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe 4: Desbravador -->
+            <div class="class-content" data-class="desbravador">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Desbravador/wpp/Desbravador_logo.png" alt="Logo Desbravador">
+                    <h2 class="content-h2">Desbravador</h2>
+                    <p class="content-p">Explorador e sobrevivente nato. Especialista em terreno desconhecido e armadilhas. Conhece os segredos da natureza e usa o ambiente como arma.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Desbravador/tokens/Desbravador_1.png" alt="Token Desbravador">
+                        <img src="src/assets/classes/Desbravador/tokens/Desbravador_1t.png" alt="Token Desbravador 1t">
+                        <img src="src/assets/classes/Desbravador/tokens/Desbravador_2t.png" alt="Token Desbravador 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="pathfinder">
+                        <h3 class="subclass-title">Pathfinder</h3>
+                        <p class="subclass-description">Mestre na navegação e descoberta de rotas secretas. Consegue encontrar recursos ocultos e atalhos em qualquer terreno.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-map"></i> Navegação: Perfeita</span>
+                            <span><i class="fas fa-compass"></i> Orientação: Excelente</span>
+                            <span><i class="fas fa-tree"></i> Sobrevivência: Alta</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="trapper">
+                        <h3 class="subclass-title">Trapper</h3>
+                        <p class="subclass-description">Especialista em armadilhas e emboscadas. Prepara o campo de batalha com vantagens táticas antes do confronto.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-tools"></i> Engenharia: Média</span>
+                            <span><i class="fas fa-mask"></i> Furtividade: Alta</span>
+                            <span><i class="fas fa-brain"></i> Estratégia: Alta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe 5: Espiritualista -->
+            <div class="class-content" data-class="espiritualista">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Espiritualista/wpp/Espiritualista_logo.png" alt="Logo Espiritualista">
+                    <h2 class="content-h2">Espiritualista</h2>
+                    <p class="content-p">Mestre das artes espirituais, capaz de invocar espíritos e manipular energias sobrenaturais. Seu poder está em controlar o campo de batalha com entidades invisíveis.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Espiritualista/tokens/Espiritualista_1.png" alt="Token Espiritualista">
+                        <img src="src/assets/classes/Espiritualista/tokens/Espiritualista_1t.png" alt="Token Espiritualista 1t">
+                        <img src="src/assets/classes/Espiritualista/tokens/Espiritualista_2t.png" alt="Token Espiritualista 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="spirit-caller">
+                        <h3 class="subclass-title">Spirit Caller</h3>
+                        <p class="subclass-description">Invoca espíritos ancestrais para lutar ao seu lado. Cada espírito tem habilidades únicas de combate e suporte.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-ghost"></i> Invocações: Múltiplas</span>
+                            <span><i class="fas fa-magic"></i> Poder Espiritual: Alto</span>
+                            <span><i class="fas fa-users"></i> Controle: Múltiplo</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="mind-weaver">
+                        <h3 class="subclass-title">Mind Weaver</h3>
+                        <p class="subclass-description">Manipula mentes e emoções dos inimigos. Pode causar confusão, medo ou até controlar oponentes temporariamente.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-brain"></i> Manipulação: Alta</span>
+                            <span><i class="fas fa-eye"></i> Percepção: Extrema</span>
+                            <span><i class="fas fa-head-side-virus"></i> Controle Mental: Médio</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe 6: Guerreiro -->
+            <div class="class-content" data-class="guerreiro">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Guerreiro/wpp/Guerreiro_logo.png" alt="Logo Guerreiro">
+                    <h2 class="content-h2">Guerreiro</h2>
+                    <p class="content-p">Mestre do combate corpo a corpo com equilíbrio perfeito entre ataque e defesa. Versátil e adaptável a qualquer situação de combate.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Guerreiro/tokens/Guerreiro_1.png" alt="Token Guerreiro">
+                        <img src="src/assets/classes/Guerreiro/tokens/Guerreiro_1t.png" alt="Token Guerreiro 1t">
+                        <img src="src/assets/classes/Guerreiro/tokens/Guerreiro_2t.png" alt="Token Guerreiro 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="knight">
+                        <h3 class="subclass-title">Knight</h3>
+                        <p class="subclass-description">Especialista em defesa e proteção. Usa armadura pesada e escudo para proteger aliados enquanto mantém a linha de frente.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-shield-alt"></i> Defesa: Máxima</span>
+                            <span><i class="fas fa-heart"></i> Resistência: Alta</span>
+                            <span><i class="fas fa-hands-helping"></i> Proteção: Aliados</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="champion">
+                        <h3 class="subclass-title">Champion</h3>
+                        <p class="subclass-description">Guerreiro equilibrado com habilidades ofensivas e defensivas. Excelente em duelos e combate individual.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-balance-scale"></i> Equilíbrio: Perfeito</span>
+                            <span><i class="fas fa-sword"></i> Ataque: Alto</span>
+                            <span><i class="fas fa-shield-alt"></i> Defesa: Alto</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe 7: Mago -->
+            <div class="class-content" data-class="mago">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Mago/wpp/Mago_logo.png" alt="Logo Mago">
+                    <h2 class="content-h2">Mago</h2>
+                    <p class="content-p">Mestre das artes arcanas e manipulação elemental. Controla os elementos da natureza para causar destruição em massa ou suporte estratégico.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Mago/tokens/Mago_1.png" alt="Token Mago">
+                        <img src="src/assets/classes/Mago/tokens/Mago_1t.png" alt="Token Mago 1t">
+                        <img src="src/assets/classes/Mago/tokens/Mago_2t.png" alt="Token Mago 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="elementalist">
+                        <h3 class="subclass-title">Elementalist</h3>
+                        <p class="subclass-description">Controla os quatro elementos: fogo, água, terra e ar. Combina elementos para criar efeitos devastadores.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-fire"></i> Elementos: 4</span>
+                            <span><i class="fas fa-bolt"></i> Dano: Extremo</span>
+                            <span><i class="fas fa-snowflake"></i> Controle: Área</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="archmage">
+                        <h3 class="subclass-title">Archmage</h3>
+                        <p class="subclass-description">Mestre em magias complexas e rituais. Pode lançar feitiços poderosos que alteram a realidade ao seu redor.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-book"></i> Conhecimento: Ilimitado</span>
+                            <span><i class="fas fa-star"></i> Poder Arcano: Máximo</span>
+                            <span><i class="fas fa-hourglass"></i> Conjuração: Lenta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Classe 8: Paladino -->
+            <div class="class-content" data-class="paladino">
+                <div class="main-class">
+                    <img class="content-img" src="src/assets/classes/Paladino/wpp/Paladino_logo.png" alt="Logo Paladino">
+                    <h2 class="content-h2">Paladino</h2>
+                    <p class="content-p">Cavaleiro sagrado que combina força divina com combate físico. Protege os inocentes e purifica o mal com luz sagrada e justiça divina.</p>
+                    <div class="class-tokens">
+                        <img src="src/assets/classes/Paladino/tokens/Paladino_1.png" alt="Token Paladino">
+                        <img src="src/assets/classes/Paladino/tokens/Paladino_1t.png" alt="Token Paladino 1t">
+                        <img src="src/assets/classes/Paladino/tokens/Paladino_2t.png" alt="Token Paladino 2t">
+                    </div>
+                </div>
+                
+                <div class="subclasses-container">
+                    <div class="subclass active" data-subclass="holy-knight">
+                        <h3 class="subclass-title">Holy Knight</h3>
+                        <p class="subclass-description">Focado em cura e proteção divina. Usa bênçãos sagradas para curar aliados e fortalecer defesas contra o mal.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-heart"></i> Cura: Alta</span>
+                            <span><i class="fas fa-shield-alt"></i> Proteção: Divina</span>
+                            <span><i class="fas fa-cross"></i> Sagrado: Puro</span>
+                        </div>
+                    </div>
+                    
+                    <div class="subclass" data-subclass="crusader">
+                        <h3 class="subclass-title">Crusader</h3>
+                        <p class="subclass-description">Guerreiro sagrado ofensivo. Canaliza poder divino para causar dano massivo a criaturas das trevas e não-mortos.</p>
+                        <div class="subclass-stats">
+                            <span><i class="fas fa-sun"></i> Luz: Ofensiva</span>
+                            <span><i class="fas fa-bolt"></i> Dano Sagrado: Alto</span>
+                            <span><i class="fas fa-skull-crossbones"></i> Vs. Trevas: +50%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+    </main>
+
+    <script src="js/main.js"></script>
+    
+    <style>
+        /* Estilos temporários */
+        .hidden {
+            display: none;
+        }
+        
+        .class-content {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        .class-content.active {
+            display: block;
+        }
+        
+        .main-class {
+            text-align: center;
+            padding: 20px;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 15px;
+            margin: 15px;
+            color: white;
+        }
+        
+        .content-img {
+            max-width: 200px;
+            height: auto;
+            margin: 0 auto 20px;
+            display: block;
+            filter: drop-shadow(0 5px 15px rgba(0,0,0,0.3));
+        }
+        
+        .content-h2 {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .content-p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            max-width: 700px;
+            margin: 0 auto 20px;
+            color: rgba(255,255,255,0.9);
+        }
+        
+        .class-tokens {
+            display: flex;
+            gap: 15px;
+            margin-top: 25px;
+            justify-content: center;
+        }
+        
+        .class-tokens img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            border: 3px solid white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            background: rgba(255,255,255,0.1);
+            padding: 5px;
+        }
+        
+        .class-tokens img:hover {
+            transform: scale(1.15) rotate(5deg);
+            border-color: #ffd700;
+            box-shadow: 0 0 20px rgba(255,215,0,0.5);
+        }
+        
+        .subclasses-container {
+            display: flex;
+            gap: 30px;
+            justify-content: center;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+        
+        .subclass {
+            background: linear-gradient(145deg, #ffffff, #f0f0f0);
+            border-radius: 20px;
+            padding: 25px;
+            width: 320px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: all 0.4s ease;
+            display: none;
+            border: 2px solid transparent;
+        }
+        
+        .subclass.active {
+            display: block;
+            animation: slideUp 0.4s ease;
+            border-color: #667eea;
+            box-shadow: 0 15px 35px rgba(102, 126, 234, 0.2);
+        }
+        
+        .subclass:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        
+        .subclass-title {
+            font-size: 1.8rem;
+            color: #2c3e50;
+            margin-bottom: 15px;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+            text-align: center;
+        }
+        
+        .subclass-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            color: #555;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        
+        .subclass-stats {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            background: rgba(52, 152, 219, 0.1);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(52, 152, 219, 0.3);
+        }
+        
+        .subclass-stats span {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 1rem;
+            color: #2c3e50;
+        }
+        
+        .subclass-stats i {
+            color: #3498db;
+            width: 25px;
+            font-size: 1.1rem;
+        }
+        
+        #controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        
+        #subclass-controls {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .subclass-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .subclass-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+        }
+        
+        #subclass-name {
+            font-weight: bold;
+            color: #2c3e50;
+            min-width: 180px;
+            text-align: center;
+            font-size: 1.2rem;
+            padding: 8px 15px;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 25px;
+            border: 2px solid rgba(102, 126, 234, 0.3);
+        }
+        
+        #swap {
+            cursor: pointer;
+            transition: all 0.5s ease;
+            width: 40px;
+            height: 40px;
+            filter: invert(0.4);
+        }
+        
+        #swap:hover {
+            transform: rotate(180deg) scale(1.1);
+            filter: invert(0.6);
+        }
+        
+        .character-selector {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+            background: rgba(255, 255, 255, 0.98);
+            padding: 20px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            margin: 20px;
+        }
+        
+        .character-selector img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 3px solid #667eea;
+            padding: 3px;
+            background: white;
+        }
+        
+        #current-class-name {
+            font-weight: bold;
+            color: #2c3e50;
+            font-size: 1.4rem;
+        }
+        
+        #current-subclass {
+            font-size: 1rem;
+            color: #666;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-weight: bold;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        /* Responsividade */
+        @media (max-width: 768px) {
+            .subclasses-container {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .subclass {
+                width: 90%;
+            }
+            
+            #controls {
+                flex-direction: column;
+                gap: 15px;
+                padding: 15px;
+            }
+            
+            .main-class {
+                margin: 10px;
+                padding: 15px;
+            }
+            
+            .content-h2 {
+                font-size: 2rem;
+            }
+            
+            .content-img {
+                max-width: 150px;
+            }
+        }
+    </style>
 </body>
 </html>

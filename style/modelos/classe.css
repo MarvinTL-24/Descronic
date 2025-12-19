@@ -1,0 +1,101 @@
+/* Estilos para as classes */
+.class-content {
+    display: none;
+    animation: fadeIn 0.5s ease;
+    text-align: center;
+    padding: 20px;
+}
+
+.class-content.active {
+    display: block;
+}
+
+#content-img {
+    max-width: 200px;
+    height: auto;
+    margin: 0 auto 20px;
+    display: block;
+}
+
+#content-h2 {
+    font-size: 2.5rem;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+#content-p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    max-width: 600px;
+    margin: 0 auto 20px;
+    color: #666;
+}
+
+.class-tokens {
+    display: flex;
+    gap: 15px;
+    margin-top: 25px;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+.class-tokens img {
+    width: 60px;
+    height: 60px;
+    border-radius: 10px;
+    border: 3px solid #444;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    object-fit: cover;
+}
+
+.class-tokens img:hover {
+    transform: scale(1.1);
+    border-color: #007bff;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+#swap {
+    cursor: pointer;
+    transition: transform 0.5s ease;
+    width: 35px;
+    height: 35px;
+    filter: invert(0.3);
+}
+
+#swap:hover {
+    transform: rotate(180deg) scale(1.1);
+}
+
+.character-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 15px;
+    border-radius: 25px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.character-selector img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #333;
+}
+
+.character-selector span {
+    font-weight: bold;
+    color: #333;
+}
+
+@keyframes fadeIn {
+    from { 
+        opacity: 0; 
+        transform: translateY(15px); 
+    }
+    to { 
+        opacity: 1; 
+        transform: translateY(0); 
+    }
+}
