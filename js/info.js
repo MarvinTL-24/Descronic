@@ -336,98 +336,193 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==============================================
-    // 9. SLIDER DE CITAÇÕES
+    // 9. SLIDER DE CITAÇÕES - VERSÃO SIMPLIFICADA E FUNCIONAL
     // ==============================================
-    const quoteSlider = document.querySelector('.quote-slider');
-    const quoteSlides = document.querySelectorAll('.quote-slide');
-    const quoteDots = document.querySelectorAll('.quote-dot');
-    const quotePrev = document.querySelector('.quote-prev');
-    const quoteNext = document.querySelector('.quote-next');
-    
-    let currentQuoteIndex = 0;
-    let quoteInterval;
-    
-    if (quoteSlider && quoteSlides.length > 0) {
-        // Inicializa o slider
-        function showQuote(index) {
-            // Remove a classe active de todos os slides
-            quoteSlides.forEach(slide => {
+    function initQuotesSlider() {
+        const quoteSlider = document.querySelector('.quote-slider');
+        const quoteSlides = document.querySelectorAll('.quote-slide');
+        const quoteDots = document.querySelectorAll('.quote-dot');
+        const prevBtn = document.querySelector('.quote-prev');
+        const nextBtn = document.querySelector('.quote-next');
+        
+        // Se não existir slider, não faz nada
+        if (!quoteSlider || quoteSlides.length === 0) {
+            console.log('Slider de citações não encontrado');
+            return;
+        }
+        
+        let currentSlide = 0;
+        let slideInterval;
+        const totalSlides = quoteSlides.length;
+        const slideDuration = 5000; // 5 segundos
+        
+        // Função para inicializar o slider
+        function initSlider() {
+            console.log('Inicializando slider com', totalSlides, 'slides');
+            
+            // Primeiro, esconde todos os slides
+            quoteSlides.forEach((slide, index) => {
+                slide.style.opacity = '0';
+                slide.style.visibility = 'hidden';
+                slide.style.position = 'absolute';
+                slide.style.transform = 'translateX(100%)';
                 slide.classList.remove('active');
             });
             
-            // Remove a classe active de todos os dots
+            // Remove active de todos os dots
             quoteDots.forEach(dot => {
                 dot.classList.remove('active');
             });
             
-            // Adiciona a classe active ao slide atual
-            quoteSlides[index].classList.add('active');
-            quoteDots[index].classList.add('active');
+            // Ativa o primeiro slide
+            if (quoteSlides[0]) {
+                quoteSlides[0].style.opacity = '1';
+                quoteSlides[0].style.visibility = 'visible';
+                quoteSlides[0].style.position = 'relative';
+                quoteSlides[0].style.transform = 'translateX(0)';
+                quoteSlides[0].classList.add('active');
+            }
             
-            currentQuoteIndex = index;
+            // Ativa o primeiro dot
+            if (quoteDots[0]) {
+                quoteDots[0].classList.add('active');
+            }
+            
+            // Inicia o auto-play
+            startAutoPlay();
+        }
+        
+        // Função para mostrar slide específico
+        function showSlide(index) {
+            console.log('Mostrando slide', index);
+            
+            // Remove a classe active de todos os slides
+            quoteSlides.forEach(slide => {
+                slide.style.opacity = '0';
+                slide.style.visibility = 'hidden';
+                slide.style.position = 'absolute';
+                slide.style.transform = 'translateX(100%)';
+                slide.classList.remove('active');
+            });
+            
+            // Remove active de todos os dots
+            quoteDots.forEach(dot => {
+                dot.classList.remove('active');
+            });
+            
+            // Atualiza o índice atual
+            currentSlide = index;
+            
+            // Ativa o slide atual
+            if (quoteSlides[currentSlide]) {
+                quoteSlides[currentSlide].style.opacity = '1';
+                quoteSlides[currentSlide].style.visibility = 'visible';
+                quoteSlides[currentSlide].style.position = 'relative';
+                quoteSlides[currentSlide].style.transform = 'translateX(0)';
+                quoteSlides[currentSlide].classList.add('active');
+                
+                // Adiciona transição suave
+                quoteSlides[currentSlide].style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+            }
+            
+            // Ativa o dot correspondente
+            if (quoteDots[currentSlide]) {
+                quoteDots[currentSlide].classList.add('active');
+            }
         }
         
         // Função para próximo slide
-        function nextQuote() {
-            let nextIndex = currentQuoteIndex + 1;
-            if (nextIndex >= quoteSlides.length) {
+        function nextSlide() {
+            let nextIndex = currentSlide + 1;
+            if (nextIndex >= totalSlides) {
                 nextIndex = 0;
             }
-            showQuote(nextIndex);
+            showSlide(nextIndex);
         }
         
         // Função para slide anterior
-        function prevQuote() {
-            let prevIndex = currentQuoteIndex - 1;
+        function prevSlide() {
+            let prevIndex = currentSlide - 1;
             if (prevIndex < 0) {
-                prevIndex = quoteSlides.length - 1;
+                prevIndex = totalSlides - 1;
             }
-            showQuote(prevIndex);
+            showSlide(prevIndex);
         }
         
-        // Event listeners
-        if (quoteNext) {
-            quoteNext.addEventListener('click', nextQuote);
+        // Inicia o auto-play
+        function startAutoPlay() {
+            console.log('Iniciando auto-play');
+            clearInterval(slideInterval);
+            slideInterval = setInterval(nextSlide, slideDuration);
         }
         
-        if (quotePrev) {
-            quotePrev.addEventListener('click', prevQuote);
+        // Para o auto-play
+        function stopAutoPlay() {
+            console.log('Parando auto-play');
+            clearInterval(slideInterval);
+        }
+        
+        // Adiciona event listeners
+        if (nextBtn) {
+            nextBtn.addEventListener('click', function() {
+                console.log('Botão próximo clicado');
+                nextSlide();
+                startAutoPlay(); // Reinicia o auto-play
+            });
+        }
+        
+        if (prevBtn) {
+            prevBtn.addEventListener('click', function() {
+                console.log('Botão anterior clicado');
+                prevSlide();
+                startAutoPlay(); // Reinicia o auto-play
+            });
         }
         
         // Event listeners para os dots
         quoteDots.forEach(dot => {
             dot.addEventListener('click', function() {
                 const index = parseInt(this.getAttribute('data-index'));
-                showQuote(index);
+                console.log('Dot clicado:', index);
+                if (!isNaN(index) && index >= 0 && index < totalSlides) {
+                    showSlide(index);
+                    startAutoPlay(); // Reinicia o auto-play
+                }
             });
         });
         
-        // Auto-play
-        function startQuoteAutoPlay() {
-            quoteInterval = setInterval(nextQuote, 6000); // Muda a cada 6 segundos
-        }
-        
-        function stopQuoteAutoPlay() {
-            clearInterval(quoteInterval);
-        }
-        
         // Pausa o auto-play quando o mouse está sobre o slider
         if (quoteSlider) {
-            quoteSlider.addEventListener('mouseenter', stopQuoteAutoPlay);
-            quoteSlider.addEventListener('mouseleave', startQuoteAutoPlay);
+            quoteSlider.addEventListener('mouseenter', stopAutoPlay);
+            quoteSlider.addEventListener('mouseleave', startAutoPlay);
         }
         
-        // Inicia o auto-play
-        startQuoteAutoPlay();
-        
-        // Anima a primeira citação
-        setTimeout(() => {
-            if (quoteSlides[0]) {
-                quoteSlides[0].style.opacity = '1';
-                quoteSlides[0].style.transform = 'translateY(0)';
+        // Pausa o auto-play quando a página não está visível
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                stopAutoPlay();
+            } else {
+                startAutoPlay();
             }
-        }, 500);
+        });
+        
+        // Suporte para teclado
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'ArrowRight') {
+                nextSlide();
+                startAutoPlay();
+            } else if (e.key === 'ArrowLeft') {
+                prevSlide();
+                startAutoPlay();
+            }
+        });
+        
+        // Inicializa o slider
+        initSlider();
     }
+    
+    // Inicializa o slider de citações
+    initQuotesSlider();
 
     // ==============================================
     // 10. ANIMAÇÃO DOS CONTADORES DE ESTATÍSTICAS
@@ -756,23 +851,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // ==============================================
-    // 19. DETECÇÃO DE VISIBILIDADE DA PÁGINA
-    // ==============================================
-    // Pausa animações quando a página não está visível
-    document.addEventListener('visibilitychange', function() {
-        if (document.hidden) {
-            // Pausa o slider de citações
-            if (quoteInterval) clearInterval(quoteInterval);
-        } else {
-            // Retoma o slider
-            if (quoteSlider) {
-                startQuoteAutoPlay();
-            }
-        }
-    });
-
-    // ==============================================
-    // 20. EFICIÊNCIA DE PERFORMANCE
+    // 19. EFICIÊNCIA DE PERFORMANCE
     // ==============================================
     // Otimiza animações para melhor performance
     const animatedElements = document.querySelectorAll('.class-card, .feature-item, .stat-card');
@@ -786,6 +865,15 @@ document.addEventListener('DOMContentLoaded', function() {
             el.style.willChange = 'auto';
         });
     }, 3000);
+    
+    // ==============================================
+    // 20. DEBUG E LOGS (APENAS PARA DESENVOLVIMENTO)
+    // ==============================================
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        console.log('DESCRONIC\'S Informações - JavaScript carregado com sucesso!');
+        console.log(`Total de cards: ${classCards.length}`);
+        console.log(`Slider de citações inicializado`);
+    }
 });
 
 // ==============================================
@@ -828,12 +916,18 @@ document.addEventListener('keydown', function(e) {
     // Navegação do slider de citações com setas
     if (e.key === 'ArrowRight') {
         const quoteNext = document.querySelector('.quote-next');
-        if (quoteNext) quoteNext.click();
+        if (quoteNext) {
+            quoteNext.click();
+            console.log('Tecla direita pressionada');
+        }
     }
     
     if (e.key === 'ArrowLeft') {
         const quotePrev = document.querySelector('.quote-prev');
-        if (quotePrev) quotePrev.click();
+        if (quotePrev) {
+            quotePrev.click();
+            console.log('Tecla esquerda pressionada');
+        }
     }
     
     // Tecla ESC fecha menu mobile
@@ -879,12 +973,3 @@ document.querySelectorAll('.card-image img').forEach(img => {
     
     observer.observe(img);
 });
-
-// ==============================================
-// 25. DEBUG E LOGS (APENAS PARA DESENVOLVIMENTO)
-// ==============================================
-if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
-    console.log('DESCRONIC\'S Informações - JavaScript carregado com sucesso!');
-    console.log(`Total de cards: ${classCards.length}`);
-    console.log(`Total de citações: ${quoteSlides ? quoteSlides.length : 0}`);
-}

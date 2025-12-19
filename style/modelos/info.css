@@ -643,10 +643,11 @@ body {
 }
 
 /* ==============================================
-   5. QUOTES SECTION
+   QUOTES SECTION - SLIDER CORRIGIDO
    ============================================== */
 .quotes-section {
     margin-bottom: var(--spacing-xxl);
+    position: relative;
 }
 
 .quotes-header {
@@ -685,6 +686,9 @@ body {
     border-radius: var(--border-radius-lg);
     border: 1px solid rgba(138, 43, 226, 0.1);
     padding: var(--spacing-xl);
+    position: relative;
+    overflow: hidden;
+    min-height: 280px;
 }
 
 .quote-slider {
@@ -693,23 +697,42 @@ body {
 }
 
 .quote-slide {
-    opacity: 0;
-    transform: translateY(20px);
-    transition: opacity 0.5s ease, transform 0.5s ease;
     position: absolute;
-    width: 100%;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(30px);
+    transition: opacity 0.6s ease, transform 0.6s ease, visibility 0.6s ease;
+    z-index: 1;
 }
 
 .quote-slide.active {
     opacity: 1;
-    transform: translateY(0);
+    visibility: visible;
+    transform: translateX(0);
+    z-index: 2;
     position: relative;
+}
+
+.quote-slide.prev {
+    transform: translateX(-30px);
+}
+
+.quote-slide.next {
+    transform: translateX(30px);
 }
 
 .quote-content {
     text-align: center;
+    padding: var(--spacing-md);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
 .quote-text {
@@ -719,37 +742,42 @@ body {
     margin-bottom: var(--spacing-lg);
     line-height: 1.8;
     position: relative;
-    padding: 0 var(--spacing-md);
+    padding: 0 var(--spacing-lg);
+    max-width: 800px;
 }
 
 .quote-text::before,
 .quote-text::after {
     content: '"';
     color: var(--secondary-color);
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-family: var(--font-decorative);
     position: absolute;
+    opacity: 0.7;
 }
 
 .quote-text::before {
-    top: -10px;
+    top: -20px;
     left: 0;
 }
 
 .quote-text::after {
-    bottom: -20px;
+    bottom: -30px;
     right: 0;
 }
 
 .quote-author {
     display: inline-block;
     text-align: center;
+    margin-top: var(--spacing-md);
 }
 
 .author-name {
     display: block;
     font-weight: 600;
     color: var(--secondary-color);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
+    margin-bottom: 0.25rem;
 }
 
 .author-role {
@@ -781,6 +809,8 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    z-index: 3;
 }
 
 .quote-prev:hover,
@@ -788,20 +818,51 @@ body {
     background: var(--gradient-primary);
     border-color: var(--primary-color);
     transform: scale(1.1);
+    box-shadow: var(--shadow-glow);
+}
+
+.quote-prev:disabled,
+.quote-next:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.quote-prev:disabled:hover,
+.quote-next:disabled:hover {
+    background: rgba(138, 43, 226, 0.1);
+    border-color: rgba(138, 43, 226, 0.2);
+    box-shadow: none;
 }
 
 .quote-dots {
     display: flex;
-    gap: 0.5rem;
+    gap: 0.75rem;
+    position: relative;
+    z-index: 3;
 }
 
 .quote-dot {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
     border-radius: 50%;
     background: rgba(255, 255, 255, 0.2);
     cursor: pointer;
     transition: all 0.3s ease;
+    position: relative;
+}
+
+.quote-dot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: rgba(0, 204, 255, 0.1);
+    transition: transform 0.3s ease;
 }
 
 .quote-dot.active {
@@ -809,8 +870,67 @@ body {
     transform: scale(1.2);
 }
 
+.quote-dot.active::after {
+    transform: translate(-50%, -50%) scale(1);
+}
+
 .quote-dot:hover:not(.active) {
     background: rgba(255, 255, 255, 0.4);
+}
+
+/* Animação de entrada para a primeira citação */
+.quote-slider .quote-slide:first-child {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
+    position: relative;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .quote-text {
+        font-size: 1.2rem;
+        padding: 0 var(--spacing-md);
+    }
+    
+    .quote-text::before,
+    .quote-text::after {
+        font-size: 2rem;
+    }
+    
+    .quote-text::before {
+        top: -15px;
+    }
+    
+    .quote-text::after {
+        bottom: -25px;
+    }
+    
+    .quotes-container {
+        padding: var(--spacing-lg);
+        min-height: 320px;
+    }
+}
+
+@media (max-width: 480px) {
+    .quote-text {
+        font-size: 1.1rem;
+        padding: 0 var(--spacing-sm);
+    }
+    
+    .quote-controls {
+        gap: var(--spacing-md);
+    }
+    
+    .quote-prev,
+    .quote-next {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .quote-dots {
+        gap: 0.5rem;
+    }
 }
 
 /* ==============================================
