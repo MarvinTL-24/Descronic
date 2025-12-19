@@ -535,3 +535,68 @@
         function createParticles(x, y) {
             // Implementação opcional de partículas
         }
+        document.addEventListener('DOMContentLoaded', function() {
+            // ==============================================
+            // MENU MOBILE
+            // ==============================================
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            function openMobileMenu() {
+                mobileMenuOverlay.classList.add('active');
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeMobileMenu() {
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            mobileMenuToggle.addEventListener('click', openMobileMenu);
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Fecha o menu ao clicar em um link
+            const mobileLinks = document.querySelectorAll('.mobile-nav a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // ==============================================
+            // HEADER SCROLL EFFECT
+            // ==============================================
+            const header = document.querySelector('.main-header');
+            
+            function updateHeaderOnScroll() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', updateHeaderOnScroll);
+            updateHeaderOnScroll();
+
+            // Adiciona efeito de rolagem suave para links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    
+                    const targetId = this.getAttribute('href');
+                    if(targetId === '#') return;
+                    
+                    const targetElement = document.querySelector(targetId);
+                    if(targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });

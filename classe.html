@@ -9,23 +9,541 @@
     <link rel="stylesheet" href="style/modelos/fontawesome-free-7.1.0-desktop/otfs/Font Awesome 7 Free-Regular-400.otf">
     <title>Cyber Classes</title>
 </head>
+<style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #0a0a16;
+            color: #e0e0ff;
+            min-height: 100vh;
+            padding: 20px;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 20, 80, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(120, 0, 255, 0.1) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            background: rgba(10, 15, 30, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(64, 224, 208, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 20, 60, 0.3);
+            padding: 20px 40px;
+            position: relative;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(64, 224, 208, 0.7), 
+                transparent);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        /* Logo Styles */
+        .logo {
+            position: absolute;
+            left: 75%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: 800;
+            color: #40e0d0;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.5);
+            background: linear-gradient(90deg, #40e0d0, #20b2aa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 5px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .logo:hover {
+            text-shadow: 0 0 15px rgba(64, 224, 208, 0.8);
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        /* Navigation Styles */
+        .desktop-nav {
+            flex: 1;
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .desktop-nav ul li {
+            position: relative;
+        }
+        
+        .desktop-nav ul li a {
+            color: #a0b0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 18px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        
+        .desktop-nav ul li a i {
+            font-size: 14px;
+        }
+        
+        .desktop-nav ul li a:hover {
+            color: #40e0d0;
+            background: rgba(64, 224, 208, 0.1);
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Social Links Styles */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0b0ff;
+            background: rgba(30, 40, 70, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(64, 224, 208, 0.1);
+        }
+        
+        .social-link:hover {
+            color: #40e0d0;
+            background: rgba(64, 224, 208, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(64, 224, 208, 0.2);
+        }
+        
+        .social-link .tooltip {
+            position: absolute;
+            bottom: -40px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 15, 30, 0.9);
+            color: #40e0d0;
+            padding: 5px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(64, 224, 208, 0.2);
+        }
+        
+        .social-link:hover .tooltip {
+            opacity: 1;
+            visibility: visible;
+            bottom: -45px;
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #40e0d0;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background: rgba(64, 224, 208, 0.1);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            background: rgba(10, 15, 30, 0.7);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(64, 224, 208, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 10, 40, 0.3);
+        }
+        
+        .main-content h1 {
+            color: #40e0d0;
+            margin-bottom: 20px;
+            font-size: 32px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
+        }
+        
+        .main-content p {
+            line-height: 1.6;
+            margin-bottom: 20px;
+            color: #c0c8ff;
+            text-align: center;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .class-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+        
+        .class-card {
+            background: rgba(20, 25, 50, 0.7);
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(64, 224, 208, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .class-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #40e0d0, #20b2aa);
+            transform: scaleX(0);
+            transition: transform 0.5s ease;
+        }
+        
+        .class-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0, 20, 60, 0.3);
+            border-color: rgba(64, 224, 208, 0.3);
+        }
+        
+        .class-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .class-card h3 {
+            color: #40e0d0;
+            margin-bottom: 15px;
+            font-size: 22px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .class-card p {
+            color: #a0b0ff;
+            font-size: 14px;
+            text-align: left;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .desktop-nav ul {
+                gap: 5px;
+            }
+            
+            .desktop-nav ul li a {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .main-header {
+                padding: 15px 25px;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+            
+            .logo {
+                position: static;
+                transform: none;
+                order: 1;
+                flex: 1;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            .desktop-nav {
+                order: 3;
+                flex: 100%;
+                margin-top: 15px;
+            }
+            
+            .desktop-nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .header-actions {
+                order: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+            
+            .logo {
+                font-size: 22px;
+                margin-bottom: 0;
+            }
+            
+            .header-actions {
+                gap: 10px;
+            }
+            
+            .social-links {
+                gap: 10px;
+            }
+            
+            /* Mobile Menu Styles */
+            .mobile-menu-overlay {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.8);
+                backdrop-filter: blur(5px);
+                z-index: 1000;
+                opacity: 0;
+                visibility: hidden;
+                transition: all 0.3s ease;
+            }
+            
+            .mobile-menu-overlay.active {
+                opacity: 1;
+                visibility: visible;
+            }
+            
+            .mobile-menu {
+                position: fixed;
+                top: 0;
+                right: 0;
+                bottom: 0;
+                width: 280px;
+                background: rgba(10, 15, 30, 0.95);
+                backdrop-filter: blur(10px);
+                z-index: 1001;
+                transform: translateX(100%);
+                transition: transform 0.4s ease;
+                border-left: 1px solid rgba(64, 224, 208, 0.2);
+                padding: 25px;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            .mobile-menu.active {
+                transform: translateX(0);
+            }
+            
+            .mobile-menu-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 30px;
+                padding-bottom: 15px;
+                border-bottom: 1px solid rgba(64, 224, 208, 0.2);
+            }
+            
+            .mobile-logo {
+                color: #40e0d0;
+                font-size: 22px;
+                font-weight: 700;
+                text-decoration: none;
+            }
+            
+            .mobile-menu-close {
+                background: transparent;
+                border: none;
+                color: #40e0d0;
+                font-size: 22px;
+                cursor: pointer;
+            }
+            
+            .mobile-nav ul {
+                list-style: none;
+                display: flex;
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .mobile-nav ul li a {
+                color: #a0b0ff;
+                text-decoration: none;
+                font-weight: 600;
+                padding: 15px;
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                transition: all 0.3s ease;
+                border: 1px solid transparent;
+            }
+            
+            .mobile-nav ul li a:hover {
+                background: rgba(64, 224, 208, 0.1);
+                color: #40e0d0;
+                border-color: rgba(64, 224, 208, 0.2);
+            }
+            
+            .mobile-social {
+                margin-top: auto;
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                padding-top: 25px;
+                border-top: 1px solid rgba(64, 224, 208, 0.2);
+            }
+            
+            .social-icon {
+                width: 45px;
+                height: 45px;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                color: #a0b0ff;
+                background: rgba(30, 40, 70, 0.7);
+                text-decoration: none;
+                font-size: 20px;
+                transition: all 0.3s ease;
+            }
+            
+            .social-icon:hover {
+                color: #40e0d0;
+                background: rgba(64, 224, 208, 0.15);
+                transform: translateY(-3px);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .main-header {
+                padding: 15px;
+                border-radius: 12px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .main-content {
+                padding: 25px 20px;
+            }
+            
+            .main-content h1 {
+                font-size: 26px;
+            }
+            
+            .class-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 <body>
-    <!-- Preloader Cyber -->
-    <div id="cyber-preloader">
-        <div class="cyber-loader">
-            <div class="cyber-loader-inner"></div>
-            <div class="cyber-loader-inner"></div>
-        </div>
-        <div class="loading-text">INICIANDO SISTEMA...</div>
+    <div class="container">
+        <!-- Header com Menu -->
+        <header class="main-header">
+            <div class="header-content">
+                <a href="index.html" class="logo">DESCRÔNIC'S</a>
+                
+                <nav class="desktop-nav">
+                    <ul>
+                        <li><a href="index.html"><i class="fas fa-home"></i> Apresentação</a></li>
+                        <li><a href="Informações.html"><i class="fas fa-info-circle"></i> Informações</a></li>
+                        <li><a href="Dimensionais.html"><i class="fas fa-ruler-combined"></i> Dimensionais</a></li>
+                        <li><a href="classe.html"><i class="fas fa-user-shield"></i> Classes</a></li>
+                        <li><a href="mapa.html">Mapa</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="social-links">
+                        <a href="https://x.com/Descrente_24" class="social-link" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                            <span class="tooltip">Siga-me no Twitter</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-link" target="_blank" title="Linkedin">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="tooltip">Meu perfil no LinkedIn</span>
+                        </a>
+                    </div>
+                    <!-- BOTÃO TOGGLE DO MENU MOBILE -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                        <span class="sr-only">Abrir menu</span>
+                    </button>
+                </div>
+            </div>
+        </header>
     </div>
-
-    <!-- Botão de Menu -->
-    <a href="Personagem.html">
-        <button id="cyber-menu-button">
-            <i class="fas fa-user"></i>
-        </button>
-    </a>
-
     <!-- Conteúdo Principal -->
     <main id="cyber-class-view">
         <header class="cyber-header">
@@ -106,12 +624,9 @@
 
     <script>
         // Preloader Cyber
-        window.addEventListener('load', () => {
+        window.addEventListener('load', function() {
             const preloader = document.getElementById('cyber-preloader');
-            preloader.style.opacity = '0';
-            setTimeout(() => {
-                preloader.style.display = 'none';
-            }, 500);
+            preloader.style.display = 'none';
         });
     </script>
     <script src="js/main.js"></script>
