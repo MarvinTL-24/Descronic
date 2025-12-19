@@ -1,4 +1,4 @@
-// classes.js - JavaScript para a página de Classes
+// informações.js - JavaScript para a página de informações
 
 document.addEventListener('DOMContentLoaded', function() {
     // ==============================================
