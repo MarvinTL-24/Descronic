@@ -1,288 +1,641 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
+    <meta name="description" content="DESCRONIC'S - Sistema de Classes do Jogo">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <!-- Title -->
+    <title>DESCRONIC'S - Informações</title>
 
-    <!-- Title  -->
-    <title>DESCRONIC'S</title>
-
-    <!-- Favicon  -->
+    <!-- Favicon -->
     <link rel="icon" href="img/core-img/favicon.ico">
 
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="style/modelos/info.css">
 </head>
 
 <body>
-    <!-- Preloader Start -->
+    <!-- Preloader -->
     <div id="preloader">
-        <div class="preload-content">
-            <div id="DESCRONIC'S-load"></div>
+        <div class="preloader-content">
+            <div class="class-loader">
+                <div class="sword"></div>
+                <div class="shield"></div>
+                <div class="staff"></div>
+            </div>
+            <p class="loading-text">Carregando Sistema de Informações...</p>
         </div>
     </div>
-    <!-- Preloader End -->
 
-    <!-- Grids -->
-    <div class="grids d-flex justify-content-between">
-        <div class="grid1"></div>
-        <div class="grid2"></div>
-        <div class="grid3"></div>
-        <div class="grid4"></div>
-        <div class="grid5"></div>
-        <div class="grid6"></div>
-        <div class="grid7"></div>
-        <div class="grid8"></div>
-        <div class="grid9"></div>
+    <!-- Menu Mobile -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="mobile-logo">DESCRONIC'S</a>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html"><i class="fas fa-home"></i> Apresentação</a></li>
+                <li><a href="Informações.html"><i class="fas fa-info-circle"></i> Informações</a></li>
+                <li><a href="Dimensionais.html"><i class="fas fa-universe"></i> Dimensionais</a></li>
+                <li><a href="classe.html" class="active"><i class="fas fa-user-shield"></i> Classes</a></li>
+                <li><a href="Personagem.html"><i class="fas fa-scroll"></i> Ficha de Personagem</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-social">
+            <a href="https://x.com/Descrente_24" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-icon" target="_blank"><i class="fab fa-linkedin"></i></a>
+        </div>
     </div>
 
-    <!-- ***** Main Menu Area Start ***** -->
-    <div class="mainMenu d-flex align-items-center justify-content-between">
-        <!-- Close Icon -->
-        <div class="closeIcon">
-            <i class="ti-close" aria-hidden="true"></i>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">DESCRONIC'S</a>
+                
+                <nav class="desktop-nav">
+                    <ul>
+                        <li><a href="index.html">Apresentação</a></li>
+                        <li><a href="Informações.html" class="active">Informações</a></li>
+                        <li><a href="Dimensionais.html">Dimensionais</a></li>
+                        <li><a href="classe.html" >Classes</a></li>
+                        <li><a href="Personagem.html">Ficha de Personagem</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="social-links">
+                        <a href="https://x.com/Descrente_24" class="social-link" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-link" target="_blank" title="Linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <!-- Logo Area -->
-        <div class="logo-area">
-            <a href="index.html">DESCRONIC'S</a>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="classes-hero">
+        <div class="classes-hero-bg"></div>
+        <div class="classes-hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="section-tagline">Sistema de Desenvolvimento</div>
+                <h1 class="hero-title">CLASSES & ESPECIALIZAÇÕES</h1>
+                <div class="hero-divider"></div>
+                <p class="hero-description">
+                    Um sistema complexo de classes e subclasses que permite criar personagens únicos. 
+                    Cada escolha afeta não apenas as habilidades de combate, mas também as interações 
+                    com o mundo e os desfechos da história.
+                </p>
+                <div class="hero-stats">
+                    <div class="stat">
+                        <span class="stat-number">6</span>
+                        <span class="stat-label">Classes Base</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">24</span>
+                        <span class="stat-label">Subclasses</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">50+</span>
+                        <span class="stat-label">Habilidades</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-number">100+</span>
+                        <span class="stat-label">Combinações</span>
+                    </div>
+                </div>
+            </div>
         </div>
-        <!-- Nav -->
-        <div class="descronic_Nav wow fadeInUp" data-wow-delay="1s">
-            <nav>
-                <ul>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Apresentação</a>
-                    </li>   
-                    <li class="nav-item">
-                        <a class="nav-link" href="Informações.html">Informações</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Dimensionais.html">Dimensionais</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="classe.html">Classes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Personagem.html">Ficha de Personagem</a>
-                    </li>
+    </section>
+
+    <!-- Main Content -->
+    <main class="classes-main">
+        <div class="container">
+            <!-- System Features -->
+            <div class="system-features">
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-crossroads"></i>
+                    </div>
+                    <h3>Escolhas Consequentes</h3>
+                    <p>Suas decisões afetam o mapa, relações entre NPCs e desbloqueiam conteúdos exclusivos.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-hammer"></i>
+                    </div>
+                    <h3>Sistema de Forja</h3>
+                    <p>Diversificação de itens baseada nos 6 povos principais, cada um com vantagens únicas.</p>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">
+                        <i class="fas fa-sync-alt"></i>
+                    </div>
+                    <h3>Mapa Dinâmico</h3>
+                    <p>Mudanças no ambiente que podem bloquear áreas ou abrir novas ramificações de história.</p>
+                </div>
+            </div>
+
+            <!-- Classes Grid -->
+            <div class="classes-grid">
+                <!-- Classe Card - Escolhas -->
+                <div class="class-card" data-category="sistema">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-crossroads"></i>
+                        </div>
+                        <h3 class="card-title">Sistema de Escolhas</h3>
+                        <span class="card-badge">Narrativa</span>
+                    </div>
+                    <div class="card-image">
+                        <img src="img/imagens/extras/escolhas.png" alt="Sistema de Escolhas">
+                        <div class="card-overlay">
+                            <span class="overlay-text">Impacto Direto</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">
+                            As escolhas afetam não só o mapa e situações futuras, como também relações entre NPCs, 
+                            podendo causar problemas maiores ou abrir novas oportunidades.
+                        </p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-label">Complexidade</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Impacto</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="ramificação/escolhas.html" class="card-link">
+                            <i class="fas fa-arrow-right"></i> Explorar Sistema
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Classe Card - Forja -->
+                <div class="class-card" data-category="crafting">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-hammer"></i>
+                        </div>
+                        <h3 class="card-title">Sistema de Forja</h3>
+                        <span class="card-badge">Crafting</span>
+                    </div>
+                    <div class="card-image">
+                        <img src="img/imagens/extras/sub-classes.png" alt="Sistema de Forja">
+                        <div class="card-overlay">
+                            <span class="overlay-text">6 Povos, 6 Estilos</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">
+                            Diversificação da variedade de chances e necessidade de locomoção pelo mapa. 
+                            Cada povo oferece itens únicos que requerem envolvimento com sua cultura.
+                        </p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-label">Variedade</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Profundidade</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 80%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="ramificação/Forja.html" class="card-link">
+                            <i class="fas fa-arrow-right"></i> Ver Forjas
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Classe Card - Mudanças -->
+                <div class="class-card" data-category="mundo">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-sync-alt"></i>
+                        </div>
+                        <h3 class="card-title">Mundo Dinâmico</h3>
+                        <span class="card-badge">Ambiente</span>
+                    </div>
+                    <div class="card-image">
+                        <img src="img/imagens/extras/mudanças.png" alt="Mundo Dinâmico">
+                        <div class="card-overlay">
+                            <span class="overlay-text">Evolução Constante</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">
+                            O mapa sofre mudanças que podem impedir certos avanços ou abrir novas ramificações. 
+                            O ambiente responde às suas ações e decisões.
+                        </p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-label">Dinamismo</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Interatividade</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="ramificação/mudanças.html" class="card-link">
+                            <i class="fas fa-arrow-right"></i> Explorar Mudanças
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Classe Card - Recompensas -->
+                <div class="class-card" data-category="itens">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <h3 class="card-title">Sistema de Recompensas</h3>
+                        <span class="card-badge">Loot</span>
+                    </div>
+                    <div class="card-image">
+                        <img src="img/imagens/extras/recompensas.png" alt="Sistema de Recompensas">
+                        <div class="card-overlay">
+                            <span class="overlay-text">Itens Únicos</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">
+                            Armas com skins personalizadas e habilidades exclusivas do personagem que as representa. 
+                            Cada recompensa conta uma história.
+                        </p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-label">Exclusividade</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 95%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Valor</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 90%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="ramificação/recompensas.html" class="card-link">
+                            <i class="fas fa-arrow-right"></i> Ver Recompensas
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Classe Card - Artefatos -->
+                <div class="class-card" data-category="itens">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="card-title">Artefatos & Armaduras</h3>
+                        <span class="card-badge">Equipamento</span>
+                    </div>
+                    <div class="card-image">
+                        <img src="img/imagens/extras/artefatos.png" alt="Artefatos e Armaduras">
+                        <div class="card-overlay">
+                            <span class="overlay-text">Conjuntos Poderosos</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">
+                            Armazenam buffs e habilidades de forma aleatória, introduzidos conforme o grau do artesão. 
+                            Combinados em pares, desbloqueiam benefícios especiais.
+                        </p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-label">Poder</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 87%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Estratégia</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 85%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="ramificação/conjuntos.html" class="card-link">
+                            <i class="fas fa-arrow-right"></i> Ver Conjuntos
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Classe Card - Armas -->
+                <div class="class-card" data-category="combate">
+                    <div class="card-header">
+                        <div class="card-icon">
+                            <i class="fas fa-crosshairs"></i>
+                        </div>
+                        <h3 class="card-title">Sistema de Armas</h3>
+                        <span class="card-badge">Combate</span>
+                    </div>
+                    <div class="card-image">
+                        <img src="img/imagens/extras/maestria.png" alt="Sistema de Armas">
+                        <div class="card-overlay">
+                            <span class="overlay-text">Maestria Progressiva</span>
+                        </div>
+                    </div>
+                    <div class="card-content">
+                        <p class="card-description">
+                            Armas divididas em vários aspectos: maestria de uso, raridade de forja e obtenção através 
+                            de segredos do mundo, normalmente armas únicas.
+                        </p>
+                        <div class="card-stats">
+                            <div class="stat">
+                                <span class="stat-label">Progressão</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 92%"></div>
+                                </div>
+                            </div>
+                            <div class="stat">
+                                <span class="stat-label">Variedade</span>
+                                <div class="stat-bar">
+                                    <div class="stat-fill" style="width: 88%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="ramificação/Armas.html" class="card-link">
+                            <i class="fas fa-arrow-right"></i> Ver Armas
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Quotes Section -->
+            <section class="quotes-section">
+                <div class="quotes-header">
+                    <h2 class="section-title">Sabedoria dos Sábios</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-subtitle">Pensamentos que moldam o universo de DESCRONIC'S</p>
+                </div>
+                
+                <div class="quotes-container">
+                    <div class="quote-slider">
+                        <!-- Quote 1 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "Até mesmo o mais tolo dos mortais poderia perceber que em meio as joias mais raras do Olimpo...
+                                    Não se comparava com o brilho e a cor dos olhos de sua amada"
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Skarwolf</span>
+                                    <span class="author-role">Bardo do Reino</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote 2 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "Existem pais iguais a Chronos que engoliram seus filhos para garantir seu poder,
+                                    mas o mal sempre tem um fim."
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Rayanne Rego</span>
+                                    <span class="author-role">Historiadora Real</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote 3 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "Mitologia é o nome que damos às religiões dos outros."
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Joseph Campbell</span>
+                                    <span class="author-role">Mitoanalista</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote 4 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "Mitologia é aquilo em que os adultos acreditam, folclore é aquilo que eles contam 
+                                    para seus filhos e religião é ambos."
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Cedric Whitman</span>
+                                    <span class="author-role">Filósofo</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote 5 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "As 'faíscas' da filosofia nos vêm como guerreiras da mitologia: são aceitas 
+                                    dependendo da época e do lugar."
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Clayton dos Santos</span>
+                                    <span class="author-role">Sábio da Montanha</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote 6 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "A mitologia, historicamente, representa a morte de um conhecimento ofertado pela religião."
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Paulo Ricardo Zargolin</span>
+                                    <span class="author-role">Teólogo</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote 7 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "O que difere a religião da mitologia é o simples exercício da descrença."
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Paulo César Oliveira</span>
+                                    <span class="author-role">Filósofo Contemporâneo</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Quote 8 -->
+                        <div class="quote-slide">
+                            <div class="quote-content">
+                                <p class="quote-text">
+                                    "A mitologia do medo chama-se deus."
+                                </p>
+                                <div class="quote-author">
+                                    <span class="author-name">Cello Vieira</span>
+                                    <span class="author-role">Poeta Rebelde</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     
-                </ul>
-            </nav>
-        </div>
-        <!-- Copwrite Text -->
-        <div class="copywrite-text">
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Templates usados como base da: <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
-        </div>
-    </div>
-    <!-- ***** Main Menu Area End ***** -->
+                    <div class="quote-controls">
+                        <button class="quote-prev">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="quote-dots">
+                            <span class="quote-dot" data-index="0"></span>
+                            <span class="quote-dot" data-index="1"></span>
+                            <span class="quote-dot" data-index="2"></span>
+                            <span class="quote-dot" data-index="3"></span>
+                            <span class="quote-dot" data-index="4"></span>
+                            <span class="quote-dot" data-index="5"></span>
+                            <span class="quote-dot" data-index="6"></span>
+                            <span class="quote-dot" data-index="7"></span>
+                        </div>
+                        <button class="quote-next">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+            </section>
 
-    <!-- ***** Header Area Start ***** -->
-    <div style="background-color: #00796b;">
-        <header class="header-area">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12">
-                        <div class="menu-area d-flex justify-content-between">
-                            <!-- Logo Area  -->
-                            <div class="logo-area">
-                                <a href="index.html">DESCRONIC'S</a>
-                            </div>
-
-                            <div class="menu-content-area d-flex align-items-center">
-                                <!-- Header Social Area -->
-                                <div class="header-social-area d-flex align-items-center">
-                                    <a href="https://x.com/Descrente_24" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                    
-                                </div>
-                                <!-- Menu Icon -->
-                                <span class="navbar-toggler-icon" id="menuIcon"></span>
-                            </div>
+            <!-- Stats Section -->
+            <section class="stats-section">
+                <div class="stats-header">
+                    <h2 class="section-title">O Mundo de DESCRONIC'S</h2>
+                    <div class="section-divider"></div>
+                    <p class="section-subtitle">Números que definem a grandiosidade do projeto</p>
+                </div>
+                
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="2800">0</h3>
+                            <p class="stat-label">População Geral</p>
+                            <span class="stat-description">NPCs com rotinas e histórias únicas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-crown"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="21">0</h3>
+                            <p class="stat-label">Bosses Principais</p>
+                            <span class="stat-description">Desafios épicos com mecânicas únicas</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="21">0</h3>
+                            <p class="stat-label">Mini Bosses</p>
+                            <span class="stat-description">Desafios opcionais e chefes de área</span>
+                        </div>
+                    </div>
+                    
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-dragon"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3 class="stat-number" data-count="135">0</h3>
+                            <p class="stat-label">Espécies de Criaturas</p>
+                            <span class="stat-description">Fauna diversa com comportamentos únicos</span>
                         </div>
                     </div>
                 </div>
-            </div>
-        </header>
-        <!-- ***** Header Area End ***** -->
+            </section>
+        </div>
+    </main>
 
-        <!-- ***** Services Area Start ***** -->
-        <div class="descronic_-services-area section-padding-100-50">
-            <div class="container">
-                <div class="row">
-                    <!-- Single Services Area -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="single-services-area wow fadeInUp" data-wow-delay="300ms">
-                            <img src="img/imagens/extras/escolhas.png" alt="">
-                            <a href="ramificação/escolhas.html" style="color: #000000; font-size: 20px;">Escolhas</a>
-                            <p>As escolhas como dito anteriomente afetarão não só o mapa e situações futuras, como tambem afeta relações entre npc's podendo causar problemas maiores.</p>
-                        </div>
-                    </div>
-                    <!-- Single Services Area -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="single-services-area wow fadeInUp" data-wow-delay="600ms">
-                            <img src="img/imagens/extras/sub-classes.png" alt="">
-                            <a href="ramificação/Forja.html" style="color: #000; font-size: 20px;">Forja</a>
-                            <p>Pretendo diversificar a variedade de chances e necessidade de locomoção pelo mapa, sabendo que existem 6 povos principais a chance de conseguir algo de cada uma delas tem uma porcentagem que o fara ter que se envolver com seu povo ou costumes.</p>
-                        </div>
-                    </div>
-                    <!-- Single Services Area -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="single-services-area wow fadeInUp" data-wow-delay="900ms">
-                            <img src="img/imagens/extras/mudanças.png" alt="">
-                            <a href="ramificação/mudanças.html" style="color: #000; font-size: 20px;">Mudanças</a>
-                            <p>O mapa sofrera mudanças que impediram certos avanços no mapa ou poderão abrir novas ramificações.</p>
-                        </div>
-                    </div>
-                    <!-- Single Services Area -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="single-services-area wow fadeInUp" data-wow-delay="300ms">
-                            <img src="img/imagens/extras/recompensas.png" alt="">
-                            <a href="ramificação/recompensas.html" style="color: #000; font-size: 20px;">Recompensas</a>
-                            <p>Teremos armas com skins personalizadas que devem ter habilidades exclusivas do personagem que o representar</p>
-                        </div>
-                    </div>
-                    <!-- Single Services Area -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="single-services-area wow fadeInUp" data-wow-delay="600ms">
-                            <img src="img/imagens/extras/artefatos.png" alt="">
-                            <a href="ramificação/conjuntos.html" style="color: #000; font-size: 20px;">Artefatos/Armaduras</a>
-                            <p>Armazenam buffs e habilidades de forma aleatoria que serão introduzidos de acordo com o grau do artesão,sendo combinados em pares terão acesso a tal beneficio.</p>
-                        </div>
-                    </div>
-                    <!-- Single Services Area -->
-                    <div class="col-12 col-md-6 col-lg-4">
-                        <div class="single-services-area wow fadeInUp" data-wow-delay="900ms">
-                            <img src="img/imagens/extras/maestria.png" alt="">
-                            <a href="ramificação/Armas.html" style="color: #000; font-size: 20px;">Armas</a>
-                            <p>As armas serão dividas em variós aspectos a primeira será sua maestria de uso que habilitara maior dano e velocidade de uso pela proeficiência por meio de metas, teremos a raridade de forja ou obtenção ao achar por meio de segredos do mundo que normalmente são armas unicas.</p>
-                        </div>
+    <!-- Footer -->
+    <footer class="classes-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" class="logo">DESCRONIC'S</a>
+                    <p>Um universo de escolhas e consequências</p>
+                </div>
+                
+                <div class="footer-navigation">
+                    <h4>Explorar</h4>
+                    <ul>
+                        <li><a href="index.html">Apresentação</a></li>
+                        <li><a href="Informações.html" class="active">Informações</a></li>
+                        <li><a href="Dimensionais.html">Dimensionais</a></li>
+                        <li><a href="classe.html" >Classes</a></li>
+                        <li><a href="Personagem.html">Ficha de Personagem</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-social">
+                    <h4>Conectar</h4>
+                    <div class="social-icons">
+                        <a href="https://x.com/Descrente_24" class="social-icon" target="_blank">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-icon" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
                     </div>
                 </div>
             </div>
-        </div>
-  
-        <!-- ***** Services Area End ***** -->
-        <div class="descronic_-testimonials-area bg-img" style="background-image: url(img/imagens/blackgrounds/reunião.png); color: #000;">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col-12 col-md-10 col-lg-7">
-                        <div class="testimonial-content bg-white">
-                            <div class="section-heading text-left">
-                                <div class="line"></div>
-                                <h2>Pensamentos</h2>
-                            </div>
-
-                            <div class="testimonial-slides owl-carousel">
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">Até mesmo o mais tolo dos mortais poderia perceber
-                                        que em meio as joias mais raras do Olimpo...
-                                        Não se comparava com o brilho e a cor dos olhos de sua amada</p>
-                                    <h6>Skarwolf</h6>
-                                </div>
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">Existem pais iguais a Chronos que engolira seus filhos para garantir seu poder
-                                    , mas o mal sempre tem um fim.</p>
-                                    <h6>Rayanne Rego</h6>
-                                </div>
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">Mitologia é o nome que damos às religiões dos outros.</p>
-                                    <h6>Joseph Campbell</h6>
-                                </div>
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">Mitologia é aquilo em que os adultos acreditam, folclore é aquilo que eles contam para seus filhos e religião é ambos.</p>
-                                    <h6>Cedric Whitman</h6>
-                                </div>
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">As 'faíscas' da filosofia nos vêm como guerreiras da mitologia: são aceitas dependendo da época e do lugar.</p>
-                                    <h6>Clayton dos santos</h6>
-                                </div>
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">A mitologia, historicamente, representa a morte de um conhecimento ofertado pela religião.</p>
-                                    <h6>Paulo Ricardo Zargolin</h6>
-                                </div>
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">O que difere a religião da mitologia é o simples exercício da descrença.</p>
-                                    <h6>Paulo César Oliveira</h6>
-                                </div>
-
-                                <div class="single-tes-slide">
-                                    <p style="color: #000; font-size: 25px;">A mitologia do medo chama-se deus.</p>
-                                    <h6>Cello Vieira</h6>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> DESCRONIC'S. Todos os direitos reservados.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="cool-facts-area section-padding-100-0">
-            <div class="container">
-                <div class="row align-items-center">
-                    <!-- Single Cool Fact-->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-cool-fact-area text-center mb-100 wow fadeInUpBig" data-wow-delay="250ms">
-                            <img src="img/imagens/extras/população.png" alt="">
-                            <h2><span class="counter">2800</span></h2>
-                            <p>POPULAÇÃO GERAL</p>
-                        </div>
-                    </div>
-                    <!-- Single Cool Fact-->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-cool-fact-area text-center mb-100 wow fadeInUpBig" data-wow-delay="500ms">
-                            <img src="img/imagens/extras/bosses.png" alt="">
-                            <h2><span class="counter">21</span></h2>
-                            <p>BOSSES</p>
-                        </div>
-                    </div>
-                    <!-- Single Cool Fact-->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-cool-fact-area text-center mb-100 wow fadeInUpBig" data-wow-delay="750ms">
-                            <img src="img/imagens/extras/mini boss.png" alt="">
-                            <h2><span class="counter">21</span></h2>
-                            <p>MINI BOSSES</p>
-                        </div>
-                    </div>
-                    <!-- Single Cool Fact-->
-                    <div class="col-12 col-sm-6 col-lg-3">
-                        <div class="single-cool-fact-area text-center mb-100 wow fadeInUpBig" data-wow-delay="1000ms">
-                            <img src="img/imagens/extras/inimigos.png" alt="">
-                            <h2><span class="counter">135</span></h2>
-                            <p>ESPECIES DE CRIATURAS</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- ***** Footer Area End ***** -->
-
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
-
+    <!-- JavaScript -->
+    <script src="js/info.js"></script>
 </body>
-
 </html>

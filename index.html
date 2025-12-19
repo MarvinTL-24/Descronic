@@ -1,249 +1,620 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="description" content="">
+    <meta name="description" content="DESCRONIC'S - Um projeto de jogo ambicioso com múltiplas facetas">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <!-- The above 4 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-    <!-- Title  -->
-    <title>DESCRONIC'S</title>
-
-    <!-- Favicon  -->
-    <link rel="icon" href="img/core-img/favicon.ico">
-
-    <!-- Style CSS -->
-    <link rel="stylesheet" href="style.css">
+    <title>DESCRONIC'S - Projeto de Jogo</title>
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- CSS Principal -->
+    <link rel="stylesheet" href="style/modelos/style.css">
+    
 
 </head>
-
 <body>
-    <!-- Preloader Start -->
+    <!-- Preloader com animação impressionante -->
     <div id="preloader">
-        <div class="preload-content">
-            <div id="DESCRONIC'S-load"></div>
+        <div class="preloader-content">
+            <div class="loader">
+                <div class="loader-inner"></div>
+            </div>
+            <p class="loading-text">Carregando DESCRONIC'S...</p>
         </div>
     </div>
-    <!-- Preloader End -->
 
-    <!-- Grids -->
-    <div class="grids d-flex justify-content-between">
-        <div class="grid1"></div>
-        <div class="grid2"></div>
-        <div class="grid3"></div>
-        <div class="grid4"></div>
-        <div class="grid5"></div>
-        <div class="grid6"></div>
-        <div class="grid7"></div>
-        <div class="grid8"></div>
-        <div class="grid9"></div>
-    </div>
+    <!-- Menu Mobile Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay"></div>
 
-    <!-- ***** Main Menu Area Start ***** -->
-    <div class="mainMenu d-flex align-items-center justify-content-between">
-        <!-- Close Icon -->
-        <div class="closeIcon">
-            <i class="ti-close" aria-hidden="true"></i>
+    <!-- Menu Mobile -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="mobile-logo">DESCRONIC'S</a>
+            <button class="mobile-menu-close" id="mobileMenuClose">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <!-- Logo Area -->
-        <div class="logo-area">
-            <a href="index.html">DESCRONIC'S</a>
-        </div>
-        <!-- Nav -->
-        <div class="descronic_Nav wow fadeInUp" data-wow-delay="1s">
-            <nav>
-                <ul>
-                    <li class="nav-item">
-                        <a class="nav-link" href="index.html">Apresentação</a>
-                    </li>   
-                    <li class="nav-item">
-                        <a class="nav-link" href="Informações.html">Informações</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Dimensionais.html">Dimensionais</a>
-                    </li>
-                    <li class="nav-item active">
-                        <a class="nav-link" href="classe.html">Classes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="Personagem.html">Ficha de Personagem</a>
-                    </li>
-                    
-                </ul>
-            </nav>
-        </div>
-        <!-- Copwrite Text -->
-        <div class="copywrite-text">
-            <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-Copyright &copy;<script>document.write(new Date().getFullYear());</script> Templates usados como base da: <i class="fa fa-heart-o" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-</p>
+        <nav class="mobile-nav">
+            <ul>
+                <li><a href="index.html" class="active"><i class="fas fa-home"></i> Apresentação</a></li>
+                <li><a href="Informações.html"><i class="fas fa-info-circle"></i> Informações</a></li>
+                <li><a href="Dimensionais.html"><i class="fas fa-ruler-combined"></i> Dimensionais</a></li>
+                <li><a href="classe.html"><i class="fas fa-user-shield"></i> Classes</a></li>
+                <li><a href="Personagem.html"><i class="fas fa-scroll"></i> Ficha de Personagem</a></li>
+            </ul>
+        </nav>
+        <div class="mobile-social">
+            <a href="https://x.com/Descrente_24" class="social-icon" target="_blank"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-icon" target="_blank"><i class="fab fa-linkedin"></i></a>
         </div>
     </div>
-    <!-- ***** Main Menu Area End ***** -->
 
-    <!-- ***** Header Area Start ***** -->
-    <header class="header-area">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-12">
-                    <div class="menu-area d-flex justify-content-between">
-                        <!-- Logo Area  -->
-                        <div class="logo-area">
-                            <a href="index.html">DESCRONIC'S</a>
-                        </div>
-
-                        <div class="menu-content-area d-flex align-items-center">
-                            <!-- Header Social Area -->
-                            <div class="header-social-area d-flex align-items-center">
-                                <a href="https://x.com/Descrente_24" data-toggle="tooltip" data-placement="bottom" title="Twitter"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-                                <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" data-toggle="tooltip" data-placement="bottom" title="Linkedin"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
-                                
-                            </div>
-                            <!-- Menu Icon -->
-                            <span class="navbar-toggler-icon" id="menuIcon"></span>
-                        </div>
+    <!-- Header -->
+    <header class="main-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="index.html" class="logo">DESCRONIC'S</a>
+                
+                <nav class="desktop-nav">
+                    <ul>
+                        <li><a href="index.html" class="active">Apresentação</a></li>
+                        <li><a href="Informações.html">Informações</a></li>
+                        <li><a href="Dimensionais.html">Dimensionais</a></li>
+                        <li><a href="classe.html">Classes</a></li>
+                        <li><a href="Personagem.html">Ficha de Personagem</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="social-links">
+                        <a href="https://x.com/Descrente_24" class="social-link" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                            <span class="tooltip">Siga-me no Twitter</span>
+                        </a>
+                        <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-link" target="_blank" title="Linkedin">
+                            <i class="fab fa-linkedin"></i>
+                            <span class="tooltip">Meu perfil no LinkedIn</span>
+                        </a>
                     </div>
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
                 </div>
             </div>
         </div>
     </header>
-    <!-- ***** Header Area End ***** -->
 
-    <!-- ***** Hero Area Start ***** -->
-    <div class="hero-area d-flex align-items-center">
-        <!-- Back End Content -->
-        <div class="backEnd-content">
-            <img class="dots" src="img/core-img/dots.png" alt="">
-        </div>
-
-        <!-- Hero Thumbnail -->
-        <div class="hero-thumbnail aboutUs equalize bg-img" style="background-image: url(img/imagens/blackgrounds/blackground.jpg);"></div>
+    <!-- Hero Section -->
+    <section class="hero-section">
+        <!-- Partículas animadas no fundo -->
+        <div class="particles-container" id="particles"></div>
         
-        <!-- Hero Content -->
-        <div class="hero-content aboutUs equalize">
-            <div class="container-fluid h-100">
-                <div class="row h-100 align-items-center justify-content-center">
-                    <div class="col-12 col-md-10">
-                        <div class="line"></div>
-                        <h2>Sejam bem vindos ao jogo que desejo que seja existente.</h2><br>
-                        <p style="font-size: 18px;">Muitos podem questionar o que este jogo tem a oferecer de diferente em meio a tantas opções disponíveis hoje em dia.<br> Talvez eu mesma tenha dificuldade em explicar, mas quero que você entenda que meu objetivo é desenvolver um jogo ao nível de The Witcher 3, com diversas facetas da vida e uma alma que possa abrir espaço para uma franquia ou se tornar uma referência para o surgimento de novas obras. Esse é o nível que almejo para meu projeto.<br> Reconheço que é uma ambição grande e que podem parecer apenas palavras ao vento, mas se eu conseguir deixar um pouco do que pensei para este projeto com alguém, já terei cumprido minha parte em não deixá-lo morrer.
-                        </p>
-                        <a href="https://x.com/Descrente_24" class="btn descronic_-btn white-btn">Fale comigo.</a>
-                    </div>
+        <div class="hero-background" style="background-image: url('img/imagens/blackgrounds/blackground.jpg');"></div>
+        <div class="hero-overlay"></div>
+        <div class="container">
+            <div class="hero-content">
+                <div class="section-tagline">Bem-vindo ao projeto</div>
+                <h1 class="hero-title">DESCRONIC'S</h1>
+                <div class="hero-divider"></div>
+                <p class="hero-description">
+                    Um jogo que desejo que seja existente. Muitos podem questionar o que este jogo tem a oferecer de diferente em meio a tantas opções disponíveis hoje em dia. Talvez eu mesma tenha dificuldade em explicar, mas quero que você entenda que meu objetivo é desenvolver um jogo ao nível de The Witcher 3, com diversas facetas da vida e uma alma que possa abrir espaço para uma franquia.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#about" class="btn btn-primary">Saiba Mais</a>
+                    <a href="https://x.com/Descrente_24" class="btn btn-secondary" target="_blank">Fale Comigo</a>
                 </div>
             </div>
         </div>
-    </div>
-    <!-- ***** Hero Area End ***** -->
+    </section>
 
-    <div class="descronic_-about-us-area bg-img" style="background-image: url(img/imagens/blackgrounds/part\ 1.jpg);">
-        <!-- Back End Content -->
-
-        <div class="container-fluid" style="margin-left: -100px; margin-top: 20px;">
-            <div class="row">
-                <div class="col-12 col-md-10 col-lg-7">
-                    <div class="about-us-content">
-                        <div class="section-heading text-center wow fadeInUp" data-wow-delay="300ms">
-                            <div class="line"></div>
-                            <h2>Desenvolvimento em si do jogo</h2>
+    <!-- About Section -->
+    <section class="about-section animated" id="about">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Desenvolvimento do Jogo</h2>
+                <p class="section-subtitle">O projeto está mais estabelecido e estruturado do que pode parecer</p>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <p>O jogo em si está sendo desenvolvido exclusivamente por mim, com o objetivo de divulgar e permitir que outros usufruam do que já imaginei e desenvolvi. Não busco apenas criar um jogo de grande porte, mas também proporcionar material para que fãs de RPG de mesa possam se divertir.</p>
+                    <p>Espero que até mesmo aqueles que amam RPG de mesa possam utilizar esse material de forma que se divirtam e que ele não fique apenas preso na minha mente.</p>
+                </div>
+                
+                <div class="development-progress">
+                    <h3>Progresso do Desenvolvimento</h3>
+                    
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-title">NPC's em geral</span>
+                            <span class="progress-percent">30%</span>
                         </div>
-                        <p class="wow fadeInUp" data-wow-delay="600ms" style="color: #000; font-size: 18px;">O jogo em si está mais estabelecido e estruturado do que pode parecer, no entanto, ele está sendo desenvolvido exclusivamente por mim e estou publicando o material.<br> Meu objetivo é divulgar e, se possível, permitir que outros usufruam do que já imaginei e desenvolvi, para que possam colocar em prática algum dia.<br>
-                        Não busco alguém para criar um jogo de grande porte, como Souls-like ou The Witcher. <br> Espero que até mesmo aqueles que amam RPG de mesa possam utilizar esse material de forma que se divirtam e que ele não fique apenas preso na minha mente.
-                        </p>
-                        <!-- Progress Bar Content Area -->
-                        <div class="services-progress-bar mt-50 wow fadeInUp" data-wow-delay="900ms">
-                            <!-- Single Progress Bar -->
-                            <div class="single_progress_bar">
-                                <div id="bar1" class="barfiller">
-                                    <div class="tipWrap">
-                                        <span class="tip"></span>
-                                    </div>
-                                    <span class="fill" data-percentage="30"></span>
-                                </div>
-                                <a href="#" style="color: #000; font-size: 15px;">NPC'S em geral</a>
-                            </div>
-                            <!-- Single Progress Bar -->
-                            <div class="single_progress_bar">
-                                <div id="bar2" class="barfiller">
-                                    <div class="tipWrap">
-                                        <span class="tip"></span>
-                                    </div>
-                                    <span class="fill" data-percentage="45"></span>
-                                </div>
-                                <a href="./index2/mapa.html" style="color: #000; font-size: 15px;">Designer do Mapa</a>
-                            </div>
-                            <!-- Single Progress Bar -->
-                            <div class="single_progress_bar">
-                                <div id="bar3" class="barfiller">
-                                    <div class="tipWrap">
-                                        <span class="tip"></span>
-                                    </div>
-                                    <span class="fill" data-percentage="100"></span>
-                                </div>
-                                <a href="#" style="color: #000; font-size: 15px;">Seres vivos/ Povos/ Inimigos.</a>
-                            </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="30%"></div>
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="descronic_-about-us-area second-part bg-img" style="background-image: url(img/imagens/blackgrounds/part\ 2.jpg);">
-        <!-- Back End Content -->
-
-        <div class="container-fluid" style="margin-left: 100px; margin-top: 20px;">
-            <div class="row justify-content-end">
-                <div class="col-12 col-md-10 col-lg-7">
-                    <div class="about-us-content ">
-                        <div class="section-heading text-left wow fadeInUp" data-wow-delay="300ms">
-                            <div class="line"></div>
-                            <h2>Planos</h2>
+                    
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-title">Design do Mapa</span>
+                            <span class="progress-percent">45%</span>
                         </div>
-                        <p class="wow fadeInUp" data-wow-delay="600ms" style="color: #000; font-size: 18px;">Neste jogo, temos uma grande variedade de categorias em relação ao desenvolvimento de batalhas contra chefes, classes e suas ramificações, no entanto, o jogo tem como destaque é o sistema de escolhas, que pode punir severamente o jogador, a ponto de alterar a experiência de jogo e bloquear certas missões.<br> Isso significa que será necessário jogar até cinco finais diferentes para desbloquear o final original em momentos-chave da narrativa. É importante ressaltar que essas escolhas são fundamentais para alcançar 100% do mapa e completar a platina.
-                        <br>
-                        O mapa ficará definitivamente com 100% do jogo, sem alterar histórias ou elementos existentes, para isso teremos um modo de exploração que permitirá aos jogadores explorar o mapa como se fossem desenvolvedores do jogo.<br> Nesse modo, será possível enfrentar os chefes quantas vezes quiser, realizar missões específicas e ter total liberdade para usar a build, informações, conjuntos e status da maneira que preferir.<br> Isso também permitirá que criadores de conteúdo descubram mais segredos ao longo da história.
-                        </p>
-                        <div class="row mt-100 text-center wow fadeInUp" data-wow-delay="900ms">
-                            <div class="col-12 col-sm-6 col-md-4">
-                                <div class="single-pie-bar" data-percent="90">
-                                    <canvas class="bar-circle" width="100" height="100"></canvas>
-                                    <a href="#" style="color: #000; font-size: 15px;">FINAIS</a>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-4">
-                                <div class="single-pie-bar" data-percent="65">
-                                    <canvas class="bar-circle" width="100" height="100"></canvas>
-                                    <a href="#" style="color: #000; font-size: 15px;">TEMPO</a>
-                                </div>
-                            </div>
-                            <div class="col-12 col-sm-6 col-md-4">
-                                <div class="single-pie-bar" data-percent="80">
-                                    <canvas class="bar-circle" width="100" height="100"></canvas>
-                                    <a href="#" style="color: #000; font-size: 15px;">BOSSES</a>
-                                </div>
-                            </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="45%"></div>
+                        </div>
+                    </div>
+                    
+                    <div class="progress-item">
+                        <div class="progress-header">
+                            <span class="progress-title">Seres vivos / Povos / Inimigos</span>
+                            <span class="progress-percent">100%</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" data-width="100%"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </section>
 
-    <!-- jQuery (Necessary for All JavaScript Plugins) -->
-    <script src="js/jquery/jquery-2.2.4.min.js"></script>
-    <!-- Popper js -->
-    <script src="js/popper.min.js"></script>
-    <!-- Bootstrap js -->
-    <script src="js/bootstrap.min.js"></script>
-    <!-- Plugins js -->
-    <script src="js/plugins.js"></script>
-    <!-- Active js -->
-    <script src="js/active.js"></script>
+    <!-- Features Section -->
+    <section class="features-section animated">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Planos e Características</h2>
+                <p class="section-subtitle">Um jogo com múltiplas escolhas e finais</p>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="features-content">
+                <div class="feature-text">
+                    <p>Neste jogo, temos uma grande variedade de categorias em relação ao desenvolvimento de batalhas contra chefes, classes e suas ramificações. O destaque é o sistema de escolhas, que pode punir severamente o jogador, a ponto de alterar a experiência de jogo e bloquear certas missões.</p>
+                    <p>Será necessário jogar até cinco finais diferentes para desbloquear o final original em momentos-chave da narrativa. Essas escolhas são fundamentais para alcançar 100% do mapa e completar a platina.</p>
+                </div>
+                
+                <div class="features-stats">
+                    <div class="stat-item">
+                        <div class="stat-circle">
+                            <div class="circle-progress" data-percent="90">
+                                <span class="circle-value">0%</span>
+                            </div>
+                        </div>
+                        <h4>FINAIS</h4>
+                        <p>Múltiplos finais para explorar</p>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-circle">
+                            <div class="circle-progress" data-percent="65">
+                                <span class="circle-value">0%</span>
+                            </div>
+                        </div>
+                        <h4>TEMPO</h4>
+                        <p>Estimativa de tempo de desenvolvimento</p>
+                    </div>
+                    
+                    <div class="stat-item">
+                        <div class="stat-circle">
+                            <div class="circle-progress" data-percent="80">
+                                <span class="circle-value">0%</span>
+                            </div>
+                        </div>
+                        <h4>BOSSES</h4>
+                        <p>Chefes únicos e desafiadores</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <!-- Game Modes Section -->
+    <section class="modes-section animated">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title">Modo de Exploração</h2>
+                <div class="section-divider"></div>
+            </div>
+            
+            <div class="modes-content">
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-map-marked-alt"></i>
+                    </div>
+                    <h3>Mapa 100%</h3>
+                    <p>O mapa ficará definitivamente com 100% do jogo, sem alterar histórias ou elementos existentes.</p>
+                </div>
+                
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-dungeon"></i>
+                    </div>
+                    <h3>Modo Exploração</h3>
+                    <p>Permite explorar o mapa como desenvolvedor, enfrentar chefes quantas vezes quiser e realizar missões específicas.</p>
+                </div>
+                
+                <div class="mode-card">
+                    <div class="mode-icon">
+                        <i class="fas fa-user-cog"></i>
+                    </div>
+                    <h3>Total Liberdade</h3>
+                    <p>Liberdade para usar builds, informações, conjuntos e status da maneira que preferir.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html" class="logo">DESCRONIC'S</a>
+                    <p>Um projeto de jogo ambicioso com alma própria</p>
+                </div>
+                
+                <div class="footer-links">
+                    <h4>Navegação</h4>
+                    <ul>
+                        <li><a href="index.html">Apresentação</a></li>
+                        <li><a href="Informações.html">Informações</a></li>
+                        <li><a href="Dimensionais.html">Dimensionais</a></li>
+                        <li><a href="classe.html">Classes</a></li>
+                        <li><a href="Personagem.html">Ficha de Personagem</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-contact">
+                    <h4>Contato</h4>
+                    <div class="social-links">
+                        <a href="https://x.com/Descrente_24" class="social-link" target="_blank">
+                            <i class="fab fa-twitter"></i> Twitter
+                        </a>
+                        <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-link" target="_blank">
+                            <i class="fab fa-linkedin"></i> LinkedIn
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; <span id="currentYear"></span> DESCRONIC'S. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // ==============================================
+            // 1. PRELOADER COM ANIMAÇÃO
+            // ==============================================
+            const preloader = document.getElementById('preloader');
+            
+            // Remove o preloader após 1.5 segundos (tempo da animação)
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                setTimeout(() => {
+                    preloader.style.display = 'none';
+                }, 500);
+            }, 1500);
+
+            // ==============================================
+            // 2. MENU MOBILE
+            // ==============================================
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenu = document.getElementById('mobileMenu');
+            
+            function openMobileMenu() {
+                mobileMenuOverlay.classList.add('active');
+                mobileMenu.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+            
+            function closeMobileMenu() {
+                mobileMenuOverlay.classList.remove('active');
+                mobileMenu.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+            
+            mobileMenuToggle.addEventListener('click', openMobileMenu);
+            mobileMenuClose.addEventListener('click', closeMobileMenu);
+            mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+            
+            // Fecha o menu ao clicar em um link
+            const mobileLinks = document.querySelectorAll('.mobile-nav a');
+            mobileLinks.forEach(link => {
+                link.addEventListener('click', closeMobileMenu);
+            });
+
+            // ==============================================
+            // 3. HEADER SCROLL EFFECT
+            // ==============================================
+            const header = document.querySelector('.main-header');
+            
+            function updateHeaderOnScroll() {
+                if (window.scrollY > 50) {
+                    header.classList.add('scrolled');
+                } else {
+                    header.classList.remove('scrolled');
+                }
+            }
+            
+            window.addEventListener('scroll', updateHeaderOnScroll);
+            updateHeaderOnScroll();
+
+            // ==============================================
+            // 4. PARTÍCULAS ANIMADAS NO HERO
+            // ==============================================
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                const particleCount = 50;
+                
+                for (let i = 0; i < particleCount; i++) {
+                    const particle = document.createElement('div');
+                    particle.classList.add('particle');
+                    
+                    // Tamanho aleatório
+                    const size = Math.random() * 4 + 1;
+                    particle.style.width = `${size}px`;
+                    particle.style.height = `${size}px`;
+                    
+                    // Posição aleatória
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    
+                    // Cor aleatória
+                    const colors = ['#8a2be2', '#00ccff', '#ff2a6d'];
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    particle.style.backgroundColor = color;
+                    
+                    // Opacidade aleatória
+                    particle.style.opacity = Math.random() * 0.5 + 0.1;
+                    
+                    // Duração da animação aleatória
+                    const duration = Math.random() * 20 + 10;
+                    particle.style.animationDuration = `${duration}s`;
+                    particle.style.animationDelay = `${Math.random() * 5}s`;
+                    
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            
+            createParticles();
+
+            // ==============================================
+            // 5. ANIMAÇÃO DE SEÇÕES AO SCROLL
+            // ==============================================
+            const animatedSections = document.querySelectorAll('.animated');
+            
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('section-visible');
+                        
+                        // Anima as barras de progresso
+                        if (entry.target.classList.contains('about-section')) {
+                            animateProgressBars();
+                        }
+                        
+                        // Anima os círculos de estatísticas
+                        if (entry.target.classList.contains('features-section')) {
+                            animateStatsCircles();
+                        }
+                        
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, observerOptions);
+            
+            animatedSections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // ==============================================
+            // 6. ANIMAÇÃO DAS BARRAS DE PROGRESSO
+            // ==============================================
+            function animateProgressBars() {
+                const progressFills = document.querySelectorAll('.progress-fill');
+                
+                progressFills.forEach(fill => {
+                    const width = fill.getAttribute('data-width');
+                    
+                    // Usa requestAnimationFrame para animação suave
+                    requestAnimationFrame(() => {
+                        fill.style.width = width;
+                    });
+                });
+            }
+
+            // ==============================================
+            // 7. ANIMAÇÃO DOS CÍRCULOS DE ESTATÍSTICAS
+            // ==============================================
+            function animateStatsCircles() {
+                const circles = document.querySelectorAll('.circle-progress');
+                
+                circles.forEach(circle => {
+                    const percent = parseInt(circle.getAttribute('data-percent'));
+                    const valueElement = circle.querySelector('.circle-value');
+                    
+                    // Anima o círculo
+                    const degrees = (percent / 100) * 360;
+                    
+                    requestAnimationFrame(() => {
+                        circle.style.background = `conic-gradient(var(--secondary-color) ${degrees}deg, #e0e0e0 ${degrees}deg)`;
+                    });
+                    
+                    // Anima o contador
+                    if (valueElement) {
+                        animateCounter(valueElement, 0, percent, 2000);
+                    }
+                });
+            }
+            
+            // Função para animar contador
+            function animateCounter(element, start, end, duration) {
+                let startTimestamp = null;
+                const step = (timestamp) => {
+                    if (!startTimestamp) startTimestamp = timestamp;
+                    const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                    const currentValue = Math.floor(progress * (end - start) + start);
+                    element.textContent = currentValue + '%';
+                    
+                    if (progress < 1) {
+                        window.requestAnimationFrame(step);
+                    }
+                };
+                window.requestAnimationFrame(step);
+            }
+
+            // ==============================================
+            // 8. ANIMAÇÃO DOS CARDS 3D
+            // ==============================================
+            const cards = document.querySelectorAll('.mode-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mouseenter', function(e) {
+                    // Efeito 3D baseado na posição do mouse
+                    const cardRect = this.getBoundingClientRect();
+                    const cardCenterX = cardRect.left + cardRect.width / 2;
+                    const cardCenterY = cardRect.top + cardRect.height / 2;
+                    
+                    const mouseX = e.clientX;
+                    const mouseY = e.clientY;
+                    
+                    const rotateY = ((mouseX - cardCenterX) / cardRect.width) * 10;
+                    const rotateX = ((cardCenterY - mouseY) / cardRect.height) * 10;
+                    
+                    this.style.transform = `translateY(-15px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0) rotateX(0) rotateY(0)';
+                });
+                
+                // Adiciona um efeito de brilho ao clicar
+                card.addEventListener('click', function() {
+                    this.style.boxShadow = '0 0 30px rgba(138, 43, 226, 0.8), 0 20px 40px rgba(0, 0, 0, 0.4)';
+                    setTimeout(() => {
+                        this.style.boxShadow = '';
+                    }, 300);
+                });
+            });
+
+            // ==============================================
+            // 9. ANIMAÇÃO DOS BOTÕES
+            // ==============================================
+            const buttons = document.querySelectorAll('.btn');
+            
+            buttons.forEach(button => {
+                button.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                });
+                
+                button.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+                
+                // Efeito de onda ao clicar
+                button.addEventListener('click', function(e) {
+                    const x = e.clientX - this.getBoundingClientRect().left;
+                    const y = e.clientY - this.getBoundingClientRect().top;
+                    
+                    const ripple = document.createElement('span');
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+
+            // ==============================================
+            // 10. ATUALIZAR ANO NO FOOTER
+            // ==============================================
+            document.getElementById('currentYear').textContent = new Date().getFullYear();
+
+            // ==============================================
+            // 11. SCROLL SUAVE PARA LINKS INTERNOS
+            // ==============================================
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    if (href === '#' || href === '#!') return;
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        e.preventDefault();
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+
+            // ==============================================
+            // 12. TOOLTIPS DINÂMICOS
+            // ==============================================
+            const socialLinks = document.querySelectorAll('.social-link');
+            socialLinks.forEach(link => {
+                link.addEventListener('mouseenter', function() {
+                    const tooltip = this.querySelector('.tooltip');
+                    if (tooltip) {
+                        tooltip.style.opacity = '1';
+                        tooltip.style.visibility = 'visible';
+                        tooltip.style.bottom = 'calc(100% + 10px)';
+                        tooltip.style.transform = 'translateX(-50%) scale(1)';
+                    }
+                });
+                
+                link.addEventListener('mouseleave', function() {
+                    const tooltip = this.querySelector('.tooltip');
+                    if (tooltip) {
+                        tooltip.style.opacity = '0';
+                        tooltip.style.visibility = 'hidden';
+                        tooltip.style.bottom = '100%';
+                        tooltip.style.transform = 'translateX(-50%) scale(0.9)';
+                    }
+                });
+            });
+
+            // ==============================================
+            // 13. ANIMAÇÃO DE TEXTO NO HERO
+            // ==============================================
+            const heroTitle = document.querySelector('.hero-title');
+            
+            // Adiciona efeito de digitação ao título
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 100);
+                }
+            }
+            
+            // Inicia a animação de digitação após o preloader
+            setTimeout(typeWriter, 1600);
+        });
+    </script>
 </body>
-
 </html>
