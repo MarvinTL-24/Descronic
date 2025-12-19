@@ -314,7 +314,7 @@ const bossesData = [
         image: "img/imagens/Dimensional/yepa belo.png"
     },
     {
-        id: "iztamina",
+        id: "iztamna",
         name: "IZTAMINA",
         title: "MINI BOSS MAIA",
         description: "Iztamina é um deus maia associado à fertilidade, à agricultura e à medicina. Ela é conhecida por sua habilidade de curar doenças e trazer prosperidade à terra.",
@@ -341,7 +341,7 @@ const bossesData = [
             speed: 70,
             magic: 95
         },
-        image: "img/imagens/Dimensional/iztamina.png"
+        image: "img/imagens/Dimensional/iztamna.png"
     },
     {
         id: "seth",
@@ -559,20 +559,33 @@ document.addEventListener('DOMContentLoaded', function() {
             mobileMenu.classList.remove('active');
         });
     }
-    
-    // Teste: adicione um boss para ver se funciona
-    const testDiv = document.createElement('div');
-    testDiv.innerHTML = `
-        <div style="position: fixed; top: 100px; right: 20px; z-index: 9999; background: #8a2be2; padding: 10px; border-radius: 5px;">
-            <button onclick="openBossModal('ahpuch')" style="background: white; color: #8a2be2; border: none; padding: 8px 15px; border-radius: 3px; cursor: pointer;">
-                Testar Modal (Ah Puch)
-            </button>
-        </div>
-    `;
-    document.body.appendChild(testDiv);
 });
 
 // Torna as funções globais
 window.openBossModal = openBossModal;
 window.closeBossModal = closeBossModal;
 window.switchTab = switchTab;
+
+// REMOVE PRELOADER SIMPLES
+window.addEventListener('load', function() {
+    const preloader = document.getElementById('preloader');
+    
+    if (preloader) {
+        // Adiciona efeito de fade
+        preloader.style.opacity = '0';
+        preloader.style.transition = 'opacity 0.5s ease';
+        
+        // Remove após animação
+        setTimeout(() => {
+            preloader.style.display = 'none';
+        }, 500);
+    }
+});
+
+// Timeout de segurança (remove após 3 segundos mesmo se a página não carregar totalmente)
+setTimeout(function() {
+    const preloader = document.getElementById('preloader');
+    if (preloader && preloader.style.display !== 'none') {
+        preloader.style.display = 'none';
+    }
+}, 3000);
