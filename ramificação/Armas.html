@@ -5,158 +5,467 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Armas, Magias e Pactos</title>
     <style>
+        /* Variáveis CSS para cores e efeitos */
+        :root {
+            --primary-color: #f4a261;
+            --secondary-color: #62d0ff;
+            --dark-bg: rgba(0, 0, 0, 0.85);
+            --card-bg: rgba(0, 0, 0, 0.7);
+            --hover-glow: 0 0 15px var(--primary-color);
+            --transition-speed: 0.3s;
+            --gradient-bg: linear-gradient(135deg, #62d0ff 0%, #2a9d8f 100%);
+        }
+
+        /* Scroll suave */
+        html {
+            scroll-behavior: smooth;
+        }
+
         /* Definir o fundo da página */
         body {
-            background-color: rgb(98, 208, 255);
-            font-family: 'Arial', sans-serif;
+            background: var(--gradient-bg);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 0;
-            height: 100%; /* Garante que o body ocupe toda a altura da tela */
-            display: flex;
-            justify-content: center;
-            align-items: flex-start;
+            min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Efeito de partículas no fundo */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(244, 162, 97, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 80% 20%, rgba(98, 208, 255, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 40% 40%, rgba(42, 157, 143, 0.1) 0%, transparent 20%);
+            z-index: -1;
+            pointer-events: none;
         }
 
         /* Container principal */
         .container {
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo com transparência */
+            background-color: var(--dark-bg);
             padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.7);
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.8);
             width: 100%;
-            max-width: 1200px;
-            margin-top: 20px;
-            display: flex;
-            flex-direction: column; /* Organiza os itens em coluna */
+            max-width: 1300px;
+            margin: 20px auto;
+            position: relative;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(244, 162, 97, 0.2);
+        }
+
+        /* Linha decorativa no topo */
+        .container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+            border-radius: 3px;
         }
 
         /* Título principal */
         h1 {
             text-align: center;
-            margin-bottom: 40px;
-            font-size: 36px;
-            color: #f4a261;
+            margin-bottom: 50px;
+            font-size: 42px;
+            color: var(--primary-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            text-shadow: 0 2px 10px rgba(244, 162, 97, 0.5);
+            position: relative;
+            padding-bottom: 15px;
         }
 
-        /* Categoria de itens (armas, magias, pactos) */
+        h1::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 3px;
+            background: linear-gradient(90deg, transparent, var(--primary-color), transparent);
+        }
+
+        /* Categoria de itens */
         .categoria {
-            margin-bottom: 40px;
+            margin-bottom: 60px;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        /* Animações */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        @keyframes glow {
+            0%, 100% { box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5); }
+            50% { box-shadow: var(--hover-glow); }
         }
 
         /* Título das categorias */
         .categoria h2 {
-            font-size: 28px;
+            font-size: 32px;
             text-align: center;
-            color: #f4a261;
-        }
-
-        /* Estilo para cada item (arma, magia, pacto) */
-        .item {
-            background-color: rgba(0, 0, 0, 0.7); /* Fundo transparente com sombra */
-            padding: 20px;
+            color: var(--primary-color);
             margin-bottom: 30px;
+            padding: 15px;
+            background: rgba(0, 0, 0, 0.5);
             border-radius: 10px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            border-left: 4px solid var(--primary-color);
+            border-right: 4px solid var(--primary-color);
+            position: relative;
+            overflow: hidden;
         }
 
-        /* Título de cada item (arma, magia, pacto) */
+        .categoria h2::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(244, 162, 97, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .categoria h2:hover::before {
+            left: 100%;
+        }
+
+        /* Estilo para cada item */
+        .item {
+            background-color: var(--card-bg);
+            padding: 25px;
+            margin-bottom: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            transition: all var(--transition-speed) ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--hover-glow);
+            border-color: var(--primary-color);
+            animation: glow 2s infinite;
+        }
+
+        .item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+
+        .item:hover::before {
+            transform: scaleX(1);
+        }
+
+        /* Título de cada item */
         .item h3 {
-            font-size: 24px;
-            color: #f4a261;
-            margin-bottom: 10px;
+            font-size: 26px;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+            padding-left: 10px;
+            border-left: 4px solid var(--primary-color);
+            position: relative;
+            display: inline-block;
         }
 
-        /* Área das habilidades dentro de cada item */
+        .item h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .item:hover h3::after {
+            width: 100%;
+        }
+
+        /* Área das habilidades */
         .habilidades {
             display: flex;
             flex-wrap: wrap;
             justify-content: space-around;
+            gap: 15px;
         }
 
         /* Estilo para cada habilidade */
         .habilidade {
-            background-color: rgba(255, 255, 255, 0.1);
-            border: 1px solid #f4a261;
-            padding: 10px;
-            margin: 5px;
-            width: 45%;
-            border-radius: 8px;
-            text-align: center;
-            box-sizing: border-box; /* Para garantir que o padding não estoure a largura */
+            background: linear-gradient(145deg, rgba(255, 255, 255, 0.1), rgba(0, 0, 0, 0.2));
+            border: 1px solid rgba(244, 162, 97, 0.3);
+            padding: 20px;
+            width: calc(33.333% - 20px);
+            min-width: 300px;
+            border-radius: 12px;
+            box-sizing: border-box;
+            transition: all var(--transition-speed) ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @media (max-width: 1100px) {
+            .habilidade {
+                width: calc(50% - 15px);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .habilidade {
+                width: 100%;
+            }
+        }
+
+        .habilidade:hover {
+            transform: translateY(-3px) scale(1.02);
+            box-shadow: var(--hover-glow);
+            background: linear-gradient(145deg, rgba(244, 162, 97, 0.1), rgba(0, 0, 0, 0.3));
+            border-color: var(--primary-color);
+            animation: pulse 0.5s ease;
+        }
+
+        .habilidade::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent 30%, rgba(244, 162, 97, 0.1) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.6s ease;
+        }
+
+        .habilidade:hover::before {
+            transform: translateX(100%);
         }
 
         /* Título da habilidade */
         .habilidade h4 {
-            color: #f4a261;
+            color: var(--primary-color);
             font-size: 18px;
+            margin-bottom: 12px;
+            font-weight: 600;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 5px;
+        }
+
+        .habilidade h4::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary-color);
+            transition: width 0.3s ease;
+        }
+
+        .habilidade:hover h4::after {
+            width: 100%;
         }
 
         /* Descrição da habilidade */
         .habilidade p {
-            color: #fff;
+            color: #e0e0e0;
             font-size: 14px;
+            line-height: 1.6;
+            margin: 0;
+            transition: color 0.3s ease;
+        }
+
+        .habilidade:hover p {
+            color: #ffffff;
         }
 
         /* Rodapé */
         .footer {
             text-align: center;
-            margin-top: 40px;
-            color: #f4a261;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(244, 162, 97, 0.3);
+            color: var(--primary-color);
+            position: relative;
         }
 
-        /* Link do rodapé */
+        .footer::before {
+            content: '✦';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--dark-bg);
+            padding: 0 20px;
+            color: var(--primary-color);
+            font-size: 20px;
+        }
+
         .footer a {
-            color: #f4a261;
+            color: var(--secondary-color);
             text-decoration: none;
             font-size: 18px;
-        }
-
-        /* Estilo de hover para as habilidades */
-        .habilidade:hover {
-            background-color: rgba(255, 255, 255, 0.3);
-            cursor: pointer;
-        }
-
-        /* Garantir que a página preencha a altura completa */
-        html, body {
-            height: 100%;
-        }
-
-        #menu-button {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
-            padding: 10px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
-            border-radius: 50%;
-        }
-        #menu-button {
+            font-weight: bold;
+            transition: all 0.3s ease;
+            padding: 5px 10px;
+            border-radius: 5px;
             position: relative;
-            width: 50px;
-            height: 50px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
+            overflow: hidden;
+        }
+
+        .footer a::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(98, 208, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+
+        .footer a:hover {
+            color: #ffffff;
+            background: rgba(98, 208, 255, 0.1);
+            text-shadow: 0 0 10px var(--secondary-color);
+        }
+
+        .footer a:hover::before {
+            left: 100%;
+        }
+
+        /* Botão de menu */
+        #menu-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 60px;
+            height: 60px;
+            background: var(--primary-color);
             border: none;
             border-radius: 50%;
             cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        #menu-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(244, 162, 97, 0.4);
+            animation: pulse 1s infinite;
         }
 
         #menu-button .arrow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
             width: 0;
             height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-right: 10px solid rgb(148, 21, 21); /* Cor da seta */
+            border-top: 8px solid transparent;
+            border-bottom: 8px solid transparent;
+            border-right: 12px solid #1a1a1a;
+            transition: transform 0.3s ease;
+        }
+
+        #menu-button:hover .arrow {
+            transform: translateX(-3px);
+        }
+
+        /* Indicador de scroll */
+        .scroll-indicator {
+            position: fixed;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 999;
+        }
+
+        .scroll-dot {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(244, 162, 97, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .scroll-dot.active {
+            background: var(--primary-color);
+            transform: scale(1.3);
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .scroll-dot:hover {
+            background: var(--primary-color);
+            transform: scale(1.2);
+        }
+
+        /* Efeito de foco nas categorias */
+        .categoria:target {
+            animation: highlight 1.5s ease;
+        }
+
+        @keyframes highlight {
+            0%, 100% { background-color: transparent; }
+            50% { background-color: rgba(244, 162, 97, 0.1); }
+        }
+
+        /* Barra de progresso de scroll */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: transparent;
+            z-index: 1001;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, var(--secondary-color), var(--primary-color));
+            width: 0%;
+            transition: width 0.1s ease;
         }
     </style>
 </head>
@@ -5594,14 +5903,132 @@
                 </div>
             </div>
             
+            <div class="footer">
+            <p>Desenvolvido por <a href="#">MarvinTL24</a></p>
+            </div>
             <!-- Mais espiritos aqui -->
         </div>
 
-        <div class="footer">
-            <p>Desenvolvido por Marvin Tavares Lopes <a href="#">MarvinTL24</a></p>
-        </div>
+         <script>
+        // Animações de entrada
+        document.addEventListener('DOMContentLoaded', function() {
+            // Animar elementos ao rolar
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
 
-    </div>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
 
+            // Observar todas as categorias
+            document.querySelectorAll('.categoria').forEach(cat => {
+                observer.observe(cat);
+            });
+
+            // Observar todos os itens
+            document.querySelectorAll('.item').forEach(item => {
+                item.style.opacity = '0';
+                item.style.transform = 'translateY(20px)';
+                item.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(item);
+            });
+
+            // Barra de progresso
+            window.addEventListener('scroll', () => {
+                const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+                const scrolled = (winScroll / height) * 100;
+                document.getElementById('progressBar').style.width = scrolled + '%';
+            });
+
+            // Navegação suave e atualização dos dots
+            const sections = document.querySelectorAll('.categoria');
+            const dots = document.querySelectorAll('.scroll-dot');
+
+            window.addEventListener('scroll', () => {
+                let current = '';
+                
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (scrollY >= (sectionTop - 200)) {
+                        current = section.getAttribute('id');
+                    }
+                });
+
+                dots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if (dot.getAttribute('data-section') === current) {
+                        dot.classList.add('active');
+                    }
+                });
+            });
+
+            // Navegação suave para os dots
+            dots.forEach(dot => {
+                dot.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const sectionId = dot.getAttribute('data-section');
+                    const section = document.getElementById(sectionId);
+                    
+                    if (section) {
+                        section.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                        
+                        // Efeito de destaque
+                        section.style.animation = 'none';
+                        setTimeout(() => {
+                            section.style.animation = 'highlight 1.5s ease';
+                        }, 10);
+                    }
+                });
+            });
+
+            // Efeito de digitação no título
+            const title = document.querySelector('h1');
+            const text = title.textContent;
+            title.textContent = '';
+            
+            let i = 0;
+            function typeWriter() {
+                if (i < text.length) {
+                    title.textContent += text.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, 50);
+                }
+            }
+            
+            // Iniciar efeito de digitação após carregamento
+            setTimeout(typeWriter, 500);
+
+            // Efeito de parallax sutil
+            window.addEventListener('scroll', () => {
+                const scrolled = window.pageYOffset;
+                const container = document.querySelector('.container');
+                container.style.transform = `translateY(${scrolled * 0.02}px)`;
+            });
+
+            // Efeito sonoro ao passar mouse sobre habilidades (opcional)
+            document.querySelectorAll('.habilidade').forEach(habilidade => {
+                habilidade.addEventListener('mouseenter', () => {
+                    // Poderia adicionar um som sutil aqui
+                    habilidade.style.transform = 'translateY(-3px) scale(1.02)';
+                });
+                
+                habilidade.addEventListener('mouseleave', () => {
+                    habilidade.style.transform = 'translateY(0) scale(1)';
+                });
+            });
+        });
+    </script>
 </body>
 </html>
