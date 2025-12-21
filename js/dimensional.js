@@ -190,7 +190,7 @@ const bossesData = [
             speed: 70,
             magic: 85
         },
-        image: "img/imagens/Dimensional/Rei dragão.png"
+        image: "img/imagens/Dimensional/reidragao.png"
     },
     {
         id: "wukong",

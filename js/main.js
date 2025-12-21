@@ -4,7 +4,7 @@
                 id: 'assassin',
                 name: 'ASSASSIN',
                 description: 'Mestre da furtividade e ataques precisos. Especialista em eliminar alvos importantes antes que percebam sua presença. Movimentação ágil e golpes letais são suas marcas registradas.',
-                logo: 'img/imagens/classes.logo/Logo.Assasino.jpg',
+                logo: 'img/imagens/classes.logo/Logo.Assassino.jpg',
                 tokens: [
                     { src: 'src/assets/classes/Assasin/tokens/Assasin_1.png', name: 'Assassin'},
                     { src: 'src/assets/classes/Assasin/tokens/Assasin_1t.png', name: 'Assassin' },
