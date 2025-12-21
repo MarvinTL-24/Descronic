@@ -169,7 +169,7 @@
                 id: 'guerreiro',
                 name: 'GUERREIRO',
                 description: 'Mestre do combate corpo a corpo com equilíbrio perfeito entre ataque e defesa. Versátil e adaptável a qualquer situação de combate.',
-                logo: 'img/imagens/classes.logo/Logo.Guerreiro.jpg',
+                logo: 'img/imagens/classes.logo/Logo.guerreiro.jpg',
                 tokens: [
                     { src: 'src/assets/classes/Guerreiro/tokens/Guerreiro_1.png', name: 'Guerreiro'},
                     { src: 'src/assets/classes/Guerreiro/tokens/Guerreiro_1t.png', name: 'Guerreiro' },
@@ -202,7 +202,7 @@
                 id: 'mago',
                 name: 'MAGO',
                 description: 'Mestre das artes arcanas e manipulação elemental. Controla os elementos da natureza para causar destruição em massa ou suporte estratégico.',
-                logo: 'img/imagens/classes.logo/Logo.Mago.jpg',
+                logo: 'img/imagens/classes.logo/Logo.mago.jpg',
                 tokens: [
                     { src: 'src/assets/classes/Mago/tokens/Mago_1.png', name: 'Mago'},
                     { src: 'src/assets/classes/Mago/tokens/Mago_1t.png', name: 'Mago' },
