@@ -3,208 +3,745 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Planilha de criação e obtenção</title>
+    <title>Forja - Planilha de Criação e Obtenção</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background-color: #7a5c2f; /* Tom de pedra */
+        /* ==============================================
+        VARIÁVEIS E RESET
+        ============================================== */
+        :root {
+            --metal-dark: #1a1a1a;
+            --metal-medium: #2d2d2d;
+            --metal-light: #3a3a3a;
+            --metal-gold: #d4af37;
+            --metal-copper: #b87333;
+            --metal-silver: #c0c0c0;
+            --metal-bronze: #cd7f32;
+            --fire-orange: #ff6b00;
+            --fire-red: #c41e3a;
+            --fire-yellow: #ffd700;
+            --anvil-gray: #7a5c2f;
+            --coal-black: #1c1c1c;
+            --text-light: #f5f5f5;
+            --text-dim: #b0b0b0;
+            
+            --gradient-metal: linear-gradient(135deg, #2d2d2d, #1a1a1a, #3a3a3a);
+            --gradient-fire: linear-gradient(135deg, #ff6b00, #c41e3a, #ffd700);
+            --gradient-gold: linear-gradient(135deg, #d4af37, #ffd700, #b8860b);
+            
+            --shadow-heavy: 0 10px 30px rgba(0, 0, 0, 0.7);
+            --shadow-light: 0 5px 15px rgba(0, 0, 0, 0.5);
+            --glow-fire: 0 0 20px rgba(255, 107, 0, 0.6);
+            --glow-gold: 0 0 15px rgba(212, 175, 55, 0.5);
+            
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --font-forge: 'Segoe UI', 'Arial Black', Tahoma, sans-serif;
+        }
+        
+        * {
             margin: 0;
-            padding: 20px;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        h2 {
-            text-align: center;
-            color: #c47e27; /* Cor dourada metálica, simbolizando forja */
+        
+        body {
+            font-family: var(--font-forge);
+            background: var(--metal-dark);
+            color: var(--text-light);
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 20% 30%, rgba(255, 107, 0, 0.05) 0%, transparent 50%),
+                radial-gradient(circle at 80% 70%, rgba(212, 175, 55, 0.05) 0%, transparent 50%),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="100" height="100" viewBox="0 0 100 100"><rect width="100" height="100" fill="%231a1a1a"/><path d="M20,20 L80,80 M80,20 L20,80" stroke="%232d2d2d" stroke-width="1" opacity="0.3"/></svg>');
         }
-
-        table {
-            width: 80%;
+        
+        /* ==============================================
+        CONTAINER PRINCIPAL
+        ============================================== */
+        .forge-container {
+            max-width: 1400px;
             margin: 0 auto;
-            border-collapse: collapse;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra leve */
+            padding: 30px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ==============================================
+        CABEÇALHO E TÍTULOS
+        ============================================== */
+        .forge-header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+        
+        .main-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            margin-bottom: 10px;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .main-title::before {
+            content: '⚒️';
+            position: absolute;
+            left: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+        }
+        
+        .main-title::after {
+            content: '⚒️';
+            position: absolute;
+            right: -50px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 2.5rem;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--metal-silver);
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* ==============================================
+        SEÇÃO DE CRIAÇÃO
+        ============================================== */
+        .creation-section {
+            background: var(--gradient-metal);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: var(--shadow-heavy);
+            border: 1px solid var(--metal-gold);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .creation-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-fire);
+        }
+        
+        .section-title {
+            font-size: 2.2rem;
+            color: var(--fire-yellow);
+            margin-bottom: 25px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+        }
+        
+        .section-title i {
+            color: var(--fire-orange);
+            font-size: 1.8rem;
+        }
+        
+        /* ==============================================
+        TABELA DE CRIAÇÃO
+        ============================================== */
+        .forge-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            margin-bottom: 30px;
             border-radius: 10px;
             overflow: hidden;
-            background-color: rgba(255, 255, 255, 0.8); /* Transparente para um toque mais leve */
+            box-shadow: var(--shadow-light);
         }
-
-        th, td {
-            padding: 15px 20px;
+        
+        .forge-table thead {
+            background: var(--gradient-metal);
+        }
+        
+        .forge-table th {
+            padding: 20px 15px;
             text-align: center;
-            border-bottom: 1px solid #ddd;
-        }
-
-        th {
-            background-color: #3e2a47; /* Cor metálica e escura */
-            color: white;
-            font-weight: bold;
-        }
-
-        td {
-            background-color: #f7f7f7; /* Cor de pedra leve */
-            color: #333;
-            font-size: 14px;
-        }
-
-        tr:nth-child(even) td {
-            background-color: #e2e2e2; /* Alternância de cor para maior contraste */
-        }
-
-        tr:hover td {
-            background-color: rgba(182, 138, 38, 0.2); /* Efeito de hover dourado suave */
-            cursor: pointer;
-        }
-
-        caption {
-            font-size: 24px;
-            font-weight: bold;
-            padding: 10px;
-            color: #4a3d23; /* Cor de pedra mais escura */
-        }
-
-        td, th {
-            border-radius: 8px; /* Bordas arredondadas para um efeito mais suave */
-        }
-
-        #menu-button {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
-            padding: 10px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
-            border-radius: 50%;
-        }
-        #menu-button {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--metal-gold);
+            border-bottom: 2px solid var(--metal-gold);
+            text-transform: uppercase;
+            letter-spacing: 1px;
             position: relative;
-            width: 50px;
-            height: 50px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
         }
-
-        #menu-button .arrow {
+        
+        .forge-table th::after {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-right: 10px solid rgb(148, 21, 21); /* Cor da seta */
+            bottom: -2px;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--gradient-fire);
+        }
+        
+        .forge-table th:first-child {
+            border-top-left-radius: 10px;
+            background: var(--metal-medium);
+        }
+        
+        .forge-table th:last-child {
+            border-top-right-radius: 10px;
+        }
+        
+        .forge-table td {
+            padding: 18px 15px;
+            text-align: center;
+            background: rgba(40, 40, 40, 0.7);
+            border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+            transition: var(--transition);
+            font-weight: 600;
+        }
+        
+        .forge-table tr:hover td {
+            background: rgba(212, 175, 55, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .forge-table tr:last-child td {
+            border-bottom: none;
+        }
+        
+        .forge-table td:first-child {
+            background: rgba(58, 58, 58, 0.8);
+            font-weight: 700;
+            color: var(--metal-silver);
+            border-right: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        
+        /* Estilos para as porcentagens */
+        .percentage-cell {
+            position: relative;
+            font-weight: 700;
+        }
+        
+        .percentage-high {
+            color: var(--fire-yellow);
+            text-shadow: var(--glow-gold);
+        }
+        
+        .percentage-medium {
+            color: var(--metal-silver);
+        }
+        
+        .percentage-low {
+            color: var(--text-dim);
+        }
+        
+        /* ==============================================
+        OBSERVAÇÕES
+        ============================================== */
+        .forge-notes {
+            background: rgba(28, 28, 28, 0.8);
+            border-radius: 10px;
+            padding: 25px;
+            margin-top: 30px;
+            border-left: 4px solid var(--metal-copper);
+        }
+        
+        .note-title {
+            color: var(--metal-copper);
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .note-title i {
+            font-size: 1.2rem;
+        }
+        
+        .note-text {
+            color: var(--text-dim);
+            line-height: 1.7;
+            margin-bottom: 10px;
+        }
+        
+        /* ==============================================
+        SEÇÃO DE OBTENÇÃO
+        ============================================== */
+        .obtention-section {
+            background: var(--gradient-metal);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: var(--shadow-heavy);
+            border: 1px solid var(--metal-bronze);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .obtention-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-gold);
+        }
+        
+        /* ==============================================
+        TABELA DE OBTENÇÃO
+        ============================================== */
+        .obtention-table {
+            width: 60%;
+            margin: 0 auto;
+            border-collapse: separate;
+            border-spacing: 0;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow-light);
+        }
+        
+        .obtention-table th {
+            padding: 20px;
+            text-align: center;
+            background: var(--metal-medium);
+            color: var(--metal-gold);
+            font-size: 1.2rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid var(--metal-bronze);
+        }
+        
+        .obtention-table td {
+            padding: 20px;
+            text-align: center;
+            background: rgba(40, 40, 40, 0.7);
+            border-bottom: 1px solid rgba(205, 127, 50, 0.2);
+            transition: var(--transition);
+        }
+        
+        .obtention-table tr:hover td {
+            background: rgba(205, 127, 50, 0.1);
+        }
+        
+        /* Estilos específicos para qualidades */
+        .quality-uncommon {
+            color: #1eff00;
+            font-weight: 700;
+        }
+        
+        .quality-rare {
+            color: #0070ff;
+            font-weight: 700;
+        }
+        
+        .quality-epic {
+            color: #a335ee;
+            font-weight: 700;
+        }
+        
+        .quality-legendary {
+            color: var(--fire-yellow);
+            font-weight: 700;
+            text-shadow: var(--glow-gold);
+        }
+        
+        .quality-dimensional {
+            color: #ff6b6b;
+            font-weight: 700;
+            font-style: italic;
+        }
+        
+        /* ==============================================
+        BOTÃO DE VOLTA
+        ============================================== */
+        .forge-back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            width: 60px;
+            height: 60px;
+            background: var(--gradient-metal);
+            border: 2px solid var(--metal-gold);
+            border-radius: 50%;
+            color: var(--metal-gold);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-heavy);
+        }
+        
+        .forge-back-button:hover {
+            background: var(--metal-gold);
+            color: var(--metal-dark);
+            transform: scale(1.1) rotate(-10deg);
+            box-shadow: var(--glow-gold);
+        }
+        
+        /* ==============================================
+        ELEMENTOS DECORATIVOS DA FORJA
+        ============================================== */
+        .forge-decoration {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1;
+        }
+        
+        .anvil {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            font-size: 4rem;
+            color: var(--anvil-gray);
+            opacity: 0.1;
+            transform: rotate(15deg);
+        }
+        
+        .hammer {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            font-size: 3rem;
+            color: var(--metal-light);
+            opacity: 0.1;
+            transform: rotate(-15deg);
+        }
+        
+        .fire-effect {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to top, rgba(255, 107, 0, 0.1), transparent);
+            z-index: 1;
+        }
+        
+        /* ==============================================
+        RESPONSIVIDADE
+        ============================================== */
+        @media (max-width: 1200px) {
+            .forge-container {
+                padding: 20px;
+            }
+            
+            .main-title {
+                font-size: 2.8rem;
+            }
+            
+            .obtention-table {
+                width: 80%;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .main-title::before,
+            .main-title::after {
+                display: none;
+            }
+            
+            .forge-table th,
+            .forge-table td {
+                padding: 12px 8px;
+                font-size: 0.9rem;
+            }
+            
+            .obtention-table {
+                width: 100%;
+            }
+            
+            .forge-back-button {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+                top: 15px;
+                left: 15px;
+            }
+            
+            .anvil,
+            .hammer {
+                display: none;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.7rem;
+                flex-direction: column;
+                gap: 5px;
+            }
+            
+            .forge-table {
+                font-size: 0.8rem;
+            }
+            
+            .forge-notes {
+                padding: 15px;
+            }
+            
+            .note-text {
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Elementos decorativos da forja -->
+    <div class="forge-decoration">
+        <div class="anvil">⚒️</div>
+        <div class="hammer">🔨</div>
+        <div class="fire-effect"></div>
+    </div>
+    
+    <!-- Botão de voltar -->
     <a href="../Informações.html">
-        <button id="menu-button">
-            <i class="arrow"></i> <!-- Ícone de seta para trás -->
+        <button class="forge-back-button" aria-label="Voltar à forja">
+            <i class="fas fa-arrow-left"></i>
         </button>
     </a>
-    <h2>CRIAÇÃO DAS RESPECTIVAS REGIÕES:</h2>
-    <table>
-        <tr>
-            <th>Regiões</th>
-            <th>Porto</th>
-            <th>Dragonewtes</th>
-            <th>Demonios</th>
-            <th>Elfos</th>
-            <th>Anões</th>
-            <th>Druidas</th>
-        </tr>
-        <tr>
-            <td>Minerio</td>
-            <td>10%</td>
-            <td>100%</td>
-            <td>10%</td>
-            <td>30%</td>
-            <td>50%</td>
-            <td>30%</td>
-        </tr>
-        <tr>
-            <td>Runas</td>
-            <td>30%</td>
-            <td>10%</td>
-            <td>100%</td>
-            <td>50%</td>
-            <td>30%</td>
-            <td>10%</td>
-        </tr>
-        <tr>
-            <td>Tavola</td>
-            <td>10%</td>
-            <td>30%</td>
-            <td>50%</td>
-            <td>10%</td>
-            <td>30%</td>
-            <td>100%</td>
-        </tr>
-        <tr>
-            <td>Habilidades</td>
-            <td>30%</td>
-            <td>10%</td>
-            <td>30%</td>
-            <td>100%</td>
-            <td>10%</td>
-            <td>50%</td>
-        </tr>
-        <tr>
-            <td>Criação</td>
-            <td>50%</td>
-            <td>30%</td>
-            <td>10%</td>
-            <td>10%</td>
-            <td>100%</td>
-            <td>10%</td>
-        </tr>
-        <tr>
-            <td>Descobertas</td>
-            <td>100%</td>
-            <td>50%</td>
-            <td>30%</td>
-            <td>30%</td>
-            <td>10%</td>
-            <td>10%</td>
-        </tr>
+    
+    <!-- Container principal -->
+    <div class="forge-container">
+        <!-- Cabeçalho -->
+        <header class="forge-header">
+            <h1 class="main-title">FORJA REAL</h1>
+            <p class="subtitle">Planilha de criação e obtenção - Onde o aço encontra a alma</p>
+        </header>
         
-    </table>
-    <br>
-    <P style="color: #000000; font-size: 20px; margin-left: 190px;">OBS: A chance de criação não significa que a porcentagem de qualidade será a mesma, pois a % para a qualidade do matérial depende dos matériais ou diagrama descobertos. </P>
-    <P style="color: #000000; font-size: 20px; margin-left: 190px;">OBS: A criação é ate o nivel Lendario.</P>
-    <h2>OBTENÇÃO DE ITENS</h2>
-    <table>
-        <caption>Estimativa</caption>
-        <tr>
-            <th>QUALIDADE</th>
-            <th>%</th>
-        </tr>
-        <tr>
-            <td>Incomum</td>
-            <td>50%</td>
-        </tr>
-        <tr>
-            <td>Raro</td>
-            <td>30%</td>
-        </tr>
-        <tr>
-            <td>Epico</td>
-            <td>15%</td>
-        </tr>
-        <tr>
-            <td>Lendario</td>
-            <td>5%</td>
-        </tr>
-        <tr>
-            <td>Dimensional</td>
-            <td>Procure ou conquiste.</td>
-        </tr>
-    </table>
+        <!-- Seção de Criação -->
+        <section class="creation-section">
+            <h2 class="section-title">
+                <i class="fas fa-fire"></i>
+                CRIAÇÃO DAS RESPECTIVAS REGIÕES
+            </h2>
+            
+            <!-- Tabela de Criação -->
+            <table class="forge-table">
+                <thead>
+                    <tr>
+                        <th>Regiões</th>
+                        <th>Porto</th>
+                        <th>Dragonewtes</th>
+                        <th>Demônios</th>
+                        <th>Elfos</th>
+                        <th>Anões</th>
+                        <th>Druidas</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Minério</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-high">100%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-medium">50%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                    </tr>
+                    <tr>
+                        <td>Runas</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-high">100%</td>
+                        <td class="percentage-cell percentage-medium">50%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                    </tr>
+                    <tr>
+                        <td>Tavola</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-medium">50%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-high">100%</td>
+                    </tr>
+                    <tr>
+                        <td>Habilidades</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-high">100%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-medium">50%</td>
+                    </tr>
+                    <tr>
+                        <td>Criação</td>
+                        <td class="percentage-cell percentage-medium">50%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-high">100%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                    </tr>
+                    <tr>
+                        <td>Descobertas</td>
+                        <td class="percentage-cell percentage-high">100%</td>
+                        <td class="percentage-cell percentage-medium">50%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                        <td class="percentage-cell percentage-low">10%</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Observações -->
+            <div class="forge-notes">
+                <h3 class="note-title">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    OBSERVAÇÕES DA FORJA
+                </h3>
+                <p class="note-text">
+                    <strong>⚒️ Nota do Ferreiro:</strong> A chance de criação não significa que a porcentagem de qualidade será a mesma, pois a % para a qualidade do material depende dos materiais ou diagramas descobertos.
+                </p>
+                <p class="note-text">
+                    <strong>🔥 Limite da Forja:</strong> A criação é válida até o nível Lendário. Itens dimensionais exigem conquista, não apenas criação.
+                </p>
+            </div>
+        </section>
+        
+        <!-- Seção de Obtenção -->
+        <section class="obtention-section">
+            <h2 class="section-title">
+                <i class="fas fa-gem"></i>
+                OBTENÇÃO DE ITENS - ESTIMATIVA
+            </h2>
+            
+            <!-- Tabela de Obtenção -->
+            <table class="obtention-table">
+                <thead>
+                    <tr>
+                        <th>QUALIDADE</th>
+                        <th>CHANCE</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="quality-uncommon">Incomum</td>
+                        <td class="percentage-cell percentage-high">50%</td>
+                    </tr>
+                    <tr>
+                        <td class="quality-rare">Raro</td>
+                        <td class="percentage-cell percentage-medium">30%</td>
+                    </tr>
+                    <tr>
+                        <td class="quality-epic">Épico</td>
+                        <td class="percentage-cell percentage-medium">15%</td>
+                    </tr>
+                    <tr>
+                        <td class="quality-legendary">Lendário</td>
+                        <td class="percentage-cell percentage-low">5%</td>
+                    </tr>
+                    <tr>
+                        <td class="quality-dimensional">Dimensional</td>
+                        <td class="quality-dimensional">Procure ou conquiste</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <!-- Nota sobre obtenção -->
+            <div class="forge-notes" style="margin-top: 30px; border-left-color: var(--metal-bronze);">
+                <h3 class="note-title">
+                    <i class="fas fa-crown"></i>
+                    SOBRE OS ITENS DIMENSIONAIS
+                </h3>
+                <p class="note-text">
+                    Itens dimensionais não podem ser forjados - devem ser conquistados em batalhas épicas, descobertos em ruínas ancestrais ou obtidos através de pactos com entidades poderosas. Cada um é único e carrega uma história.
+                </p>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        // Efeito de interação nas células de porcentagem
+        document.addEventListener('DOMContentLoaded', function() {
+            const percentageCells = document.querySelectorAll('.percentage-cell');
+            
+            percentageCells.forEach(cell => {
+                cell.addEventListener('mouseenter', function() {
+                    const value = parseInt(this.textContent);
+                    if (!isNaN(value)) {
+                        this.style.transform = 'scale(1.2)';
+                        this.style.transition = 'transform 0.2s ease';
+                    }
+                });
+                
+                cell.addEventListener('mouseleave', function() {
+                    this.style.transform = 'scale(1)';
+                });
+                
+                // Efeito de clique para células com porcentagem
+                if (cell.textContent.includes('%')) {
+                    cell.addEventListener('click', function() {
+                        const originalText = this.textContent;
+                        const value = parseInt(originalText);
+                        
+                        // Efeito visual temporário
+                        this.style.background = 'var(--metal-gold)';
+                        this.style.color = 'var(--metal-dark)';
+                        
+                        setTimeout(() => {
+                            this.style.background = '';
+                            this.style.color = '';
+                        }, 300);
+                        
+                        // Log no console (para debug/expansão futura)
+                        console.log(`Chance de criação: ${value}%`);
+                    });
+                }
+            });
+            
+            // Efeito especial para itens lendários e dimensionais
+            const legendaryItems = document.querySelectorAll('.quality-legendary, .quality-dimensional');
+            
+            legendaryItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    this.style.textShadow = '0 0 10px currentColor';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    this.style.textShadow = '';
+                });
+            });
+            
+            // Efeito de brilho intermitente para o título principal
+            const mainTitle = document.querySelector('.main-title');
+            let glowState = true;
+            
+            setInterval(() => {
+                if (glowState) {
+                    mainTitle.style.textShadow = '0 0 20px rgba(212, 175, 55, 0.7)';
+                } else {
+                    mainTitle.style.textShadow = '0 5px 15px rgba(0, 0, 0, 0.5)';
+                }
+                glowState = !glowState;
+            }, 1500);
+        });
+    </script>
 </body>
 </html>
