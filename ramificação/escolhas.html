@@ -3,209 +3,888 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Peso de suas escolhas</title>
+    <title>Peso de Suas Escolhas - Mapa Mental</title>
     <script src="https://d3js.org/d3.v7.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* Estilo geral */
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #232526, #414345); /* Fundo com gradiente escuro */
+        /* ==============================================
+        VARIÁVEIS E RESET
+        ============================================== */
+        :root {
+            --primary: #8a2be2;
+            --secondary: #00ccff;
+            --accent: #ff2a6d;
+            --dark: #0a0a1a;
+            --darker: #050510;
+            --light: #f0f0ff;
+            --gray: #2a2a3a;
+            --success: #00ff9d;
+            --warning: #ffcc00;
+            --danger: #ff2a6d;
+            
+            --card-bg: rgba(15, 15, 30, 0.9);
+            --border-color: rgba(138, 43, 226, 0.2);
+            
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            --glow: 0 0 20px rgba(138, 43, 226, 0.3);
+            
+            --transition: all 0.3s ease;
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
             margin: 0;
-            padding: 20px;
-            color: #fff; /* Texto branco para contraste */
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        h2 {
-            text-align: center;
-            color: #ffd700; /* Amarelo ouro */
-            font-size: 36px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px #000; /* Sombra para destaque */
+        
+        body {
+            font-family: var(--font-main);
+            background: var(--darker);
+            color: var(--light);
+            min-height: 100vh;
+            line-height: 1.6;
         }
-
-        svg {
-            display: block;
+        
+        /* ==============================================
+        LAYOUT PRINCIPAL
+        ============================================== */
+        .app-container {
+            max-width: 1600px;
             margin: 0 auto;
-            background: rgba(0, 0, 0, 0.8); /* Fundo semi-transparente */
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 400px;
+            gap: 30px;
+            min-height: 100vh;
+        }
+        
+        /* ==============================================
+        HEADER E TÍTULO
+        ============================================== */
+        .page-header {
+            grid-column: 1 / -1;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        
+        .main-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(240, 240, 255, 0.7);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        /* ==============================================
+        PAINEL DO MAPA MENTAL
+        ============================================== */
+        .mindmap-panel {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            overflow: hidden;
+        }
+        
+        .mindmap-container {
+            width: 100%;
+            height: 700px;
+            position: relative;
+        }
+        
+        #mindmap-svg {
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* ==============================================
+        PAINEL DE INFORMAÇÕES
+        ============================================== */
+        .info-panel {
+            background: var(--card-bg);
+            border-radius: 20px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .panel-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 2px solid var(--primary);
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .panel-title i {
+            font-size: 1.2rem;
+        }
+        
+        /* ==============================================
+        SELEÇÃO DE CATEGORIA
+        ============================================== */
+        .category-selector {
+            margin-bottom: 30px;
+        }
+        
+        .selector-label {
+            display: block;
+            margin-bottom: 12px;
+            color: rgba(240, 240, 255, 0.9);
+            font-weight: 500;
+        }
+        
+        .category-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+        
+        .category-btn {
+            padding: 12px 15px;
+            background: rgba(30, 30, 50, 0.5);
+            border: 1px solid var(--border-color);
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            color: var(--light);
+            font-weight: 500;
+            cursor: pointer;
+            transition: var(--transition);
+            text-align: center;
         }
-
-        .node rect {
-            fill: #69b3a2;
-            stroke: #ffffff;
-            stroke-width: 2;
-            rx: 10;
-            ry: 10;
-            transition: fill 0.3s ease, transform 0.2s ease; /* Suavizar alterações */
+        
+        .category-btn:hover {
+            background: rgba(138, 43, 226, 0.2);
+            transform: translateY(-2px);
         }
-
-        .node rect:hover {
-            fill: #ffd700; /* Destaque ao passar o mouse */
-            transform: scale(1.1); /* Leve aumento */
+        
+        .category-btn.active {
+            background: rgba(138, 43, 226, 0.3);
+            border-color: var(--primary);
+            box-shadow: var(--glow);
         }
-
+        
+        /* ==============================================
+        DETALHES DA CATEGORIA
+        ============================================== */
+        .category-details {
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .category-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: white;
+        }
+        
+        .category-name {
+            font-size: 1.3rem;
+            font-weight: 600;
+        }
+        
+        /* ==============================================
+        LISTA DE RAÇAS
+        ============================================== */
+        .race-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+        
+        .race-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px;
+            background: rgba(30, 30, 50, 0.3);
+            border-radius: 10px;
+            border-left: 4px solid transparent;
+            transition: var(--transition);
+        }
+        
+        .race-item:hover {
+            background: rgba(138, 43, 226, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .race-name {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .race-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: var(--gray);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+        
+        .race-percentage {
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 5px 12px;
+            border-radius: 20px;
+            background: rgba(0, 0, 0, 0.3);
+        }
+        
+        /* ==============================================
+        OBSERVAÇÕES
+        ============================================== */
+        .observations {
+            margin-top: auto;
+            background: rgba(20, 20, 40, 0.5);
+            border-radius: 15px;
+            padding: 20px;
+        }
+        
+        .observation-item {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            color: rgba(240, 240, 255, 0.8);
+        }
+        
+        .observation-item i {
+            color: var(--secondary);
+            margin-top: 3px;
+        }
+        
+        /* ==============================================
+        BOTÃO DE VOLTA
+        ============================================== */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            width: 50px;
+            height: 50px;
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 50%;
+            color: var(--light);
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .back-button:hover {
+            background: var(--primary);
+            transform: scale(1.1);
+        }
+        
+        /* ==============================================
+        ESTILOS DO MAPA MENTAL (D3)
+        ============================================== */
+        .node circle {
+            fill: rgba(15, 15, 30, 0.9);
+            stroke-width: 3;
+            transition: var(--transition);
+        }
+        
         .node text {
+            fill: var(--light);
             font-size: 14px;
-            fill: white;
+            font-weight: 500;
             text-anchor: middle;
-            dominant-baseline: middle;
+            dominant-baseline: central;
         }
-
+        
         .link {
             fill: none;
-            stroke: #ccc;
+            stroke: rgba(138, 43, 226, 0.3);
             stroke-width: 2;
+            transition: var(--transition);
         }
-
-        .observations {
-            fill: #ffd700; /* Destaque dourado */
-            font-size: 16px;
-            font-weight: bold;
-            text-shadow: 1px 1px 2px #000;
+        
+        .node.main-category circle {
+            stroke: var(--primary);
+            r: 25;
         }
-        #menu-button {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
-            padding: 10px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
-            border-radius: 50%;
+        
+        .node.sub-category circle {
+            stroke: var(--secondary);
+            r: 20;
         }
-        #menu-button {
-            position: relative;
-            width: 50px;
-            height: 50px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
-            border-radius: 50%;
-            cursor: pointer;
+        
+        .node.race-item circle {
+            stroke: var(--accent);
+            r: 18;
+            fill: rgba(15, 15, 30, 0.7);
         }
-
-        #menu-button .arrow {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-right: 10px solid rgb(148, 21, 21); /* Cor da seta */
+        
+        .node.race-item text {
+            font-size: 12px;
+            fill: rgba(240, 240, 255, 0.9);
+        }
+        
+        .percentage-label {
+            font-size: 11px;
+            fill: var(--secondary);
+            font-weight: 700;
+        }
+        
+        /* ==============================================
+        HOVER EFFECTS
+        ============================================== */
+        .node:hover circle {
+            filter: drop-shadow(0 0 10px currentColor);
+            transform: scale(1.1);
+        }
+        
+        .node.main-category:hover circle {
+            stroke-width: 4;
+        }
+        
+        .node.sub-category:hover circle {
+            stroke-width: 3;
+        }
+        
+        .node.race-item:hover circle {
+            stroke-width: 3;
+            fill: rgba(138, 43, 226, 0.2);
+        }
+        
+        .link.active {
+            stroke: var(--secondary);
+            stroke-width: 3;
+        }
+        
+        /* ==============================================
+        RESPONSIVIDADE
+        ============================================== */
+        @media (max-width: 1200px) {
+            .app-container {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                padding: 20px;
+            }
+            
+            .mindmap-container {
+                height: 600px;
+            }
+            
+            .info-panel {
+                order: -1;
+            }
+            
+            .back-button {
+                top: 15px;
+                left: 15px;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .main-title {
+                font-size: 2.2rem;
+            }
+            
+            .mindmap-container {
+                height: 500px;
+            }
+            
+            .category-buttons {
+                grid-template-columns: 1fr;
+            }
+            
+            .race-item {
+                padding: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .app-container {
+                padding: 15px;
+            }
+            
+            .main-title {
+                font-size: 1.8rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .mindmap-panel,
+            .info-panel {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
+    <!-- Botão de voltar -->
     <a href="../Informações.html">
-        <button id="menu-button">
-            <i class="arrow"></i> <!-- Ícone de seta para trás -->
+        <button class="back-button" aria-label="Voltar">
+            <i class="fas fa-arrow-left"></i>
         </button>
     </a>
-    <h2>Maior peso:</h2>
-    <svg width="1800" height="1000">
-        <!-- Observações -->
-        <text class="observations" x="50" y="920">
-            OBS: São pontos de variáveis oscilatórias, pois até mesmo a morte ou fracasso em certas quests podem influenciar na criação ou não de modos de influenciar o local em que está.
-        </text>
-        <text class="observations" x="50" y="950">
-            OBS: A porcentagem não representa a escolha ideal, mas o que a sociedade em que estão inseridos mais valoriza.
-        </text>
-    </svg>
+    
+    <!-- Container principal -->
+    <div class="app-container">
+        <!-- Header -->
+        <header class="page-header">
+            <h1 class="main-title">Peso das Escolhas</h1>
+            <p class="subtitle">Mapa mental interativo das variáveis que influenciam seu destino</p>
+        </header>
+        
+        <!-- Painel do Mapa Mental -->
+        <main class="mindmap-panel">
+            <div class="mindmap-container">
+                <svg id="mindmap-svg"></svg>
+            </div>
+        </main>
+        
+        <!-- Painel de Informações -->
+        <aside class="info-panel">
+            <!-- Seletor de Categorias -->
+            <div class="category-selector">
+                <label class="selector-label">Selecione uma categoria:</label>
+                <div class="category-buttons">
+                    <button class="category-btn active" data-category="all">
+                        <i class="fas fa-globe"></i> Todas
+                    </button>
+                    <button class="category-btn" data-category="atributos">
+                        <i class="fas fa-shield-alt"></i> Atributos
+                    </button>
+                    <button class="category-btn" data-category="reputacao">
+                        <i class="fas fa-crown"></i> Reputação
+                    </button>
+                    <button class="category-btn" data-category="moral">
+                        <i class="fas fa-heart"></i> Moral
+                    </button>
+                    <button class="category-btn" data-category="recursos">
+                        <i class="fas fa-coins"></i> Recursos
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Detalhes da Categoria -->
+            <div class="category-details" id="category-details">
+                <div class="category-header">
+                    <div class="category-icon">
+                        <i class="fas fa-chart-pie"></i>
+                    </div>
+                    <div>
+                        <h3 class="category-name">Todas as Variáveis</h3>
+                        <p>4 categorias principais</p>
+                    </div>
+                </div>
+                
+                <!-- Lista de Raças -->
+                <div class="race-list" id="race-list">
+                    <!-- Conteúdo preenchido por JavaScript -->
+                </div>
+            </div>
+            
+            <!-- Observações -->
+            <div class="observations">
+                <h3 class="panel-title">
+                    <i class="fas fa-info-circle"></i> Observações
+                </h3>
+                <div class="observation-item">
+                    <i class="fas fa-circle"></i>
+                    <span>As porcentagens representam o valor social, não o ideal.</span>
+                </div>
+                <div class="observation-item">
+                    <i class="fas fa-circle"></i>
+                    <span>Variáveis oscilam com eventos e escolhas do jogo.</span>
+                </div>
+                <div class="observation-item">
+                    <i class="fas fa-circle"></i>
+                    <span>Cada raça tem prioridades e valores diferentes.</span>
+                </div>
+            </div>
+        </aside>
+    </div>
 
     <script>
-        const data = {
-            name: "Variáveis",
-            children: [
-                {
-                    name: "Atributos",
-                    children: [
-                        { name: "Humanos: 20%" },
-                        { name: "Dragonewtes: 80%" },
-                        { name: "Demônios: 50%" },
-                        { name: "Elfos: 30%" },
-                        { name: "Anões: 50%" },
-                        { name: "Druidas: 30%" }
-                    ]
-                },
-                {
-                    name: "Reputação",
-                    children: [
-                        { name: "Humanos: 60%" },
-                        { name: "Dragonewtes: 10%" },
-                        { name: "Demônios: 20%" },
-                        { name: "Elfos: 50%" },
-                        { name: "Anões: 60%" },
-                        { name: "Druidas: 100%" }
-                    ]
-                },
-                {
-                    name: "Moral",
-                    children: [
-                        { name: "Humanos: 40%" },
-                        { name: "Dragonewtes: 30%" },
-                        { name: "Demônios: 50%" },
-                        { name: "Elfos: 100%" },
-                        { name: "Anões: 30%" },
-                        { name: "Druidas: 80%" }
-                    ]
-                },
-                {
-                    name: "Recursos",
-                    children: [
-                        { name: "Humanos: 30%" },
-                        { name: "Dragonewtes: 10%" },
-                        { name: "Demônios: 30%" },
-                        { name: "Elfos: 50%" },
-                        { name: "Anões: 100%" },
-                        { name: "Druidas: 60%" }
-                    ]
-                }
-            ]
+        // Dados estruturados
+        const categories = {
+            "atributos": {
+                name: "Atributos",
+                icon: "fas fa-shield-alt",
+                description: "Características físicas e habilidades inatas",
+                races: [
+                    { name: "Humanos", value: "20%", icon: "👤" },
+                    { name: "Dragonewtes", value: "80%", icon: "🐉" },
+                    { name: "Demônios", value: "50%", icon: "😈" },
+                    { name: "Elfos", value: "30%", icon: "🧝" },
+                    { name: "Anões", value: "50%", icon: "🧔" },
+                    { name: "Druidas", value: "30%", icon: "🌿" }
+                ]
+            },
+            "reputacao": {
+                name: "Reputação",
+                icon: "fas fa-crown",
+                description: "Prestígio e reconhecimento na sociedade",
+                races: [
+                    { name: "Humanos", value: "60%", icon: "👤" },
+                    { name: "Dragonewtes", value: "10%", icon: "🐉" },
+                    { name: "Demônios", value: "20%", icon: "😈" },
+                    { name: "Elfos", value: "50%", icon: "🧝" },
+                    { name: "Anões", value: "60%", icon: "🧔" },
+                    { name: "Druidas", value: "100%", icon: "🌿" }
+                ]
+            },
+            "moral": {
+                name: "Moral",
+                icon: "fas fa-heart",
+                description: "Valores éticos e princípios comportamentais",
+                races: [
+                    { name: "Humanos", value: "40%", icon: "👤" },
+                    { name: "Dragonewtes", value: "30%", icon: "🐉" },
+                    { name: "Demônios", value: "50%", icon: "😈" },
+                    { name: "Elfos", value: "100%", icon: "🧝" },
+                    { name: "Anões", value: "30%", icon: "🧔" },
+                    { name: "Druidas", value: "80%", icon: "🌿" }
+                ]
+            },
+            "recursos": {
+                name: "Recursos",
+                icon: "fas fa-coins",
+                description: "Bens materiais e capacidade econômica",
+                races: [
+                    { name: "Humanos", value: "30%", icon: "👤" },
+                    { name: "Dragonewtes", value: "10%", icon: "🐉" },
+                    { name: "Demônios", value: "30%", icon: "😈" },
+                    { name: "Elfos", value: "50%", icon: "🧝" },
+                    { name: "Anões", value: "100%", icon: "🧔" },
+                    { name: "Druidas", value: "60%", icon: "🌿" }
+                ]
+            }
         };
 
-        const svg = d3.select("svg"),
-            width = +svg.attr("width"),
-            height = +svg.attr("height");
+        // Dados para o mapa mental
+        const mindmapData = {
+            name: "Variáveis",
+            children: Object.values(categories).map(category => ({
+                name: category.name,
+                type: "category",
+                children: category.races.map(race => ({
+                    name: race.name,
+                    value: race.value,
+                    type: "race"
+                }))
+            }))
+        };
 
-        const g = svg.append("g").attr("transform", "translate(50,50)");
+        // Inicialização
+        document.addEventListener('DOMContentLoaded', () => {
+            initMindmap();
+            setupCategorySelector();
+            updateCategoryDetails('all');
+        });
 
-        const tree = d3.tree().size([height - 200, width - 200]);
+        // Configurar seletor de categorias
+        function setupCategorySelector() {
+            const buttons = document.querySelectorAll('.category-btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', () => {
+                    // Remover classe ativa de todos os botões
+                    buttons.forEach(btn => btn.classList.remove('active'));
+                    
+                    // Adicionar classe ativa ao botão clicado
+                    button.classList.add('active');
+                    
+                    // Atualizar detalhes da categoria
+                    const category = button.dataset.category;
+                    updateCategoryDetails(category);
+                    filterMindmap(category);
+                });
+            });
+        }
 
-        const root = d3.hierarchy(data);
-        tree(root);
+        // Atualizar detalhes da categoria
+        function updateCategoryDetails(categoryId) {
+            const detailsContainer = document.getElementById('category-details');
+            const raceListContainer = document.getElementById('race-list');
+            
+            if (categoryId === 'all') {
+                // Mostrar todas as categorias
+                const icon = detailsContainer.querySelector('.category-icon i');
+                icon.className = 'fas fa-chart-pie';
+                
+                const name = detailsContainer.querySelector('.category-name');
+                name.textContent = 'Todas as Variáveis';
+                
+                detailsContainer.querySelector('p').textContent = '4 categorias principais';
+                
+                // Limpar lista de raças
+                raceListContainer.innerHTML = '<p style="color: rgba(240,240,255,0.7); text-align: center; padding: 20px;">Selecione uma categoria para ver os valores de cada raça.<br><br>Lembre-se que a categoria simboliza o que cada sociedade valoriza mais em seu meio.</p>';
+                
+            } else {
+                const category = categories[categoryId];
+                
+                // Atualizar ícone e nome
+                const icon = detailsContainer.querySelector('.category-icon i');
+                icon.className = category.icon;
+                
+                const name = detailsContainer.querySelector('.category-name');
+                name.textContent = category.name;
+                
+                detailsContainer.querySelector('p').textContent = category.description;
+                
+                // Atualizar lista de raças
+                raceListContainer.innerHTML = category.races.map(race => `
+                    <div class="race-item" data-race="${race.name.toLowerCase()}">
+                        <div class="race-name">
+                            <div class="race-icon">${race.icon}</div>
+                            <span>${race.name}</span>
+                        </div>
+                        <div class="race-percentage" style="color: ${getPercentageColor(race.value)}">
+                            ${race.value}
+                        </div>
+                    </div>
+                `).join('');
+                
+                // Adicionar event listeners às raças
+                document.querySelectorAll('.race-item').forEach(item => {
+                    item.addEventListener('click', () => {
+                        const raceName = item.dataset.race;
+                        highlightRace(raceName);
+                    });
+                });
+            }
+        }
 
-        const link = g
-            .selectAll(".link")
-            .data(root.links())
-            .enter()
-            .append("path")
-            .attr("class", "link")
-            .attr("d", d3.linkHorizontal()
-                .x(d => d.y)
-                .y(d => d.x));
+        // Obter cor baseada na porcentagem
+        function getPercentageColor(value) {
+            const percent = parseInt(value);
+            if (percent >= 80) return '#00ff9d'; // Verde
+            if (percent >= 60) return '#00ccff'; // Azul
+            if (percent >= 40) return '#ffcc00'; // Amarelo
+            if (percent >= 20) return '#ff9933'; // Laranja
+            return '#ff2a6d'; // Vermelho
+        }
 
-        const node = g
-            .selectAll(".node")
-            .data(root.descendants())
-            .enter()
-            .append("g")
-            .attr("class", "node")
-            .attr("transform", d => `translate(${d.y},${d.x})`);
+        // Inicializar mapa mental
+        function initMindmap() {
+            const width = document.querySelector('#mindmap-svg').parentElement.clientWidth;
+            const height = document.querySelector('#mindmap-svg').parentElement.clientHeight;
+            
+            const svg = d3.select('#mindmap-svg')
+                .attr('width', width)
+                .attr('height', height);
+            
+            const g = svg.append('g')
+                .attr('transform', `translate(${width / 2}, ${height / 2})`);
+            
+            // Criar hierarquia
+            const root = d3.hierarchy(mindmapData);
+            
+            // Criar layout de cluster
+            const cluster = d3.cluster()
+                .size([360, Math.min(width, height) / 2 - 100]);
+            
+            cluster(root);
+            
+            // Adicionar links
+            const link = g.selectAll('.link')
+                .data(root.links())
+                .enter()
+                .append('path')
+                .attr('class', 'link')
+                .attr('d', d3.linkRadial()
+                    .angle(d => d.x / 180 * Math.PI)
+                    .radius(d => d.y));
+            
+            // Adicionar nós
+            const node = g.selectAll('.node')
+                .data(root.descendants())
+                .enter()
+                .append('g')
+                .attr('class', d => {
+                    if (d.depth === 0) return 'node main-category';
+                    if (d.depth === 1) return 'node sub-category';
+                    return 'node race-item';
+                })
+                .attr('transform', d => `translate(${getPosition(d)})`)
+                .on('mouseover', function(event, d) {
+                    highlightNode(d);
+                })
+                .on('mouseout', function() {
+                    resetHighlight();
+                });
+            
+            // Adicionar círculos aos nós
+            node.append('circle');
+            
+            // Adicionar texto aos nós
+            node.append('text')
+                .attr('dy', d => {
+                    if (d.depth === 0) return '0.35em';
+                    if (d.depth === 1) return '0.35em';
+                    return '1.2em';
+                })
+                .attr('text-anchor', d => {
+                    if (d.depth === 0) return 'middle';
+                    if (d.depth === 1) return 'middle';
+                    const angle = (d.x + 180) % 360;
+                    return angle < 180 ? 'start' : 'end';
+                })
+                .attr('dx', d => {
+                    if (d.depth === 2) {
+                        const angle = (d.x + 180) % 360;
+                        return angle < 180 ? '0.5em' : '-0.5em';
+                    }
+                    return 0;
+                })
+                .text(d => d.data.name);
+            
+            // Adicionar porcentagens às raças
+            node.filter(d => d.depth === 2)
+                .append('text')
+                .attr('class', 'percentage-label')
+                .attr('dy', '2.2em')
+                .attr('text-anchor', d => {
+                    const angle = (d.x + 180) % 360;
+                    return angle < 180 ? 'start' : 'end';
+                })
+                .attr('dx', d => {
+                    const angle = (d.x + 180) % 360;
+                    return angle < 180 ? '0.5em' : '-0.5em';
+                })
+                .text(d => d.data.value)
+                .style('fill', d => getPercentageColor(d.data.value));
+            
+            // Função para obter posição radial
+            function getPosition(d) {
+                const angle = d.x / 180 * Math.PI;
+                const radius = d.y;
+                return [
+                    radius * Math.sin(angle),
+                    -radius * Math.cos(angle)
+                ];
+            }
+            
+            // Salvar referências para uso posterior
+            window.mindmap = {
+                nodes: node,
+                links: link,
+                root: root
+            };
+        }
 
-        node.append("rect")
-            .attr("width", 120)
-            .attr("height", 30)
-            .attr("x", -60)
-            .attr("y", -15);
+        // Destacar nó
+        function highlightNode(d) {
+            // Resetar todos os nós e links
+            resetHighlight();
+            
+            // Destacar nó atual
+            d3.select(d3.select(d).node().parentNode)
+                .select('circle')
+                .style('stroke-width', '4');
+            
+            // Destacar links conectados
+            const connectedLinks = window.mindmap.links.filter(l => 
+                l.source === d || l.target === d
+            );
+            
+            connectedLinks.each(function() {
+                d3.select(this)
+                    .classed('active', true);
+            });
+        }
 
-        node.append("text")
-            .text(d => d.data.name);
+        // Resetar destaque
+        function resetHighlight() {
+            window.mindmap.nodes.select('circle')
+                .style('stroke-width', null);
+            
+            window.mindmap.links
+                .classed('active', false);
+        }
+
+        // Filtrar mapa mental por categoria
+        function filterMindmap(categoryId) {
+            if (categoryId === 'all') {
+                // Mostrar todos os nós
+                window.mindmap.nodes.style('opacity', 1);
+                window.mindmap.links.style('opacity', 0.3);
+            } else {
+                // Filtrar por categoria
+                const categoryName = categories[categoryId].name;
+                
+                window.mindmap.nodes.style('opacity', d => {
+                    if (d.depth === 0) return 1; // Nó raiz sempre visível
+                    if (d.depth === 1) return d.data.name === categoryName ? 1 : 0.2;
+                    return d.parent.data.name === categoryName ? 1 : 0.2;
+                });
+                
+                window.mindmap.links.style('opacity', d => {
+                    if (d.source.depth === 0 && d.target.data.name === categoryName) return 0.3;
+                    if (d.source.data.name === categoryName) return 0.3;
+                    return 0.1;
+                });
+            }
+        }
+
+        // Destacar raça específica
+        function highlightRace(raceName) {
+            const raceNode = window.mindmap.nodes.filter(d => 
+                d.depth === 2 && d.data.name.toLowerCase() === raceName
+            );
+            
+            if (raceNode.size() > 0) {
+                const node = raceNode.datum();
+                highlightNode(raceNode.node());
+                
+                // Rolar para a raça na lista
+                const raceItem = document.querySelector(`[data-race="${raceName}"]`);
+                if (raceItem) {
+                    raceItem.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }
+        }
+
+        // Ajustar mapa mental no redimensionamento
+        window.addEventListener('resize', () => {
+            // Em uma implementação real, você recriaria o mapa mental
+            // com as novas dimensões
+        });
     </script>
 </body>
 </html>
