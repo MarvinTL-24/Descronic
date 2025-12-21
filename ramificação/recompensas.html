@@ -3,236 +3,1708 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recompensas</title>
+    <title>Sistema de Recompensas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #232526, #414345);
+        /* ==============================================
+        VARIÁVEIS E RESET
+        ============================================== */
+        :root {
+            --primary-color: #8a2be2;
+            --secondary-color: #00ccff;
+            --dark-color: #0a0a1a;
+            --darker-color: #050510;
+            --light-color: #f0f0ff;
+            --accent-color: #ff2a6d;
+            --gold-color: #ffd700;
+            --epic-color: #a335ee;
+            --legendary-color: #ff8000;
+            --mythic-color: #e6cc80;
+            
+            --gradient-1: linear-gradient(135deg, #8a2be2, #00ccff);
+            --gradient-2: linear-gradient(135deg, #ff2a6d, #ffcc00);
+            --gradient-3: linear-gradient(135deg, #00ccff, #8a2be2);
+            --gradient-gold: linear-gradient(135deg, #ffd700, #ff9500);
+            --gradient-epic: linear-gradient(135deg, #a335ee, #0070dd);
+            --gradient-legendary: linear-gradient(135deg, #ff8000, #e6cc80);
+            
+            --shadow-glow: 0 0 20px rgba(138, 43, 226, 0.5);
+            --shadow-glow-gold: 0 0 20px rgba(255, 215, 0, 0.5);
+            --shadow-glow-epic: 0 0 20px rgba(163, 53, 238, 0.5);
+            --shadow-glow-legendary: 0 0 20px rgba(255, 128, 0, 0.5);
+            
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
             margin: 0;
-            padding: 20px;
-            color: #fff;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        h2 {
-            text-align: center;
-            color: #ffd700;
-            font-size: 36px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px #000;
+        
+        html {
+            scroll-behavior: smooth;
         }
-
-        .image-container {
+        
+        body {
+            font-family: var(--font-main);
+            background: var(--dark-color);
+            color: var(--light-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(163, 53, 238, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255, 128, 0, 0.05) 0%, transparent 20%),
+                radial-gradient(circle at 50% 50%, rgba(0, 204, 255, 0.03) 0%, transparent 30%);
+        }
+        
+        /* ==============================================
+        ANIMAÇÕES PERSONALIZADAS
+        ============================================== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: var(--shadow-glow); }
+            50% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); }
+            100% { transform: translateX(200%) rotate(45deg); }
+        }
+        
+        @keyframes rarityPulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        /* ==============================================
+        PRELOADER
+        ============================================== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker-color);
+            z-index: 9999;
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
-
-        .image-container img {
-            width: 300px;
-            height: 300px;
+        
+        .preloader-content {
+            text-align: center;
+            z-index: 10000;
+        }
+        
+        .loader {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .loader::before,
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ccc;
-            transition: transform 0.3s, border-color 0.3s;
-            cursor: pointer;
+            border: 5px solid transparent;
+            border-top-color: var(--primary-color);
+            animation: rotate 2s linear infinite;
         }
-
-        .image-container img:hover {
-            transform: scale(1.1);
-            border-color: #007BFF;
+        
+        .loader::after {
+            border-top-color: var(--gold-color);
+            animation-duration: 1.5s;
+            animation-direction: reverse;
         }
-
-        .info-container {
-            display: none;
-            position: fixed;
+        
+        .loader-inner {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
-            width: 90%;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .loading-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 20px;
+            background: var(--gradient-gold);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            letter-spacing: 2px;
+        }
+        
+        .loading-text::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-gold);
+            animation: shimmer 2s infinite linear;
+            background-size: 200% auto;
+        }
+        
+        /* ==============================================
+        BOTÃO DE VOLTA
+        ============================================== */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+        }
+        
+        .btn-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-gold);
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(255, 215, 0, 0.4);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-back:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 8px 20px rgba(255, 215, 0, 0.6);
+        }
+        
+        .btn-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-legendary);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn-back:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-back i {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ==============================================
+        HERO SECTION
+        ============================================== */
+        .page-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px;
+            background: 
+                linear-gradient(rgba(10, 10, 26, 0.9), rgba(10, 10, 26, 0.7)),
+                radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(163, 53, 238, 0.1) 0%, transparent 40%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            z-index: 100;
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            animation: slideInUp 1.2s ease-out;
         }
-
-        .info-container.active {
-            display: block;
-        }
-
-        .info-container h3 {
+        
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
             margin-bottom: 20px;
-            font-size: 24px;
-            color: #ffd700;
+            background: linear-gradient(to right, #ffd700, #ff9500, #ff2a6d);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
-
-        .info-container p {
-            font-size: 18px;
+        
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 200px;
+            height: 5px;
+            background: linear-gradient(to right, #ffd700, #ff9500);
+            border-radius: 5px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
             line-height: 1.6;
         }
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff4c4c;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .close-button:hover {
-            background: #ff1c1c;
-        }
-        #menu-button {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
-            padding: 10px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
-            border-radius: 50%;
-        }
-        .mystery-message {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 18px;
-            color: #ffd700;
-            font-style: italic;
-        }
-        #menu-button {
+        
+        /* ==============================================
+        RECOMPENSAS SECTION
+        ============================================== */
+        .recompensas-section {
+            padding: 80px 20px;
             position: relative;
+        }
+        
+        .recompensas-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .recompensas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .recompensa-card {
+            background: rgba(10, 10, 26, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 215, 0, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .recompensa-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .recompensa-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-glow);
+        }
+        
+        .recompensa-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .card-missao::before {
+            background: linear-gradient(to right, #4cd964, #5ac8fa);
+        }
+        
+        .card-inspecionar::before {
+            background: linear-gradient(to right, #5ac8fa, #007aff);
+        }
+        
+        .card-puzzles::before {
+            background: linear-gradient(to right, #ff2d55, #8a2be2);
+        }
+        
+        .card-criaturas::before {
+            background: linear-gradient(to right, #ff9500, #ff2d55);
+        }
+        
+        .card-criacao::before {
+            background: linear-gradient(to right, #34aadc, #4cd964);
+        }
+        
+        .recompensa-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+        
+        .recompensa-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 20px;
+            font-size: 2.5rem;
+            color: white;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card-missao .recompensa-icon {
+            background: linear-gradient(135deg, #4cd964, #5ac8fa);
+            box-shadow: 0 5px 15px rgba(76, 217, 100, 0.4);
+        }
+        
+        .card-inspecionar .recompensa-icon {
+            background: linear-gradient(135deg, #5ac8fa, #007aff);
+            box-shadow: 0 5px 15px rgba(90, 200, 250, 0.4);
+        }
+        
+        .card-puzzles .recompensa-icon {
+            background: linear-gradient(135deg, #ff2d55, #8a2be2);
+            box-shadow: 0 5px 15px rgba(255, 45, 85, 0.4);
+        }
+        
+        .card-criaturas .recompensa-icon {
+            background: linear-gradient(135deg, #ff9500, #ff2d55);
+            box-shadow: 0 5px 15px rgba(255, 149, 0, 0.4);
+        }
+        
+        .card-criacao .recompensa-icon {
+            background: linear-gradient(135deg, #34aadc, #4cd964);
+            box-shadow: 0 5px 15px rgba(52, 170, 220, 0.4);
+        }
+        
+        .recompensa-card:hover .recompensa-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .recompensa-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .rarity-badge {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .rarity-common {
+            background: rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .rarity-rare {
+            background: rgba(0, 112, 221, 0.2);
+            color: #0070dd;
+            border: 1px solid rgba(0, 112, 221, 0.5);
+        }
+        
+        .rarity-epic {
+            background: rgba(163, 53, 238, 0.2);
+            color: #a335ee;
+            border: 1px solid rgba(163, 53, 238, 0.5);
+        }
+        
+        .rarity-legendary {
+            background: rgba(255, 128, 0, 0.2);
+            color: #ff8000;
+            border: 1px solid rgba(255, 128, 0, 0.5);
+            animation: rarityPulse 2s infinite;
+        }
+        
+        .rarity-mythic {
+            background: rgba(230, 204, 128, 0.2);
+            color: #e6cc80;
+            border: 1px solid rgba(230, 204, 128, 0.5);
+            animation: rarityPulse 1.5s infinite;
+        }
+        
+        .recompensa-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+        
+        .recompensa-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .card-missao .detail-value {
+            color: #4cd964;
+        }
+        
+        .card-inspecionar .detail-value {
+            color: #5ac8fa;
+        }
+        
+        .card-puzzles .detail-value {
+            color: #ff2d55;
+        }
+        
+        .card-criaturas .detail-value {
+            color: #ff9500;
+        }
+        
+        .card-criacao .detail-value {
+            color: #34aadc;
+        }
+        
+        .recompensa-bonus {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+        
+        .card-missao .recompensa-bonus {
+            border-left-color: #4cd964;
+        }
+        
+        .card-inspecionar .recompensa-bonus {
+            border-left-color: #5ac8fa;
+        }
+        
+        .card-puzzles .recompensa-bonus {
+            border-left-color: #ff2d55;
+        }
+        
+        .card-criaturas .recompensa-bonus {
+            border-left-color: #ff9500;
+        }
+        
+        .card-criacao .recompensa-bonus {
+            border-left-color: #34aadc;
+        }
+        
+        .bonus-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .bonus-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+        
+        /* ==============================================
+        MODAL DE DETALHES
+        ============================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            max-width: 900px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: rgba(10, 10, 26, 0.95);
+            border-radius: 20px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.5s ease;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .modal-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .modal-rarity {
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 20px;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             width: 50px;
             height: 50px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
             border-radius: 50%;
+            background: var(--gradient-gold);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        #menu-button .arrow {
+        
+        .modal-close:hover {
+            background: var(--gradient-legendary);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .modal-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-icon {
+            font-size: 1.2rem;
+        }
+        
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .section-content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+            position: relative;
+        }
+        
+        .section-content li::before {
+            content: '▸';
+            color: var(--gold-color);
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-right: 10px solid rgb(148, 21, 21); /* Cor da seta */
+            left: -15px;
+        }
+        
+        .modal-image {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+            position: relative;
+        }
+        
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .modal-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        .image-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(5, 5, 16, 0.9), transparent);
+            color: white;
+        }
+        
+        .image-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        
+        .image-subtitle {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+        
+        /* ==============================================
+        SEÇÃO DE AVISOS
+        ============================================== */
+        .avisos-section {
+            padding: 80px 20px;
+            background: rgba(5, 5, 16, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .avisos-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .aviso-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-legendary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 3rem;
+            color: white;
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .avisos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .aviso-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid var(--accent-color);
+            transition: var(--transition);
+            text-align: left;
+        }
+        
+        .aviso-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+        
+        .aviso-text {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            position: relative;
+        }
+        
+        .aviso-text::before {
+            content: '"';
+            position: absolute;
+            top: -20px;
+            left: -10px;
+            font-size: 4rem;
+            color: rgba(255, 255, 255, 0.1);
+            font-family: serif;
+        }
+        
+        /* ==============================================
+        FOOTER
+        ============================================== */
+        .main-footer {
+            background: rgba(5, 5, 16, 0.95);
+            padding: 40px 20px 20px;
+            border-top: 1px solid rgba(255, 215, 0, 0.2);
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-gold);
+        }
+        
+        .footer-text {
+            color: rgba(240, 240, 255, 0.6);
+            font-size: 0.95rem;
+        }
+        
+        /* ==============================================
+        ANIMAÇÕES DE PARTÍCULAS
+        ============================================== */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 10s infinite linear;
+        }
+        
+        /* ==============================================
+        ANIMAÇÕES AO ROLAR
+        ============================================== */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==============================================
+        RESPONSIVIDADE
+        ============================================== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .recompensas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .recompensas-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .modal-title {
+                font-size: 2rem;
+            }
+            
+            .btn-back {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .recompensa-card {
+                padding: 20px;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .modal-title {
+                font-size: 1.8rem;
+            }
+            
+            .avisos-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
 <body>
-    <a href="../Informações.html">
-        <button id="menu-button">
-            <i class="arrow"></i> <!-- Ícone de seta para trás -->
-        </button>
-    </a>
-    <h2>Como adquirir recompensas.</h2>
-    <div class="image-container">
-        <img src="./ganhos/missões.webp" alt="Missão" onclick="showInfo('Missão', 1)">
-        <img src="./ganhos/inspecionar.png" alt="Inspecionar" onclick="showInfo('Inspecionar', 2)">
-        <img src="./ganhos/puzzle.png" alt="Puzzles" onclick="showInfo('Puzzles', 3)">
-        <img src="./ganhos/monstros.png" alt="Criaturas" onclick="showInfo('Criaturas', 4)">
-        <img src="./ganhos/criar.png" alt="Criação" onclick="showInfo('Criação', 5)">
-    </div>
-
-    <div id="info-container" class="info-container">
-        <button class="close-button" onclick="closeInfo()">&times;</button>
-        <h3 id="info-title">Recompensas</h3>
-        <div id="info-content">
-            <p>Conquistas</p>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader">
+                <div class="loader-inner"></div>
+            </div>
+            <div class="loading-text">Carregando Sistema de Recompensas...</div>
         </div>
     </div>
-    <div class="mystery-message">
-        Nem mesmo a melhor recompensa vale o sacrificio que ira o precidir...
+    
+    <!-- Botão de voltar -->
+    <div class="back-button">
+        <a href="../Informações.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i>
+        </a>
     </div>
-    <div class="mystery-message">
-        Segredos descobertos podem conter a razão de sua ruina...
+    
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="particles-container" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Sistema de Recompensas</h1>
+            <p class="hero-subtitle">Descubra como obter equipamentos lendários, habilidades únicas e tesouros dimensionais. Cada conquista tem seu preço e cada recompensa carrega um mistério.</p>
+        </div>
+    </section>
+    
+    <!-- Recompensas Section -->
+    <section class="recompensas-section">
+        <div class="recompensas-container">
+            <div class="recompensas-grid">
+                <!-- Missões -->
+                <div class="recompensa-card card-missao animate-on-scroll" data-recompensa="missao">
+                    <div class="recompensa-header">
+                        <div class="recompensa-icon">
+                            <i class="fas fa-quest"></i>
+                        </div>
+                        <h3 class="recompensa-name">Missões</h3>
+                    </div>
+                    <div class="rarity-badge rarity-legendary">Dimensional (Máximo)</div>
+                    <p class="recompensa-description">Desde caçar monstros até enfrentar deuses, as missões oferecem os maiores desafios e as recompensas mais poderosas do mundo.</p>
+                    
+                    <div class="recompensa-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Escala</div>
+                            <div class="detail-value">Monstros a Deuses</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Afeta</div>
+                            <div class="detail-value">Afinidade</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recompensa-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Dano escalado com afinidade do personagem, influenciado por maestria e estilo de luta.</div>
+                    </div>
+                </div>
+                
+                <!-- Inspecionar -->
+                <div class="recompensa-card card-inspecionar animate-on-scroll" data-recompensa="inspecionar">
+                    <div class="recompensa-header">
+                        <div class="recompensa-icon">
+                            <i class="fas fa-search"></i>
+                        </div>
+                        <h3 class="recompensa-name">Inspecionar</h3>
+                    </div>
+                    <div class="rarity-badge rarity-legendary">Lendário a Dimensional</div>
+                    <p class="recompensa-description">Áreas secretas reveladas apenas para os mais observadores. Pistas escondidas levam a tesouros e conhecimentos proibidos.</p>
+                    
+                    <div class="recompensa-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Requer</div>
+                            <div class="detail-value">Percepção Afiada</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Afeta</div>
+                            <div class="detail-value">Afinidade</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recompensa-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Fusão de 2 elementos criando habilidades ou passivas únicas, baseado na dificuldade da descoberta.</div>
+                    </div>
+                </div>
+                
+                <!-- Puzzles -->
+                <div class="recompensa-card card-puzzles animate-on-scroll" data-recompensa="puzzles">
+                    <div class="recompensa-header">
+                        <div class="recompensa-icon">
+                            <i class="fas fa-puzzle-piece"></i>
+                        </div>
+                        <h3 class="recompensa-name">Puzzles</h3>
+                    </div>
+                    <div class="rarity-badge rarity-mythic">Dimensional</div>
+                    <p class="recompensa-description">Enigmas complexos escondidos em dungeons e áreas secretas. Cada solução revela artefatos de poder incomensurável.</p>
+                    
+                    <div class="recompensa-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Local</div>
+                            <div class="detail-value">Dungeons Secretas</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Afeta</div>
+                            <div class="detail-value">Afinidade</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recompensa-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Características baseadas nas lendas dos contos referentes ao puzzle resolvido.</div>
+                    </div>
+                </div>
+                
+                <!-- Criaturas -->
+                <div class="recompensa-card card-criaturas animate-on-scroll" data-recompensa="criaturas">
+                    <div class="recompensa-header">
+                        <div class="recompensa-icon">
+                            <i class="fas fa-dragon"></i>
+                        </div>
+                        <h3 class="recompensa-name">Criaturas</h3>
+                    </div>
+                    <div class="rarity-badge rarity-epic">Épico a Lendário</div>
+                    <p class="recompensa-description">Derrote seres superiores, chefes de região e lendas vivas para obter suas habilidades e tesouros acumulados.</p>
+                    
+                    <div class="recompensa-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Tipos</div>
+                            <div class="detail-value">Superiores a Lendários</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dano</div>
+                            <div class="detail-value">Afinidade do Monstro</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recompensa-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Aquisição de habilidades únicas da criatura derrotada, incorporando seus poderes.</div>
+                    </div>
+                </div>
+                
+                <!-- Criação -->
+                <div class="recompensa-card card-criacao animate-on-scroll" data-recompensa="criacao">
+                    <div class="recompensa-header">
+                        <div class="recompensa-icon">
+                            <i class="fas fa-hammer"></i>
+                        </div>
+                        <h3 class="recompensa-name">Criação</h3>
+                    </div>
+                    <div class="rarity-badge rarity-rare">Raro a Lendário</div>
+                    <p class="recompensa-description">Forje seu destino com materiais raros e ferreiros especializados. A verdadeira arte da criação está nas mãos do artesão.</p>
+                    
+                    <div class="recompensa-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Base</div>
+                            <div class="detail-value">Materiais + Ferreiro</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Dano</div>
+                            <div class="detail-value">Maestria + Monstros</div>
+                        </div>
+                    </div>
+                    
+                    <div class="recompensa-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Combinação livre de elementos, limitada apenas pela capacidade da arma em comportar tal poder.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modal de Detalhes -->
+    <div class="modal-overlay" id="recompensaModal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="modal-title" id="modalTitle">
+                    <i class="fas fa-quest" id="modalIcon"></i>
+                    <span id="modalName">Missões</span>
+                </h2>
+                <div class="modal-rarity rarity-legendary" id="modalRarity">Dimensional (Máximo)</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section" id="modalImageContainer">
+                    <div class="modal-image">
+                        <img id="modalImage" src="./ganhos/missões.webp" alt="Recompensa">
+                        <div class="image-overlay">
+                            <div class="image-title" id="imageTitle">Conquista Épica</div>
+                            <div class="image-subtitle" id="imageSubtitle">Recompensa máxima por desafios divinos</div>
+                        </div>
+                    </div>
+                </div>
+                <div>
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-info-circle section-icon"></i>
+                            Descrição Detalhada
+                        </h3>
+                        <div class="section-content" id="modalDescricao">
+                            Desde caçar monstros comuns até enfrentar deuses em batalhas épicas que mudam o destino do mundo.
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-swords section-icon"></i>
+                            Mecânicas de Dano
+                        </h3>
+                        <div class="section-content" id="modalDano">
+                            <ul id="danoList">
+                                <li>Baseado na afinidade aleatória do personagem</li>
+                                <li>Influenciado pela maestria nas habilidades</li>
+                                <li>Modificado pelo estilo de luta escolhido</li>
+                                <li>Escala com o nível do desafio enfrentado</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-gem section-icon"></i>
+                            Sistema de Raridade
+                        </h3>
+                        <div class="section-content" id="modalRaridade">
+                            <ul id="rarityList">
+                                <li>Comum: Recompensas básicas de missões menores</li>
+                                <li>Raro: Itens com propriedades especiais</li>
+                                <li>Épico: Artefatos com habilidades únicas</li>
+                                <li>Lendário: Relíquias de poder ancestral</li>
+                                <li>Dimensional: Armas que transcendem a realidade</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-trophy section-icon"></i>
+                            Estratégias de Otimização
+                        </h3>
+                        <div class="section-content" id="modalEstrategia">
+                            <ul id="strategyList">
+                                <li>Complete cadeias de missões para bônus acumulativos</li>
+                                <li>Enfrente chefes em condições climáticas favoráveis</li>
+                                <li>Use equipamentos com sinergia à sua afinidade</li>
+                                <li>Procure por missões secretas dentro de missões principais</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="mystery-message">
-        Melhor saber a procedência do que tens, do que aquilo que não conhece...
-    </div>
-
+    
+    <!-- Seção de Avisos -->
+    <section class="avisos-section">
+        <div class="avisos-container">
+            <div class="aviso-icon">
+                <i class="fas fa-exclamation-triangle"></i>
+            </div>
+            <h2 class="hero-title" style="font-size: 3rem;">Avisos do Sistema</h2>
+            
+            <div class="avisos-grid">
+                <div class="aviso-card animate-on-scroll">
+                    <p class="aviso-text">Nem mesmo a melhor recompensa vale o sacrifício que irá a preceder... O custo do poder sempre é maior do que parece.</p>
+                </div>
+                
+                <div class="aviso-card animate-on-scroll">
+                    <p class="aviso-text">Segredos descobertos podem conter a razão de sua ruína... Algumas verdades são melhor deixadas escondidas.</p>
+                </div>
+                
+                <div class="aviso-card animate-on-scroll">
+                    <p class="aviso-text">Melhor saber a procedência do que tens, do que aquilo que não conhece... A origem do poder define seu destino.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-text">
+            <p>&copy; 2023 Sistema de Recompensas Lendárias. Cada conquista tem seu preço, cada recompensa seu mistério.</p>
+        </div>
+    </footer>
+    
     <script>
-        const infoData = {
-            1: {
-                title: 'Missão',
-                content: `
-                    <p>Tipo: Teremos desde caçar monstros ate matar um deus.</p>
-                    <p>Raridade: Pode-se conseguir no maximo uma arma dimensional nas ultimas missões de mundo.</p>
-                    <p>Dano: O dano será de acordo com a afinidade do personagem, isso é um atributo aleatorio que pode ser interferido pela maestria e estilo de luta.</p>
-                    <p>Bônus: Depende do nivel da afinidade.</p>
-                `,
+        // ==============================================
+        // DADOS DAS RECOMPENSAS
+        // ==============================================
+        const recompensaData = {
+            missao: {
+                name: 'Missões',
+                icon: 'fas fa-quest',
+                rarity: 'Dimensional (Máximo)',
+                rarityClass: 'rarity-legendary',
+                image: './ganhos/missões.webp',
+                imageTitle: 'Conquista Épica',
+                imageSubtitle: 'Recompensa máxima por desafios divinos',
+                descricao: 'Desde caçar monstros comuns até enfrentar deuses em batalhas épicas que mudam o destino do mundo. As missões variam de tarefas simples a empreitadas que redefinem a realidade.',
+                dano: [
+                    'Baseado na afinidade aleatória do personagem',
+                    'Influenciado pela maestria nas habilidades',
+                    'Modificado pelo estilo de luta escolhido',
+                    'Escala com o nível do desafio enfrentado',
+                    'Bônus adicional baseado no karma do personagem'
+                ],
+                raridade: [
+                    'Comum: Recompensas básicas de missões menores',
+                    'Raro: Itens com propriedades especiais',
+                    'Épico: Artefatos com habilidades únicas',
+                    'Lendário: Relíquias de poder ancestral',
+                    'Dimensional: Armas que transcendem a realidade (apenas missões finais de mundo)'
+                ],
+                estrategia: [
+                    'Complete cadeias de missões para bônus acumulativos',
+                    'Enfrente chefes em condições climáticas favoráveis',
+                    'Use equipamentos com sinergia à sua afinidade',
+                    'Procure por missões secretas dentro de missões principais',
+                    'Aceite contratos de facções para recompensas exclusivas'
+                ]
             },
-            2: {
-                title: 'Inspecionar',
-                content: `
-                    <p>Tipo: Existira areas e regiões desbloqueadas atraves de uma percepção afiada que tera que achar pistas e entradas secretas.</p>
-                    <p>Raridade: O padrão é lendario, mas o Dimensional é possivel aleatoriamente de acordo com a dificuldade.</p>
-                    <p>Dano: O dano será de acordo com a afinidade do personagem, isso é um atributo aleatorio que pode ser interferido pela maestria e estilo de luta.</p>
-                    <p>Bônus: O padrão seria a mistura de 2 elementos criando sua nova habilidade ou passiva.</p>
-                `,
+            inspecionar: {
+                name: 'Inspecionar',
+                icon: 'fas fa-search',
+                rarity: 'Lendário a Dimensional',
+                rarityClass: 'rarity-legendary',
+                image: './ganhos/inspecionar.png',
+                imageTitle: 'Olhar Atento',
+                imageSubtitle: 'Tesouros revelados pela percepção',
+                descricao: 'Áreas secretas reveladas apenas para os mais observadores. Pistas escondidas levam a tesouros e conhecimentos proibidos. Requer percepção afiada e intuição aguçada.',
+                dano: [
+                    'Baseado na afinidade aleatória do personagem',
+                    'Influenciado pelo nível de percepção',
+                    'Modificado pela intuição e sabedoria',
+                    'Escala com a dificuldade da descoberta',
+                    'Bônus para classes com destreza mental'
+                ],
+                raridade: [
+                    'Padrão: Lendário (garantido em descobertas)',
+                    'Especial: Dimensional (aleatório baseado na dificuldade)',
+                    'Variável: Depende da profundidade do segredo revelado',
+                    'Exclusivo: Itens que só aparecem uma vez por personagem',
+                    'Contextual: Relacionado ao local e história da descoberta'
+                ],
+                estrategia: [
+                    'Investigue áreas incomuns com atenção redobrada',
+                    'Use habilidades de detecção em intervalos regulares',
+                    'Procure padrões e anomalias no ambiente',
+                    'Volte a locais visitados em diferentes condições climáticas',
+                    'Combine pistas de diferentes áreas para segredos maiores'
+                ]
             },
-            3: {
-                title: 'Puzzles',
-                content: `
-                    <p>Tipo: Elas são encontradas dentro de dungeons ou areas achadas pelo inspecionar.</p>
-                    <p>Raridade: Dimensional.</p>
-                    <p>Dano: O dano será de acordo com a afinidade do personagem, isso é um atributo aleatorio que pode ser interferido pela maestria e estilo de luta.</p>
-                    <p>Bônus: Pode haver a caracteristica da lenda do conto referente.</p>
-                `,
+            puzzles: {
+                name: 'Puzzles',
+                icon: 'fas fa-puzzle-piece',
+                rarity: 'Dimensional',
+                rarityClass: 'rarity-mythic',
+                image: './ganhos/puzzle.png',
+                imageTitle: 'Enigma Resolvido',
+                imageSubtitle: 'Sabedoria recompensada com poder',
+                descricao: 'Enigmas complexos escondidos em dungeons e áreas secretas. Cada solução revela artefatos de poder incomensurável. Os puzzles são baseados em lendas e mitos do mundo.',
+                dano: [
+                    'Baseado na afinidade aleatória do personagem',
+                    'Influenciado pela inteligência e raciocínio',
+                    'Modificado pela compreensão das lendas',
+                    'Escala com a complexidade do puzzle',
+                    'Bônus para resolvidos sem ajuda externa'
+                ],
+                raridade: [
+                    'Exclusivo: Dimensional (única raridade para puzzles)',
+                    'Temático: Baseado na lenda referente ao puzzle',
+                    'Progressivo: Dificuldade determina qualidade da recompensa',
+                    'Sequencial: Puzzles em cadeia oferecem recompensas maiores',
+                    'Cooperativo: Alguns puzzles requerem grupo para melhores recompensas'
+                ],
+                estrategia: [
+                    'Estude as lendas e mitos locais antes de explorar',
+                    'Trabalhe em equipe para puzzles complexos',
+                    'Anote padrões e soluções para referência futura',
+                    'Procure por dicas no ambiente ao redor',
+                    'Retorne a puzzles não resolvidos com novos conhecimentos'
+                ]
             },
-            4: {
-                title: 'Criaturas',
-                content: `
-                    <p>Tipo: Superiores, chefes de região e seres lendarios.</p>
-                    <p>Raridade: Epico ou Lendario.</p>
-                    <p>Dano: O dano será de acordo com a afinidade do monstro "superior" da região.</p>
-                    <p>Bônus: Adquire uma habilidade do monstro em sí.</p>
-                `,
+            criaturas: {
+                name: 'Criaturas',
+                icon: 'fas fa-dragon',
+                rarity: 'Épico a Lendário',
+                rarityClass: 'rarity-epic',
+                image: './ganhos/monstros.png',
+                imageTitle: 'Troféu de Caça',
+                imageSubtitle: 'Poder obtido da essência derrotada',
+                descricao: 'Derrote seres superiores, chefes de região e lendas vivas para obter suas habilidades e tesouros acumulados. Cada criatura guarda segredos de poder ancestral.',
+                dano: [
+                    'Baseado na afinidade do monstro "superior" da região',
+                    'Influenciado pelo nível de ameaça da criatura',
+                    'Modificado pela raridade da espécie',
+                    'Escala com o status de "chefe" ou "lendário"',
+                    'Bônus por derrotas em condições desfavoráveis'
+                ],
+                raridade: [
+                    'Épico: Recompensas de criaturas superiores',
+                    'Lendário: Tesouros de chefes de região',
+                    'Variante: Diferentes versões da mesma criatura podem dropar raridades diferentes',
+                    'Sazonal: Criaturas de eventos especiais têm loot exclusivo',
+                    'Evolutivo: Criaturas que evoluem durante a batalha oferecem recompensas maiores'
+                ],
+                estrategia: [
+                    'Estude os pontos fracos de cada criatura',
+                    'Use equipamentos com bônus contra tipos específicos',
+                    'Forme grupos especializados para chefes de alto nível',
+                    'Explore em diferentes horários para encontrar variantes raras',
+                    'Complete bestiários para bônus contra tipos de criaturas'
+                ]
             },
-            5: {
-                title: 'Criação',
-                content: `
-                    <p>Tipo: Os materiais e o ferreiro de determinada especialização são sua principal forma de criar.</p>
-                    <p>Raridade: Raro ate lendario.</p>
-                    <p>Dano: O dano será de acordo com sua maestria e quantidade de monstros mortos.</p>
-                    <p>Bônus: Pode colocar ou misturar os elementos da forma que desejar, se a arma tiver capacidade de comportar tal poder.</p>
-                `,
-            },
+            criacao: {
+                name: 'Criação',
+                icon: 'fas fa-hammer',
+                rarity: 'Raro a Lendário',
+                rarityClass: 'rarity-rare',
+                image: './ganhos/criar.png',
+                imageTitle: 'Obra de Arte',
+                imageSubtitle: 'Poder forjado pelas próprias mãos',
+                descricao: 'Forje seu destino com materiais raros e ferreiros especializados. A verdadeira arte da criação está nas mãos do artesão. Misture elementos livremente dentro dos limites do material.',
+                dano: [
+                    'Baseado na maestria do personagem',
+                    'Influenciado pela quantidade de monstros mortos (experiência)',
+                    'Modificado pela qualidade dos materiais',
+                    'Escala com a habilidade do ferreiro contratado',
+                    'Bônus por combinações elementais harmoniosas'
+                ],
+                raridade: [
+                    'Raro: Criações básicas com materiais comuns',
+                    'Épico: Obras com materiais raros e ferreiros especializados',
+                    'Lendário: Artefatos com combinações elementais perfeitas',
+                    'Personalizado: Raridade varia com a criatividade do jogador',
+                    'Evolutivo: Itens que melhoram com uso e manutenção'
+                ],
+                estrategia: [
+                    'Colete materiais de criaturas variadas para combinações únicas',
+                    'Encontre ferreiros especializados em tipos específicos de itens',
+                    'Experimente combinações elementais não convencionais',
+                    'Mantenha itens criados para desbloquear melhorias',
+                    'Documente receitas bem-sucedidas para reprodução'
+                ]
+            }
         };
-
-        function showInfo(title, index) {
-            const container = document.getElementById('info-container');
-            const titleEl = document.getElementById('info-title');
-            const contentEl = document.getElementById('info-content');
-
-            titleEl.textContent = infoData[index].title;
-            contentEl.innerHTML = infoData[index].content;
-
-            container.classList.add('active');
+        
+        // ==============================================
+        // PRELOADER
+        // ==============================================
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 1500);
+        });
+        
+        // ==============================================
+        // ANIMAÇÃO DE PARTÍCULAS
+        // ==============================================
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 50;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamanho aleatório
+                const size = Math.random() * 5 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posição aleatória
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Cor aleatória baseada em raridades
+                const colors = ['#ffd700', '#a335ee', '#ff8000', '#0070dd', '#e6cc80'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = color;
+                
+                // Opacidade aleatória
+                particle.style.opacity = `${Math.random() * 0.4 + 0.1}`;
+                
+                // Duração da animação aleatória
+                const duration = Math.random() * 15 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Delay aleatório
+                const delay = Math.random() * 5;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
         }
-
-        function closeInfo() {
-            const container = document.getElementById('info-container');
-            container.classList.remove('active');
+        
+        // ==============================================
+        // MODAL DE DETALHES
+        // ==============================================
+        function initRecompensaModal() {
+            const recompensaModal = document.getElementById('recompensaModal');
+            const closeModal = document.getElementById('closeModal');
+            const recompensaCards = document.querySelectorAll('.recompensa-card');
+            
+            recompensaCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const recompensaType = this.getAttribute('data-recompensa');
+                    const recompensa = recompensaData[recompensaType];
+                    
+                    if (!recompensa) return;
+                    
+                    // Atualizar conteúdo do modal
+                    document.getElementById('modalName').textContent = recompensa.name;
+                    document.getElementById('modalIcon').className = recompensa.icon;
+                    document.getElementById('modalRarity').textContent = recompensa.rarity;
+                    document.getElementById('modalRarity').className = `modal-rarity ${recompensa.rarityClass}`;
+                    document.getElementById('modalImage').src = recompensa.image;
+                    document.getElementById('modalImage').alt = recompensa.name;
+                    document.getElementById('imageTitle').textContent = recompensa.imageTitle;
+                    document.getElementById('imageSubtitle').textContent = recompensa.imageSubtitle;
+                    document.getElementById('modalDescricao').textContent = recompensa.descricao;
+                    
+                    // Atualizar lista de dano
+                    const danoList = document.getElementById('danoList');
+                    danoList.innerHTML = '';
+                    recompensa.dano.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        danoList.appendChild(li);
+                    });
+                    
+                    // Atualizar lista de raridade
+                    const rarityList = document.getElementById('rarityList');
+                    rarityList.innerHTML = '';
+                    recompensa.raridade.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        rarityList.appendChild(li);
+                    });
+                    
+                    // Atualizar lista de estratégias
+                    const strategyList = document.getElementById('strategyList');
+                    strategyList.innerHTML = '';
+                    recompensa.estrategia.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        strategyList.appendChild(li);
+                    });
+                    
+                    // Atualizar cores do modal baseado no tipo
+                    const modalHeader = document.getElementById('modalHeader');
+                    const sectionTitles = document.querySelectorAll('.section-title');
+                    
+                    // Remover classes de cor anteriores
+                    modalHeader.classList.remove('card-missao', 'card-inspecionar', 'card-puzzles', 'card-criaturas', 'card-criacao');
+                    sectionTitles.forEach(title => {
+                        title.classList.remove('card-missao', 'card-inspecionar', 'card-puzzles', 'card-criaturas', 'card-criacao');
+                    });
+                    
+                    // Adicionar nova classe de cor
+                    const cardClass = `card-${recompensaType}`;
+                    modalHeader.classList.add(cardClass);
+                    sectionTitles.forEach(title => {
+                        title.classList.add(cardClass);
+                        title.style.borderBottomColor = 'currentColor';
+                    });
+                    
+                    // Mostrar modal
+                    recompensaModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                recompensaModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            recompensaModal.addEventListener('click', function(e) {
+                if (e.target === recompensaModal) {
+                    recompensaModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Fechar modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && recompensaModal.classList.contains('active')) {
+                    recompensaModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         }
+        
+        // ==============================================
+        // ANIMAÇÃO AO ROLAR A PÁGINA
+        // ==============================================
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // ==============================================
+        // EFEITO DE DIGITAÇÃO PARA TÍTULO
+        // ==============================================
+        function typeWriterEffect() {
+            const heroTitle = document.querySelector('.hero-title');
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            
+            let i = 0;
+            const speed = 80;
+            
+            function typeWriter() {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+            
+            // Iniciar efeito após 1 segundo
+            setTimeout(typeWriter, 1000);
+        }
+        
+        // ==============================================
+        // ROTAÇÃO DE RECOMPENSAS (SIMULAÇÃO)
+        // ==============================================
+        function simulateRecompensaRotation() {
+            const recompensaCards = document.querySelectorAll('.recompensa-card');
+            let currentRecompensa = 0;
+            
+            setInterval(() => {
+                // Remover destaque anterior
+                recompensaCards.forEach(card => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = 'none';
+                });
+                
+                // Destacar próxima recompensa
+                recompensaCards[currentRecompensa].style.transform = 'translateY(-20px)';
+                recompensaCards[currentRecompensa].style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px currentColor';
+                
+                // Atualizar índice
+                currentRecompensa = (currentRecompensa + 1) % recompensaCards.length;
+            }, 5000);
+        }
+        
+        // ==============================================
+        // EFEITO DE BRILHO NAS BADGES DE RARIDADE
+        // ==============================================
+        function initRarityEffects() {
+            const rarityBadges = document.querySelectorAll('.rarity-badge');
+            
+            rarityBadges.forEach(badge => {
+                // Adicionar efeito de brilho para badges lendários e míticos
+                if (badge.classList.contains('rarity-legendary') || badge.classList.contains('rarity-mythic')) {
+                    const shine = document.createElement('div');
+                    shine.style.position = 'absolute';
+                    shine.style.top = '-50%';
+                    shine.style.left = '-50%';
+                    shine.style.width = '200%';
+                    shine.style.height = '200%';
+                    shine.style.background = 'linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.3) 50%, transparent 70%)';
+                    shine.style.animation = 'shine 3s infinite linear';
+                    shine.style.pointerEvents = 'none';
+                    badge.style.position = 'relative';
+                    badge.style.overflow = 'hidden';
+                    badge.appendChild(shine);
+                }
+            });
+        }
+        
+        // ==============================================
+        // INICIALIZAÇÃO
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Criar partículas
+            createParticles();
+            
+            // Inicializar modal
+            initRecompensaModal();
+            
+            // Efeito de digitação
+            typeWriterEffect();
+            
+            // Efeitos de raridade
+            initRarityEffects();
+            
+            // Simular rotação de recompensas
+            simulateRecompensaRotation();
+            
+            // Event listeners para scroll
+            window.addEventListener('scroll', function() {
+                animateOnScroll();
+            });
+            
+            // Executar animações iniciais
+            animateOnScroll();
+            
+            // Adicionar efeito de hover dinâmico aos cards
+            const recompensaCards = document.querySelectorAll('.recompensa-card');
+            recompensaCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const recompensaType = this.getAttribute('data-recompensa');
+                    const particles = document.querySelectorAll('.particle');
+                    
+                    // Alterar cor das partículas baseado no tipo
+                    let color;
+                    switch(recompensaType) {
+                        case 'missao': color = '#4cd964'; break;
+                        case 'inspecionar': color = '#5ac8fa'; break;
+                        case 'puzzles': color = '#ff2d55'; break;
+                        case 'criaturas': color = '#ff9500'; break;
+                        case 'criacao': color = '#34aadc'; break;
+                        default: color = '#ffd700';
+                    }
+                    
+                    particles.forEach(particle => {
+                        particle.style.background = color;
+                    });
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    // Restaurar cores aleatórias das partículas
+                    const particles = document.querySelectorAll('.particle');
+                    const colors = ['#ffd700', '#a335ee', '#ff8000', '#0070dd', '#e6cc80'];
+                    
+                    particles.forEach(particle => {
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        particle.style.background = color;
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>

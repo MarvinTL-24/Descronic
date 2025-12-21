@@ -3,230 +3,1542 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mudanças</title>
+    <title>Mudanças - Sistema de Climas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #232526, #414345);
+        /* ==============================================
+        VARIÁVEIS E RESET
+        ============================================== */
+        :root {
+            --primary-color: #8a2be2;
+            --secondary-color: #00ccff;
+            --dark-color: #0a0a1a;
+            --darker-color: #050510;
+            --light-color: #f0f0ff;
+            --accent-color: #ff2a6d;
+            --gradient-1: linear-gradient(135deg, #8a2be2, #00ccff);
+            --gradient-2: linear-gradient(135deg, #ff2a6d, #ffcc00);
+            --gradient-3: linear-gradient(135deg, #00ccff, #8a2be2);
+            --gradient-dark: linear-gradient(135deg, #050510, #0a0a1a);
+            --shadow-glow: 0 0 20px rgba(138, 43, 226, 0.5);
+            --shadow-glow-blue: 0 0 20px rgba(0, 204, 255, 0.5);
+            --shadow-glow-pink: 0 0 20px rgba(255, 42, 109, 0.5);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            --font-main: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        * {
             margin: 0;
-            padding: 20px;
-            color: #fff;
+            padding: 0;
+            box-sizing: border-box;
         }
-
-        h2 {
-            text-align: center;
-            color: #ffd700;
-            font-size: 36px;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px #000;
+        
+        html {
+            scroll-behavior: smooth;
         }
-
-        .image-container {
+        
+        body {
+            font-family: var(--font-main);
+            background: var(--dark-color);
+            color: var(--light-color);
+            overflow-x: hidden;
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+        }
+        
+        /* ==============================================
+        ANIMAÇÕES PERSONALIZADAS
+        ============================================== */
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        
+        @keyframes glow {
+            0%, 100% { box-shadow: var(--shadow-glow); }
+            50% { box-shadow: 0 0 30px rgba(138, 43, 226, 0.8); }
+        }
+        
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        @keyframes shimmer {
+            0% { background-position: -200% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        @keyframes slideInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        @keyframes colorCycle {
+            0% { background-position: 0% center; }
+            100% { background-position: 200% center; }
+        }
+        
+        /* ==============================================
+        PRELOADER
+        ============================================== */
+        #preloader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--darker-color);
+            z-index: 9999;
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 20px;
+            align-items: center;
+            transition: opacity 0.8s ease, visibility 0.8s ease;
         }
-
-        .image-container img {
-            width: 300px;
-            height: 300px;
+        
+        .preloader-content {
+            text-align: center;
+            z-index: 10000;
+        }
+        
+        .loader {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto 30px;
+            position: relative;
+        }
+        
+        .loader::before,
+        .loader::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
             border-radius: 50%;
-            object-fit: cover;
-            border: 2px solid #ccc;
-            transition: transform 0.3s, border-color 0.3s;
-            cursor: pointer;
+            border: 5px solid transparent;
+            border-top-color: var(--primary-color);
+            animation: rotate 2s linear infinite;
         }
-
-        .image-container img:hover {
-            transform: scale(1.1);
-            border-color: #007BFF;
+        
+        .loader::after {
+            border-top-color: var(--secondary-color);
+            animation-duration: 1.5s;
+            animation-direction: reverse;
         }
-
-        .info-container {
-            display: none;
-            position: fixed;
+        
+        .loader-inner {
+            position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-            background: rgba(0, 0, 0, 0.9);
-            color: #fff;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 600px;
-            width: 90%;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .loading-text {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-top: 20px;
+            background: var(--gradient-1);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            letter-spacing: 2px;
+        }
+        
+        .loading-text::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -5px;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient-1);
+            animation: shimmer 2s infinite linear;
+            background-size: 200% auto;
+        }
+        
+        /* ==============================================
+        BOTÃO DE VOLTA
+        ============================================== */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 1001;
+        }
+        
+        .btn-back {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            color: white;
+            font-size: 1.5rem;
+            text-decoration: none;
+            box-shadow: 0 5px 15px rgba(138, 43, 226, 0.4);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-back:hover {
+            transform: scale(1.1) rotate(-5deg);
+            box-shadow: 0 8px 20px rgba(138, 43, 226, 0.6);
+        }
+        
+        .btn-back::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-2);
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .btn-back:hover::before {
+            opacity: 1;
+        }
+        
+        .btn-back i {
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* ==============================================
+        HERO SECTION
+        ============================================== */
+        .page-hero {
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+            padding-top: 100px;
+            background: linear-gradient(rgba(10, 10, 26, 0.9), rgba(10, 10, 26, 0.7)), 
+                        radial-gradient(circle at 20% 50%, rgba(138, 43, 226, 0.2), transparent 40%),
+                        radial-gradient(circle at 80% 20%, rgba(0, 204, 255, 0.2), transparent 40%);
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
             text-align: center;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-            z-index: 100;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            animation: slideInUp 1.2s ease-out;
         }
-
-        .info-container.active {
-            display: block;
-        }
-
-        .info-container h3 {
+        
+        .hero-title {
+            font-size: 4.5rem;
+            font-weight: 900;
             margin-bottom: 20px;
-            font-size: 24px;
-            color: #ffd700;
+            background: linear-gradient(to right, #ffd700, #ffcc00, #ff9500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1.1;
+            letter-spacing: 2px;
+            text-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+            position: relative;
         }
-
-        .info-container p {
-            font-size: 18px;
+        
+        .hero-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 5px;
+            background: linear-gradient(to right, #ffd700, #ffcc00);
+            border-radius: 5px;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            margin-top: 40px;
+            color: rgba(255, 255, 255, 0.9);
+            font-weight: 300;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
             line-height: 1.6;
         }
-
-        .close-button {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #ff4c4c;
-            color: #fff;
-            border: none;
-            border-radius: 50%;
-            width: 30px;
-            height: 30px;
-            font-size: 16px;
-            cursor: pointer;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-
-        .close-button:hover {
-            background: #ff1c1c;
-        }
-        #menu-button {
-            width: 50px;
-            height: 50px;
-            position: fixed;
-            top: 10px;
-            left: 10px;
-            z-index: 10;
-            padding: 10px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
-            border-radius: 50%;
-        }
-        .mystery-message {
-            margin-top: 50px;
-            text-align: center;
-            font-size: 18px;
-            color: #ffd700;
-            font-style: italic;
-        }
-        #menu-button {
+        
+        /* ==============================================
+        CLIMAS SECTION
+        ============================================== */
+        .climas-section {
+            padding: 80px 20px;
             position: relative;
+        }
+        
+        .climas-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .climas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 50px;
+        }
+        
+        .clima-card {
+            background: rgba(10, 10, 26, 0.7);
+            border-radius: 20px;
+            padding: 30px;
+            transition: var(--transition);
+            border: 1px solid rgba(138, 43, 226, 0.2);
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .clima-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.5s ease;
+        }
+        
+        .clima-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-glow);
+        }
+        
+        .clima-card:hover::before {
+            transform: scaleX(1);
+        }
+        
+        .clima-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 2.5rem;
+            color: white;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .clima-card:hover .clima-icon {
+            transform: scale(1.1) rotate(10deg);
+        }
+        
+        .clima-manha .clima-icon {
+            background: linear-gradient(135deg, #4cd964, #5ac8fa);
+            box-shadow: 0 5px 15px rgba(76, 217, 100, 0.4);
+        }
+        
+        .clima-noite .clima-icon {
+            background: linear-gradient(135deg, #007aff, #5856d6);
+            box-shadow: 0 5px 15px rgba(0, 122, 255, 0.4);
+        }
+        
+        .clima-nevoa .clima-icon {
+            background: linear-gradient(135deg, #8e8e93, #a5a5a7);
+            box-shadow: 0 5px 15px rgba(142, 142, 147, 0.4);
+        }
+        
+        .clima-chuva .clima-icon {
+            background: linear-gradient(135deg, #34aadc, #007aff);
+            box-shadow: 0 5px 15px rgba(52, 170, 220, 0.4);
+        }
+        
+        .clima-eclipse .clima-icon {
+            background: linear-gradient(135deg, #ff2d55, #8a2be2);
+            box-shadow: 0 5px 15px rgba(255, 45, 85, 0.4);
+        }
+        
+        .clima-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            color: white;
+        }
+        
+        .clima-manha .clima-name {
+            color: #4cd964;
+        }
+        
+        .clima-noite .clima-name {
+            color: #5ac8fa;
+        }
+        
+        .clima-nevoa .clima-name {
+            color: #c7c7cc;
+        }
+        
+        .clima-chuva .clima-name {
+            color: #34aadc;
+        }
+        
+        .clima-eclipse .clima-name {
+            color: #ff2d55;
+        }
+        
+        .clima-duration {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .clima-description {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.6;
+            margin-bottom: 25px;
+            flex-grow: 1;
+        }
+        
+        .clima-details {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 15px;
+        }
+        
+        .detail-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .detail-label {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.6);
+            margin-bottom: 5px;
+        }
+        
+        .detail-value {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: white;
+        }
+        
+        .clima-manha .detail-value {
+            color: #4cd964;
+        }
+        
+        .clima-noite .detail-value {
+            color: #5ac8fa;
+        }
+        
+        .clima-nevoa .detail-value {
+            color: #c7c7cc;
+        }
+        
+        .clima-chuva .detail-value {
+            color: #34aadc;
+        }
+        
+        .clima-eclipse .detail-value {
+            color: #ff2d55;
+        }
+        
+        .clima-bonus {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            border-left: 4px solid;
+        }
+        
+        .clima-manha .clima-bonus {
+            border-left-color: #4cd964;
+        }
+        
+        .clima-noite .clima-bonus {
+            border-left-color: #5ac8fa;
+        }
+        
+        .clima-nevoa .clima-bonus {
+            border-left-color: #c7c7cc;
+        }
+        
+        .clima-chuva .clima-bonus {
+            border-left-color: #34aadc;
+        }
+        
+        .clima-eclipse .clima-bonus {
+            border-left-color: #ff2d55;
+        }
+        
+        .bonus-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .bonus-text {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            line-height: 1.5;
+        }
+        
+        /* ==============================================
+        MODAL DE DETALHES
+        ============================================== */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            padding: 20px;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .modal-content {
+            max-width: 800px;
+            width: 100%;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: rgba(10, 10, 26, 0.95);
+            border-radius: 20px;
+            position: relative;
+            transform: scale(0.8);
+            transition: transform 0.5s ease;
+            border: 1px solid rgba(138, 43, 226, 0.3);
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+        
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+        
+        .modal-header {
+            padding: 30px 30px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+        }
+        
+        .modal-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .modal-duration {
+            display: inline-block;
+            padding: 5px 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            font-size: 1rem;
+            margin-bottom: 15px;
+        }
+        
+        .modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
             width: 50px;
             height: 50px;
-            background-color: #f3f1f1;
-            color: rgb(148, 21, 21);
-            border: none;
             border-radius: 50%;
+            background: var(--gradient-1);
+            color: white;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-
-        #menu-button .arrow {
+        
+        .modal-close:hover {
+            background: var(--gradient-2);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        
+        @media (max-width: 768px) {
+            .modal-body {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        .modal-section {
+            margin-bottom: 25px;
+        }
+        
+        .section-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section-icon {
+            font-size: 1.2rem;
+        }
+        
+        .section-content {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        .section-content ul {
+            padding-left: 20px;
+            margin-top: 10px;
+        }
+        
+        .section-content li {
+            margin-bottom: 8px;
+        }
+        
+        .modal-image {
+            border-radius: 15px;
+            overflow: hidden;
+            height: 300px;
+        }
+        
+        .modal-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+        
+        .modal-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* ==============================================
+        MENSAGEM MISTERIOSA
+        ============================================== */
+        .mystery-section {
+            padding: 80px 20px;
+            background: rgba(5, 5, 16, 0.7);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mystery-container {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .mystery-icon {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--gradient-1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+            font-size: 3rem;
+            color: white;
+            animation: float 5s ease-in-out infinite;
+        }
+        
+        .mystery-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 30px;
+            background: linear-gradient(to right, #ff2d55, #8a2be2, #ff9500);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
+            animation: colorCycle 5s infinite linear;
+        }
+        
+        .mystery-message {
+            font-size: 1.3rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.9);
+            font-style: italic;
+            max-width: 700px;
+            margin: 0 auto;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            border-left: 5px solid var(--accent-color);
+            position: relative;
+        }
+        
+        .mystery-message::before {
+            content: '"';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 0;
-            height: 0;
-            border-top: 6px solid transparent;
-            border-bottom: 6px solid transparent;
-            border-right: 10px solid rgb(148, 21, 21); /* Cor da seta */
+            top: -30px;
+            left: 30px;
+            font-size: 8rem;
+            color: rgba(255, 255, 255, 0.1);
+            font-family: serif;
+            z-index: -1;
+        }
+        
+        /* ==============================================
+        FOOTER
+        ============================================== */
+        .main-footer {
+            background: rgba(5, 5, 16, 0.95);
+            padding: 40px 20px 20px;
+            border-top: 1px solid rgba(138, 43, 226, 0.2);
+            position: relative;
+            text-align: center;
+        }
+        
+        .main-footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient-1);
+        }
+        
+        .footer-text {
+            color: rgba(240, 240, 255, 0.6);
+            font-size: 0.95rem;
+        }
+        
+        /* ==============================================
+        ANIMAÇÕES DE PARTÍCULAS
+        ============================================== */
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            pointer-events: none;
+        }
+        
+        .particle {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            opacity: 0.3;
+            animation: float 10s infinite linear;
+        }
+        
+        /* ==============================================
+        ANIMAÇÕES AO ROLAR
+        ============================================== */
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+        
+        .animate-on-scroll.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* ==============================================
+        RESPONSIVIDADE
+        ============================================== */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 3.5rem;
+            }
+            
+            .climas-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .climas-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mystery-title {
+                font-size: 2rem;
+            }
+            
+            .mystery-message {
+                font-size: 1.1rem;
+                padding: 20px;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .clima-card {
+                padding: 20px;
+            }
+            
+            .modal-body {
+                padding: 20px;
+            }
+            
+            .modal-title {
+                font-size: 2rem;
+            }
+            
+            .btn-back {
+                width: 50px;
+                height: 50px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
 <body>
-    <a href="../Informações.html">
-        <button id="menu-button">
-            <i class="arrow"></i> <!-- Ícone de seta para trás -->
-        </button>
-    </a>
-    <h2>Bem-vindo ao seu novo mundo. O sol neon está brilhando!</h2>
-    <div class="image-container">
-        <img src="climas/manhã.png" alt="Manhã" onclick="showInfo('Manhã', 1)">
-        <img src="climas/noite.jpeg" alt="Noite" onclick="showInfo('Noite', 2)">
-        <img src="climas/nevoa.jpeg" alt="Nevoa" onclick="showInfo('Nevoa', 3)">
-        <img src="climas/chuva.jpeg" alt="Chuva" onclick="showInfo('Chuva', 4)">
-        <img src="climas/eclipse.jpeg" alt="Eclipse" onclick="showInfo('Eclipse', 5)">
-    </div>
-
-    <div id="info-container" class="info-container">
-        <button class="close-button" onclick="closeInfo()">&times;</button>
-        <h3 id="info-title">Climas</h3>
-        <div id="info-content">
-            <p>Conteúdo</p>
+    <!-- Preloader -->
+    <div id="preloader">
+        <div class="preloader-content">
+            <div class="loader">
+                <div class="loader-inner"></div>
+            </div>
+            <div class="loading-text">Carregando Sistemas de Clima...</div>
         </div>
     </div>
-    <div class="mystery-message">
-        O que acontece é sempre um mistério, então não confie nem mesmo no clima ou no que vê, só use sua percepção.
+    
+    <!-- Botão de voltar -->
+    <div class="back-button">
+        <a href="../Informações.html" class="btn-back">
+            <i class="fas fa-arrow-left"></i>
+        </a>
     </div>
-
+    
+    <!-- Hero Section -->
+    <section class="page-hero">
+        <div class="particles-container" id="particles"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">Bem-vindo ao seu novo mundo</h1>
+            <p class="hero-subtitle">O sol neon está brilhando! Descubra como os climas dinâmicos afetam sua jornada, oferecendo bônus, desafios e mistérios em cada momento.</p>
+        </div>
+    </section>
+    
+    <!-- Climas Section -->
+    <section class="climas-section">
+        <div class="climas-container">
+            <div class="climas-grid">
+                <!-- Manhã -->
+                <div class="clima-card clima-manha animate-on-scroll" data-clima="manha">
+                    <div class="clima-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <h3 class="clima-name">Manhã</h3>
+                    <div class="clima-duration">Duração: 3 horas</div>
+                    <p class="clima-description">A luz verde neon inunda o mundo, trazendo calor que pode alterar regiões inteiras e criar novas variáveis no ambiente.</p>
+                    
+                    <div class="clima-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Coloração</div>
+                            <div class="detail-value">Verde Neon</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Elemento</div>
+                            <div class="detail-value">Fogo/Luz</div>
+                        </div>
+                    </div>
+                    
+                    <div class="clima-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Habilidades de fogo ou luz têm 30% mais chance de sucesso e 20% de dano aumentado.</div>
+                    </div>
+                </div>
+                
+                <!-- Noite -->
+                <div class="clima-card clima-noite animate-on-scroll" data-clima="noite">
+                    <div class="clima-icon">
+                        <i class="fas fa-moon"></i>
+                    </div>
+                    <h3 class="clima-name">Noite</h3>
+                    <div class="clima-duration">Duração: 2 horas</div>
+                    <p class="clima-description">A escuridão azul marinho revela segredos que só podem ser descobertos sob sua luz misteriosa.</p>
+                    
+                    <div class="clima-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Coloração</div>
+                            <div class="detail-value">Azul Marinho</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Elemento</div>
+                            <div class="detail-value">Gelo/Gravidade</div>
+                        </div>
+                    </div>
+                    
+                    <div class="clima-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Habilidades de gelo ou magia gravitacional têm 25% mais eficácia e custo reduzido de mana.</div>
+                    </div>
+                </div>
+                
+                <!-- Névoa -->
+                <div class="clima-card clima-nevoa animate-on-scroll" data-clima="nevoa">
+                    <div class="clima-icon">
+                        <i class="fas fa-cloud"></i>
+                    </div>
+                    <h3 class="clima-name">Névoa</h3>
+                    <div class="clima-duration">Duração: 1 hora (aleatória)</div>
+                    <p class="clima-description">A visibilidade é drasticamente reduzida, criando o cenário perfeito para operações furtivas e emboscadas.</p>
+                    
+                    <div class="clima-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Visibilidade</div>
+                            <div class="detail-value">Reduzida 70%</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Foco</div>
+                            <div class="detail-value">Furtividade</div>
+                        </div>
+                    </div>
+                    
+                    <div class="clima-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Classes com destreza e percepção avançada ganham +40% em habilidades furtivas.</div>
+                    </div>
+                </div>
+                
+                <!-- Chuva -->
+                <div class="clima-card clima-chuva animate-on-scroll" data-clima="chuva">
+                    <div class="clima-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <h3 class="clima-name">Chuva</h3>
+                    <div class="clima-duration">Duração: 30 minutos (aleatória)</div>
+                    <p class="clima-description">A precipitação altera o terreno, criando inundações e mudando permanentemente partes do mapa.</p>
+                    
+                    <div class="clima-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Alteração</div>
+                            <div class="detail-value">Terreno/Dano Água</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Elemento</div>
+                            <div class="detail-value">Eletricidade</div>
+                        </div>
+                    </div>
+                    
+                    <div class="clima-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">Eletricidade e poderes sobrenaturais têm 35% mais chance de efeitos críticos.</div>
+                    </div>
+                </div>
+                
+                <!-- Eclipse -->
+                <div class="clima-card clima-eclipse animate-on-scroll" data-clima="eclipse">
+                    <div class="clima-icon">
+                        <i class="fas fa-eclipse"></i>
+                    </div>
+                    <h3 class="clima-name">Eclipse</h3>
+                    <div class="clima-duration">Duração: 1 dia inteiro</div>
+                    <p class="clima-description">O céu sangrento desperta monstros mais poderosos e recompensas lendárias para os corajosos.</p>
+                    
+                    <div class="clima-details">
+                        <div class="detail-item">
+                            <div class="detail-label">Coloração</div>
+                            <div class="detail-value">Roxo/Carmesim</div>
+                        </div>
+                        <div class="detail-item">
+                            <div class="detail-label">Bônus Monstros</div>
+                            <div class="detail-value">+30% Poder</div>
+                        </div>
+                    </div>
+                    
+                    <div class="clima-bonus">
+                        <div class="bonus-title">Bônus Principal</div>
+                        <div class="bonus-text">XP ganho é 20% maior, com chance de obter itens de nível superior ao da região.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Modal de Detalhes -->
+    <div class="modal-overlay" id="climaModal">
+        <div class="modal-content">
+            <div class="modal-header" id="modalHeader">
+                <button class="modal-close" id="closeModal">
+                    <i class="fas fa-times"></i>
+                </button>
+                <h2 class="modal-title" id="modalTitle">
+                    <i class="fas fa-sun" id="modalIcon"></i>
+                    <span id="modalName">Manhã</span>
+                </h2>
+                <div class="modal-duration" id="modalDuration">Duração: 3 horas</div>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section" id="modalImageContainer">
+                    <div class="modal-image">
+                        <img id="modalImage" src="climas/manhã.png" alt="Clima">
+                    </div>
+                </div>
+                <div>
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-palette section-icon"></i>
+                            Coloração e Efeitos
+                        </h3>
+                        <div class="section-content" id="modalColoracao">
+                            Verde neon que altera a percepção visual do ambiente.
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-exclamation-triangle section-icon"></i>
+                            Interferências
+                        </h3>
+                        <div class="section-content" id="modalInterferencia">
+                            <ul id="interferenceList">
+                                <li>O calor pode causar problemas em certas regiões</li>
+                                <li>Facilita a criação de variáveis ambientais</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-star section-icon"></i>
+                            Bônus e Habilidades
+                        </h3>
+                        <div class="section-content" id="modalBonus">
+                            <ul id="bonusList">
+                                <li>Habilidades de fogo ou luz têm potencial maior</li>
+                                <li>Efeitos visuais são intensificados</li>
+                            </ul>
+                        </div>
+                    </div>
+                    
+                    <div class="modal-section">
+                        <h3 class="section-title">
+                            <i class="fas fa-lightbulb section-icon"></i>
+                            Estratégias
+                        </h3>
+                        <div class="section-content" id="modalEstrategia">
+                            <ul id="strategyList">
+                                <li>Use habilidades de fogo para maximizar dano</li>
+                                <li>Explore áreas que mudam com o calor</li>
+                                <li>Procure por eventos especiais ativados pelo clima</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Seção Misteriosa -->
+    <section class="mystery-section">
+        <div class="mystery-container">
+            <div class="mystery-icon">
+                <i class="fas fa-question"></i>
+            </div>
+            <h2 class="mystery-title">Aviso do Sistema</h2>
+            <div class="mystery-message animate-on-scroll">
+                O que acontece é sempre um mistério, então não confie nem mesmo no clima ou no que vê, só use sua percepção. Cada ciclo climático esconde segredos que podem recompensar os observadores ou punir os desatentos. O mundo está vivo e reage às suas escolhas - esteja preparado para o inesperado.
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="footer-text">
+            <p>&copy; 2023 Sistema de Climas Dinâmicos. O clima muda, suas estratégias devem mudar também.</p>
+        </div>
+    </footer>
+    
     <script>
-        const infoData = {
-            1: {
-                title: 'Manhã',
-                content: `
-                    <p>Duração: 3 horas.</p>
-                    <p>Coloração: Verde neon.</p>
-                    <p>Interferência: O calor pode causar problemas em certas regiões ou facilitar a criação de variáveis.</p>
-                    <p>Bônus: A habilidade de fogo ou de luz tem um potencial maior de funcionar.</p>
-                `,
+        // ==============================================
+        // DADOS DOS CLIMAS
+        // ==============================================
+        const climaData = {
+            manha: {
+                name: 'Manhã',
+                icon: 'fas fa-sun',
+                duration: '3 horas',
+                colorClass: 'clima-manha',
+                image: 'climas/manhã.png',
+                coloracao: 'Verde neon intenso que cobre todo o horizonte, criando uma atmosfera surreal e energizante. A luz tem propriedades únicas que podem alterar materiais específicos.',
+                interferencia: [
+                    'O calor extremo pode causar problemas de sobrevivência em regiões desérticas',
+                    'Facilita a criação de variáveis químicas e alquímicas',
+                    'Plantas sensíveis podem florescer ou murchar rapidamente',
+                    'Equipamentos metálicos podem superaquecer'
+                ],
+                bonus: [
+                    'Habilidade de fogo ou luz tem 30% mais chance de funcionar',
+                    'Dano de habilidades de fogo aumentado em 20%',
+                    'Regeneração de mana 15% mais rápida',
+                    'Criação de poções com propriedades de luz tem sucesso garantido'
+                ],
+                estrategia: [
+                    'Use habilidades de fogo para maximizar dano contra inimigos vulneráveis',
+                    'Explore áreas que mudam com o calor para descobrir segredos',
+                    'Procure por cristais que brilham apenas durante a manhã',
+                    'Realize missões de coleta de recursos que florescem neste clima'
+                ]
             },
-            2: {
-                title: 'Noite',
-                content: `
-                    <p>Duração: 2 horas.</p>
-                    <p>Coloração: Azul marinho.</p>
-                    <p>Interferência: Certas quests, habilidades ou puzzles dependem dessa luz.</p>
-                    <p>Bônus: A habilidade de gelo ou de magia gravitacional tem um potencial maior de funcionar.</p>
-                `,
+            noite: {
+                name: 'Noite',
+                icon: 'fas fa-moon',
+                duration: '2 horas',
+                colorClass: 'clima-noite',
+                image: 'climas/noite.jpeg',
+                coloracao: 'Azul marinho profundo que parece absorver a luz, criando sombras vivas e revelando constelações únicas no céu. A escuridão tem textura quase física.',
+                interferencia: [
+                    'Certas quests, habilidades ou puzzles dependem exclusivamente dessa luz',
+                    'Criaturas noturnas tornam-se mais ativas e agressivas',
+                    'Navegação sem fontes de luz é extremamente difícil',
+                    'Portais dimensionais podem se abrir em locais específicos'
+                ],
+                bonus: [
+                    'Habilidade de gelo ou magia gravitacional tem 25% mais eficácia',
+                    'Custo de mana reduzido em 15% para magias noturnas',
+                    'Furtividade aumentada em 40% nas sombras',
+                    'Percepção aumentada para detectar itens ocultos'
+                ],
+                estrategia: [
+                    'Use habilidades furtivas para abordagens sorrateiras',
+                    'Procure constelações específicas para desbloquear eventos',
+                    'Enfrente chefes noturnos para loot exclusivo',
+                    'Explore áreas que só são acessíveis durante a noite'
+                ]
             },
-            3: {
-                title: 'Nevoa',
-                content: `
-                    <p>Duração: 1 hora - aleatoriamente.</p>
-                    <p>Coloração: A nevoa irá deixar mais difícil a visualização de áreas de visão ampla.</p>
-                    <p>Interferência: Mesmo dificultando a visão ele tem como principal foco facilitar missões furtivas, roubos e assassinatos.</p>
-                    <p>Bônus: O uso de classes com destreza e percepção avançados podem aproveitar melhor para uso de suas habilidades.</p>
-                `,
+            nevoa: {
+                name: 'Névoa',
+                icon: 'fas fa-cloud',
+                duration: '1 hora (aleatoriamente)',
+                colorClass: 'clima-nevoa',
+                image: 'climas/nevoa.jpeg',
+                coloracao: 'Névoa densa e cinzenta que reduz drasticamente a visibilidade a apenas alguns metros. O ar fica úmido e pesado, abafando sons distantes.',
+                interferencia: [
+                    'Visão ampla é praticamente impossível',
+                    'Facilita missões furtivas, roubos e assassinatos',
+                    'Sons são abafados, dificultando detecção auditiva',
+                    'Sinais mágicos podem se dissipar mais rápido'
+                ],
+                bonus: [
+                    'Classes com destreza e percepção avançados têm +40% em furtividade',
+                    'Ataques surpresa causam 50% mais dano',
+                    'Chance de escapar de combate aumentada em 35%',
+                    'Detecção de armadilhas visuais reduzida em 60% para inimigos'
+                ],
+                estrategia: [
+                    'Execute missões de assassinato ou infiltração',
+                    'Use a cobertura para emboscar grupos inimigos',
+                    'Evite combate em áreas abertas',
+                    'Procure por tesouros escondidos que só aparecem na névoa'
+                ]
             },
-            4: {
-                title: 'Chuva',
-                content: `
-                    <p>Duração: 30 minutos - aleatoriamente.</p>
-                    <p>Coloração: Fica mais escuro, mas ficará com a tonalidade mais ofuscada do clima atual.</p>
-                    <p>Interferência: Poderes com fraqueza à água estarão mais fracos e com potência reduzida. Isso também afetará o mapa em relação a inundações e criação de mudanças no mapa.</p>
-                    <p>Bônus: Eletricidade e poderes sobrenaturais podem ter capacidade maior de funcionar.</p>
-                `,
+            chuva: {
+                name: 'Chuva',
+                icon: 'fas fa-cloud-rain',
+                duration: '30 minutos (aleatoriamente)',
+                colorClass: 'clima-chuva',
+                image: 'climas/chuva.jpeg',
+                coloracao: 'Chuva constante que escurece o céu, mantendo a tonalidade básica do clima atual mas com intensidade reduzida. Gotas refletem a luz de forma única.',
+                interferencia: [
+                    'Poderes com fraqueza à água têm eficácia reduzida em 40%',
+                    'Inundações podem criar ou bloquear rotas',
+                    'Terreno lamacento reduz velocidade de movimento em 25%',
+                    'Fogo e habilidades térmicas são menos eficazes'
+                ],
+                bonus: [
+                    'Eletricidade e poderes sobrenaturais têm 35% mais chance de funcionar',
+                    'Habilidades de água são fortalecidas em 50%',
+                    'Plantas aquáticas e recursos únicos aparecem',
+                    'Criaturas elétricas tornam-se mais comuns e poderosas'
+                ],
+                estrategia: [
+                    'Use habilidades elétricas para dominar o campo de batalha',
+                    'Explore áreas normalmente inacessíveis devido a inundações',
+                    'Colete recursos aquáticos raros',
+                    'Evite usar equipamentos vulneráveis à água'
+                ]
             },
-            5: {
-                title: 'Eclipse',
-                content: `
-                    <p>Duração: 1 dia todo.</p>
-                    <p>Coloração: Roxo com teor de vermelho carmesim.</p>
-                    <p>Interferência: Os monstros têm a bonificação de 30% de poder bruto aumentados. Dependendo do nível e região o monstro pode abrir ou destruir o local em questão criando variações no mapa maior.</p>
-                    <p>Bônus: O XP ganho durante esse horário é 20% maior, mas dependendo do monstro e seu nível de influência pode dar armas de grau maior ao estabelecido na região.</p>
-                `,
-            },
+            eclipse: {
+                name: 'Eclipse',
+                icon: 'fas fa-eclipse',
+                duration: '1 dia inteiro',
+                colorClass: 'clima-eclipse',
+                image: 'climas/eclipse.jpeg',
+                coloracao: 'Céu roxo com tons de vermelho carmesim que parecem sangrar. A luz é distorcida e sombras se comportam de maneira antinatural.',
+                interferencia: [
+                    'Monstros têm bônus de 30% em poder bruto',
+                    'Criaturas de alto nível podem destruir ou alterar permanentemente áreas',
+                    'Portais para dimensões alternativas podem se abrir espontaneamente',
+                    'Leis físicas e mágicas podem se comportar erraticamente'
+                ],
+                bonus: [
+                    'XP ganho é 20% maior durante todo o eclipse',
+                    'Chance de obter armas e itens de nível superior',
+                    'Habilidades de sangue e sombra são potenciadas em 60%',
+                    'Chefes lendários podem aparecer em locais específicos'
+                ],
+                estrategia: [
+                    'Enfrente chefes para loot de alto nível',
+                    'Explore áreas normalmente muito perigosas',
+                    'Use habilidades de sangue/sombra para dominar',
+                    'Forme grupos para sobreviver aos monstros potenciados',
+                    'Procure por eventos únicos que só ocorrem durante eclipses'
+                ]
+            }
         };
-
-        function showInfo(title, index) {
-            const container = document.getElementById('info-container');
-            const titleEl = document.getElementById('info-title');
-            const contentEl = document.getElementById('info-content');
-
-            titleEl.textContent = infoData[index].title;
-            contentEl.innerHTML = infoData[index].content;
-
-            container.classList.add('active');
+        
+        // ==============================================
+        // PRELOADER
+        // ==============================================
+        window.addEventListener('load', function() {
+            const preloader = document.getElementById('preloader');
+            setTimeout(() => {
+                preloader.style.opacity = '0';
+                preloader.style.visibility = 'hidden';
+            }, 1500);
+        });
+        
+        // ==============================================
+        // ANIMAÇÃO DE PARTÍCULAS
+        // ==============================================
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 40;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                // Tamanho aleatório
+                const size = Math.random() * 4 + 1;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Posição aleatória
+                particle.style.left = `${Math.random() * 100}%`;
+                particle.style.top = `${Math.random() * 100}%`;
+                
+                // Cor aleatória baseada no clima
+                const colors = ['#4cd964', '#5ac8fa', '#c7c7cc', '#34aadc', '#ff2d55'];
+                const color = colors[Math.floor(Math.random() * colors.length)];
+                particle.style.background = color;
+                
+                // Opacidade aleatória
+                particle.style.opacity = `${Math.random() * 0.4 + 0.1}`;
+                
+                // Duração da animação aleatória
+                const duration = Math.random() * 15 + 10;
+                particle.style.animationDuration = `${duration}s`;
+                
+                // Delay aleatório
+                const delay = Math.random() * 5;
+                particle.style.animationDelay = `${delay}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
         }
-
-        function closeInfo() {
-            const container = document.getElementById('info-container');
-            container.classList.remove('active');
+        
+        // ==============================================
+        // MODAL DE DETALHES
+        // ==============================================
+        function initClimaModal() {
+            const climaModal = document.getElementById('climaModal');
+            const closeModal = document.getElementById('closeModal');
+            const climaCards = document.querySelectorAll('.clima-card');
+            
+            climaCards.forEach(card => {
+                card.addEventListener('click', function() {
+                    const climaType = this.getAttribute('data-clima');
+                    const clima = climaData[climaType];
+                    
+                    if (!clima) return;
+                    
+                    // Atualizar conteúdo do modal
+                    document.getElementById('modalName').textContent = clima.name;
+                    document.getElementById('modalIcon').className = clima.icon;
+                    document.getElementById('modalDuration').textContent = `Duração: ${clima.duration}`;
+                    document.getElementById('modalImage').src = clima.image;
+                    document.getElementById('modalImage').alt = clima.name;
+                    document.getElementById('modalColoracao').textContent = clima.coloracao;
+                    
+                    // Atualizar lista de interferências
+                    const interferenceList = document.getElementById('interferenceList');
+                    interferenceList.innerHTML = '';
+                    clima.interferencia.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        interferenceList.appendChild(li);
+                    });
+                    
+                    // Atualizar lista de bônus
+                    const bonusList = document.getElementById('bonusList');
+                    bonusList.innerHTML = '';
+                    clima.bonus.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        bonusList.appendChild(li);
+                    });
+                    
+                    // Atualizar lista de estratégias
+                    const strategyList = document.getElementById('strategyList');
+                    strategyList.innerHTML = '';
+                    clima.estrategia.forEach(item => {
+                        const li = document.createElement('li');
+                        li.textContent = item;
+                        strategyList.appendChild(li);
+                    });
+                    
+                    // Atualizar cores do modal baseado no clima
+                    const modalHeader = document.getElementById('modalHeader');
+                    const sectionTitles = document.querySelectorAll('.section-title');
+                    
+                    // Remover classes de cor anteriores
+                    modalHeader.classList.remove('clima-manha', 'clima-noite', 'clima-nevoa', 'clima-chuva', 'clima-eclipse');
+                    sectionTitles.forEach(title => {
+                        title.classList.remove('clima-manha', 'clima-noite', 'clima-nevoa', 'clima-chuva', 'clima-eclipse');
+                    });
+                    
+                    // Adicionar nova classe de cor
+                    modalHeader.classList.add(clima.colorClass);
+                    sectionTitles.forEach(title => {
+                        title.classList.add(clima.colorClass);
+                        title.style.borderBottomColor = 'currentColor';
+                    });
+                    
+                    // Mostrar modal
+                    climaModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            closeModal.addEventListener('click', function() {
+                climaModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            climaModal.addEventListener('click', function(e) {
+                if (e.target === climaModal) {
+                    climaModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Fechar modal com ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && climaModal.classList.contains('active')) {
+                    climaModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
         }
+        
+        // ==============================================
+        // ANIMAÇÃO AO ROLAR A PÁGINA
+        // ==============================================
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        // ==============================================
+        // EFEITO DE DIGITAÇÃO PARA TÍTULO
+        // ==============================================
+        function typeWriterEffect() {
+            const heroTitle = document.querySelector('.hero-title');
+            const originalText = heroTitle.textContent;
+            heroTitle.textContent = '';
+            
+            let i = 0;
+            const speed = 80;
+            
+            function typeWriter() {
+                if (i < originalText.length) {
+                    heroTitle.textContent += originalText.charAt(i);
+                    i++;
+                    setTimeout(typeWriter, speed);
+                }
+            }
+            
+            // Iniciar efeito após 1 segundo
+            setTimeout(typeWriter, 1000);
+        }
+        
+        // ==============================================
+        // ROTAÇÃO DE CLIMAS (SIMULAÇÃO)
+        // ==============================================
+        function simulateClimaRotation() {
+            const climaCards = document.querySelectorAll('.clima-card');
+            let currentClima = 0;
+            
+            setInterval(() => {
+                // Remover destaque anterior
+                climaCards.forEach(card => {
+                    card.style.transform = 'translateY(0)';
+                    card.style.boxShadow = 'none';
+                });
+                
+                // Destacar próximo clima
+                climaCards[currentClima].style.transform = 'translateY(-20px)';
+                climaCards[currentClima].style.boxShadow = '0 25px 50px rgba(0, 0, 0, 0.5), 0 0 30px currentColor';
+                
+                // Atualizar índice
+                currentClima = (currentClima + 1) % climaCards.length;
+            }, 5000);
+        }
+        
+        // ==============================================
+        // INICIALIZAÇÃO
+        // ==============================================
+        document.addEventListener('DOMContentLoaded', function() {
+            // Criar partículas
+            createParticles();
+            
+            // Inicializar modal
+            initClimaModal();
+            
+            // Efeito de digitação
+            typeWriterEffect();
+            
+            // Simular rotação de climas
+            simulateClimaRotation();
+            
+            // Event listeners para scroll
+            window.addEventListener('scroll', function() {
+                animateOnScroll();
+            });
+            
+            // Executar animações iniciais
+            animateOnScroll();
+            
+            // Adicionar efeito de hover dinâmico aos cards
+            const climaCards = document.querySelectorAll('.clima-card');
+            climaCards.forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    const climaType = this.getAttribute('data-clima');
+                    const particles = document.querySelectorAll('.particle');
+                    
+                    // Alterar cor das partículas baseado no clima
+                    let color;
+                    switch(climaType) {
+                        case 'manha': color = '#4cd964'; break;
+                        case 'noite': color = '#5ac8fa'; break;
+                        case 'nevoa': color = '#c7c7cc'; break;
+                        case 'chuva': color = '#34aadc'; break;
+                        case 'eclipse': color = '#ff2d55'; break;
+                        default: color = '#00ccff';
+                    }
+                    
+                    particles.forEach(particle => {
+                        particle.style.background = color;
+                    });
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    // Restaurar cores aleatórias das partículas
+                    const particles = document.querySelectorAll('.particle');
+                    const colors = ['#4cd964', '#5ac8fa', '#c7c7cc', '#34aadc', '#ff2d55'];
+                    
+                    particles.forEach(particle => {
+                        const color = colors[Math.floor(Math.random() * colors.length)];
+                        particle.style.background = color;
+                    });
+                });
+            });
+        });
     </script>
 </body>
 </html>
