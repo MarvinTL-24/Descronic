@@ -1,0 +1,1268 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/modelos/classe.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    <title>Cyber Classes - Raças</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: #0a0a16;
+            color: #e0e0ff;
+            min-height: 100vh;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 20, 80, 0.1) 0%, transparent 20%),
+                radial-gradient(circle at 85% 30%, rgba(120, 0, 255, 0.1) 0%, transparent 20%);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        /* Header Styles */
+        .main-header {
+            background: rgba(10, 15, 30, 0.9);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(64, 224, 208, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 20, 60, 0.3);
+            padding: 20px 40px;
+            position: relative;
+            margin-bottom: 40px;
+            overflow: hidden;
+        }
+        
+        .main-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, 
+                transparent, 
+                rgba(64, 224, 208, 0.7), 
+                transparent);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+        
+        /* Logo Styles */
+        .logo {
+            position: absolute;
+            left: 75%;
+            transform: translateX(-50%);
+            font-size: 28px;
+            font-weight: 800;
+            color: #40e0d0;
+            text-decoration: none;
+            letter-spacing: 2px;
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.5);
+            background: linear-gradient(90deg, #40e0d0, #20b2aa);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding: 5px 15px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+        
+        .logo:hover {
+            text-shadow: 0 0 15px rgba(64, 224, 208, 0.8);
+            transform: translateX(-50%) scale(1.05);
+        }
+        
+        /* Navigation Styles */
+        .desktop-nav {
+            flex: 1;
+        }
+        
+        .desktop-nav ul {
+            display: flex;
+            list-style: none;
+            gap: 10px;
+        }
+        
+        .desktop-nav ul li {
+            position: relative;
+        }
+        
+        .desktop-nav ul li a {
+            color: #a0b0ff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 15px;
+            padding: 10px 18px;
+            border-radius: 30px;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            white-space: nowrap;
+            border: 1px solid transparent;
+        }
+        
+        .desktop-nav ul li a i {
+            font-size: 14px;
+        }
+        
+        .desktop-nav ul li a:hover {
+            color: #40e0d0;
+            background: rgba(64, 224, 208, 0.1);
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            transform: translateY(-2px);
+        }
+        
+        /* Social Links Styles */
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+        
+        .social-link {
+            position: relative;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #a0b0ff;
+            background: rgba(30, 40, 70, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(64, 224, 208, 0.1);
+        }
+        
+        .social-link:hover {
+            color: #40e0d0;
+            background: rgba(64, 224, 208, 0.15);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(64, 224, 208, 0.2);
+        }
+        
+        /* Mobile Menu Toggle */
+        .mobile-menu-toggle {
+            display: none;
+            background: transparent;
+            border: none;
+            color: #40e0d0;
+            font-size: 24px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .mobile-menu-toggle:hover {
+            background: rgba(64, 224, 208, 0.1);
+        }
+        
+        /* Main Content Styles */
+        .main-content {
+            background: rgba(10, 15, 30, 0.7);
+            border-radius: 16px;
+            padding: 40px;
+            border: 1px solid rgba(64, 224, 208, 0.1);
+            box-shadow: 0 10px 30px rgba(0, 10, 40, 0.3);
+            margin-top: 20px;
+        }
+        
+        h1 {
+            color: #40e0d0;
+            margin-bottom: 20px;
+            font-size: 36px;
+            text-align: center;
+            text-shadow: 0 0 10px rgba(64, 224, 208, 0.3);
+        }
+        
+        .subtitle {
+            text-align: center;
+            margin-bottom: 40px;
+            font-size: 18px;
+            color: #b8b8ff;
+            line-height: 1.6;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* Raças Grid */
+        .racas-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        
+        .raca-card {
+            background: rgba(20, 25, 50, 0.7);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            cursor: pointer;
+        }
+        
+        .raca-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 35px rgba(0, 20, 60, 0.4);
+            border-color: rgba(64, 224, 208, 0.3);
+        }
+        
+        /* Cores específicas para cada raça */
+        .excomungados:hover {
+            border-color: #e63946;
+            box-shadow: 0 15px 35px rgba(230, 57, 70, 0.4);
+        }
+        
+        .dragonawtes:hover {
+            border-color: #2a9d8f;
+            box-shadow: 0 15px 35px rgba(42, 157, 143, 0.4);
+        }
+        
+        .elfos:hover {
+            border-color: #a7c957;
+            box-shadow: 0 15px 35px rgba(167, 201, 87, 0.4);
+        }
+        
+        .druidas:hover {
+            border-color: #4a9d2f;
+            box-shadow: 0 15px 35px rgba(74, 157, 47, 0.4);
+        }
+        
+        .humanos:hover {
+            border-color: #ff9f1c;
+            box-shadow: 0 15px 35px rgba(255, 159, 28, 0.4);
+        }
+        
+        .anoes:hover {
+            border-color: #bc6c25;
+            box-shadow: 0 15px 35px rgba(188, 108, 37, 0.4);
+        }
+        
+        /* Imagem da raça */
+        .raca-imagem {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            position: relative;
+            background-color: rgba(30, 40, 70, 0.5);
+        }
+        
+        .raca-imagem::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 60%;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+        }
+        
+        .raca-titulo {
+            position: absolute;
+            bottom: 15px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            z-index: 2;
+            font-size: 28px;
+            font-weight: bold;
+            color: white;
+            text-shadow: 0 2px 8px rgba(0,0,0,0.8);
+            padding: 0 20px;
+        }
+        
+        /* Conteúdo do card */
+        .raca-conteudo {
+            padding: 25px;
+        }
+        
+        .raca-descricao {
+            color: #c0c8ff;
+            line-height: 1.6;
+            margin-bottom: 20px;
+            font-size: 14px;
+        }
+        
+        /* População */
+        .populacao {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 10px;
+            padding: 15px;
+            margin-bottom: 20px;
+        }
+        
+        .populacao h4 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: #40e0d0;
+            font-size: 16px;
+        }
+        
+        .populacao-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+        
+        .populacao-table th {
+            text-align: left;
+            padding: 8px 0;
+            color: #b8b8ff;
+            font-weight: normal;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .populacao-table td {
+            padding: 8px 0;
+            color: #ffffff;
+        }
+        
+        /* Opções da raça */
+        .opcoes-raca {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        
+        .opcao-btn {
+            background: linear-gradient(145deg, rgba(64, 224, 208, 0.1), rgba(0, 0, 0, 0.2));
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            color: #40e0d0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-grow: 1;
+            text-align: center;
+            font-weight: 600;
+        }
+        
+        .opcao-btn:hover {
+            background: rgba(64, 224, 208, 0.2);
+            border-color: #40e0d0;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(64, 224, 208, 0.2);
+        }
+        
+        /* Nova Raça Section */
+        .nova-raca {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 2px dashed rgba(64, 224, 208, 0.3);
+            margin-top: 40px;
+            transition: all 0.3s ease;
+        }
+        
+        .nova-raca:hover {
+            border-color: #40e0d0;
+            background: rgba(0, 0, 0, 0.5);
+        }
+        
+        .nova-raca h3 {
+            color: #40e0d0;
+            margin-top: 0;
+            margin-bottom: 15px;
+        }
+        
+        .nova-raca p {
+            color: #b8b8ff;
+            margin-bottom: 25px;
+        }
+        
+        .btn-nova-raca {
+            background: linear-gradient(145deg, #40e0d0, #20b2aa);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        
+        .btn-nova-raca:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 20px rgba(64, 224, 208, 0.4);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            margin-top: 60px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(64, 224, 208, 0.3);
+            color: #40e0d0;
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '✦';
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(10, 15, 30, 0.7);
+            padding: 0 20px;
+            color: #40e0d0;
+            font-size: 20px;
+        }
+        
+        .footer a {
+            color: #40e0d0;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .footer a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 1000;
+            overflow-y: auto;
+            padding: 20px;
+            box-sizing: border-box;
+        }
+        
+        .modal-content {
+            background: rgba(10, 15, 30, 0.95);
+            max-width: 1000px;
+            margin: 50px auto;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+            border: 1px solid rgba(64, 224, 208, 0.3);
+            animation: modalAppear 0.5s ease;
+        }
+        
+        @keyframes modalAppear {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .modal-header {
+            padding: 25px 30px;
+            background: rgba(0, 0, 0, 0.6);
+            border-bottom: 1px solid rgba(64, 224, 208, 0.3);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .modal-title {
+            font-size: 32px;
+            color: #40e0d0;
+            margin: 0;
+        }
+        
+        .close-modal {
+            background: transparent;
+            border: none;
+            color: #40e0d0;
+            font-size: 30px;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .close-modal:hover {
+            background: rgba(64, 224, 208, 0.2);
+            transform: rotate(90deg);
+        }
+        
+        .modal-body {
+            padding: 30px;
+            max-height: 70vh;
+            overflow-y: auto;
+        }
+        
+        .modal-section {
+            margin-bottom: 40px;
+        }
+        
+        .modal-section h3 {
+            color: #40e0d0;
+            font-size: 24px;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(64, 224, 208, 0.3);
+        }
+        
+        .inimigos-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        
+        .inimigo-card {
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 12px;
+            padding: 20px;
+            border-left: 4px solid #40e0d0;
+            transition: all 0.3s ease;
+        }
+        
+        .inimigo-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+        }
+        
+        .inimigo-card h4 {
+            color: #40e0d0;
+            margin-top: 0;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+        
+        .inimigo-card p {
+            color: #b8b8ff;
+            margin: 0;
+            font-size: 14px;
+            line-height: 1.5;
+        }
+        
+        .empty-message {
+            color: #8888cc;
+            font-style: italic;
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 10px;
+            border: 1px dashed rgba(64, 224, 208, 0.3);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 1100px) {
+            .desktop-nav ul {
+                gap: 5px;
+            }
+            
+            .desktop-nav ul li a {
+                padding: 10px 14px;
+                font-size: 14px;
+            }
+            
+            .logo {
+                font-size: 24px;
+            }
+            
+            .racas-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .main-header {
+                padding: 15px 25px;
+            }
+            
+            .header-content {
+                flex-wrap: wrap;
+                justify-content: flex-end;
+            }
+            
+            .logo {
+                position: static;
+                transform: none;
+                order: 1;
+                flex: 1;
+                text-align: center;
+                margin-bottom: 15px;
+            }
+            
+            .desktop-nav {
+                order: 3;
+                flex: 100%;
+                margin-top: 15px;
+            }
+            
+            .desktop-nav ul {
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+            
+            .header-actions {
+                order: 2;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .desktop-nav {
+                display: none;
+            }
+            
+            .logo {
+                font-size: 22px;
+                margin-bottom: 0;
+            }
+            
+            .header-actions {
+                gap: 10px;
+            }
+            
+            .social-links {
+                gap: 10px;
+            }
+            
+            .racas-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .inimigos-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .main-header {
+                padding: 15px;
+                border-radius: 12px;
+            }
+            
+            .logo {
+                font-size: 20px;
+            }
+            
+            .main-content {
+                padding: 20px 15px;
+            }
+            
+            h1 {
+                font-size: 28px;
+            }
+            
+            .opcoes-raca {
+                justify-content: center;
+            }
+            
+            .opcao-btn {
+                flex: 0 0 calc(50% - 10px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header com Menu -->
+        <header class="main-header">
+            <div class="header-content">
+                <a href="/index.html" class="logo">DESCRÔNIC'S</a>
+                
+                <nav class="desktop-nav">
+                    <ul>
+                        <li><a href="/index.html"><i class="fas fa-home"></i> Apresentação</a></li>
+                        <li><a href="/Informações.html"><i class="fas fa-info-circle"></i> Informações</a></li>
+                        <li><a href="/Dimensionais.html"><i class="fas fa-ruler-combined"></i> Dimensionais</a></li>
+                        <li><a href="/classe.html"><i class="fas fa-user-shield"></i> Classes</a></li>
+                        <li><a href="/personagens/raças.html"><i class="fas fa-paw"></i> Raças</a></li>
+                        <li><a href="/mapa.html">Mapa</a></li>
+                    </ul>
+                </nav>
+                
+                <div class="header-actions">
+                    <div class="social-links">
+                        <a href="https://x.com/Descrente_24" class="social-link" target="_blank" title="Twitter">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="https://www.linkedin.com/in/marvin-tavares-3b55b7336/" class="social-link" target="_blank" title="Linkedin">
+                            <i class="fab fa-linkedin"></i>
+                        </a>
+                    </div>
+                    <!-- BOTÃO TOGGLE DO MENU MOBILE -->
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                        <span class="sr-only">Abrir menu</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+    </div>
+
+    <div class="container">
+        <div class="main-content">
+            <h1>Raças do Mundo</h1>
+            
+            <div class="subtitle">
+                Explore as diversas raças que habitam este mundo, cada uma com sua cultura única, história e desafios. 
+                Clique em qualquer raça para descobrir seus inimigos, chefes, criaturas, lore e muito mais.
+            </div>
+            
+            <!-- Grid de Raças -->
+            <div class="racas-grid">
+                <!-- Excomungados -->
+                <div class="raca-card excomungados" data-raca="excomungados">
+                    <div class="raca-imagem" style="background-image: url('');">
+                        <div class="raca-titulo">Excomungados</div>
+                    </div>
+                    <div class="raca-conteudo">
+                        <div class="raca-descricao">
+                            Os Excomungados são seres amaldiçoados que carregam o peso de seus pecados em suas formas distorcidas. 
+                            Rejeitados por deuses e homens, eles vagam pelas terras em busca de redenção ou vingança.
+                        </div>
+                        
+                        <div class="populacao">
+                            <h4>População</h4>
+                            <table class="populacao-table">
+                                <tr>
+                                    <th>Período</th>
+                                    <th>População</th>
+                                </tr>
+                                <tr>
+                                    <td>Antes da Guerra</td>
+                                    <td>4.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Depois da Guerra</td>
+                                    <td>2.500</td>
+                                </tr>
+                                <tr>
+                                    <td>Pós-Guerra</td>
+                                    <td>1.200</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="opcoes-raca">
+                            <div class="opcao-btn" data-opcao="inimigos">Inimigos</div>
+                            <div class="opcao-btn" data-opcao="chefes">Chefes</div>
+                            <div class="opcao-btn" data-opcao="mini-chefes">Mini-Chefes</div>
+                            <div class="opcao-btn" data-opcao="criaturas">Criaturas</div>
+                            <div class="opcao-btn" data-opcao="dimensionais">Dimensionais</div>
+                            <div class="opcao-btn" data-opcao="lore">Lore</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dragonawtes -->
+                <div class="raca-card dragonawtes" data-raca="dragonawtes">
+                    <div class="raca-imagem" style="background-image: url('');">
+                        <div class="raca-titulo">Dragonawtes</div>
+                    </div>
+                    <div class="raca-conteudo">
+                        <div class="raca-descricao">
+                            Descendentes de antigos dragões, os Dragonawtes possuem escamas, garras e uma conexão inata com elementos ancestrais. 
+                            São orgulhosos, fortes e guardiões de conhecimento arcaico.
+                        </div>
+                        
+                        <div class="populacao">
+                            <h4>População</h4>
+                            <table class="populacao-table">
+                                <tr>
+                                    <th>Período</th>
+                                    <th>População</th>
+                                </tr>
+                                <tr>
+                                    <td>Antes da Guerra</td>
+                                    <td>6.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Depois da Guerra</td>
+                                    <td>2.150</td>
+                                </tr>
+                                <tr>
+                                    <td>Pós-Guerra</td>
+                                    <td>1.000</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="opcoes-raca">
+                            <div class="opcao-btn" data-opcao="inimigos">Inimigos</div>
+                            <div class="opcao-btn" data-opcao="chefes">Chefes</div>
+                            <div class="opcao-btn" data-opcao="mini-chefes">Mini-Chefes</div>
+                            <div class="opcao-btn" data-opcao="criaturas">Criaturas</div>
+                            <div class="opcao-btn" data-opcao="dimensionais">Dimensionais</div>
+                            <div class="opcao-btn" data-opcao="lore">Lore</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Elfos -->
+                <div class="raca-card elfos" data-raca="elfos">
+                    <div class="raca-imagem" style="background-image: url('');">
+                        <div class="raca-titulo">Elfos</div>
+                    </div>
+                    <div class="raca-conteudo">
+                        <div class="raca-descricao">
+                            Guardiões da natureza e praticantes de magias antigas, os Elfos vivem em harmonia com o mundo natural. 
+                            Podem usar a natureza e espíritos, controlar elementos e curar feridas com ervas e encantamentos.
+                        </div>
+                        
+                        <div class="populacao">
+                            <h4>População</h4>
+                            <table class="populacao-table">
+                                <tr>
+                                    <th>Período</th>
+                                    <th>População</th>
+                                </tr>
+                                <tr>
+                                    <td>Antes da Guerra</td>
+                                    <td>3.000</td>
+                                </tr>
+                                <tr>
+                                    <td>Depois da Guerra</td>
+                                    <td>1.200</td>
+                                </tr>
+                                <tr>
+                                    <td>Pós-Guerra</td>
+                                    <td>700</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="opcoes-raca">
+                            <div class="opcao-btn" data-opcao="inimigos">Inimigos</div>
+                            <div class="opcao-btn" data-opcao="chefes">Chefes</div>
+                            <div class="opcao-btn" data-opcao="mini-chefes">Mini-Chefes</div>
+                            <div class="opcao-btn" data-opcao="criaturas">Criaturas</div>
+                            <div class="opcao-btn" data-opcao="dimensionais">Dimensionais</div>
+                            <div class="opcao-btn" data-opcao="lore">Lore</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Druidas -->
+                <div class="raca-card druidas" data-raca="druidas">
+                    <div class="raca-imagem" style="background-image: url('');">
+                        <div class="raca-titulo">Druidas</div>
+                    </div>
+                    <div class="raca-conteudo">
+                        <div class="raca-descricao">
+                            São uma das ramificações da raça dos elfos. Os druidas vivem em harmonia com o mundo natural. 
+                            Podem se transformar em animais, são capazes de se comunicar com animais e tem um certo grau de tolerância a poderes psiquicos e a dor.
+                        </div>
+                        
+                        <div class="populacao">
+                            <h4>População</h4>
+                            <table class="populacao-table">
+                                <tr>
+                                    <th>Período</th>
+                                    <th>População</th>
+                                </tr>
+                                <tr>
+                                    <td>Antes da Guerra</td>
+                                    <td>1.700</td>
+                                </tr>
+                                <tr>
+                                    <td>Depois da Guerra</td>
+                                    <td>1.200</td>
+                                </tr>
+                                <tr>
+                                    <td>Pós-Guerra</td>
+                                    <td>800</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="opcoes-raca">
+                            <div class="opcao-btn" data-opcao="inimigos">Inimigos</div>
+                            <div class="opcao-btn" data-opcao="chefes">Chefes</div>
+                            <div class="opcao-btn" data-opcao="mini-chefes">Mini-Chefes</div>
+                            <div class="opcao-btn" data-opcao="criaturas">Criaturas</div>
+                            <div class="opcao-btn" data-opcao="dimensionais">Dimensionais</div>
+                            <div class="opcao-btn" data-opcao="lore">Lore</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Humanos -->
+                <div class="raca-card humanos" data-raca="humanos">
+                    <div class="raca-imagem" style="background-image: url('');">
+                        <div class="raca-titulo">Humanos</div>
+                    </div>
+                    <div class="raca-conteudo">
+                        <div class="raca-descricao">
+                            Humanos são capazes de se adaptar em qualquer ambiente, mas continuam sem capacidades exclusivas ou diferencial em combate sendo mediocres. 
+                            Sempre serão capazes usar habilidades e magias de outras raças, mas só podem usufruir do poder total dessas habilidades se focar na area escolhida.
+                            Obs: Humanos tem como maior conhecimento o conhecimento de suas terras natais e os unicos a conquistarem o mar.
+                        </div>
+                        
+                        <div class="populacao">
+                            <h4>População</h4>
+                            <table class="populacao-table">
+                                <tr>
+                                    <th>Período</th>
+                                    <th>População</th>
+                                </tr>
+                                <tr>
+                                    <td>Antes da Guerra</td>
+                                    <td>2.500</td>
+                                </tr>
+                                <tr>
+                                    <td>Depois da Guerra</td>
+                                    <td>1.600</td>
+                                </tr>
+                                <tr>
+                                    <td>Pós-Guerra</td>
+                                    <td>500</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="opcoes-raca">
+                            <div class="opcao-btn" data-opcao="inimigos">Inimigos</div>
+                            <div class="opcao-btn" data-opcao="chefes">Chefes</div>
+                            <div class="opcao-btn" data-opcao="mini-chefes">Mini-Chefes</div>
+                            <div class="opcao-btn" data-opcao="criaturas">Criaturas</div>
+                            <div class="opcao-btn" data-opcao="dimensionais">Dimensionais</div>
+                            <div class="opcao-btn" data-opcao="lore">Lore</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Anões -->
+                <div class="raca-card anoes" data-raca="anoes">
+                    <div class="raca-imagem" style="background-image: url('');">
+                        <div class="raca-titulo">Anões</div>
+                    </div>
+                    <div class="raca-conteudo">
+                        <div class="raca-descricao">
+                            Anões são um povo resistente e habilidoso em artesanato e mineração. Possuem alta compreensão de runas em equipamento, mas são lentos e pesados.
+                            Podem criar golens, fortalezas, tecnologias de alta precisão, mas continuam um povo muito fechado e focado em conhecimento.
+                        </div>
+                        
+                        <div class="populacao">
+                            <h4>População</h4>
+                            <table class="populacao-table">
+                                <tr>
+                                    <th>Período</th>
+                                    <th>População</th>
+                                </tr>
+                                <tr>
+                                    <td>Antes da Guerra</td>
+                                    <td>1.200</td>
+                                </tr>
+                                <tr>
+                                    <td>Depois da Guerra</td>
+                                    <td>800</td>
+                                </tr>
+                                <tr>
+                                    <td>Pós-Guerra</td>
+                                    <td>300</td>
+                                </tr>
+                            </table>
+                        </div>
+                        
+                        <div class="opcoes-raca">
+                            <div class="opcao-btn" data-opcao="inimigos">Inimigos</div>
+                            <div class="opcao-btn" data-opcao="chefes">Chefes</div>
+                            <div class="opcao-btn" data-opcao="mini-chefes">Mini-Chefes</div>
+                            <div class="opcao-btn" data-opcao="criaturas">Criaturas</div>
+                            <div class="opcao-btn" data-opcao="dimensionais">Dimensionais</div>
+                            <div class="opcao-btn" data-opcao="lore">Lore</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Seção para adicionar nova raça -->
+            <div class="nova-raca" id="nova-raca">
+                <h3>Adicionar Nova Raça</h3>
+                <p>O mundo está em constante evolução. Adicione uma nova raça para expandir o universo!</p>
+                <button class="btn-nova-raca" id="btn-adicionar-raca">Criar Nova Raça</button>
+            </div>
+            
+            <div class="footer">
+                <p>Desenvolvido por Marvin Tavares Lopes <a href="#">MarvinTL24</a></p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal de detalhes da raça -->
+    <div class="modal" id="modal-raca">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title" id="modal-raca-titulo">Excomungados</h2>
+                <button class="close-modal" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-section" id="section-inimigos">
+                    <h3>Inimigos</h3>
+                    <div class="inimigos-grid">
+                        <!-- Espaço vazio para preencher com inimigos -->
+                        <div class="empty-message">
+                            Adicione informações sobre os inimigos desta raça aqui.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section" id="section-chefes" style="display: none;">
+                    <h3>Chefes</h3>
+                    <div class="inimigos-grid">
+                        <!-- Espaço vazio para preencher com chefes -->
+                        <div class="empty-message">
+                            Adicione informações sobre os chefes desta raça aqui.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section" id="section-mini-chefes" style="display: none;">
+                    <h3>Mini-Chefes</h3>
+                    <div class="inimigos-grid">
+                        <!-- Espaço vazio para preencher com mini-chefes -->
+                        <div class="empty-message">
+                            Adicione informações sobre os mini-chefes desta raça aqui.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section" id="section-criaturas" style="display: none;">
+                    <h3>Criaturas</h3>
+                    <div class="inimigos-grid">
+                        <!-- Espaço vazio para preencher com criaturas -->
+                        <div class="empty-message">
+                            Adicione informações sobre as criaturas desta raça aqui.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section" id="section-dimensionais" style="display: none;">
+                    <h3>Dimensionais</h3>
+                    <div class="inimigos-grid">
+                        <!-- Espaço vazio para preencher com dimensionais -->
+                        <div class="empty-message">
+                            Adicione informações sobre os seres dimensionais desta raça aqui.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-section" id="section-lore" style="display: none;">
+                    <h3>Lore</h3>
+                    <!-- Espaço vazio para preencher com lore -->
+                    <div class="empty-message">
+                        <p>Adicione a história e lore desta raça aqui.</p>
+                        <p>Você pode descrever as origens, cultura, eventos importantes e qualquer informação relevante sobre a história desta raça.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos do DOM
+            const racaCards = document.querySelectorAll('.raca-card');
+            const modal = document.getElementById('modal-raca');
+            const closeModalBtn = document.getElementById('close-modal');
+            const modalTitle = document.getElementById('modal-raca-titulo');
+            const opcaoBtns = document.querySelectorAll('.opcao-btn');
+            const modalSections = document.querySelectorAll('.modal-section');
+            const btnAdicionarRaca = document.getElementById('btn-adicionar-raca');
+            const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
+            const mobileMenuClose = document.getElementById('mobileMenuClose');
+            
+            // Raça atualmente selecionada
+            let racaSelecionada = null;
+            
+            // Abrir modal ao clicar em um card de raça
+            racaCards.forEach(card => {
+                card.addEventListener('click', function(e) {
+                    // Não abrir modal se clicou em um botão de opção
+                    if (e.target.classList.contains('opcao-btn')) return;
+                    
+                    racaSelecionada = this.getAttribute('data-raca');
+                    const racaNome = this.querySelector('.raca-titulo').textContent;
+                    
+                    // Atualizar título do modal
+                    modalTitle.textContent = racaNome;
+                    
+                    // Mostrar seção padrão (inimigos)
+                    mostrarSecao('inimigos');
+                    
+                    // Abrir modal
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Função para mostrar uma seção específica no modal
+            function mostrarSecao(secao) {
+                // Esconder todas as seções
+                modalSections.forEach(section => {
+                    section.style.display = 'none';
+                });
+                
+                // Mostrar a seção desejada
+                const secaoElement = document.getElementById(`section-${secao}`);
+                if (secaoElement) {
+                    secaoElement.style.display = 'block';
+                }
+            }
+            
+            // Configurar botões de opção dentro dos cards
+            opcaoBtns.forEach(btn => {
+                btn.addEventListener('click', function(e) {
+                    e.stopPropagation(); // Impedir que o clique se propague para o card
+                    
+                    // Obter a raça do card pai
+                    const card = this.closest('.raca-card');
+                    racaSelecionada = card.getAttribute('data-raca');
+                    const racaNome = card.querySelector('.raca-titulo').textContent;
+                    
+                    // Obter a opção selecionada
+                    const opcao = this.getAttribute('data-opcao');
+                    
+                    // Atualizar título do modal
+                    modalTitle.textContent = `${racaNome} - ${capitalize(opcao)}`;
+                    
+                    // Mostrar a seção correspondente
+                    mostrarSecao(opcao);
+                    
+                    // Abrir modal
+                    modal.style.display = 'block';
+                    document.body.style.overflow = 'hidden';
+                });
+            });
+            
+            // Fechar modal
+            closeModalBtn.addEventListener('click', function() {
+                modal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Fechar modal ao clicar fora
+            window.addEventListener('click', function(e) {
+                if (e.target === modal) {
+                    modal.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Botão para adicionar nova raça
+            btnAdicionarRaca.addEventListener('click', function() {
+                alert('Funcionalidade de adicionar nova raça será implementada em breve!');
+                // Aqui você pode adicionar um formulário para criar uma nova raça
+                // ou redirecionar para uma página de criação
+            });
+            
+            // Mobile Menu Functionality
+            mobileMenuToggle.addEventListener('click', function() {
+                mobileMenu.classList.add('active');
+                mobileMenuOverlay.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+            
+            mobileMenuClose.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            mobileMenuOverlay.addEventListener('click', function() {
+                mobileMenu.classList.remove('active');
+                mobileMenuOverlay.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            });
+            
+            // Função auxiliar para capitalizar strings
+            function capitalize(str) {
+                return str.charAt(0).toUpperCase() + str.slice(1).replace('-', ' ');
+            }
+            
+            // Animar elementos ao rolar
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -50px 0px'
+            };
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, observerOptions);
+            
+            // Observar cards de raça
+            document.querySelectorAll('.raca-card').forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+                observer.observe(card);
+            });
+            
+            // Efeito de entrada para o título
+            const title = document.querySelector('h1');
+            if (title) {
+                const originalText = title.textContent;
+                title.textContent = '';
+                
+                let i = 0;
+                function typeWriter() {
+                    if (i < originalText.length) {
+                        title.textContent += originalText.charAt(i);
+                        i++;
+                        setTimeout(typeWriter, 50);
+                    }
+                }
+                
+                setTimeout(typeWriter, 300);
+            }
+        });
+    </script>
+</body>
+</html>
