@@ -3,9 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style/modelos/classe.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
-    <title>Cyber Classes - Raças</title>
+    <title>Raças do Mundo Épico</title>
     <style>
         * {
             margin: 0;
@@ -374,51 +373,6 @@
             box-shadow: 0 4px 8px rgba(64, 224, 208, 0.2);
         }
         
-        /* Nova Raça Section */
-        .nova-raca {
-            background: rgba(0, 0, 0, 0.4);
-            border-radius: 15px;
-            padding: 30px;
-            text-align: center;
-            border: 2px dashed rgba(64, 224, 208, 0.3);
-            margin-top: 40px;
-            transition: all 0.3s ease;
-        }
-        
-        .nova-raca:hover {
-            border-color: #40e0d0;
-            background: rgba(0, 0, 0, 0.5);
-        }
-        
-        .nova-raca h3 {
-            color: #40e0d0;
-            margin-top: 0;
-            margin-bottom: 15px;
-        }
-        
-        .nova-raca p {
-            color: #b8b8ff;
-            margin-bottom: 25px;
-        }
-        
-        .btn-nova-raca {
-            background: linear-gradient(145deg, #40e0d0, #20b2aa);
-            color: white;
-            border: none;
-            padding: 12px 30px;
-            border-radius: 25px;
-            font-size: 16px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: bold;
-            letter-spacing: 1px;
-        }
-        
-        .btn-nova-raca:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 5px 20px rgba(64, 224, 208, 0.4);
-        }
-        
         /* Footer */
         .footer {
             text-align: center;
@@ -716,7 +670,7 @@
                         <li><a href="/Dimensionais.html"><i class="fas fa-ruler-combined"></i> Dimensionais</a></li>
                         <li><a href="/classe.html"><i class="fas fa-user-shield"></i> Classes</a></li>
                         <li><a href="/personagens/raças.html"><i class="fas fa-paw"></i> Raças</a></li>
-                        <li><a href="/mapa.html">Mapa</a></li>
+                        <li><a href="/mapa.html"><i class="fas fa-map"></i> Mapa</a></li>
                     </ul>
                 </nav>
                 
@@ -729,10 +683,8 @@
                             <i class="fab fa-linkedin"></i>
                         </a>
                     </div>
-                    <!-- BOTÃO TOGGLE DO MENU MOBILE -->
                     <button class="mobile-menu-toggle" id="mobileMenuToggle">
                         <i class="fas fa-bars"></i>
-                        <span class="sr-only">Abrir menu</span>
                     </button>
                 </div>
             </div>
@@ -1015,13 +967,6 @@
                 </div>
             </div>
             
-            <!-- Seção para adicionar nova raça -->
-            <div class="nova-raca" id="nova-raca">
-                <h3>Adicionar Nova Raça</h3>
-                <p>O mundo está em constante evolução. Adicione uma nova raça para expandir o universo!</p>
-                <button class="btn-nova-raca" id="btn-adicionar-raca">Criar Nova Raça</button>
-            </div>
-            
             <div class="footer">
                 <p>Desenvolvido por Marvin Tavares Lopes <a href="#">MarvinTL24</a></p>
             </div>
@@ -1039,7 +984,6 @@
                 <div class="modal-section" id="section-inimigos">
                     <h3>Inimigos</h3>
                     <div class="inimigos-grid">
-                        <!-- Espaço vazio para preencher com inimigos -->
                         <div class="empty-message">
                             Adicione informações sobre os inimigos desta raça aqui.
                         </div>
@@ -1049,7 +993,6 @@
                 <div class="modal-section" id="section-chefes" style="display: none;">
                     <h3>Chefes</h3>
                     <div class="inimigos-grid">
-                        <!-- Espaço vazio para preencher com chefes -->
                         <div class="empty-message">
                             Adicione informações sobre os chefes desta raça aqui.
                         </div>
@@ -1059,7 +1002,6 @@
                 <div class="modal-section" id="section-mini-chefes" style="display: none;">
                     <h3>Mini-Chefes</h3>
                     <div class="inimigos-grid">
-                        <!-- Espaço vazio para preencher com mini-chefes -->
                         <div class="empty-message">
                             Adicione informações sobre os mini-chefes desta raça aqui.
                         </div>
@@ -1069,7 +1011,6 @@
                 <div class="modal-section" id="section-criaturas" style="display: none;">
                     <h3>Criaturas</h3>
                     <div class="inimigos-grid">
-                        <!-- Espaço vazio para preencher com criaturas -->
                         <div class="empty-message">
                             Adicione informações sobre as criaturas desta raça aqui.
                         </div>
@@ -1079,7 +1020,6 @@
                 <div class="modal-section" id="section-dimensionais" style="display: none;">
                     <h3>Dimensionais</h3>
                     <div class="inimigos-grid">
-                        <!-- Espaço vazio para preencher com dimensionais -->
                         <div class="empty-message">
                             Adicione informações sobre os seres dimensionais desta raça aqui.
                         </div>
@@ -1088,7 +1028,6 @@
                 
                 <div class="modal-section" id="section-lore" style="display: none;">
                     <h3>Lore</h3>
-                    <!-- Espaço vazio para preencher com lore -->
                     <div class="empty-message">
                         <p>Adicione a história e lore desta raça aqui.</p>
                         <p>Você pode descrever as origens, cultura, eventos importantes e qualquer informação relevante sobre a história desta raça.</p>
@@ -1107,11 +1046,7 @@
             const modalTitle = document.getElementById('modal-raca-titulo');
             const opcaoBtns = document.querySelectorAll('.opcao-btn');
             const modalSections = document.querySelectorAll('.modal-section');
-            const btnAdicionarRaca = document.getElementById('btn-adicionar-raca');
             const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-            const mobileMenu = document.getElementById('mobileMenu');
-            const mobileMenuOverlay = document.getElementById('mobileMenuOverlay');
-            const mobileMenuClose = document.getElementById('mobileMenuClose');
             
             // Raça atualmente selecionada
             let racaSelecionada = null;
@@ -1190,31 +1125,12 @@
                 }
             });
             
-            // Botão para adicionar nova raça
-            btnAdicionarRaca.addEventListener('click', function() {
-                alert('Funcionalidade de adicionar nova raça será implementada em breve!');
-                // Aqui você pode adicionar um formulário para criar uma nova raça
-                // ou redirecionar para uma página de criação
-            });
-            
-            // Mobile Menu Functionality
-            mobileMenuToggle.addEventListener('click', function() {
-                mobileMenu.classList.add('active');
-                mobileMenuOverlay.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            });
-            
-            mobileMenuClose.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                mobileMenuOverlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
-            
-            mobileMenuOverlay.addEventListener('click', function() {
-                mobileMenu.classList.remove('active');
-                mobileMenuOverlay.classList.remove('active');
-                document.body.style.overflow = 'auto';
-            });
+            // Mobile Menu Toggle (simplificado)
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', function() {
+                    alert('Menu mobile será implementado em breve!');
+                });
+            }
             
             // Função auxiliar para capitalizar strings
             function capitalize(str) {
@@ -1243,24 +1159,6 @@
                 card.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
                 observer.observe(card);
             });
-            
-            // Efeito de entrada para o título
-            const title = document.querySelector('h1');
-            if (title) {
-                const originalText = title.textContent;
-                title.textContent = '';
-                
-                let i = 0;
-                function typeWriter() {
-                    if (i < originalText.length) {
-                        title.textContent += originalText.charAt(i);
-                        i++;
-                        setTimeout(typeWriter, 50);
-                    }
-                }
-                
-                setTimeout(typeWriter, 300);
-            }
         });
     </script>
 </body>
